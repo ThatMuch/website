@@ -3,10 +3,10 @@ module.exports = {
     siteUrl: `https://thatmuch.gatsbyjs.io/`,
   },
   plugins: [
-	  {
+    {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: "https://thatmuch.fr/graphql",
+        url: "https://wordpress.thatmuch.fr/graphql",
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
