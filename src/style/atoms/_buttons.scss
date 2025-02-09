@@ -1,0 +1,31 @@
+.btn_TM {
+    text-transform: uppercase;
+    outline: none;
+    letter-spacing: 2px;
+    padding: $space_M $space_L;
+    font-weight: 700;
+    font-size: .85rem;
+
+    &_gradient {
+        border: 2px solid #fff;
+        background-color: $dark_1;
+        color: $white;
+        position: relative;
+
+        &::after {
+            content: "";
+            display: block;
+            height: 4px;
+            width: 100%;
+            background: $gradient_rainbow;
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            transition-duration: $fast;
+        }
+
+        &:hover:after {
+            height: 8px;
+        }
+    }
+}

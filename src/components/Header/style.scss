@@ -1,0 +1,235 @@
+@import "../../style/vars";
+@import "../../style/mixins";
+
+.menu {
+    display: flex;
+    position: fixed;
+    left: $space_XL;
+    top: $space_XL;
+    z-index: 1000;
+
+    @include breakpoint(mobile) {
+        right: $space_M;
+        top: $space_M;
+    }
+
+
+    &__txt {
+        font-weight: 700;
+    }
+
+    &__button {
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        transition-duration: .3s;
+        z-index: 99;
+        display: flex;
+        align-items: center;
+
+        .bento {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            margin-right: $space_S;
+            transition-duration: .7s;
+
+            &:hover, &:focus {
+                outline: none;
+            }
+
+            .circle {
+                width: 17px;
+                height: 17px;
+                margin: 5px;
+                background: $cyan;
+                border-radius: 17px;
+                display: block;
+                transition-duration: .7s;
+                position: absolute;
+
+                &:nth-child(1) {
+                    left: 0;
+                    top: 0;
+                    background: $cyan;
+                }
+
+                &:nth-child(2) {
+                    right: 0;
+                    top: 0;
+                    background: $magenta;
+                }
+
+                &:nth-child(3) {
+                    left: 0;
+                    bottom: 0;
+                    background: $green;
+                }
+
+                &:nth-child(4) {
+                    right: 0;
+                    bottom: 0;
+                    background: $yellow;
+                }
+            }
+        }
+
+        &:hover {
+            .bento {
+                transform: rotate(45deg);
+
+                .circle {
+                    background: $dark_1 !important;
+
+                    &:nth-child(3) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &__wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1001;
+        width: 100vw;
+        height: 100vh;
+        background-color: $grey_3;
+        padding: $space_XL;
+        background-image: url("../../images/Background-stars.png");
+        background-repeat: no-repeat;
+        background-position: 90% 70%;
+
+        .logo {
+            width: 230px;
+            margin-bottom: $space_XL;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            border-right: 3px solid $grey_2;
+            height: calc(100vh - calc(#{$space_XL} * 3 + 35px) );
+
+            @include breakpoint(mobile) {
+                border-right: none;
+            }
+
+
+            li {
+                height: calc(100% /4);
+                display: flex;
+                position: relative;
+                transition-duration: $slow;
+
+                &:before {
+                    content: " ";
+                    position: absolute;
+                    right: 108%;
+                    top: 0;
+                    height: 100%;
+                    width: 100%;
+                    background-color: $cyan;
+                }
+
+                &:nth-child(2) {
+                    &:hover a {
+                        color: $green;
+                    }
+
+                    &:before {
+                        background-color: $green;
+                    }
+                }
+
+                &:nth-child(3) {
+                    &:hover a {
+                        color: $yellow;
+                    }
+
+                    &:before {
+                        background-color: $yellow;
+                    }
+                }
+
+                &:nth-child(4) {
+                    &:hover a {
+                        color: $magenta;
+                    }
+
+                    &:before {
+                        background-color: $magenta;
+                    }
+                }
+
+                &:hover {
+                    transform: translateX(15px) !important;
+
+                    a {
+                        color: $cyan;
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+                    font-family: 'Tourney';
+                    font-style: normal;
+                    font-weight: 900;
+                    font-size: 2.5rem;
+                    margin: auto 0;
+                    text-transform: uppercase;
+                    color: $dark_1;
+
+                    @include breakpoint(mobile) {
+                        font-size: 2rem;
+                    }
+                }
+            }
+        }
+
+        .btn_close {
+            background-color: transparent;
+            border: none;
+            height: 60px;
+            width: 60px;
+            position: absolute;
+            right: $space_M;
+            top: $space_M;
+
+            img {
+                width: 100%;
+            }
+
+            .close_hover {
+                display: none;
+            }
+
+            &:hover {
+                .close {
+                    display: none;
+                }
+
+                .close_hover {
+                    display: block;
+                }
+            }
+        }
+
+        .comets {
+            position: absolute;
+            right: $space_M;
+            bottom: $space_M;
+
+            img:not(:nth-child(2)) {
+                width: 100px;
+            }
+        }
+    }
+
+    &__item__desc {
+        font-size: 2rem;
+        text-align: center;
+    }
+}

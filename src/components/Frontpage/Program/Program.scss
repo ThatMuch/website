@@ -1,0 +1,65 @@
+@import "../../../style/vars";
+@import "../../../style/mixins";
+
+.Program {
+    background-color: $dark_1;
+    padding: $space_XS;
+    position: relative;
+    overflow: visible;
+
+    .fp-overflow {
+        overflow: visible !important;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    @include breakpoint(laptop) {
+        padding: $space_XL;
+    }
+
+
+    .bg__wrapper {
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        display: grid;
+        place-items: center;
+        background-image: url("./BG_ProgrammeVol.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    svg.background_program {
+        height: 100%;
+        margin: 0 auto;
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include breakpoint(desktop) {
+            width: 100%;
+            height: initial;
+        }
+    }
+
+    .container {
+        position: relative;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: -150px;
+            right: 0;
+            height: 200px;
+            width: 200px;
+            background-image: url("./Planets_green_line.svg");
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+    }
+}
