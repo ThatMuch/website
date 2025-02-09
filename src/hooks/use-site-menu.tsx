@@ -1,7 +1,7 @@
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby";
 export const useSiteMenu = () => {
   const data = useStaticQuery(graphql`
-    query GET_MENU_ITEMS{
+    query GET_MENU_ITEMS {
       allWpMenuItem {
         nodes {
           path
@@ -12,7 +12,6 @@ export const useSiteMenu = () => {
         }
       }
     }
-  `)
-  return data.allWpMenuItem
-}
-
+  `);
+  return data.allWpMenuItem;
+};

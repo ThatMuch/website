@@ -12,7 +12,7 @@ exports.createPages = async ({ graphql,actions }) => {
     }
   }
 `)
-console.log(menuItems);
+
 	// query content for WordPress posts
 	const posts = await graphql(`
     query GET_POSTS{
@@ -39,18 +39,18 @@ console.log(menuItems);
     }
   `)
 	const menu = await graphql(`
-    query GET_MENU{
-       allWpMenuItem(filter: { locations: { eq: MAINMENU } }) {
-    nodes {
-      id
-      label
-      title
-      path
-      parentId
+    query GET_MENU {
+      menu(id: "dGVybToxMA==") {
+        id
+      }
+      menuItems {
+        nodes {
+          label
+          description
+        }
+      }
     }
-  }
-    }
-  `)
+  `);
 
   console.log(menu);
 
