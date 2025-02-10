@@ -3,7 +3,7 @@ import { PageProps, graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../../components/Layout";
 import React from "react";
-import Seo from "../../components/SEO";
+import Seo from "../../components/Seo";
 import { useSitePosts } from "../../hooks/use-site-posts";
 
 interface BlogPost {
