@@ -12,7 +12,7 @@ interface SEOProps {
   pathname?: string;
 }
 
-const SEO: React.FC<SEOProps> = ({
+const Seo: React.FC<SEOProps> = ({
   title,
   description,
   image,
@@ -61,4 +61,4 @@ const SEO: React.FC<SEOProps> = ({
   );
 };
 
-export default SEO;
+export default Seo;
