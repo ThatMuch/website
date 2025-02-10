@@ -28,19 +28,6 @@ exports.createPages = async ({ graphql,actions }) => {
       }
     }
   `)
-	const menu = await graphql(`
-    query GET_MENU {
-      menu(id: "dGVybToxMA==") {
-        id
-      }
-      menuItems {
-        nodes {
-          label
-          description
-        }
-      }
-    }
-  `);
 
 
 	const postTemplate = path.resolve(`./src/templates/Post/index.tsx`)
