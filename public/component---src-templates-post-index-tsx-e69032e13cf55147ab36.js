@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkthatmuch=self.webpackChunkthatmuch||[]).push([[701],{8948:function(e,t,n){n.r(t);var l=n(7294);t.default=e=>{let{data:t}=e;const n=t.wpPost;return l.createElement("main",null,l.createElement("h1",null,n.title),l.createElement("div",{dangerouslySetInnerHTML:{__html:n.content}}))}}}]);
+//# sourceMappingURL=component---src-templates-post-index-tsx-e69032e13cf55147ab36.js.map
