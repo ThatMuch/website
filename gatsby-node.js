@@ -2,16 +2,6 @@ const path = require(`path`)
 const { slash } = require(`gatsby-core-utils`)
 exports.createPages = async ({ graphql,actions }) => {
 	const { createPage } = actions
-	const menuItems = await graphql(`
- query GET_MENU_ITEMS{
-     allWpMenuItem {
-      nodes {
-        path
-        label
-      }
-    }
-  }
-`)
 
 	// query content for WordPress posts
 	const posts = await graphql(`
@@ -52,10 +42,11 @@ exports.createPages = async ({ graphql,actions }) => {
     }
   `);
 
-  console.log(menu);
 
 	const postTemplate = path.resolve(`./src/templates/Post/index.tsx`)
 	const pageTemplate = path.resolve(`./src/templates/Page/index.tsx`)
+	const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`)
+
 	pages.data.allWpPage.edges.forEach(edge => {
 		createPage({
 			// `path` will be the url for the page
@@ -82,4 +73,12 @@ exports.createPages = async ({ graphql,actions }) => {
 			},
 		})
 	})
+
+	//create a blog page
+	createPage({
+		path: '/blog',
+		component: slash(blogTemplate),
+	})
+
+
 }
