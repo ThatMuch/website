@@ -28,7 +28,7 @@ const BlogCategoryFilter = () => {
   return (
     <div className="BlogCategoryFilter">
       <h2 className="DividerTitle">Catégories</h2>
-      <div className="divider"></div>
+      <div className="divider mb-4"></div>
       <div className="BlogCategoryFilter_list">
         {/* All Posts Button */}
         <button
