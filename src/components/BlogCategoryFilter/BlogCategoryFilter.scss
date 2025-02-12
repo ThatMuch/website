@@ -1,0 +1,21 @@
+@import "../../style/vars";
+
+.BlogCategoryFilter {
+  &_list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-m;
+    justify-content: center;
+    &_button {
+      padding: $spacing-s;
+      border-bottom: 2px solid $text-color-default;
+      transformation: all 0.3s;
+      &:hover,
+      &.active {
+        border-radius: $radius-m $radius-m 0rem 0rem;
+        border-bottom: 2px solid $surface-default;
+        background: $surface-default;
+      }
+    }
+  }
+}

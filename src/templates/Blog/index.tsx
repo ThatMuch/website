@@ -1,5 +1,6 @@
 import { PageProps, graphql } from "gatsby";
 
+import BlogCategoryFilter from "../../components/BlogCategoryFilter/BlogCategoryFilter";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../../components/Layout";
 import React from "react";
@@ -24,31 +25,13 @@ interface BlogPost {
 
 const BlogPage: React.FC<PageProps> = () => {
   const posts = useSitePosts();
-  console.log(posts);
   return (
     <Layout>
-      <Seo title="Blog" />
-      <h1>Blog</h1>
-      {posts.map((post: any) => {
-        const { node } = post; // Destructure the node property
-        const { title, link, id } = node;
-        return (
-          <article key={id}>
-            <h2>{title}</h2>
-            {/* {post.featured_media_item && ( // Check if it exists
-            <GatsbyImage
-              image={
-                post.featured_media_item.localFile.childImageSharp
-                  .gatsbyImageData
-              }
-              alt={post.title}
-            />
-          )} */}
-            {/* <div dangerouslySetInnerHTML={{ __html: post.excerpt }} /> */}
-            <a href={link}>Read More</a>
-          </article>
-        );
-      })}
+      <main>
+        <Seo title="Blog" />
+        <h1>Blog</h1>
+        <BlogCategoryFilter />
+      </main>
     </Layout>
   );
 };

@@ -9,10 +9,32 @@ export const useSitePosts = () => {
             id
             link
             title
+            categories {
+              nodes {
+                slug
+                name
+              }
+            }
+            content
+            date(formatString: "d/MM/YYYY")
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
   `);
-  return data.allWpPost.edges;
+  // map data to have only posts
+  const posts = data.allWpPost.edges.map(({ node }) => node);
+
+  return posts;
 };

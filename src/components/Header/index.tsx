@@ -7,13 +7,14 @@ import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
 import logo from "../../images/THATMUCH_Logo_Black.png";
+import { useSiteMenu } from "../../hooks/use-site-menu";
 
-export default function Header({ data }) {
+export default function Header() {
   // hide the .menu__txt if the page is scrolled
   const [isOpened, setIsOpened] = useState(false);
   const [isActive, setIsActive] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const menuItems = useSiteMenu();
   return (
     <header className="menu">
       <button
@@ -43,7 +44,7 @@ export default function Header({ data }) {
           <div className="row">
             <div className="col-12 col-sm-4 ">
               <ul>
-                {data.nodes.map((item, index) => (
+                {menuItems.map((item, index) => (
                   <li
                     key={index}
                     data-aos="slide-up"
@@ -62,9 +63,9 @@ export default function Header({ data }) {
               </ul>
             </div>
             <div className="d-none d-sm-flex col-sm-8  align-items-center">
-              {data.nodes[isActive].description && (
+              {menuItems[isActive].description && (
                 <p className="menu__item__desc">
-                  {data.nodes[isActive].description}
+                  {menuItems[isActive].description}
                 </p>
               )}
               <div className="comets">
@@ -94,11 +95,3 @@ export default function Header({ data }) {
     </header>
   );
 }
-
-const MenuItem = ({ url, label }) => {
-  return (
-    <Nav.Item>
-      <Nav.Link href={url}>{label}</Nav.Link>
-    </Nav.Item>
-  );
-};
