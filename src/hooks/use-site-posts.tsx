@@ -21,12 +21,14 @@ export const useSitePosts = () => {
               node {
                 altText
                 mediaItemUrl
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
-                }
               }
+            }
+            seo {
+              metaDesc
+              metaKeywords
+              title
+              twitterDescription
+              twitterTitle
             }
           }
         }

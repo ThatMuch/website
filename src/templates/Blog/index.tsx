@@ -1,39 +1,39 @@
-import { PageProps, graphql } from "gatsby";
-
 import BlogCategoryFilter from "../../components/BlogCategoryFilter/BlogCategoryFilter";
-import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../../components/Layout";
+import PageHeader from "../../components/PageHeader";
+import PropTypes from "prop-types";
 import React from "react";
 import Seo from "../../components/Seo";
-import { useSitePosts } from "../../hooks/use-site-posts";
+import { graphql } from "gatsby";
 
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  slug: string;
-  date: string;
-  link: string;
-  featured_media_item: {
-    localFile: {
-      childImageSharp: {
-        gatsbyImageData: any; // Or a more specific type if you define it
-      };
-    };
-  } | null; // Make featured_media_item nullable
-}
-
-const BlogPage: React.FC<PageProps> = () => {
-  const posts = useSitePosts();
+const BlogPage = ({ data }) => {
+  const page = data.wpPage;
   return (
     <Layout>
-      <main>
-        <Seo title="Blog" />
-        <h1>Blog</h1>
-        <BlogCategoryFilter />
-      </main>
+      <Seo title={page.title} description={page.seo.metaDesc} />
+      <PageHeader title={page.title} description={page.seo.metaDesc} />
+      <BlogCategoryFilter />
     </Layout>
   );
 };
 
+BlogPage.propTypes = {
+  data: PropTypes.object.isRequired,
+  edges: PropTypes.array,
+};
+
 export default BlogPage;
+
+export const pageQuery = graphql`
+  query ($id: String!) {
+    wpPage(id: { eq: $id }) {
+      title
+      content
+      seo {
+        metaDesc
+        metaKeywords
+        title
+      }
+    }
+  }
+`;

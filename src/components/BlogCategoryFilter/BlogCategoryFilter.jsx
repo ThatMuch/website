@@ -28,6 +28,7 @@ const BlogCategoryFilter = () => {
   return (
     <div className="BlogCategoryFilter">
       <h2 className="DividerTitle">Catégories</h2>
+      <div className="divider"></div>
       <div className="BlogCategoryFilter_list">
         {/* All Posts Button */}
         <button
@@ -48,7 +49,7 @@ const BlogCategoryFilter = () => {
             }`}
             onClick={() => setSelectedCategory(category.name)}
           >
-            {category.name}
+            {category.name} {category.count && <span>({category?.count})</span>}
           </button>
         ))}
       </div>

@@ -10,16 +10,10 @@ body {
   font-size: 16px;
   line-height: 1.5;
   box-sizing: border-box;
-
   font-size: 16px;
-
-  h1 {
-    font-family: "Tourney";
-    font-weight: bold;
-  }
-
+  color: $text-color-default;
   main {
-    padding: 50px;
+    padding: 100px 50px 50px 50px;
   }
 
   .bg-dark {

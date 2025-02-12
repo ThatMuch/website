@@ -7,6 +7,8 @@ export const useBlogCategories = () => {
         nodes {
           name
           slug
+          count
+          link
         }
       }
     }

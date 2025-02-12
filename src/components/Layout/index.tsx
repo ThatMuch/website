@@ -1,4 +1,3 @@
-import "normalize.css";
 import "./style.scss";
 
 import React, { useEffect } from "react";
@@ -15,9 +14,11 @@ export default function Layout({ children }) {
     AOS.refresh();
   }, []);
   return (
-    <>
-      <Header />
-      {children}
-    </>
+    <main>
+      <div className="container">
+        <Header />
+        {children}
+      </div>
+    </main>
   );
 }
