@@ -1,0 +1,23 @@
+@import "../../style/vars";
+@import "../../style/mixins";
+
+.Newsletter {
+  padding: $spacing-xl;
+  border-radius: $radius-l;
+  background: $neutral-900;
+  color: #fff;
+  &__image {
+    width: 350px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: $spacing-l;
+  }
+  &__content {
+    display: grid;
+    gap: $spacing-m;
+    grid-template-columns: 1fr 1fr;
+    p {
+      font-size: $font-size-xl;
+    }
+  }
+}

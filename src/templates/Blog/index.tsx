@@ -1,5 +1,6 @@
 import BlogCategoryFilter from "../../components/BlogCategoryFilter/BlogCategoryFilter";
 import Layout from "../../components/Layout";
+import Newsletter from "../../components/Newsletter";
 import PageHeader from "../../components/PageHeader";
 import PropTypes from "prop-types";
 import React from "react";
@@ -13,6 +14,7 @@ const BlogPage = ({ data }) => {
       <Seo title={page.title} description={page.seo.metaDesc} />
       <PageHeader title={page.title} description={page.seo.metaDesc} />
       <BlogCategoryFilter />
+      <Newsletter />
     </Layout>
   );
 };

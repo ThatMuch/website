@@ -8,7 +8,9 @@ module.exports = {
     defaultDescription: `ThatMuch intervient dans la communication numérique & visuelle de votre entreprise. Nous vous accompagnons dans toutes les étapes de votre projet.`,
     author: `Thatmuch`,
     siteUrl: `https://www.thatmuch.fr`, // Replace with your domain
-    defaultImage: `src/images/THATMUCH_Logo_Black.png`,
+		defaultImage: `src/images/THATMUCH_Logo_Black.png`,
+		defaultImageAlt: `THATMUCH Logo`,
+	defaultImageWhite: `src/images/THATMUCH_Logo_White.png`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
