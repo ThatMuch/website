@@ -44,6 +44,8 @@
     "react-fullpage": "^0.1.19",
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^2.0.5",
+    "react-hubspot-form": "^1.3.7",
+    "react-icons": "^5.4.0",
     "sass": "^1.70.0"
   },
   "devDependencies": {

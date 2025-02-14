@@ -1,0 +1,48 @@
+@import "../../style/vars";
+.Footer {
+  background-color: $neutral-900;
+  color: #fff;
+  display: flex;
+  padding: 1.875rem;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 0rem 6.5rem;
+  align-self: stretch;
+  flex-wrap: wrap;
+  &__logo {
+    img {
+      width: 10rem;
+    }
+  }
+  &__credits {
+    display: flex;
+    justify-content: center;
+    background-color: $neutral-900;
+    color: $neutral-300;
+    gap: $spacing-xs;
+  }
+}
+.RS_Section {
+  margin-bottom: $spacing-xl;
+  &__title {
+    text-align: center;
+    margin-bottom: $spacing-m;
+  }
+
+  &__list {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    gap: $spacing-m;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
+  &__icon {
+    color: $neutral-400;
+    &:hover {
+      color: $neutral-900;
+    }
+  }
+}

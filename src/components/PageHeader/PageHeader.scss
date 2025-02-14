@@ -1,0 +1,11 @@
+@import "../../style/mixins.scss";
+@import "../../style/vars.scss";
+.PageHeader {
+  width: 100%;
+  @include breakpoint(laptop) {
+    width: 877px;
+  }
+  &__desc {
+    font-size: $font-size-xl;
+  }
+}

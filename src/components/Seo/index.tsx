@@ -20,7 +20,6 @@ const Seo: React.FC<SEOProps> = ({
   pathname,
 }) => {
   const site = useSiteSeo();
-  console.log(site);
 
   const {
     defaultTitle,

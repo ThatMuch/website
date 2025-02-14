@@ -1,0 +1,36 @@
+.Layout {
+  padding: 150px 50px 50px 50px;
+  position: relative;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -125px;
+    right: -100px;
+    width: 413px;
+    height: 413px;
+    z-index: -1;
+    background-image: url("../../images/bg_icon_1.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -290px;
+    left: -100px;
+    width: 413px;
+    height: 413px;
+    z-index: -1;
+    background-image: url("../../images/bg_icon_2.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &--post {
+    .container {
+      max-width: 750px;
+    }
+  }
+}
