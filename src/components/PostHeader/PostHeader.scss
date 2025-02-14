@@ -30,6 +30,9 @@
   &__meta {
     display: flex;
     gap: $spacing-s;
+    p {
+      margin-bottom: 0;
+    }
   }
   &__avatar {
     border-radius: 100%;
