@@ -42,3 +42,40 @@ button {
   text-transform: inherit;
   letter-spacing: inherit;
 }
+.btn {
+  display: inline-flex;
+  height: 2.75rem;
+  padding: $spacing-s;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+  border-radius: $radius-s;
+
+  &-primary {
+    background-color: $neutral-900;
+    border-color: $neutral-900;
+    &:hover {
+      background-color: $neutral-500;
+      border-color: $neutral-500;
+    }
+    &:disabled {
+      background: $status-disabled;
+      border-color: $status-disabled;
+    }
+  }
+
+  &-secondary {
+    border-color: $status-info;
+    background-color: transparent;
+    color: $status-info;
+    &:hover {
+      background-color: $status-info;
+      color: $text-color-default;
+    }
+    &:disabled {
+      background: $status-disabled;
+      border-color: $status-disabled;
+      color: $status-disabled-dark;
+    }
+  }
+}

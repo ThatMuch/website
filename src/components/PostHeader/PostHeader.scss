@@ -1,0 +1,39 @@
+@import "../../style/vars";
+.PostHeader {
+  display: flex;
+  padding: $spacing-l $spacing-xl;
+  align-items: flex-start;
+  gap: 1.5rem;
+  align-self: stretch;
+  border-radius: $radius-l;
+  margin-bottom: $spacing-l;
+
+  &--proj {
+    background-color: $project-100;
+  }
+
+  &--com {
+    background-color: $com-100;
+  }
+
+  &--dev {
+    background-color: $dev-100;
+  }
+
+  &--design {
+    background-color: $design-100;
+  }
+
+  &__title {
+    margin-bottom: $spacing-m;
+  }
+  &__meta {
+    display: flex;
+    gap: $spacing-s;
+  }
+  &__avatar {
+    border-radius: 100%;
+    height: $size-xl;
+    width: $size-xl;
+  }
+}

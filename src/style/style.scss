@@ -8,15 +8,15 @@
 body {
   font-family: "SpaceMono", sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.8;
   box-sizing: border-box;
   font-size: 16px;
   color: $text-color-default;
   transition-duration: 1s;
-  main {
-    padding: 100px 50px 50px 50px;
-  }
 
+  p {
+    margin-bottom: $spacing-s;
+  }
   .bg-dark {
     color: #fff;
     background-color: #180d3c !important;
