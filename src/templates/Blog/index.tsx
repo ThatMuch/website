@@ -1,13 +1,24 @@
+import { PageProps, graphql } from "gatsby";
+
 import BlogCategoryFilter from "../../components/BlogCategoryFilter/BlogCategoryFilter";
 import Layout from "../../components/Layout";
 import Newsletter from "../../components/Newsletter";
 import PageHeader from "../../components/PageHeader";
-import PropTypes from "prop-types";
 import React from "react";
 import Seo from "../../components/Seo";
-import { graphql } from "gatsby";
 
-const BlogPage = ({ data }) => {
+interface BlogPageProps extends PageProps {
+  data: {
+    wpPage: {
+      title: string;
+      seo: {
+        metaDesc: string;
+      };
+    };
+  };
+}
+
+const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
   const page = data.wpPage;
   return (
     <Layout>
@@ -17,11 +28,6 @@ const BlogPage = ({ data }) => {
       <Newsletter />
     </Layout>
   );
-};
-
-BlogPage.propTypes = {
-  data: PropTypes.object.isRequired,
-  edges: PropTypes.array,
 };
 
 export default BlogPage;
