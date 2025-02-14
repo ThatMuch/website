@@ -1,10 +1,11 @@
-import React from "react";
-import { PageProps } from "gatsby";
-import Layout from "../../components/Layout";
-import Seo from "../../components/Seo";
+import { PageProps, graphql } from "gatsby";
+
 import BlogCategoryFilter from "../../components/BlogCategoryFilter/BlogCategoryFilter";
+import Layout from "../../components/Layout";
 import Newsletter from "../../components/Newsletter";
 import PageHeader from "../../components/PageHeader";
+import React from "react";
+import Seo from "../../components/Seo";
 
 interface BlogPageProps extends PageProps {
   data: {
@@ -12,9 +13,9 @@ interface BlogPageProps extends PageProps {
       title: string;
       seo: {
         metaDesc: string;
-      }
-    }
-  }
+      };
+    };
+  };
 }
 
 const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
@@ -28,8 +29,6 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
     </Layout>
   );
 };
-
-
 
 export default BlogPage;
 
