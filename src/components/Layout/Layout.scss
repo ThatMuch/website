@@ -1,6 +1,12 @@
+@import "../../style/vars";
+@import "../../style/mixins";
 .Layout {
   padding: 150px 50px 50px 50px;
   position: relative;
+  @include breakpoint(mobile) {
+    padding: $spacing-m;
+  }
+
   &:before {
     content: "";
     display: block;

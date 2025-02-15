@@ -1,4 +1,5 @@
 @import "../../style/vars";
+@import "../../style/mixins";
 .PostHeader {
   display: flex;
   padding: $spacing-l $spacing-xl;
@@ -7,6 +8,12 @@
   align-self: stretch;
   border-radius: $radius-l;
   margin-bottom: $spacing-l;
+
+  @include breakpoint(mobile) {
+    border-radius: $radius-m;
+    flex-direction: column;
+    padding: $spacing-m $spacing-l;
+  }
 
   &--proj {
     background-color: $project-100;
@@ -26,6 +33,9 @@
 
   &__title {
     margin-bottom: $spacing-m;
+    @include breakpoint(mobile) {
+      font-size: $font-size-xl;
+    }
   }
   &__meta {
     display: flex;
