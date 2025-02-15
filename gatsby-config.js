@@ -20,7 +20,7 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: "https://wordpress.thatmuch.fr/graphql",
+        url: "https://back.thatmuch.fr/graphql",
         acfOptions: {
           useACF: true,
           verboseOutput: true,
