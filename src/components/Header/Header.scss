@@ -10,13 +10,20 @@ header {
   left: $space_XL;
   top: $space_XL;
   z-index: 1000;
+  @include breakpoint(mobile) {
+    width: 100%;
+    position: relative;
+    left: inherit;
+    top: inherit;
+    margin-bottom: $spacing-m;
+  }
 }
 .menu {
   display: flex;
 
   @include breakpoint(mobile) {
-    right: $space_M;
-    top: $space_M;
+    right: $spacing-m;
+    top: $spacing-m;
   }
 
   &__txt {

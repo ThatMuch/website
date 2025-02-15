@@ -1,6 +1,15 @@
+@import "../../style/vars";
+@import "../../style/mixins";
 .Layout {
   padding: 150px 50px 50px 50px;
   position: relative;
+  @include breakpoint(mobile) {
+    padding: $spacing-s;
+    .container {
+      padding: 0;
+    }
+  }
+
   &:before {
     content: "";
     display: block;
@@ -13,6 +22,13 @@
     background-image: url("../../images/bg_icon_1.svg");
     background-repeat: no-repeat;
     background-size: contain;
+
+    @include breakpoint(mobile) {
+      top: -50px;
+      right: 0;
+      width: 200px;
+      height: 200px;
+    }
   }
   &:after {
     content: "";
@@ -26,6 +42,11 @@
     background-image: url("../../images/bg_icon_2.svg");
     background-repeat: no-repeat;
     background-size: contain;
+    @include breakpoint(mobile) {
+      bottom: -200px;
+      width: 200px;
+      height: 200px;
+    }
   }
 
   &--post {

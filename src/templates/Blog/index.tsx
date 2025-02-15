@@ -21,7 +21,7 @@ interface BlogPageProps extends PageProps {
 const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
   const page = data.wpPage;
   return (
-    <Layout>
+    <Layout type="blog">
       <Seo title={page.title} description={page.seo.metaDesc} />
       <PageHeader title={page.title} description={page.seo.metaDesc} />
       <BlogCategoryFilter />

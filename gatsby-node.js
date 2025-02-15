@@ -1,34 +1,16 @@
 const path = require(`path`);
 const { slash } = require(`gatsby-core-utils`);
-exports.createPages = async ({ graphql, actions }) => {
+
+import { useSitePages } from '../hooks/use-site-pages'
+import { useSitePosts } from '../hooks/use-site-posts'
+exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
+
   // query content for WordPress posts
-  const posts = await graphql(`
-    query GET_POSTS {
-      allWpPost {
-        edges {
-          node {
-            id
-            slug
-            link
-          }
-        }
-      }
-    }
-  `);
-  const pages = await graphql(`
-    query GET_PAGES {
-      allWpPage {
-        edges {
-          node {
-            id
-            slug
-          }
-        }
-      }
-    }
-  `);
+  const posts = await useSitePosts()
+  const pages = await useSitePages()
+
 
   const postTemplate = path.resolve(`./src/templates/Post/index.tsx`);
   const pageTemplate = path.resolve(`./src/templates/Page/index.tsx`);
