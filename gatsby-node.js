@@ -1,8 +1,8 @@
 const path = require(`path`);
 const { slash } = require(`gatsby-core-utils`);
 
-import { useSitePages } from '../hooks/use-site-pages'
-import { useSitePosts } from '../hooks/use-site-posts'
+import { useSitePages } from './src/hooks/use-site-pages'
+import { useSitePosts } from './src/hooks/use-site-posts'
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
