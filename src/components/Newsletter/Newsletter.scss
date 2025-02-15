@@ -6,8 +6,14 @@
   border-radius: $radius-l;
   background: $neutral-900;
   color: #fff;
+  width: 100%;
+  @include breakpoint(mobile) {
+    padding: $spacing-m;
+    border-radius: $radius-m;
+  }
   &__image {
     width: 350px;
+    max-width: 100%;
     margin: 0 auto;
     display: block;
     margin-bottom: $spacing-l;
@@ -15,7 +21,7 @@
   &__content {
     display: grid;
     gap: $spacing-m;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(242px, 1fr));
     p {
       font-size: $font-size-xl;
     }

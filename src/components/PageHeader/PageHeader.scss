@@ -7,5 +7,8 @@
   }
   &__desc {
     font-size: $font-size-xl;
+    @include breakpoint(mobile) {
+      font-size: $font-size-l;
+    }
   }
 }

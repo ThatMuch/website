@@ -4,11 +4,13 @@ export const useSiteMenu = () => {
     query GET_MENU_ITEMS {
       allWpMenuItem {
         nodes {
+          id
           path
           label
           url
           target
           description
+          locations
         }
       }
     }

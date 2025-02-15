@@ -4,12 +4,17 @@ import { FaBluesky, FaLinkedin, FaSpotify, FaYoutube } from "react-icons/fa6";
 
 import React from "react";
 import logoThatIsWhite from "../../images/THATMUCH_Logo_White.png";
+import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSitePosts } from "../../hooks/use-site-posts";
 import { useSiteSeo } from "../../hooks/use-site-seo";
 
 type Props = {};
 
 export default function Footer({}: Props) {
+  const menuItems = useSiteMenu().filter((item) =>
+    item.locations.includes("GATSBY_FOOTER_MENU")
+  );
+  console.log(menuItems);
   const site = useSiteSeo();
   const { siteUrl } = site;
   const posts = useSitePosts();
@@ -83,8 +88,11 @@ export default function Footer({}: Props) {
       </div>
       <div className="Footer__credits">
         <p>© {new Date().getFullYear()} THATMUCH - Tous droits réservés</p>
-        <a href="">Mentions Légales</a>
-        <a href="">Politique de confidentialité</a>
+        {menuItems.map((item) => (
+          <p key={item.id}>
+            <a href={item.path}>{item.label}</a>
+          </p>
+        ))}
       </div>
     </footer>
   );

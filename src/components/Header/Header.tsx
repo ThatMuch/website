@@ -12,7 +12,10 @@ export default function Header() {
   const [isOpened, setIsOpened] = useState(false);
   const [isActive, setIsActive] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-  const menuItems = useSiteMenu();
+  const menuItems = useSiteMenu().filter((item) =>
+    item.locations.includes("GATSBY_HEADER_MENU")
+  );
+  console.log(menuItems);
   return (
     <header>
       <div className="menu">
@@ -49,7 +52,7 @@ export default function Header() {
                 <ul>
                   {menuItems.map((item, index) => (
                     <li
-                      key={index}
+                      key={item.id}
                       data-aos="slide-up"
                       data-aos-delay={index * 100}
                       onMouseEnter={() => setIsActive(index)}
