@@ -72,5 +72,22 @@ module.exports = {
         icon: `src/images/THATMUCH_Logo_Black.png`, // Path to your favicon
       },
     },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "G-EGCDBV43KT",
+
+        // Include GTM in development.
+        //
+        // Defaults to false meaning GTM will only be loaded in production.
+        includeInDevelopment: false,
+
+        // datalayer to be set before GTM is loaded
+        // should be an object or a function that is executed in the browser
+        //
+        // Defaults to null
+        defaultDataLayer: { platform: "gatsby" },
+      },
+    },
   ],
 };
