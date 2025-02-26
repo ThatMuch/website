@@ -78,6 +78,7 @@ module.exports = {
       options: {
         id: process.env.GOOGLETAGID,
         includeInDevelopment: false,
+        defaultDataLayer: { platform: "gatsby" },
       },
     },
   ],
