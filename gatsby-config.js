@@ -2,7 +2,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-console.log(process.env.WPGRAPHQL_URL);
+
 module.exports = {
   siteMetadata: {
     defaultTitle: `Thatmuch`,
@@ -66,6 +66,6 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/THATMUCH_Logo_Black.png`, // Path to your favicon
       },
-    }
+    },
   ],
 };
