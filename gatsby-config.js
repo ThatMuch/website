@@ -44,12 +44,6 @@ module.exports = {
     "gatsby-plugin-image",
     `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: process.env.GOOGLETAGID,
-      },
-    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
@@ -72,14 +66,6 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/THATMUCH_Logo_Black.png`, // Path to your favicon
       },
-    },
-    {
-      resolve: "gatsby-plugin-google-tagmanager",
-      options: {
-        id: process.env.GOOGLETAGID,
-        includeInDevelopment: false,
-        defaultDataLayer: { platform: "gatsby" },
-      },
-    },
+    }
   ],
 };
