@@ -34,16 +34,22 @@ h6 {
 }
 
 .display--1 {
+  font-family: "NeueMachina", sans-serif;
   font-size: 6.25rem;
+  font-weight: 700;
   @include breakpoint(mobile) {
     font-size: 4rem;
   }
 }
 
 .display--2 {
+  font-family: "NeueMachina", sans-serif;
   font-size: 5rem;
+  font-weight: 700;
 }
 
 .display--3 {
+  font-family: "NeueMachina", sans-serif;
   font-size: 3.5rem;
+  font-weight: 700;
 }

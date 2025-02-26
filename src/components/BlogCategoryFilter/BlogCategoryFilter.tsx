@@ -1,5 +1,6 @@
 import "./BlogCategoryFilter.scss";
 
+import { CategoryType, PostType } from "../../utils/types";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
 
@@ -7,38 +8,16 @@ import PostCard from "../PostCard/PostCard";
 import { useBlogCategories } from "../../hooks/use-blog-categories";
 import { useSitePosts } from "../../hooks/use-site-posts";
 
-interface Category {
-  slug: string;
-  name: string;
-  count?: number;
-}
-
-interface CategoryNode {
-  name: string;
-  slug: string;
-}
-
-interface Post {
-  title: string;
-  link: string;
-  categories: {
-    nodes: CategoryNode[];
-  };
-  featuredImage?: {
-    node: {
-      sourceUrl: string;
-    };
-  };
-}
-
 const BlogCategoryFilter: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [filteredPosts, setFilteredPosts] = useState<Post[] | undefined>([]);
+  const [filteredPosts, setFilteredPosts] = useState<PostType[] | undefined>(
+    []
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const postsPerPage: number = 8;
 
-  const posts: Post[] = useSitePosts();
-  const categories: Category[] = useBlogCategories();
+  const posts: PostType[] = useSitePosts();
+  const categories: CategoryType[] = useBlogCategories();
 
   useEffect(() => {
     setFilteredPosts(posts);
@@ -57,7 +36,7 @@ const BlogCategoryFilter: React.FC = () => {
 
   const indexOfLastPost: number = currentPage * postsPerPage;
   const indexOfFirstPost: number = indexOfLastPost - postsPerPage;
-  const currentPosts: Post[] | undefined = filteredPosts?.slice(
+  const currentPosts: PostType[] | undefined = filteredPosts?.slice(
     indexOfFirstPost,
     indexOfLastPost
   );
@@ -93,6 +72,7 @@ const BlogCategoryFilter: React.FC = () => {
           onClick={() => setSelectedCategory("")}
         >
           Tous les articles
+          <span>({posts?.length})</span>
         </button>
 
         {/* Category Buttons */}
@@ -105,7 +85,7 @@ const BlogCategoryFilter: React.FC = () => {
             onClick={() => setSelectedCategory(category.name)}
           >
             {category.name}
-            {/* {category.count && <span>({category?.count})</span>} */}
+            {category.count && <span>({category?.count})</span>}
           </button>
         ))}
       </div>

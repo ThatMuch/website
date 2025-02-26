@@ -14,7 +14,7 @@ export default function Footer({}: Props) {
   const menuItems = useSiteMenu().filter((item) =>
     item.locations.includes("GATSBY_FOOTER_MENU")
   );
-  console.log(menuItems);
+
   const site = useSiteSeo();
   const { siteUrl } = site;
   const posts = useSitePosts();

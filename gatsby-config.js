@@ -8,7 +8,7 @@ module.exports = {
     defaultTitle: `Thatmuch`,
     defaultDescription: `ThatMuch intervient dans la communication numérique & visuelle de votre entreprise. Nous vous accompagnons dans toutes les étapes de votre projet.`,
     author: `Thatmuch`,
-    siteUrl: `https://thatmuch.fr/`, // Replace with your domain
+    siteUrl: process.env.SITE_URL, // Replace with your domain
     defaultImage: `src/images/THATMUCH_Logo_Black.png`,
     defaultImageAlt: `THATMUCH Logo`,
     defaultImageWhite: `src/images/THATMUCH_Logo_White.png`,
