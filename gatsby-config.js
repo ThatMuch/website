@@ -2,6 +2,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+
 module.exports = {
   siteMetadata: {
     defaultTitle: `Thatmuch`,
@@ -20,14 +21,14 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: "https://back.thatmuch.fr/graphql",
-        acfOptions: {
-          useACF: true,
-          verboseOutput: true,
-          excludedACFTypes: ["options"],
-          onlyIncludedACFList: false,
-          includedACFList: [],
-        },
+        url: process.env.WPGRAPHQL_URL,
+        // acfOptions: {
+        //   useACF: true,
+        //   verboseOutput: true,
+        //   excludedACFTypes: ["options"],
+        //   onlyIncludedACFList: false,
+        //   includedACFList: [],
+        // },
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
@@ -43,12 +44,6 @@ module.exports = {
     "gatsby-plugin-image",
     `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: "0000",
-      },
-    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
