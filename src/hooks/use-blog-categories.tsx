@@ -9,7 +9,27 @@ export const useBlogCategories = () => {
           slug
           count
           link
+          posts {
+            nodes {
+              id
+              title
+              link
+              featuredImage {
+                node {
+                  altText
+                  mediaItemUrl
+                }
+              }
+              categories {
+                nodes {
+                  slug
+                  name
+                }
+              }
+            }
+          }
         }
+        totalCount
       }
     }
   `);

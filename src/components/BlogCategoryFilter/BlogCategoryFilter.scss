@@ -40,3 +40,14 @@
     grid-template-columns: repeat(auto-fit, max(300px));
   }
 }
+
+.Pagination {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-m;
+  margin-bottom: $spacing-xl;
+  .isActive {
+    color: $text-color-link;
+    font-weight: bold;
+  }
+}
