@@ -18,7 +18,10 @@ const Post = ({ data }) => {
           postDate={post.date}
         />
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
-        <RelatedPosts category={post.categories.nodes[0].slug} />
+        <RelatedPosts
+          category={post.categories.nodes[0].slug}
+          currentPostId={post.id}
+        />
       </main>
     </Layout>
   );
@@ -32,6 +35,7 @@ export default Post;
 export const pageQuery = graphql`
   query ($id: String!) {
     wpPost(id: { eq: $id }) {
+      id
       title
       content
       date(formatString: "D/MM/YYYY")

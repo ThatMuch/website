@@ -1,11 +1,5 @@
 import "./PostCard.scss";
 
-import {
-  GatsbyImage,
-  IGatsbyImageData,
-  StaticImage,
-} from "gatsby-plugin-image";
-
 import React from "react";
 
 type PostCardProps = {
@@ -24,7 +18,6 @@ export default function PostCard({
   url,
   image,
 }: PostCardProps) {
-  console.log(image);
   return (
     <article className="PostCard">
       <a href={url} className="PostCard__image">
