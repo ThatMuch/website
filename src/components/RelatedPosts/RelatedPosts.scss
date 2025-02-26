@@ -1,0 +1,15 @@
+@import "../../style/mixins";
+@import "../../style/vars";
+.RelatedPosts {
+  margin-top: $spacing-xl;
+  &__grid {
+    width: 100%;
+    display: grid;
+    gap: $spacing-m;
+    grid-template-columns: repeat(auto-fit, minmax(242px, 1fr));
+    margin-bottom: $spacing-xl;
+    @include breakpoint(laptop) {
+      grid-template-columns: repeat(auto-fit, max(220px));
+    }
+  }
+}

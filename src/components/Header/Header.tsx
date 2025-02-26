@@ -15,7 +15,7 @@ export default function Header() {
   const menuItems = useSiteMenu().filter((item) =>
     item.locations.includes("GATSBY_HEADER_MENU")
   );
-  console.log(menuItems);
+
   return (
     <header>
       <div className="menu">

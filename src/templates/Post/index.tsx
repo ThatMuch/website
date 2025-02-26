@@ -3,6 +3,7 @@ import PostHeader from "../../components/PostHeader/PostHeader";
 //import Layout from "../../components/Layout"
 import PropTypes from "prop-types";
 import React from "react";
+import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import { graphql } from "gatsby";
 
 const Post = ({ data }) => {
@@ -17,6 +18,7 @@ const Post = ({ data }) => {
           postDate={post.date}
         />
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <RelatedPosts category={post.categories.nodes[0].slug} />
       </main>
     </Layout>
   );
