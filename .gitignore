@@ -17,3 +17,14 @@ node_modules/
 # System files
 .DS_Store
 .thumbs
+
+# git ignore for netlify and gatsby project
+#
+# Netlify
+
+# https://www.netlify.com/docs/continuous-deployment/#gitignore
+# https://www.netlify.com/docs/continuous-deployment/#build-ignores
+# https://www.netlify.com/docs/continuous-deployment/#build-ignores
+# https://www.netlify.com/docs/continuous-deployment/#build-ignores
+# https://www.netlify.com/docs/continuous-deployment/#build-ignores
+# https://www.netlify.com/docs/continuous-deployment/#build-ignores

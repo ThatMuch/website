@@ -7,14 +7,38 @@ import PostCard from "../PostCard/PostCard";
 import { useBlogCategories } from "../../hooks/use-blog-categories";
 import { useSitePosts } from "../../hooks/use-site-posts";
 
-const BlogCategoryFilter = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [filteredPosts, setFilteredPosts] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 8;
+interface Category {
+  slug: string;
+  name: string;
+  count?: number;
+}
 
-  const posts = useSitePosts();
-  const categories = useBlogCategories();
+interface CategoryNode {
+  name: string;
+  slug: string;
+}
+
+interface Post {
+  title: string;
+  link: string;
+  categories: {
+    nodes: CategoryNode[];
+  };
+  featuredImage?: {
+    node: {
+      sourceUrl: string;
+    };
+  };
+}
+
+const BlogCategoryFilter: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [filteredPosts, setFilteredPosts] = useState<Post[] | undefined>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const postsPerPage: number = 8;
+
+  const posts: Post[] = useSitePosts();
+  const categories: Category[] = useBlogCategories();
 
   useEffect(() => {
     setFilteredPosts(posts);
@@ -31,22 +55,29 @@ const BlogCategoryFilter = () => {
     setCurrentPage(1);
   }, [selectedCategory]);
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts?.slice(indexOfFirstPost, indexOfLastPost);
+  const indexOfLastPost: number = currentPage * postsPerPage;
+  const indexOfFirstPost: number = indexOfLastPost - postsPerPage;
+  const currentPosts: Post[] | undefined = filteredPosts?.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
 
-  const totalPages = Math.ceil(filteredPosts?.length / postsPerPage);
+  const totalPages: number = Math.ceil(
+    (filteredPosts?.length || 0) / postsPerPage
+  );
 
-  const renderPageNumbers = () => {
+  const renderPageNumbers = (): React.ReactNode => {
+    const pageNumbers: React.ReactNode[] = [];
     for (let i = 1; i <= totalPages; i++) {
-      const isActive = i === currentPage;
-      const className = isActive ? "active" : "";
-      return (
+      const isActive: boolean = i === currentPage;
+      const className: string = isActive ? "active" : "";
+      pageNumbers.push(
         <button key={i} onClick={() => setCurrentPage(i)} className={className}>
           {i}
         </button>
       );
     }
+    return pageNumbers;
   };
 
   return (
