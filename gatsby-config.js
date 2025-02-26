@@ -2,6 +2,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+console.log(process.env.WPGRAPHQL_URL);
 module.exports = {
   siteMetadata: {
     defaultTitle: `Thatmuch`,
@@ -20,14 +21,14 @@ module.exports = {
     {
       resolve: "gatsby-source-wordpress",
       options: {
-        url: "https://back.thatmuch.fr/graphql",
-        acfOptions: {
-          useACF: true,
-          verboseOutput: true,
-          excludedACFTypes: ["options"],
-          onlyIncludedACFList: false,
-          includedACFList: [],
-        },
+        url: process.env.WPGRAPHQL_URL,
+        // acfOptions: {
+        //   useACF: true,
+        //   verboseOutput: true,
+        //   excludedACFTypes: ["options"],
+        //   onlyIncludedACFList: false,
+        //   includedACFList: [],
+        // },
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
@@ -46,7 +47,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: "G-EGCDBV43KT",
+        trackingId: process.env.GOOGLETAGID,
       },
     },
     "gatsby-plugin-react-helmet",
@@ -75,18 +76,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
-        id: "G-EGCDBV43KT",
-
-        // Include GTM in development.
-        //
-        // Defaults to false meaning GTM will only be loaded in production.
+        id: process.env.GOOGLETAGID,
         includeInDevelopment: false,
-
-        // datalayer to be set before GTM is loaded
-        // should be an object or a function that is executed in the browser
-        //
-        // Defaults to null
-        defaultDataLayer: { platform: "gatsby" },
       },
     },
   ],
