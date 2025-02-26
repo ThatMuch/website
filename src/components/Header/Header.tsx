@@ -7,6 +7,7 @@ import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
 import logo from "../../images/THATMUCH_Logo_Black.png";
 import { useSiteMenu } from "../../hooks/use-site-menu";
+import { useSiteSeo } from "../../hooks/use-site-seo";
 
 export default function Header() {
   const [isOpened, setIsOpened] = useState(false);
@@ -15,7 +16,8 @@ export default function Header() {
   const menuItems = useSiteMenu().filter((item) =>
     item.locations.includes("GATSBY_HEADER_MENU")
   );
-
+  const site = useSiteSeo();
+  const { siteUrl } = site;
   return (
     <header>
       <div className="menu">
@@ -46,7 +48,9 @@ export default function Header() {
                 alt="Close Thatmuch"
               />
             </button>
-            <img src={logo} alt="Thatmuch" className="logo" />
+            <a href={siteUrl} title="Logo Thatmuch" aria-label="Logo Thatmuch">
+              <img src={logo} alt="Thatmuch" className="logo" />
+            </a>
             <div className="row">
               <div className="col-12 col-sm-4 ">
                 <ul>
