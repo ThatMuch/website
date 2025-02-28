@@ -38,6 +38,9 @@ const Seo: React.FC<SEOProps> = ({
 
   return (
     <Helmet title={seo.title}>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <html lang="fr" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 
