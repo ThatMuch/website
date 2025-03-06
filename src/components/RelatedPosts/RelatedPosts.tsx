@@ -17,7 +17,7 @@ export default function RelatedPosts({ category, currentPostId }: Props) {
   useEffect(() => {
     const postsFiltered = cats
       .filter((cat) => cat.slug === category)[0]
-      .posts.nodes.slice(0, 3)
+      ?.posts?.nodes.slice(0, 3)
       .filter((post) => post.id !== currentPostId);
 
     setPosts(postsFiltered);
@@ -29,7 +29,7 @@ export default function RelatedPosts({ category, currentPostId }: Props) {
       <h3 className="RelatedPosts__title">Articles similaires</h3>
       <div className="divider mb-4"></div>
       <div className="RelatedPosts__grid">
-        {posts.map((post: PostType, index) => (
+        {posts?.map((post: PostType, index) => (
           <div key={index}>
             <PostCard
               title={post?.title}
