@@ -1,3 +1,4 @@
 {
-	"editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "scssReminder.sourceFiles": ["./src/style/_vars.scss"]
 }
