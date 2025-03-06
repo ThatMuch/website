@@ -8,6 +8,7 @@
   align-self: stretch;
   border-radius: $radius-l;
   margin-bottom: $spacing-l;
+  background-color: $neutral-100;
 
   @include breakpoint(mobile) {
     border-radius: $radius-m;
