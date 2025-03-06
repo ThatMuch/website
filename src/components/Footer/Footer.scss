@@ -30,6 +30,9 @@
       height: 200px;
     }
   }
+  a {
+    color: $neutral-100;
+  }
   &__logo {
     img {
       width: 10rem;
@@ -42,6 +45,9 @@
     color: $neutral-300;
     gap: $spacing-xs;
     padding: $spacing-l;
+    a:hover {
+      color: $neutral-100;
+    }
   }
 }
 .RS_Section {

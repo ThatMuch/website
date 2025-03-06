@@ -23,7 +23,7 @@ export default function RelatedPosts({ category, currentPostId }: Props) {
     setPosts(postsFiltered);
   }, [category]);
 
-  if (!posts) return null;
+  if (posts.length === 0) return null;
   return (
     <div className="RelatedPosts">
       <h3 className="RelatedPosts__title">Articles similaires</h3>
