@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 export const useSitePosts = () => {
   const data = useStaticQuery(graphql`
     query GET_ALL_POSTS {
-      allWpPost {
+      allWpPost(sort: { date: DESC }) {
         edges {
           node {
             id
@@ -36,6 +36,7 @@ export const useSitePosts = () => {
     }
   `);
   // map data to have only posts
+
   const posts = data.allWpPost.edges.map(({ node }) => node);
 
   return posts;
