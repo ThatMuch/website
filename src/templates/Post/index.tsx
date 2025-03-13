@@ -4,6 +4,7 @@ import PostHeader from "../../components/PostHeader/PostHeader";
 import PropTypes from "prop-types";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
+import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 
 const Post = ({ data }) => {
@@ -11,6 +12,7 @@ const Post = ({ data }) => {
   return (
     <Layout type="post">
       <main>
+        <Seo title={post.title} description={post.seo.metaDesc} />
         <PostHeader
           title={post.title}
           author={post.author.node}
@@ -38,6 +40,11 @@ export const pageQuery = graphql`
       id
       title
       content
+      seo {
+        metaDesc
+        metaKeywords
+        title
+      }
       date(formatString: "D/MM/YYYY")
       author {
         node {
