@@ -16,7 +16,7 @@ export const useSitePosts = () => {
               }
             }
             content
-            date(formatString: "d/MM/YYYY")
+            date(formatString: "dd/MM/YYYY")
             featuredImage {
               node {
                 altText
