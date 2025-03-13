@@ -9,6 +9,7 @@ import { graphql } from "gatsby";
 
 const Post = ({ data }) => {
   const post = data.wpPost;
+  console.log(post);
   return (
     <Layout type="post">
       <main>
@@ -45,7 +46,7 @@ export const pageQuery = graphql`
         metaKeywords
         title
       }
-      date(formatString: "D/MM/YYYY")
+      date(formatString: "d/MM/YYYY")
       author {
         node {
           name
