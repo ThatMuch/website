@@ -17,6 +17,7 @@ const Post = ({ data }) => {
           title={post.title}
           description={post.seo.metaDesc}
           image={post.featuredImage.node.mediaItemUrl}
+          type="article"
         />
 
         <PostHeader
