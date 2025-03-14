@@ -9,11 +9,16 @@ import { graphql } from "gatsby";
 
 const Post = ({ data }) => {
   const post = data.wpPost;
-  console.log(post);
+
   return (
     <Layout type="post">
       <main>
-        <Seo title={post.title} description={post.seo.metaDesc} />
+        <Seo
+          title={post.title}
+          description={post.seo.metaDesc}
+          image={post.featuredImage.node.mediaItemUrl}
+        />
+
         <PostHeader
           title={post.title}
           author={post.author.node}
@@ -41,6 +46,11 @@ export const pageQuery = graphql`
       id
       title
       content
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
       seo {
         metaDesc
         metaKeywords

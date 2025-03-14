@@ -14,6 +14,11 @@ interface BlogPageProps extends PageProps {
       seo: {
         metaDesc: string;
       };
+      featuredImage: {
+        node: {
+          mediaItemUrl: string;
+        };
+      };
     };
   };
 }
@@ -22,7 +27,11 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
   const page = data.wpPage;
   return (
     <Layout type="blog">
-      <Seo title={page.title} description={page.seo.metaDesc} />
+      <Seo
+        title={page.title}
+        description={page.seo.metaDesc}
+        image={page?.featuredImage?.node?.mediaItemUrl}
+      />
       <PageHeader title={page.title} description={page.seo.metaDesc} />
       <BlogCategoryFilter />
       <Newsletter />
@@ -37,6 +46,11 @@ export const pageQuery = graphql`
     wpPage(id: { eq: $id }) {
       title
       content
+      featuredImage {
+        node {
+          mediaItemUrl
+        }
+      }
       seo {
         metaDesc
         metaKeywords
