@@ -16,6 +16,7 @@ body {
   img,
   iframe {
     max-width: 100%;
+    height: auto;
   }
   p {
     margin-bottom: $spacing-s;
