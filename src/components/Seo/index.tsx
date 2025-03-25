@@ -8,7 +8,7 @@ interface SEOProps {
   title?: string;
   description?: string;
   image?: string;
-  article?: boolean;
+  type?: string;
   pathname?: string;
 }
 
@@ -16,7 +16,7 @@ const Seo: React.FC<SEOProps> = ({
   title,
   description,
   image,
-  article = false,
+  type = "website",
   pathname,
 }) => {
   const site = useSiteSeo();
@@ -46,7 +46,7 @@ const Seo: React.FC<SEOProps> = ({
 
       {/* OpenGraph tags */}
       <meta property="og:url" content={seo.url} />
-      {article ? <meta property="og:type" content="article" /> : null}
+      <meta property="og:type" content={type} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
       <meta property="og:image" content={seo.image} />
