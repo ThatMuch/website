@@ -1,0 +1,22 @@
+@import "../../style/vars.scss";
+@import "../../style/_mixins.scss";
+.ContactForm {
+  background-color: $dark_1;
+  background-image: url("../../images/Background_Dark.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+  padding: $spacing-xl;
+  color: #fff;
+
+  overflow: hidden;
+  img {
+    position: absolute;
+    width: 340px;
+    bottom: -150px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}

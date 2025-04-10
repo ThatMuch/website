@@ -1,27 +1,23 @@
 import "normalize.css";
 import "../../style/style.scss";
 
+import ContactForm from "../../components/ContactForm";
 import HubspotForm from "react-hubspot-form";
 import Layout from "../../components/Layout";
-import PropTypes from "prop-types";
 import React from "react";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 
-const Page = ({ data }) => {
+const Contact = ({ data }) => {
   const page = data.wpPage;
-  console.log(data);
+  console.log(page);
   return (
     <Layout>
       <main>
-        <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.content }} />
-        <HubspotForm
-          portalId={page.hubspotForm.portalid}
-          formId={page.hubspotForm.formId}
-          onSubmit={() => console.log("Submit!")}
-          onReady={(form) => console.log("Form ready!")}
-        />
+        <ContactForm hubspotForm={page.hubspotForm} />
+        {page.content && (
+          <div dangerouslySetInnerHTML={{ __html: page.content }} />
+        )}
       </main>
     </Layout>
   );
@@ -41,4 +37,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default Page;
+export default Contact;
