@@ -32,7 +32,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const postTemplate = path.resolve(`./src/templates/Post/index.tsx`);
   const pageTemplate = path.resolve(`./src/templates/Page/index.tsx`);
-  const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`);
+	const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`);
+	const contactTemplete = path.resolve(`./src/templates/Contact/index.tsx`);
+
 
   pages.data.allWpPage.edges.forEach((edge) => {
     // if is posts page, use the index template
@@ -44,7 +46,16 @@ exports.createPages = async ({ graphql, actions }) => {
 			  id: edge.node.id,
 		}
       });
-    } else {
+	} else if (edge.node.slug === "contact") {
+		createPage({
+			path: "/contact",
+			component: slash(contactTemplete),
+			context: {
+				id: edge.node.id,
+			}
+		});
+	}
+	else {
       createPage({
         // `path` will be the url for the page
         path: edge.node.slug,
