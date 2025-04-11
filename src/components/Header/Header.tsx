@@ -60,6 +60,7 @@ export default function Header() {
                       data-aos="slide-up"
                       data-aos-delay={index * 100}
                       onMouseEnter={() => setIsActive(index)}
+                      className="pr-1"
                     >
                       <a
                         href={item.url}

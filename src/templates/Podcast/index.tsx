@@ -4,6 +4,7 @@ import AllPosts from "../../components/AllPosts/AllPosts";
 import ContactForm from "../../components/ContactForm";
 import Layout from "../../components/Layout";
 import PodcastLinks from "../../components/PodcastLinks";
+import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { useSitePosts } from "../../hooks/use-site-posts";
 
@@ -16,6 +17,7 @@ const Podcast = ({ data }) => {
   console.log(posts);
   return (
     <Layout type="podcast">
+      <Seo title={title} description={page.seo.metaDesc} />
       <div className="row mb-5">
         <div className="col-md-6 order-2 order-md-1">
           <h2 className="h3">{sousTitre}</h2>
@@ -56,6 +58,11 @@ export const pageQuery = graphql`
       detailPagePodcast {
         descriptionHeroSection
         sousTitre
+      }
+      seo {
+        metaDesc
+        metaKeywords
+        title
       }
     }
   }
