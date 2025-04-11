@@ -1,102 +1,100 @@
-@import "../../../style/vars";
-@import "../../../style/mixins";
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
 
 .Moteur {
-    background-image: url("../../../images/Background_Dark.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("../../../images/Background_Dark.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 
-    p {
-        margin-bottom: 3rem;
+  p {
+    margin-bottom: 3rem;
 
-        @include breakpoint(mobile) {
-            color: #fff;
-        }
+    @include breakpoint(mobile) {
+      color: #fff;
+    }
+  }
+
+  @include breakpoint(tablet) {
+    background-image: url("../../../images/Background_Light.png");
+
+    .illu_mobile {
+      display: none;
+    }
+  }
+
+  .illu_desktop {
+    width: 800px;
+    margin: 0 auto;
+    display: block;
+
+    @include breakpoint(mobile) {
+      display: none;
+    }
+  }
+
+  .content {
+    @include breakpoint(tablet) {
+      max-width: 800px;
+      margin: auto;
+    }
+  }
+
+  h1 {
+    color: #fff;
+
+    @include breakpoint(tablet) {
+      color: $dark_1;
+
+      //    max-width: 500px;
+      margin-bottom: 2rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .Card {
+    @include breakpoint(tablet) {
+      transform: translateX(-10%);
+    }
+  }
+
+  .number {
+    color: #fff;
+    font-weight: light;
+    font-size: 3rem;
+    position: relative;
+    height: 109px;
+    width: 119px;
+    text-align: center;
+    line-height: 109px;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-image: url("../../../images/number_decoration.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      -webkit-animation: rotating 5s linear infinite;
+      -moz-animation: rotating 5s linear infinite;
+      -ms-animation: rotating 5s linear infinite;
+      -o-animation: rotating 5s linear infinite;
+      animation: rotating 5s linear infinite;
     }
 
     @include breakpoint(tablet) {
-        background-image: url("../../../images/Background_Light.png");
-
-        .illu_mobile {
-            display: none;
-        }
+      transform: translate(80%, -170%);
     }
 
-
-    .illu_desktop {
-        width: 800px;
-        margin: 0 auto;
-        display: block;
-
-        @include breakpoint(mobile) {
-            display: none;
-        }
+    @include breakpoint(mobile) {
+      height: 89px;
+      width: 99px;
+      line-height: 89px;
+      transform: translateY(-21px);
     }
-
-    .content {
-        @include breakpoint(tablet) {
-            max-width: 800px;
-            margin: auto;
-        }
-    }
-
-    h1 {
-        color: #fff;
-
-        @include breakpoint(tablet) {
-            color: $dark_1;
-
-            //    max-width: 500px;
-            margin-bottom: 2rem;
-        }
-    }
-
-    img {
-        max-width: 100%;
-    }
-
-    .Card {
-        @include breakpoint(tablet) {
-            transform: translateX(-10%);
-        }
-    }
-
-    .number {
-        color: #fff;
-        font-weight: light;
-        font-size: 3rem;
-        position: relative;
-        height: 109px;
-        width: 119px;
-        text-align: center;
-        line-height: 109px;
-
-        &:before {
-            content: "";
-            display: block;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            background-image: url("../../../images/number_decoration.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-            -webkit-animation: rotating 5s linear infinite;
-            -moz-animation: rotating 5s linear infinite;
-            -ms-animation: rotating 5s linear infinite;
-            -o-animation: rotating 5s linear infinite;
-            animation: rotating 5s linear infinite;
-        }
-
-        @include breakpoint(tablet) {
-            transform: translate(80%, -170%);
-        }
-
-
-        @include breakpoint(mobile) {
-            height: 89px;
-            width: 99px;
-            line-height: 89px;
-            transform: translateY(-21px);
-        }
-    }
+  }
 }

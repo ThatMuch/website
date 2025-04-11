@@ -1,5 +1,5 @@
-@import "../../style/mixins";
-@import "../../style/vars";
+@use "../../style/mixins" as *;
+@use "../../style/vars" as *;
 .RelatedPosts {
   margin-top: $spacing-xl;
   &__grid {

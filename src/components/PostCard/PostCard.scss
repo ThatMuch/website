@@ -1,4 +1,4 @@
-@import "../../style/vars";
+@use "../../style/vars" as *;
 
 .PostCard {
   &__title {

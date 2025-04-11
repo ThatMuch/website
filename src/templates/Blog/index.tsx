@@ -1,7 +1,6 @@
 import { PageProps, graphql } from "gatsby";
 
 import AllPosts from "../../components/AllPosts/AllPosts";
-import BlogCategoryFilter from "../../components/BlogCategoryFilter/BlogCategoryFilter";
 import Layout from "../../components/Layout";
 import Newsletter from "../../components/Newsletter";
 import PageHeader from "../../components/PageHeader";

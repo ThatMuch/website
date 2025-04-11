@@ -1,9 +1,9 @@
-@import "./vars";
-@import "./fonts";
-@import "./mixins";
-@import "./atoms/atoms";
-@import "./atoms/buttons";
-@import "./atoms/input";
+@use "./vars" as *;
+@use "./fonts" as *;
+@use "./mixins" as *;
+@use "./atoms/atoms" as *;
+@use "./atoms/buttons" as *;
+@use "./atoms/input" as *;
 
 body {
   font-family: "SpaceMono", sans-serif;

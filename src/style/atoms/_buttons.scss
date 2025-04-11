@@ -1,3 +1,6 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
 .btn_TM {
   text-transform: uppercase;
   outline: none;

@@ -1,5 +1,5 @@
-@import "../../style/vars.scss";
-@import "../../style/_mixins.scss";
+@use "../../style/vars.scss" as *;
+@use "../../style/_mixins.scss" as *;
 .ContactForm {
   background-color: $dark_1;
   background-image: url("../../images/Background_Dark.png");
