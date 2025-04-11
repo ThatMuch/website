@@ -4,7 +4,7 @@ import React from "react";
 import amazon from "../../images/amazonmusic.svg";
 import apple from "../../images/applepodcast.svg";
 import spotify from "../../images/spotify.svg";
-import youtube from "../../images/youtube.svg";
+import youtube from "../../images/youtube-podcast.svg";
 
 type Props = {};
 
