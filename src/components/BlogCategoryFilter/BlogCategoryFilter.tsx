@@ -18,7 +18,6 @@ const BlogCategoryFilter: React.FC = () => {
 
   const posts: PostType[] = useSitePosts();
   const categories: CategoryType[] = useBlogCategories();
-  console.log(categories);
   useEffect(() => {
     setFilteredPosts(posts);
   }, []);

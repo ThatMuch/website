@@ -9,8 +9,12 @@
   border-radius: $radius-l;
   padding: $spacing-xl;
   color: #fff;
-
   overflow: hidden;
+  @include breakpoint(mobile) {
+    padding: $spacing-m;
+    border-radius: $radius-m;
+  }
+
   img {
     position: absolute;
     width: 340px;
@@ -18,5 +22,13 @@
     left: 0;
     right: 0;
     margin: auto;
+    @include breakpoint(mobile) {
+      position: relative;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
   }
 }
