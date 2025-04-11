@@ -78,6 +78,9 @@ module.exports = {
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
+          timeout: 120000,
+          // Decrease the number of items fetched per request (e.g., to 50)
+          perPage: 50,
         },
         develop: {
           //caches media files outside of Gatsby's default cache an thus allows them to persist through a cache reset.

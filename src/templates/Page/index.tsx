@@ -29,6 +29,7 @@ export const pageQuery = graphql`
     wpPage(id: { eq: $id }) {
       title
       content
+      slug
     }
   }
 `;
