@@ -2,8 +2,6 @@
 @use "./fonts" as *;
 @use "./mixins" as *;
 @use "./atoms/atoms" as *;
-@use "./atoms/buttons" as *;
-@use "./atoms/input" as *;
 
 body {
   font-family: "SpaceMono", sans-serif;
@@ -16,6 +14,9 @@ body {
   img,
   iframe {
     max-width: 100%;
+  }
+
+  img {
     height: auto;
   }
   p {

@@ -11,7 +11,7 @@ const Post = ({ data }) => {
 
   return (
     <Layout type="post">
-      <main>
+      <main className={post.categories.nodes[0].slug}>
         <Seo
           title={post.title}
           description={post.seo.metaDesc}
