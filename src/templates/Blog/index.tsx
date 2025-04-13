@@ -35,7 +35,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
         image={page?.featuredImage?.node?.mediaItemUrl}
       />
       <PageHeader title={page.title} description={page.seo.metaDesc} />
-      <AllPosts posts={posts} />
+      <AllPosts filter />
       <Newsletter />
     </Layout>
   );

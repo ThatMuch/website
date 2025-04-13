@@ -30,7 +30,7 @@ const Podcast = ({ data }) => {
         </div>
       </div>
       <PodcastLinks />
-      <AllPosts posts={posts} title="Les épisodes" />
+      <AllPosts title="Les épisodes" category="podcast" />
       <ContactForm hubspotForm={hubspotForm} />
     </Layout>
   );

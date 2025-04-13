@@ -1,7 +1,7 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 
-.BlogCategoryFilter {
+.AllPosts {
   &_list {
     display: flex;
     flex-wrap: wrap;
@@ -49,5 +49,15 @@
   .isActive {
     color: $text-color-link;
     font-weight: bold;
+    background-color: $surface-default;
+    border-radius: $radius-l;
+    padding: $spacing-s;
+    border: 1px solid $surface-default;
+    height: 42px;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 }
