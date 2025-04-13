@@ -104,7 +104,10 @@ export default function Header() {
           </div>
         ) : null}
       </div>
-      <a href="https://thatmuch.fr/#Contact" className="btn btn-primary">
+      <a
+        href="https://meetings-eu1.hubspot.com/mathilde-arconte"
+        className="btn btn-primary"
+      >
         Programmez un appel
       </a>
     </header>
