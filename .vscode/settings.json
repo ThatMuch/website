@@ -1,5 +1,21 @@
 {
   "editor.formatOnSave": true,
   "scssReminder.sourceFiles": ["./src/style/_vars.scss"],
-  "cSpell.words": ["Linkedin", "Thatmuch", "Tiktok", "Youtube"]
+  "cSpell.words": [
+    "allowfullscreen",
+    "fily",
+    "fullscreen",
+    "gatsby",
+    "IDAS",
+    "kante",
+    "Kanté",
+    "Linkedin",
+    "portalid",
+    "spotify",
+    "Thatmuch",
+    "Tiktok",
+    "WPGRAPHQL",
+    "youtube",
+    "Youtube"
+  ]
 }
