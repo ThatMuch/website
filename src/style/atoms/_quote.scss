@@ -1,6 +1,6 @@
 @use "../vars" as *;
 
-div:has(> blockquote) {
+blockquote {
   border-radius: $radius-m;
   background: $surface-default;
   padding: $spacing-xl $spacing-l $spacing-l $spacing-xl;
@@ -21,9 +21,6 @@ div:has(> blockquote) {
     height: calc(100% - $spacing-l * 2);
     background: var(--text-color-default, $neutral-200);
   }
-}
-
-blockquote {
   p {
     position: relative;
     padding: $spacing-m;
