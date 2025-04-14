@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-export const useSitePosts = () => {
+export const useSitePosts = (categorySlug?: string) => {
   const data = useStaticQuery(graphql`
     query GET_ALL_POSTS {
       allWpPost(sort: { date: DESC }) {
@@ -35,9 +35,16 @@ export const useSitePosts = () => {
       }
     }
   `);
-  // map data to have only posts
 
-  const posts = data.allWpPost.edges.map(({ node }) => node);
+  // Map data to have only posts
+  let posts = data.allWpPost.edges.map(({ node }) => node);
+
+  // Filter posts by category if categorySlug is provided
+  if (categorySlug) {
+    posts = posts.filter((post) =>
+      post.categories.nodes.some((category) => category.slug === categorySlug)
+    );
+  }
 
   return posts;
 };

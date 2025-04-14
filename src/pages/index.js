@@ -7,11 +7,11 @@ import Decollage from '../components/Frontpage/Decollage';
 import Fullpage from "../components/Fullpage"
 import Header from '../components/Header';
 import HeroSection from "../components/Frontpage/HeroSection"
-import Layout from "../components/Layout"
 import Moteur from "../components/Frontpage/Moteur"
 import Plan from "../components/Frontpage/Plan"
 import Program from "../components/Frontpage/Program/Program"
 import React from "react"
+import Seo from '../components/Seo';
 
 const sections = [
 	{
@@ -50,6 +50,7 @@ const IndexPage = () => {
   return (
 	  <>
 		  <Header />
+		  <Seo/>
 			<Fullpage sections={sections}/>
 		</>
   )

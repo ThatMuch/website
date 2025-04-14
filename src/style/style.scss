@@ -1,9 +1,7 @@
-@import "./vars";
-@import "./fonts";
-@import "./mixins";
-@import "./atoms/atoms";
-@import "./atoms/buttons";
-@import "./atoms/input";
+@use "./vars" as *;
+@use "./fonts" as *;
+@use "./mixins" as *;
+@use "./atoms/atoms" as *;
 
 body {
   font-family: "SpaceMono", sans-serif;
@@ -94,4 +92,7 @@ body {
   -ms-animation: rotating 2s linear infinite;
   -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
+}
+.uppercase {
+  text-transform: uppercase;
 }

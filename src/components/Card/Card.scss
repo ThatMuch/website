@@ -1,90 +1,87 @@
-@import "../../style/vars";
-@import "../../style/mixins";
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
 
 .Card {
-    max-width: 100%;
-    position: relative;
+  max-width: 100%;
+  position: relative;
 
-    &-S {
-        width: 440px;
+  &-S {
+    width: 440px;
+  }
+
+  &-M {
+    width: 495px;
+  }
+
+  &-L {
+    width: 535px;
+  }
+
+  &-XL {
+    width: 800px;
+  }
+
+  &-cyan {
+    background-color: rgba($cyan, 0.85);
+  }
+
+  &-yellow {
+    background-color: rgba($yellow, 0.85);
+  }
+
+  &-green {
+    background-color: rgba($green, 0.85);
+  }
+
+  &-magenta {
+    background-color: rgba($magenta, 0.85);
+  }
+
+  &-dark {
+    background-color: rgba($dark_1, 0.85);
+  }
+
+  &-grey {
+    background-color: $grey_3;
+  }
+
+  @include breakpoint(mobile_S) {
+    min-width: 100%;
+  }
+
+  @include breakpoint(mobile) {
+    margin: 0 auto;
+  }
+
+  &__numbers {
+    color: $white;
+    text-align: right;
+    font-family: "Neue Machina";
+    letter-spacing: 10px;
+  }
+
+  &__content {
+    padding: $space_M;
+    width: 100%;
+
+    @include breakpoint(laptop) {
+      padding: $space_L;
     }
 
-    &-M {
-        width: 495px;
+    p:last-child {
+      margin-bottom: 0;
     }
 
-    &-L {
-        width: 535px;
+    .balise {
+      color: $magenta;
     }
 
-    &-XL {
-        width: 800px;
+    &:not(.Card-grey) {
+      color: $white;
+
+      .balise {
+        color: $yellow;
+      }
     }
-
-    &-cyan {
-        background-color: rgba($cyan, 0.85);
-    }
-
-    &-yellow {
-        background-color: rgba($yellow, 0.85);
-    }
-
-    &-green {
-        background-color: rgba($green, 0.85);
-    }
-
-    &-magenta {
-        background-color: rgba($magenta, 0.85);
-    }
-
-    &-dark {
-        background-color: rgba($dark_1, 0.85);
-    }
-
-    &-grey {
-        background-color: $grey_3;
-    }
-
-    @include breakpoint(mobile_S) {
-        min-width: 100%;
-    }
-
-
-    @include breakpoint(mobile) {
-        margin: 0 auto;
-    }
-
-
-    &__numbers {
-        color: $white;
-        text-align: right;
-        font-family: 'Neue Machina';
-        letter-spacing: 10px;
-    }
-
-    &__content {
-        padding: $space_M;
-        width: 100%;
-
-        @include breakpoint(laptop) {
-            padding: $space_L;
-        }
-
-
-        p:last-child {
-            margin-bottom: 0;
-        }
-
-        .balise {
-            color: $magenta;
-        }
-
-        &:not(.Card-grey) {
-            color: $white;
-
-            .balise {
-                color: $yellow;
-            }
-        }
-    }
+  }
 }

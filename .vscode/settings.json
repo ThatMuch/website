@@ -1,4 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "scssReminder.sourceFiles": ["./src/style/_vars.scss"]
+  "scssReminder.sourceFiles": ["./src/style/_vars.scss"],
+  "cSpell.words": ["Linkedin", "Thatmuch", "Tiktok", "Youtube"]
 }

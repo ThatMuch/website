@@ -1,5 +1,5 @@
-@import "../../style/mixins.scss";
-@import "../../style/vars.scss";
+@use "../../style/mixins.scss" as *;
+@use "../../style/vars.scss" as *;
 .PageHeader {
   width: 100%;
   @include breakpoint(laptop) {

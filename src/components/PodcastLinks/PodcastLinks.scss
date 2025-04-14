@@ -1,0 +1,18 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.PodcastLinks {
+  display: flex;
+  padding: $spacing-m;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-m;
+  align-self: stretch;
+  border-radius: $radius-m;
+  background: $neutral-50;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-xl;
+  img:hover {
+    transform: scale(1.1);
+  }
+}

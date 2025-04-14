@@ -1,5 +1,5 @@
-@import "../../style/vars";
-@import "../../style/mixins";
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
 .PostHeader {
   display: flex;
   padding: $spacing-l $spacing-xl;

@@ -1,4 +1,4 @@
-@import "../../style/vars";
+@use "../../style/vars" as *;
 
 .PostCard {
   &__title {
@@ -9,6 +9,7 @@
     a {
       color: $text-color-default;
       text-decoration: none;
+      font-weight: normal;
     }
   }
 

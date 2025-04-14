@@ -60,6 +60,7 @@ export default function Header() {
                       data-aos="slide-up"
                       data-aos-delay={index * 100}
                       onMouseEnter={() => setIsActive(index)}
+                      className="pr-1"
                     >
                       <a
                         href={item.url}
@@ -103,7 +104,22 @@ export default function Header() {
           </div>
         ) : null}
       </div>
-      <a href="https://thatmuch.fr/#Contact" className="btn btn-primary">
+      <a
+        href="https://meetings-eu1.hubspot.com/mathilde-arconte"
+        className="btn btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Programmez un appel"
+        aria-label="Programmez un appel"
+        data-aos="fade-down"
+        data-aos-delay="100"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+        data-aos-anchor-placement="top-bottom"
+        data-aos-offset="0"
+        data-aos-once="true"
+        data-aos-anchor="#bento-menu"
+      >
         Programmez un appel
       </a>
     </header>

@@ -1,43 +1,43 @@
-@import "../../../style/vars";
-@import "../../../style/mixins";
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
 
 .Decollage {
-    background-image: url("../../../images/Background_Light.png");
+  background-image: url("../../../images/Background_Light.png");
 
-    .section-title {
-        color: $dark_1;
-        display: flex;
-        align-items: center;
-        margin-top: 0;
+  .section-title {
+    color: $dark_1;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
 
-        &__index {
-            font-weight: normal;
-            margin-right: $space_S;
-        }
-
-        &__numbers {
-            display: block;
-            font-family: 'Neue Machina';
-            letter-spacing: 10px;
-            font-size: .9rem;
-            margin-bottom: 1rem;
-            margin-left: 70px;
-        }
-
-        @include breakpoint(mobile) {
-            width: 65%;
-            flex-direction: column;
-            align-items: inherit;
-        }
+    &__index {
+      font-weight: normal;
+      margin-right: $space_S;
     }
 
-    img {
-        max-width: 100%;
-
-        @include breakpoint(mobile) {
-            height: 250px;
-            margin: auto;
-            display: block;
-        }
+    &__numbers {
+      display: block;
+      font-family: "Neue Machina";
+      letter-spacing: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      margin-left: 70px;
     }
+
+    @include breakpoint(mobile) {
+      width: 65%;
+      flex-direction: column;
+      align-items: inherit;
+    }
+  }
+
+  img {
+    max-width: 100%;
+
+    @include breakpoint(mobile) {
+      height: 250px;
+      margin: auto;
+      display: block;
+    }
+  }
 }

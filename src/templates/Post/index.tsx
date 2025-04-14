@@ -1,6 +1,5 @@
 import Layout from "../../components/Layout";
 import PostHeader from "../../components/PostHeader/PostHeader";
-//import Layout from "../../components/Layout"
 import PropTypes from "prop-types";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
@@ -12,7 +11,7 @@ const Post = ({ data }) => {
 
   return (
     <Layout type="post">
-      <main>
+      <main className={post.categories.nodes[0].slug}>
         <Seo
           title={post.title}
           description={post.seo.metaDesc}

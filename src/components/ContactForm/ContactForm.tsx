@@ -1,0 +1,37 @@
+import "./ContactForm.scss";
+
+import HubspotForm from "react-hubspot-form";
+import React from "react";
+import tardis from "../../images/tardis.png";
+
+type Props = {
+  hubspotForm: {
+    formId: string;
+    portalid: string;
+    sousTitre: string;
+    titre: string;
+  };
+};
+
+export default function ContactForm({ hubspotForm }: Props) {
+  return (
+    <div className="ContactForm">
+      <div className="row">
+        <div className="col-md-6 position-relative">
+          <h2 className="h3">{hubspotForm.sousTitre}</h2>
+          <div className="divider mb-4"></div>
+          <h1>{hubspotForm.titre}</h1>
+          <img src={tardis} alt="Tardis" />
+        </div>
+        <div className="col-md-6">
+          <HubspotForm
+            portalId={hubspotForm.portalid}
+            formId={hubspotForm.formId}
+            onSubmit={() => console.log("Submit!")}
+            onReady={(form) => console.log("Form ready!")}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,34 @@
+@use "../../style/vars.scss" as *;
+@use "../../style/_mixins.scss" as *;
+.ContactForm {
+  background-color: $dark_1;
+  background-image: url("../../images/Background_Dark.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+  padding: $spacing-xl;
+  color: #fff;
+  overflow: hidden;
+  @include breakpoint(mobile) {
+    padding: $spacing-m;
+    border-radius: $radius-m;
+  }
+
+  img {
+    position: absolute;
+    width: 340px;
+    bottom: -150px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    @include breakpoint(mobile) {
+      position: relative;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  }
+}

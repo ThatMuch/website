@@ -5,12 +5,12 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     defaultTitle: `Thatmuch`,
-    defaultDescription: `ThatMuch intervient dans la communication numérique & visuelle de votre entreprise. Nous vous accompagnons dans toutes les étapes de votre projet.`,
+    defaultDescription: `THATMUCH : Agence web de design et développement front pour les sites WordPress et SaaS.`,
     author: `Thatmuch`,
     siteUrl: process.env.SITE_URL, // Replace with your domain
-    defaultImage: `src/images/THATMUCH_Logo_Black.png`,
+    defaultImage: `/og_image_THATMUCH.png`,
     defaultImageAlt: `THATMUCH Logo`,
-    defaultImageWhite: `src/images/THATMUCH_Logo_White.png`,
+    defaultImageWhite: `/THATMUCH_Logo_White.png`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -78,6 +78,9 @@ module.exports = {
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
+          timeout: 120000,
+          // Decrease the number of items fetched per request (e.g., to 50)
+          perPage: 50,
         },
         develop: {
           //caches media files outside of Gatsby's default cache an thus allows them to persist through a cache reset.
