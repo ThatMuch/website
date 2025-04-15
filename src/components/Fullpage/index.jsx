@@ -45,13 +45,13 @@ const Fullpage = ({ sections }) => {
             ))}
           </ReactFullpage.Wrapper>
 
-          {typeof window !== "undefined" &&
+          {/* {typeof window !== "undefined" &&
             window.location.pathname === "/" && (
               <NavigationFullpage
                 anchors={anchors}
                 activeSection={activeSection}
               />
-            )}
+            )} */}
         </>
       )}
     />
