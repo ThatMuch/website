@@ -16,7 +16,7 @@ const podcastLinks = [
   },
   {
     name: "Apple Podcast",
-    url: "https://podcasts.apple.com/us/podcast/ipeach/id1771820680?l=fr",
+    url: "https://podcasts.apple.com/fr/podcast/ipeach/id1771820680?l=fr",
     image: apple,
   },
   {
