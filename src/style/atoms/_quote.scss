@@ -15,7 +15,6 @@ blockquote {
     content: "";
     position: absolute;
     top: $spacing-l;
-
     left: $spacing-l;
     width: 4px;
     height: calc(100% - $spacing-l * 2);
