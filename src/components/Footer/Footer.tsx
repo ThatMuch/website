@@ -25,8 +25,12 @@ export default function Footer({}: Props) {
   const site = useSiteSeo();
   const { siteUrl } = site;
   const posts = useSitePosts();
-
-  const socialLinks = [
+  type SocialLinksType = {
+    name: string;
+    icon: React.ReactNode;
+    url: string;
+  };
+  const socialLinks: SocialLinksType[] = [
     {
       name: "Instagram",
       icon: (
@@ -73,9 +77,9 @@ export default function Footer({}: Props) {
       <div className="RS_Section">
         <h3 className="RS_Section__title">Suivez nous</h3>
         <div className="RS_Section__list">
-          {socialLinks.map((link) => (
+          {socialLinks.map((link: SocialLinksType) => (
             <a
-              key={link.name}
+              key={link.name + "-00"}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -102,7 +106,7 @@ export default function Footer({}: Props) {
           <h4 className="mb-2">Articles récents</h4>
           <ul>
             {posts?.slice(0, 4).map((post) => (
-              <li key={post.slug}>
+              <li key={post.id}>
                 <a href={post.link}>{post.title}</a>
               </li>
             ))}

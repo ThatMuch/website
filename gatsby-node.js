@@ -24,6 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             id
             slug
+            isFrontPage
             template {
               templateName
             }
@@ -39,46 +40,46 @@ exports.createPages = async ({ graphql, actions }) => {
   const contactTemplete = path.resolve(`./src/templates/Contact/index.tsx`);
   const podcastTemplate = path.resolve(`./src/templates/Podcast/index.tsx`);
 
-pages.data.allWpPage.edges.forEach((edge) => {
-	switch (true) {
-		case edge.node.slug === "blog":
-			createPage({
-				path: "/blog",
-				component: slash(blogTemplate),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-		case edge.node.template.templateName === "Podcast":
-			createPage({
-				path: "/ipeach",
-				component: slash(podcastTemplate),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-		case edge.node.slug === "contact":
-			createPage({
-				path: "/contact",
-				component: slash(contactTemplete),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-		default:
-			createPage({
-				path: edge.node.slug,
-				component: slash(pageTemplate),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-	}
-});
+  pages.data.allWpPage.edges.forEach((edge) => {
+    switch (true) {
+      case edge.node.slug === "blog":
+        createPage({
+          path: "/blog",
+          component: slash(blogTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+      case edge.node.template.templateName === "Podcast":
+        createPage({
+          path: "/ipeach",
+          component: slash(podcastTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+      case edge.node.slug === "contact":
+        createPage({
+          path: "/contact",
+          component: slash(contactTemplete),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+      default:
+        createPage({
+          path: edge.node.slug,
+          component: slash(pageTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+    }
+  });
   posts.data.allWpPost.edges.forEach((edge) => {
     createPage({
       // `path` will be the url for the page
