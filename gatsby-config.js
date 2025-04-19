@@ -68,13 +68,18 @@ module.exports = {
       resolve: "gatsby-source-wordpress",
       options: {
         url: process.env.WPGRAPHQL_URL,
-        // acfOptions: {
-        //   useACF: true,
-        //   verboseOutput: true,
-        //   excludedACFTypes: ["options"],
-        //   onlyIncludedACFList: false,
-        //   includedACFList: [],
-        // },
+        type: {
+          MediaItem: {
+            createFileNodes: true,
+          },
+        },
+        debug: {
+          graphql: {
+            showQueryVarsOnError: true,
+            copyQueryOnError: true,
+            panicOnError: true,
+          },
+        },
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
