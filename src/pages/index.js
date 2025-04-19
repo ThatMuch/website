@@ -6,13 +6,86 @@ import { useStaticQuery } from "gatsby";
 const query = graphql`
   query {
     wpPage(isFrontPage: { eq: true }) {
-      title
-      content
-      slug
-      seo {
-        metaDesc
-        metaKeywords
-        title
+      home {
+        pageBuilder {
+          ... on WpHomePageBuilderWhySectionLayout {
+            desc
+            sousTitre
+            title
+            fieldGroupName
+            image {
+              node {
+                altText
+                mediaItemUrl
+              }
+            }
+            link {
+              target
+              title
+              url
+            }
+            item {
+              desc
+              fieldGroupName
+              title
+            }
+          }
+          ... on WpHomePageBuilderServicesLayout {
+            fieldGroupName
+            title
+            titr {
+              desc
+              titre
+              fieldGroupName
+              link {
+                target
+                title
+                url
+              }
+              image {
+                node {
+                  altText
+                  mediaItemUrl
+                }
+              }
+              products {
+                desc
+                titre
+                fieldGroupName
+                image {
+                  node {
+                    altText
+                    mediaItemUrl
+                  }
+                }
+              }
+            }
+          }
+          ... on WpHomePageBuilderTestimonialsLayout {
+            desc
+            fieldGroupName
+            sousTitre
+            titre
+          }
+        }
+        heroSection {
+          boutton {
+            target
+            title
+            url
+          }
+          desc
+          logos {
+            title
+            images {
+              nodes {
+                altText
+                mediaItemUrl
+              }
+            }
+          }
+          title
+        }
       }
     }
   }
@@ -20,9 +93,10 @@ const query = graphql`
 
 const IndexPage = () => {
   const data = useStaticQuery(query);
-  const { wpPage } = data;
+	const { wpPage } = data;
+	  const { home } = wpPage;
 	  return (
-	<FrontPage data={wpPage} />
+	<FrontPage data={home} />
   );
 };
 

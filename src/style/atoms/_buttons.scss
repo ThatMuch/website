@@ -60,6 +60,7 @@ button {
     &:hover {
       background-color: $neutral-500;
       border-color: $neutral-500;
+      text-decoration: none;
     }
     &:disabled {
       background: $status-disabled;

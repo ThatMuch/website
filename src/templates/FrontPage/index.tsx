@@ -1,3 +1,4 @@
+import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
 import React from "react";
 import Seo from "../../components/Seo";
@@ -8,7 +9,7 @@ const FrontPage = ({ data }) => {
     <div>
       <Layout type="frontpage">
         <Seo />
-        <h1>FrontPage</h1>
+        <HeroSection data={data.heroSection} />
       </Layout>
     </div>
   );
