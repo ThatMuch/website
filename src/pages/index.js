@@ -7,36 +7,49 @@ const query = graphql`
   query {
     wpPage(isFrontPage: { eq: true }) {
       home {
+	      heroSection {
+        desc
+        title
+        logos {
+          title
+          images {
+            nodes {
+              altText
+              mediaItemUrl
+            }
+          }
+        }
+        boutton {
+          target
+          title
+          url
+        }
+
+	  }
         pageBuilder {
-          ... on WpHomePageBuilderWhySectionLayout {
+          ... on WpHomePageBuilderTestimonialsLayout {
             desc
-            sousTitre
-            title
             fieldGroupName
-            image {
-              node {
-                altText
-                mediaItemUrl
-              }
-            }
-            link {
-              target
-              title
-              url
-            }
-            item {
-              desc
-              fieldGroupName
-              title
-            }
+            titre
+            sousTitre
           }
           ... on WpHomePageBuilderServicesLayout {
             fieldGroupName
             title
-            titr {
+            subtitle
+            service {
               desc
               titre
-              fieldGroupName
+              products {
+                desc
+                titre
+                image {
+                  node {
+                    altText
+                    mediaItemUrl
+                  }
+                }
+              }
               link {
                 target
                 title
@@ -48,43 +61,29 @@ const query = graphql`
                   mediaItemUrl
                 }
               }
-              products {
-                desc
-                titre
-                fieldGroupName
-                image {
-                  node {
-                    altText
-                    mediaItemUrl
-                  }
-                }
-              }
             }
           }
-          ... on WpHomePageBuilderTestimonialsLayout {
+          ... on WpHomePageBuilderWhySectionLayout {
             desc
             fieldGroupName
             sousTitre
-            titre
-          }
-        }
-        heroSection {
-          boutton {
-            target
             title
-            url
-          }
-          desc
-          logos {
-            title
-            images {
-              nodes {
+            link {
+              target
+              title
+              url
+            }
+            item {
+              desc
+              title
+            }
+            image {
+              node {
                 altText
                 mediaItemUrl
               }
             }
           }
-          title
         }
       }
     }

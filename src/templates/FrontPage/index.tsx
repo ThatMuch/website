@@ -1,9 +1,10 @@
 import AllPosts from "../../components/AllPosts/AllPosts";
+import ExpertisesSection from "../../components/ExpertisesSection";
 import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
 import React from "react";
 import Seo from "../../components/Seo";
-import Testimonials from "../../components/Testimonials";
+import Testimonials from "../../components/TestimonialsSection";
 const FrontPage = ({ data }) => {
   console.log(data);
   const { heroSection, pageBuilder } = data;
@@ -12,17 +13,19 @@ const FrontPage = ({ data }) => {
       <Layout type="frontpage">
         <Seo />
         <HeroSection data={heroSection} />
-        {pageBuilder.map((section) => {
+        {pageBuilder.map((section, index) => {
           switch (section.fieldGroupName) {
             case "HomePageBuilderTestimonialsLayout":
               return (
                 <Testimonials
-                  key={section.id}
+                  key={index}
                   title={section.titre}
                   description={section.desc}
                   subtitle={section.sousTitre}
                 />
               );
+            case "HomePageBuilderServicesLayout":
+              return <ExpertisesSection key={section.id} section={section} />;
             default:
               return null;
           }
