@@ -1,8 +1,8 @@
+import AllPosts from "../../components/AllPosts/AllPosts";
 import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
 import React from "react";
 import Seo from "../../components/Seo";
-
 const FrontPage = ({ data }) => {
   console.log(data);
   return (
@@ -10,6 +10,7 @@ const FrontPage = ({ data }) => {
       <Layout type="frontpage">
         <Seo />
         <HeroSection data={data.heroSection} />
+        <AllPosts title="Le blog de l'équipage" isHome />
       </Layout>
     </div>
   );

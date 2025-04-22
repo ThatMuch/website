@@ -12,9 +12,10 @@ type Props = {
   title?: string;
   filter?: boolean;
   category?: string;
+  isHome?: boolean;
 };
 
-export default function AllPosts({ title, filter, category }: Props) {
+export default function AllPosts({ title, filter, category, isHome }: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const posts = useSitePosts(category ? category : selectedCategory);
@@ -77,19 +78,30 @@ export default function AllPosts({ title, filter, category }: Props) {
           </div>
         )}
         <div className="PostsGrid">
-          {paginatedPosts?.map((post, index) => (
-            <div key={index}>
-              <PostCard
-                title={post.title}
-                category={post?.categories?.nodes[0]}
-                url={post.link}
-                image={post.featuredImage?.node}
-              />
-            </div>
-          ))}
+          {!isHome
+            ? paginatedPosts?.map((post, index) => (
+                <div key={index}>
+                  <PostCard
+                    title={post.title}
+                    category={post?.categories?.nodes[0]}
+                    url={post.link}
+                    image={post.featuredImage?.node}
+                  />
+                </div>
+              ))
+            : posts?.slice(0, 4).map((post, index) => (
+                <div key={index}>
+                  <PostCard
+                    title={post.title}
+                    category={post?.categories?.nodes[0]}
+                    url={post.link}
+                    image={post.featuredImage?.node}
+                  />
+                </div>
+              ))}
         </div>
 
-        {totalPages > 1 && (
+        {totalPages > 1 && !isHome && (
           <div className="Pagination">
             <button
               onClick={() => setCurrentPage(currentPage - 1)}
@@ -104,6 +116,17 @@ export default function AllPosts({ title, filter, category }: Props) {
             >
               <FaChevronRight />
             </button>
+          </div>
+        )}
+        {isHome && (
+          <div className="AllPosts__btn">
+            <a
+              href="/blog"
+              className="btn btn-primary"
+              onClick={() => setCurrentPage(1)}
+            >
+              Voir tous les articles
+            </a>
           </div>
         )}
       </div>
