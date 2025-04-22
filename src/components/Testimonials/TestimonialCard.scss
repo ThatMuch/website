@@ -1,0 +1,12 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+.TestimonialCard {
+  display: flex;
+  height: 100%;
+  padding: $spacing-m;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-m;
+  background-color: $neutral-900;
+  color: #fff;
+}

@@ -39,7 +39,7 @@
     align-items: center;
     gap: $spacing-l;
     align-self: stretch;
-    margin-bottom: $spacing-m;
+    margin-bottom: $spacing-xl;
     //flex-wrap: wrap;
     @include breakpoint(mobile) {
       display: grid;
