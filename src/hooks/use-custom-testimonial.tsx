@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from "gatsby";
 
 export const useSiteCustomPosts = () => {
   const data = useStaticQuery(graphql`
-    query MyQuery {
+    query GET_TESTIMONIALS {
       allWpTestimonial {
         edges {
           node {

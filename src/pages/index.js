@@ -36,6 +36,7 @@ const query = graphql`
             fieldGroupName
             title
             subtitle
+
           }
           ... on WpHomePageBuilderWhySectionLayout {
             desc

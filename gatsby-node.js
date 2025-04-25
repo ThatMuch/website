@@ -17,6 +17,38 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+	const expertises = await graphql(`
+	query GET_EXPERTISES {
+      allWpExpertise {
+        edges {
+          node {
+		  id
+            slug
+            title
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+              }
+            }
+            expertiseContent {
+              service {
+                desc
+                titre
+                image {
+                  node {
+                    altText
+                    mediaItemUrl
+                  }
+                }
+              }
+              desc_exp
+            }
+          }
+        }
+      }
+    }`);
+
   const pages = await graphql(`
     query GET_PAGES {
       allWpPage {
@@ -39,7 +71,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`);
   const contactTemplete = path.resolve(`./src/templates/Contact/index.tsx`);
   const podcastTemplate = path.resolve(`./src/templates/Podcast/index.tsx`);
-
+ const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
   pages.data.allWpPage.edges.forEach((edge) => {
     switch (true) {
       case edge.node.slug === "blog":
@@ -93,4 +125,19 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
+
+	expertises.data.allWpExpertise.edges.forEach((edge) => {
+		createPage({
+			// `path` will be the url for the page
+			path :`/expertise/${edge.node.slug}`,
+			// specify the component template of your choice
+			component : slash(expertiseTemplate),
+			// In the ^template's GraphQL query, 'id' will be available
+			// as a GraphQL variable to query for this posts's data.
+			context : {
+				id : edge.node.id,
+			},
+		});
+	}
+	);
 };
