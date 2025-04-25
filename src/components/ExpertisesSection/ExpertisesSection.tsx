@@ -71,10 +71,12 @@ export default function ExpertisesSection({ section }: Props) {
           <div className="ExpertisesSection__services">
             {service?.products?.map((product, index) => (
               <div className="ExpertisesSection__services__product" key={index}>
-                {/* <img
-                  src={product.image.node.mediaItemUrl}
-                  alt={product.image.node.altText}
-                /> */}
+                {product?.image?.node?.mediaItemUrl && (
+                  <img
+                    src={product.image.node.mediaItemUrl}
+                    alt={product.image.node.altText}
+                  />
+                )}
                 <div className="ExpertisesSection__services__product__desc">
                   <h5>{product.titre}</h5>
                   <div
