@@ -4,7 +4,7 @@ import EmblaCarousel from "../EmblaCarousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import React from "react";
 import TestimonialCard from "./TestimonialCard";
-import { useSiteCustomPosts } from "../../hooks/use-custom-post";
+import { useSiteCustomPosts } from "../../hooks/use-custom-testimonial";
 
 type Props = {
   title: string;
@@ -14,12 +14,16 @@ type Props = {
 
 export default function Testimonials({ title, description, subtitle }: Props) {
   const OPTIONS: EmblaOptionsType = { slidesToScroll: "auto" };
-  const {
-    allWpTestimonial: { edges: testimonials },
-  } = useSiteCustomPosts();
-  const SLIDE_COUNT = testimonials.length;
+  const data = useSiteCustomPosts();
+  console.log("testimonials", data);
+  const testimonials = data.allWpTestimonial?.edges;
+  // const {
+  //   allWpTestimonial: { edges: testimonials },
+  // } = useSiteCustomPosts();
+
+  const SLIDE_COUNT = testimonials?.length;
   // transform testimonials to an array of objects with the same structure as the one used in the TestimonialCard component
-  const transformedTestimonials = testimonials.map(({ node }) => {
+  const transformedTestimonials = testimonials?.map(({ node }) => {
     const { title, testimonialContent } = node;
     const { nom, role, citation, stars } = testimonialContent;
     return {

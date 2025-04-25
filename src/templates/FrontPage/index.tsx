@@ -24,7 +24,7 @@ const FrontPage = ({ data }) => {
                   subtitle={section.sousTitre}
                 />
               );
-            case "HomePageBuilderServicesLayout":
+            case "HomePageBuilderExpertisesLayout":
               return <ExpertisesSection key={section.id} section={section} />;
             default:
               return null;

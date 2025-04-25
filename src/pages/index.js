@@ -7,25 +7,24 @@ const query = graphql`
   query {
     wpPage(isFrontPage: { eq: true }) {
       home {
-	      heroSection {
-        desc
-        title
-        logos {
+        heroSection {
+          desc
           title
-          images {
-            nodes {
-              altText
-              mediaItemUrl
+          logos {
+            title
+            images {
+              nodes {
+                altText
+                mediaItemUrl
+              }
             }
           }
+          boutton {
+            target
+            title
+            url
+          }
         }
-        boutton {
-          target
-          title
-          url
-        }
-
-	  }
         pageBuilder {
           ... on WpHomePageBuilderTestimonialsLayout {
             desc
@@ -33,35 +32,10 @@ const query = graphql`
             titre
             sousTitre
           }
-          ... on WpHomePageBuilderServicesLayout {
+          ... on WpHomePageBuilderExpertisesLayout {
             fieldGroupName
             title
             subtitle
-            service {
-              desc
-              titre
-              products {
-                desc
-                titre
-                image {
-                  node {
-                    altText
-                    mediaItemUrl
-                  }
-                }
-              }
-              link {
-                target
-                title
-                url
-              }
-              image {
-                node {
-                  altText
-                  mediaItemUrl
-                }
-              }
-            }
           }
           ... on WpHomePageBuilderWhySectionLayout {
             desc
