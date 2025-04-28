@@ -1,0 +1,27 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+.ServiceList {
+  display: flex;
+  margin-bottom: $spacing-xl;
+  gap: $spacing-s;
+  @include breakpoint(mobile) {
+    flex-direction: column;
+  }
+  &__item {
+    border-radius: $radius-m;
+    padding: $spacing-s;
+    flex: 1;
+    &.design {
+      background-color: $surface-design;
+    }
+    &.dev {
+      background-color: $surface-dev;
+    }
+    &.com {
+      background-color: $surface-com;
+    }
+    &.project {
+      background-color: $surface-project;
+    }
+  }
+}

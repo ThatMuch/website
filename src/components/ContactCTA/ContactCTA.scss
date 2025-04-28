@@ -12,6 +12,7 @@
   color: #fff;
   overflow: hidden;
   position: relative;
+  margin-bottom: $spacing-xl;
   @include breakpoint(mobile) {
     padding: $spacing-m;
     border-radius: $radius-m;

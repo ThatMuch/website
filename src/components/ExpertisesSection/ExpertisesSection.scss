@@ -5,6 +5,9 @@
   &__content {
     display: flex;
     gap: $spacing-m;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
   }
   &__card {
     border-radius: $radius-m;
