@@ -1,0 +1,38 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.ContactCTA {
+  background-color: $dark_1;
+  background-image: url("../../images/Background_Dark.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+  padding: $spacing-xl;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  @include breakpoint(mobile) {
+    padding: $spacing-m;
+    border-radius: $radius-m;
+  }
+  &__content {
+    max-width: 100%;
+    @include breakpoint(tablet) {
+      max-width: 50%;
+    }
+  }
+  img {
+    width: 100%;
+    margin: auto;
+    transform: translateY(25%);
+
+    @include breakpoint(tablet) {
+      position: absolute;
+      width: 340px;
+      bottom: -150px;
+      right: 50px;
+      transform: translateY(0);
+    }
+  }
+}

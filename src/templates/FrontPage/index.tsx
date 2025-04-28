@@ -1,4 +1,5 @@
 import AllPosts from "../../components/AllPosts/AllPosts";
+import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import ExpertisesSection from "../../components/ExpertisesSection";
 import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
@@ -31,6 +32,7 @@ const FrontPage = ({ data }) => {
           }
         })}
         <AllPosts title="Le blog de l'équipage" isHome />
+        <ContactCTA />
       </Layout>
     </div>
   );

@@ -84,6 +84,21 @@ button {
     }
   }
 
+  &-white {
+    background-color: $neutral-0;
+    border-color: $neutral-0;
+    color: $text-color-default;
+    &:hover {
+      background-color: transparent;
+      border-color: $neutral-0;
+      text-decoration: none;
+    }
+    &:disabled {
+      background: $status-disabled;
+      border-color: $status-disabled;
+      color: $status-disabled-dark;
+    }
+  }
   &-dev {
     background-color: $status-info;
     border: 2px solid $status-info !important;

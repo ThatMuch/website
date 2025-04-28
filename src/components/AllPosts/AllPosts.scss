@@ -2,6 +2,7 @@
 @use "../../style/mixins" as *;
 
 .AllPosts {
+  margin-bottom: $spacing-xl;
   &__btn {
     width: 100%;
     display: flex;
