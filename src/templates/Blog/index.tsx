@@ -6,7 +6,6 @@ import Newsletter from "../../components/Newsletter";
 import PageHeader from "../../components/PageHeader";
 import React from "react";
 import Seo from "../../components/Seo";
-import { useSitePosts } from "../../hooks/use-site-posts";
 
 interface BlogPageProps extends PageProps {
   data: {
@@ -26,7 +25,6 @@ interface BlogPageProps extends PageProps {
 
 const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
   const page = data.wpPage;
-  const posts = useSitePosts();
   return (
     <Layout type="blog">
       <Seo

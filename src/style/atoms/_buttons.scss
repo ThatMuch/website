@@ -47,6 +47,7 @@ button {
 }
 .btn {
   display: inline-flex;
+  font-weight: 700;
   height: 2.75rem;
   padding: $spacing-s;
   align-items: center;
@@ -60,6 +61,7 @@ button {
     &:hover {
       background-color: $neutral-500;
       border-color: $neutral-500;
+      text-decoration: none;
     }
     &:disabled {
       background: $status-disabled;
@@ -74,6 +76,53 @@ button {
     &:hover {
       background-color: $status-info;
       color: $text-color-default;
+    }
+    &:disabled {
+      background: $status-disabled;
+      border-color: $status-disabled;
+      color: $status-disabled-dark;
+    }
+  }
+
+  &-white {
+    background-color: $neutral-0;
+    border-color: $neutral-0;
+    color: $text-color-default;
+    &:hover {
+      background-color: transparent;
+      border-color: $neutral-0;
+      text-decoration: none;
+    }
+    &:disabled {
+      background: $status-disabled;
+      border-color: $status-disabled;
+      color: $status-disabled-dark;
+    }
+  }
+  &-dev {
+    background-color: $status-info;
+    border: 2px solid $status-info !important;
+    color: $text-color-default;
+    &:hover {
+      background-color: $status-info-light;
+      text-decoration: none;
+    }
+    &:disabled {
+      background: $status-disabled;
+      border-color: $status-disabled;
+      color: $status-disabled-dark;
+    }
+  }
+
+  &-design {
+    background-color: $status-warning;
+
+    border: 2px solid $status-warning !important;
+    color: $text-color-default;
+    &:hover {
+      background-color: $status-warning-light;
+
+      text-decoration: none;
     }
     &:disabled {
       background: $status-disabled;

@@ -1,0 +1,32 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+.ExpertisesSection {
+  margin-bottom: $spacing-xl;
+  &__content {
+    display: flex;
+    gap: $spacing-m;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
+  }
+  &__card {
+    border-radius: $radius-m;
+    padding: $spacing-m;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    &.design {
+      background-color: $design-50;
+    }
+    &.dev {
+      background-color: $dev-50;
+    }
+    &-image {
+      img {
+        width: 200px;
+      }
+    }
+  }
+}

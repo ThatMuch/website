@@ -17,6 +17,38 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+	const expertises = await graphql(`
+	query GET_EXPERTISES {
+      allWpExpertise {
+        edges {
+          node {
+		  id
+            slug
+            title
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+              }
+            }
+            expertiseContent {
+              service {
+                desc
+                titre
+                image {
+                  node {
+                    altText
+                    mediaItemUrl
+                  }
+                }
+              }
+              desc_exp
+            }
+          }
+        }
+      }
+    }`);
+
   const pages = await graphql(`
     query GET_PAGES {
       allWpPage {
@@ -24,6 +56,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             id
             slug
+            isFrontPage
             template {
               templateName
             }
@@ -38,47 +71,47 @@ exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`);
   const contactTemplete = path.resolve(`./src/templates/Contact/index.tsx`);
   const podcastTemplate = path.resolve(`./src/templates/Podcast/index.tsx`);
-
-pages.data.allWpPage.edges.forEach((edge) => {
-	switch (true) {
-		case edge.node.slug === "blog":
-			createPage({
-				path: "/blog",
-				component: slash(blogTemplate),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-		case edge.node.template.templateName === "Podcast":
-			createPage({
-				path: "/ipeach",
-				component: slash(podcastTemplate),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-		case edge.node.slug === "contact":
-			createPage({
-				path: "/contact",
-				component: slash(contactTemplete),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-		default:
-			createPage({
-				path: edge.node.slug,
-				component: slash(pageTemplate),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
-	}
-});
+ const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
+  pages.data.allWpPage.edges.forEach((edge) => {
+    switch (true) {
+      case edge.node.slug === "blog":
+        createPage({
+          path: "/blog",
+          component: slash(blogTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+      case edge.node.template.templateName === "Podcast":
+        createPage({
+          path: "/ipeach",
+          component: slash(podcastTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+      case edge.node.slug === "contact":
+        createPage({
+          path: "/contact",
+          component: slash(contactTemplete),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+      default:
+        createPage({
+          path: edge.node.slug,
+          component: slash(pageTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+    }
+  });
   posts.data.allWpPost.edges.forEach((edge) => {
     createPage({
       // `path` will be the url for the page
@@ -92,4 +125,19 @@ pages.data.allWpPage.edges.forEach((edge) => {
       },
     });
   });
+
+	expertises.data.allWpExpertise.edges.forEach((edge) => {
+		createPage({
+			// `path` will be the url for the page
+			path :`/expertise/${edge.node.slug}`,
+			// specify the component template of your choice
+			component : slash(expertiseTemplate),
+			// In the ^template's GraphQL query, 'id' will be available
+			// as a GraphQL variable to query for this posts's data.
+			context : {
+				id : edge.node.id,
+			},
+		});
+	}
+	);
 };

@@ -1,0 +1,27 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+.ServiceList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-bottom: $spacing-xl;
+  gap: $spacing-s;
+
+  &__item {
+    border-radius: $radius-m;
+    padding: $spacing-s;
+    flex: 1;
+
+    &.design {
+      background-color: $surface-design;
+    }
+    &.dev {
+      background-color: $surface-dev;
+    }
+    &.com {
+      background-color: $surface-com;
+    }
+    &.project {
+      background-color: $surface-project;
+    }
+  }
+}
