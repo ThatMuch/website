@@ -36,12 +36,11 @@ const query = graphql`
             fieldGroupName
             title
             subtitle
-
           }
           ... on WpHomePageBuilderWhySectionLayout {
             desc
             fieldGroupName
-            sousTitre
+            subtitle
             title
             link {
               target
