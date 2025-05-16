@@ -1,8 +1,9 @@
 import "./Testimonials.scss";
 
+import React, { useEffect } from "react";
+
 import EmblaCarousel from "../EmblaCarousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
-import React from "react";
 import TestimonialCard from "./TestimonialCard";
 import { useSiteCustomPosts } from "../../hooks/use-custom-testimonial";
 
@@ -15,11 +16,15 @@ type Props = {
 export default function Testimonials({ title, description, subtitle }: Props) {
   const OPTIONS: EmblaOptionsType = { slidesToScroll: "auto" };
   const data = useSiteCustomPosts();
-  console.log("testimonials", data);
   const testimonials = data.allWpTestimonial?.edges;
-  // const {
-  //   allWpTestimonial: { edges: testimonials },
-  // } = useSiteCustomPosts();
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/reviews")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
 
   const SLIDE_COUNT = testimonials?.length;
   // transform testimonials to an array of objects with the same structure as the one used in the TestimonialCard component

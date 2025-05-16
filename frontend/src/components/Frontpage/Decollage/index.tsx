@@ -2,13 +2,12 @@ import "./style.scss";
 
 import CountUp from "react-countup";
 import React from "react";
-import illustration from "../../../../src/images/Illu_decollage.svg";
+import illustration from "../../../images/Illu_decollage.svg";
 
 export default function Decollage({ index, title, anchor }) {
   return (
     <div id={"deco"} className="section Decollage" data-anchor={anchor}>
       <div className="container">
-
         <div className="row align-items-center">
           <div className="col-sm-7">
             <span className="section-title__numbers">
@@ -31,7 +30,6 @@ export default function Decollage({ index, title, anchor }) {
               Le projet est lancé, il est désormais accessible au public les
               opérations de communication peuvent commencer.
             </p>
-
           </div>
           <div className="col-sm-5">
             <img src={illustration} alt="décollage THATMUCH" />

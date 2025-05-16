@@ -1,19 +1,42 @@
-# Dependency directories
-node_modules/
+# Node modules (tous les sous-dossiers)
+**/node_modules/
 
-# Optional npm cache directory
-.npm
+# Fichiers de logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
 
-# Optional eslint cache
-.eslintcache
+# Fichiers d'environnement
+**/.env
+**/.env.*.local
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
 
-# dotenv environment variables file
-.env.development
+/backend/service-account.json
+# Dossiers de build
+/frontend/build/
+/frontend/dist/
+/backend/build/
+/backend/dist/
 
-# gatsby files
-.cache/
+# Tests et coverage
+**/coverage/
 
-
-# System files
+# Fichiers système et IDE
 .DS_Store
-.thumbs
+.idea/
+.vscode/
+*.swp
+
+# Autres fichiers temporaires
+*.log
+*.tmp
+
+# PnP (Yarn)
+.pnp
+.pnp.js
+
+# Mac OS
+*.DS_Store
