@@ -5,17 +5,27 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 2 * $space_XL);
+  width: calc(100% - 2 * $spacing-m);
   position: fixed;
-  left: $space_XL;
-  top: $space_XL;
+  left: $spacing-m;
+  top: 0;
   z-index: 1000;
+  background-color: rgba($white, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: $radius-l;
+  padding: $spacing-s;
   @include breakpoint(mobile) {
     width: 100%;
     position: relative;
     left: inherit;
-    top: inherit;
     margin-bottom: $spacing-m;
+    padding: 0;
+  }
+  .logo--header {
+    width: 12.5rem;
+    @include breakpoint(mobile) {
+      width: 8rem;
+    }
   }
 }
 .menu {
@@ -28,6 +38,9 @@ header {
 
   &__txt {
     font-weight: 700;
+    @include breakpoint(mobile) {
+      display: none;
+    }
   }
 
   &__button {
@@ -105,15 +118,19 @@ header {
   &__wrapper {
     position: fixed;
     top: 0;
-    left: 0;
+    left: -$spacing-m;
     z-index: 1001;
     width: 100vw;
     height: 100vh;
     background-color: $grey_3;
-    padding: $space_XL;
+    padding: $spacing-m;
     background-image: url("../../images/Background-stars.png");
     background-repeat: no-repeat;
     background-position: 90% 70%;
+
+    @include breakpoint(mobile) {
+      width: calc(100% + #{$spacing_m} * 2);
+    }
 
     .logo {
       width: 230px;
@@ -139,7 +156,7 @@ header {
         &:before {
           content: " ";
           position: absolute;
-          right: 108%;
+          right: 102%;
           top: 0;
           height: 100%;
           width: 100%;
@@ -186,12 +203,9 @@ header {
 
         a {
           text-decoration: none;
-          font-family: "Tourney";
-          font-style: normal;
-          font-weight: 900;
+          font-weight: 700;
           font-size: 2.5rem;
           margin: auto 0;
-          text-transform: uppercase;
           color: $dark_1;
 
           @include breakpoint(mobile) {

@@ -9,7 +9,7 @@ import { graphql } from "gatsby";
 
 const Page = ({ data }) => {
   const page = data.wpPage;
-  console.log(data);
+
   return (
     <Layout>
       <Seo title={page.title} description={page.seo.metaDesc} />

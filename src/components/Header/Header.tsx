@@ -1,6 +1,6 @@
 import "./Header.scss";
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
@@ -10,9 +10,34 @@ import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSiteSeo } from "../../hooks/use-site-seo";
 
 export default function Header() {
+  const [isMobile, setIsMobile] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
   const [isActive, setIsActive] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpened]);
+
   const menuItems = useSiteMenu().filter((item) =>
     item.locations.includes("GATSBY_HEADER_MENU")
   );
@@ -57,8 +82,6 @@ export default function Header() {
                   {menuItems.map((item, index) => (
                     <li
                       key={item.id}
-                      data-aos="slide-up"
-                      data-aos-delay={index * 100}
                       onMouseEnter={() => setIsActive(index)}
                       className="pr-1"
                     >
@@ -104,6 +127,9 @@ export default function Header() {
           </div>
         ) : null}
       </div>
+      <a href="/">
+        <img src={logo} alt="Thatmuch" className="logo--header" />
+      </a>
       <a
         href="https://meetings-eu1.hubspot.com/mathilde-arconte"
         className="btn btn-primary"
@@ -120,7 +146,7 @@ export default function Header() {
         data-aos-once="true"
         data-aos-anchor="#bento-menu"
       >
-        Programmez un appel
+        {isMobile ? "RDV" : "Programmez un appel"}
       </a>
     </header>
   );
