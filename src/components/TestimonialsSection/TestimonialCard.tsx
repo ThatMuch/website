@@ -26,9 +26,9 @@ export default function TestimonialCard({
         ))}
       </div>
       <div dangerouslySetInnerHTML={{ __html: citation }} />
-      <div>
-        <strong>{nom}</strong>
-        <p>{role}</p>
+      <div className="TestimonialCard__author">
+        <strong className="TestimonialCard__name">{nom}</strong>
+        <p className="TestimonialCard__role">{role}</p>
       </div>
     </div>
   );

@@ -37,4 +37,9 @@
       max-width: 750px;
     }
   }
+  &--frontpage {
+    background-image: url("../../images/Background_Light.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }

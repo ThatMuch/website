@@ -1,6 +1,6 @@
 import "./Header.scss";
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
@@ -11,6 +11,10 @@ import { useSiteSeo } from "../../hooks/use-site-seo";
 
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
+  const [isActive, setIsActive] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const handleResize = () => {
     if (window.innerWidth <= 768) {
       setIsMobile(true);
@@ -26,9 +30,14 @@ export default function Header() {
     };
   }, []);
 
-  const [isOpened, setIsOpened] = useState(false);
-  const [isActive, setIsActive] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpened]);
+
   const menuItems = useSiteMenu().filter((item) =>
     item.locations.includes("GATSBY_HEADER_MENU")
   );
@@ -73,8 +82,6 @@ export default function Header() {
                   {menuItems.map((item, index) => (
                     <li
                       key={item.id}
-                      data-aos="slide-up"
-                      data-aos-delay={index * 100}
                       onMouseEnter={() => setIsActive(index)}
                       className="pr-1"
                     >

@@ -15,12 +15,7 @@ type Props = {
 export default function Testimonials({ title, description, subtitle }: Props) {
   const OPTIONS: EmblaOptionsType = { slidesToScroll: "auto" };
   const data = useSiteCustomPosts();
-  console.log("testimonials", data);
   const testimonials = data.allWpTestimonial?.edges;
-  // const {
-  //   allWpTestimonial: { edges: testimonials },
-  // } = useSiteCustomPosts();
-
   const SLIDE_COUNT = testimonials?.length;
   // transform testimonials to an array of objects with the same structure as the one used in the TestimonialCard component
   const transformedTestimonials = testimonials?.map(({ node }) => {
@@ -36,7 +31,6 @@ export default function Testimonials({ title, description, subtitle }: Props) {
       },
     };
   });
-  console.log(transformedTestimonials);
   return (
     <div className="Testimonials">
       <div className="Testimonials__header">

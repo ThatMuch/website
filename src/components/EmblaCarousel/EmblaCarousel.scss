@@ -6,9 +6,7 @@
   --slide-size: 50%;
   --slide-size-mobile: 100%;
 }
-.embla__viewport {
-  overflow: hidden;
-}
+
 .embla__container {
   display: flex;
   touch-action: pan-y pinch-zoom;
