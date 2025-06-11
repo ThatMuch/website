@@ -117,7 +117,7 @@ header {
 
   &__wrapper {
     position: fixed;
-    top: -$spacing-m;
+    top: 0;
     left: -$spacing-m;
     z-index: 1001;
     width: 100vw;
