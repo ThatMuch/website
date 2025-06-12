@@ -52,6 +52,18 @@ body {
   }
 }
 
+.bg-landing {
+  background-image: url("../images/bg-landing.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #fff;
+  background-color: #281759;
+  overflow-x: hidden;
+  @include breakpoint(desktop) {
+    background-size: cover;
+  }
+}
+
 // Animations
 
 @-webkit-keyframes rotating /* Safari and Chrome */ {
@@ -95,4 +107,12 @@ body {
 }
 .uppercase {
   text-transform: uppercase;
+}
+
+.container-fluid {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-l;
+  padding-right: $spacing-l;
 }
