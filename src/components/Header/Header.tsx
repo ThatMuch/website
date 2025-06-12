@@ -44,7 +44,7 @@ export default function Header() {
   const site = useSiteSeo();
   const { siteUrl } = site;
   return (
-    <header>
+    <header className="header">
       <div className="menu">
         <button
           id="bento-menu"

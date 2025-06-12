@@ -52,6 +52,18 @@ body {
   }
 }
 
+.bg-landing {
+  background-image: url("../images/bg-landing.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #fff;
+  background-color: #281759;
+
+  @include breakpoint(tablet) {
+    background-size: cover;
+  }
+}
+
 // Animations
 
 @-webkit-keyframes rotating /* Safari and Chrome */ {
