@@ -58,8 +58,8 @@ body {
   background-repeat: no-repeat;
   color: #fff;
   background-color: #281759;
-
-  @include breakpoint(tablet) {
+  overflow-x: hidden;
+  @include breakpoint(desktop) {
     background-size: cover;
   }
 }
@@ -107,4 +107,12 @@ body {
 }
 .uppercase {
   text-transform: uppercase;
+}
+
+.container-fluid {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-l;
+  padding-right: $spacing-l;
 }
