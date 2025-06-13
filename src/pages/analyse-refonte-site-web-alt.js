@@ -1,0 +1,23 @@
+import React from "react";
+import { HeroSectionAlt } from "../components/LandingRefonteAlt/HeroSectionAlt/HerosSectionAlt";
+
+const AnalyseRefonteSiteWebAlt = () => {
+  return (
+    <div className="bg-landing">
+      <div className="container-fluid">
+        <HeroSectionAlt
+        title="Votre site web est-il à la hauteur de vos ambitions en 2025 ?"
+        desc="Le monde digital évolue à une vitesse fulgurante. Un site web performant hier peut rapidement devenir obsolète aujourd’hui. Mais comment savoir si le vôtre répond encore aux attentes de vos clients et aux exigences du marché ?"
+        url=""
+        label="Évaluer mon site"
+        />
+        
+      </div>
+      <div className="d-flex justify-content-center p-2 bg-dark mt-5">
+        <span className="uppercase">thatmuch</span>
+      </div>
+    </div>
+  );
+};
+
+export default AnalyseRefonteSiteWebAlt;
