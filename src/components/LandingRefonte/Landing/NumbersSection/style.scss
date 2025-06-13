@@ -1,5 +1,5 @@
-@use "../../../style/vars" as *;
-@use "../../../style/mixins" as *;
+@use "../../../../style/vars" as *;
+@use "../../../../style/mixins" as *;
 .NumbersSection {
   text-align: center;
   margin-bottom: $spacing-xl;

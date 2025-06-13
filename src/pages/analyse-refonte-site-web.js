@@ -1,8 +1,8 @@
-import { HeroSection } from "../components/LandingRefonte/HeroSection/HeroSection";
-import LinkSection from "../components/LandingRefonte/LinkSection/LinkSection";
-import NumbersSection from "../components/LandingRefonte/NumbersSection/NumbersSection";
+import { HeroSection } from "../components/LandingRefonte/Landing/HeroSection/HeroSection";
+import LinkSection from "../components/LandingRefonte/Landing/LinkSection/LinkSection";
+import NumbersSection from "../components/LandingRefonte/Landing/NumbersSection/NumbersSection";
 import React from "react";
-import ScoreSection from "../components/LandingRefonte/ScoreSection/ScoreSection";
+import ScoreSection from "../components/LandingRefonte/Landing/ScoreSection/ScoreSection";
 import planetPink from "../images/planet-pink.webp";
 import planetYellow from "../images/planet-yellow.webp";
 const AnalyseRefonteSiteWeb = () => {

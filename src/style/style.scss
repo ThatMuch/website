@@ -23,7 +23,7 @@ body {
   }
   .bg-dark {
     color: #fff;
-    background-color: #180d3c !important;
+    background-color: $neutral-900 !important;
   }
 
   .section {
@@ -52,6 +52,12 @@ body {
   }
 }
 
+.bg-form {
+  background-color: $neutral-900;
+  background-image: url("../images/Background_Dark.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .bg-landing {
   position: relative;
   background-image: url("../images/bg_landing.webp");

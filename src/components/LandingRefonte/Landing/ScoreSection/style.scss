@@ -1,5 +1,5 @@
-@use "../../../style/vars" as *;
-@use "../../../style/mixins" as *;
+@use "../../../../style/vars" as *;
+@use "../../../../style/mixins" as *;
 .ScoreSection {
   display: flex;
   gap: 1.5rem;

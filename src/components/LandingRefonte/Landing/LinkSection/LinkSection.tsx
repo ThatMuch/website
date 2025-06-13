@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import Button from "../../UI/Button/Button";
+import Button from "../../../UI/Button/Button";
 import { FaArrowRight } from "react-icons/fa6";
 import React from "react";
 import img from "./tardisStars.webp";
