@@ -2,7 +2,7 @@ import "./style.scss";
 
 import * as React from "react";
 
-import Button from "../../Button/Button";
+import Button from "../../UI/Button/Button";
 import { FaArrowRight } from "react-icons/fa6";
 import logo from "../../../images/THATMUCH_Logo_White.png";
 
@@ -28,10 +28,15 @@ export const HeroSection: React.FC<IHeroSectionProps> = ({
         <div className="hero-content">
           <h1 className="hero-title">{title}</h1>
           <p className="hero-desc">{desc}</p>
-          <a href={url} className="btn btn-dev" aria-label={label}>
+          <Button
+            label={label}
+            className="btn btn-dev btn-animate"
+            type="link"
+            url={url}
+          >
             {label}
             <FaArrowRight className="btn-icon" />
-          </a>
+          </Button>
         </div>
       </section>
     </React.Fragment>

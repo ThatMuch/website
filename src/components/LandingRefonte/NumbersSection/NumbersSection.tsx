@@ -16,8 +16,8 @@ type Props = {};
 export default function NumbersSection({}: Props) {
   return (
     <div className="NumbersSection">
-      <div className="NumbersSection__content">
-        <h2>Chiffres clés</h2>
+      <div className="NumbersSection__content mb-5">
+        <h2 className="mb-4">Chiffres clés</h2>
         <p>
           Pourquoi est-ce une bonne question à se poser en 2025 ? Le monde
           digital évolue à une vitesse fulgurante. Un site web performant hier

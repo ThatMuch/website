@@ -1,7 +1,9 @@
 import "./style.scss";
 
+import Button from "../../UI/Button/Button";
+import { FaArrowRight } from "react-icons/fa6";
 import React from "react";
-import img from "./tardisStars.png";
+import img from "./tardisStars.webp";
 
 type Props = {};
 
@@ -17,9 +19,15 @@ export default function LinkSection({}: Props) {
           Répondez à notre questionnaire et obtenez une évaluation personnalisé
           en moins de 3 minutes !
         </p>
-        <a href="#" className="btn btn-dev">
+        <Button
+          label={"Évaluer mon site"}
+          className="btn btn-dev btn-animate"
+          type="link"
+          url={"#"}
+        >
           Évaluer mon site
-        </a>
+          <FaArrowRight className="btn-icon" />
+        </Button>
       </div>
     </div>
   );
