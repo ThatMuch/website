@@ -1,6 +1,6 @@
 import React from "react";
 import { HeroSectionAlt } from "../components/LandingRefonteAlt/HeroSectionAlt/HerosSectionAlt";
-
+import NumbersSectionAlt from "../components/LandingRefonteAlt/NumbersSectionAlt/NumbersSectionAlt";
 const AnalyseRefonteSiteWebAlt = () => {
   return (
     <div className="bg-landing">
@@ -11,7 +11,7 @@ const AnalyseRefonteSiteWebAlt = () => {
         url=""
         label="Évaluer mon site"
         />
-        
+        <NumbersSectionAlt/>
       </div>
       <div className="d-flex justify-content-center p-2 bg-dark mt-5">
         <span className="uppercase">thatmuch</span>

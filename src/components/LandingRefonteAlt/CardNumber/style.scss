@@ -1,0 +1,29 @@
+@use "../../../style/vars" as *;
+div.cardNumber {
+  flex: 1;
+  padding: $spacing-s;
+  padding-bottom: 0px;
+  background-color: rgba(237, 234, 246, 0.1);
+  border-radius: $radius-m;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    padding: 1px;
+    background: linear-gradient(
+      to bottom,
+      rgb(86, 68, 155),
+      rgba(169, 159, 209, 0.1)
+    );
+    border-radius: inherit;
+    --m: conic-gradient(#000 0 0);
+    mask: var(--m) content-box exclude, var(--m);
+    pointer-events: none;
+  }
+
+  p {
+    text-align: left;
+  }
+}
