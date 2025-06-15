@@ -24,7 +24,11 @@ export default function FormContainer({
   data,
   setIsFinished,
 }: Props) {
-  const { updateScoreByCategory, calculateAndSetGlobalScore } = useScores();
+  const {
+    updateScoreByCategory,
+    calculateAndSetGlobalScore,
+    setAnswersByCategory,
+  } = useScores();
   const [showErrors, setShowErrors] = useState(false);
   const isLastCategory = currentCategoryIndex === categories.length - 1;
   const currentCategory = categories[currentCategoryIndex];
@@ -57,15 +61,29 @@ export default function FormContainer({
   const handleNext = (formValues) => {
     // Potentially validate current category fields before proceeding
     // For now, assuming Formik's validation handles this via the disabled state of the button
-
+    //formValues that starts with the current category
+    const currentCategoryformValues = getCurrentCategoryData(formValues);
     const score = calculateCurrentCategoryScore(formValues);
     updateScoreByCategory(currentCategory.slug, score);
+    setAnswersByCategory(currentCategory.slug, currentCategoryformValues);
     setCurrentCategoryIndex(currentCategoryIndex + 1);
   };
 
+  const getCurrentCategoryData = (values) => {
+    return Object.keys(values).reduce((acc, key) => {
+      if (key.startsWith(currentCategory.slug)) {
+        acc[key] = values[key];
+      }
+      return acc;
+    }, {});
+  };
+
   const handleSubmit = (formValues) => {
+    const currentCategoryformValues = getCurrentCategoryData(formValues);
+
     // Ensure validation passes for the last step (Formik handles this by default on submit)
     const score = calculateCurrentCategoryScore(formValues);
+    setAnswersByCategory(currentCategory.slug, currentCategoryformValues);
     updateScoreByCategory(currentCategory.slug, score);
 
     // After updating the last category's score, calculate the global score
@@ -87,13 +105,7 @@ export default function FormContainer({
     const currentQuestions = currentCategoryData?.questions;
     if (!currentQuestions) return true; // No questions, disable
 
-    const currentCategoryFormValues = currentQuestions.reduce(
-      (acc, question) => {
-        acc[question.id] = values[question.id] ?? ""; // Use empty string for undefined
-        return acc;
-      },
-      {}
-    );
+    const currentCategoryFormValues = getCurrentCategoryData(values);
 
     if (
       Object.values(currentCategoryFormValues).some((value) => value === "") ||

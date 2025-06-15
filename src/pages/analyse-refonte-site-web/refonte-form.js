@@ -5,12 +5,12 @@ import ContactForm from "../../components/LandingRefonte/ContactForm/ContactForm
 import  FormContainer  from '../../components/LandingRefonte/Form/FormContainer/FormContainer';
 import FormStepper from '../../components/LandingRefonte/Form/FormStepper/FormStepper';
 import {HeroSection} from '../../components/LandingRefonte/Landing/HeroSection/HeroSection';
-import { ScoreProvider } from '../../contexts/ScoreContext'; // Adjust path
-import data from "../../data/questionquiz.json";
+import { ScoreProvider } from '../../contexts/ScoreContext';
+import data from "../../data/questionquiz_copy.json";
 
 const RefonteForm = () => {
 	const [currentCategoryIndex,setCurrentCategoryIndex] = useState(0);
-	const [isFinished, setIsFinished] = useState(true);
+	const [isFinished, setIsFinished] = useState(false);
 	  const categories = useMemo(() => {
 		// Récupération des catégories à partir des questions
 		const uniqueCategories = new Set(data.map((q) => q));

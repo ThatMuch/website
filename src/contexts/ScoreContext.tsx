@@ -11,10 +11,17 @@ export interface CategoryScores {
   [categorySlug: string]: number;
 }
 
+export interface Answers {
+  [questionId: string]: string; // Assuming answers can be strings or numbers
+}
+
 // Define the shape of the overall scores state
 export interface ScoresState {
   globalScore: number;
   scoresByCategory: CategoryScores;
+  answersByCategory?: {
+    [categorySlug: string]: Answers; // Optional, if you want to track answers by category
+  };
 }
 
 // Define the shape of the context value
@@ -23,11 +30,14 @@ export interface ScoreContextType {
   updateScoreByCategory: (categorySlug: string, score: number) => void;
   calculateAndSetGlobalScore: () => void;
   resetScores: (categoriesForReset: { slug: string }[]) => void;
+  setAnswersByCategory: (categorySlug: string, answers: Answers) => void;
 }
 
 // Create the context
 // The undefined default is acceptable as we'll ensure Provider is always used.
-const ScoreContext = createContext<ScoreContextType | undefined>(undefined);
+export const ScoreContext = createContext<ScoreContextType | undefined>(
+  undefined
+);
 
 // Custom hook for easy consumption of the ScoreContext
 export const useScores = (): ScoreContextType => {
@@ -53,6 +63,7 @@ const getInitialScoresState = (
     acc[category.slug] = 0;
     return acc;
   }, {} as CategoryScores),
+  answersByCategory: {},
 });
 
 // ScoreProvider component
@@ -64,6 +75,18 @@ export const ScoreProvider = ({
     getInitialScoresState(initialCategories)
   );
 
+  const setAnswersByCategory = useCallback(
+    (categorySlug: string, answers: Answers) => {
+      setScores((prevScores) => ({
+        ...prevScores,
+        answersByCategory: {
+          ...prevScores.answersByCategory,
+          [categorySlug]: answers,
+        },
+      }));
+    },
+    []
+  );
   const updateScoreByCategory = useCallback(
     (categorySlug: string, score: number) => {
       setScores((prevScores) => ({
@@ -100,6 +123,7 @@ export const ScoreProvider = ({
         updateScoreByCategory,
         calculateAndSetGlobalScore,
         resetScores,
+        setAnswersByCategory,
       }}
     >
       {children}

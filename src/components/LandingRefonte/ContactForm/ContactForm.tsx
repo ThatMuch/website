@@ -3,9 +3,11 @@ import "./ContactForm.scss";
 import * as Yup from "yup";
 
 import { ErrorMessage, Field, Form, Formik } from "formik"; // Added Field
+import React, { useContext } from "react";
 
-import React from "react";
 import tardis from "../../../images/tardis.png";
+import { useAddDoc } from "../../../hooks/use-firebase";
+import { useScores } from "../../../contexts/ScoreContext";
 
 const initialValues = {
   firstName: "",
@@ -18,7 +20,10 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email("Email invalide").required("Email est requis"),
 });
 export default function ContactForm() {
-  // Removed unused Props
+  // get the score from the context if needed
+  const { scores } = useScores();
+
+  const { addDocument } = useAddDoc("submissions");
   return (
     <div className="ContactFormRefonte">
       <div className="row">
@@ -32,9 +37,22 @@ export default function ContactForm() {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              console.log("Form submitted with values:", values);
-              setSubmitting(false);
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              const submissionData = {
+                ...values,
+                scores: scores, // Include scores from context
+              };
+              addDocument(submissionData)
+                .then(() => {
+                  console.log("Submission successful");
+                  resetForm(); // Reset the form after successful submission
+                })
+                .catch((error) => {
+                  console.error("Error submitting form:", error);
+                })
+                .finally(() => {
+                  setSubmitting(false); // Set submitting to false after operation
+                });
             }}
           >
             {(
@@ -95,7 +113,7 @@ export default function ContactForm() {
                 <button
                   type="submit"
                   className="btn btn-white"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting} // Disable button during Formik's submission or React Query's mutation loading state
                 >
                   Envoyer
                 </button>

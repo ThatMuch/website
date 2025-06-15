@@ -23,6 +23,7 @@
     "dotenv": "^16.4.7",
     "embla-carousel": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "firebase": "^11.9.1",
     "formik": "^2.4.6",
     "gatsby": "^5.13.3",
     "gatsby-plugin-gatsby-cloud": "^5.13.1",
