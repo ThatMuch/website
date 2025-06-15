@@ -35,6 +35,7 @@ export default function FormContainer({
   const currentCategory = categories[currentCategoryIndex];
 
   const handleScoreByCategory = (category, score) => {
+    console.log("handleScoreByCategory: ", score);
     setScores((prevScores) => ({
       ...prevScores,
       scoresByCategory: {
@@ -45,7 +46,14 @@ export default function FormContainer({
   };
 
   const handleAllScores = (values) => {
-    let score: number = Object.values(values).reduce(
+    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
+      (acc, question) => {
+        acc[question.id] = values[question.id];
+        return acc;
+      },
+      {}
+    );
+    let score: number = Object.values(currentCategoryValues).reduce(
       (acc: number, val: unknown) => acc + (parseInt(val as string) || 0),
       0
     );
@@ -55,6 +63,7 @@ export default function FormContainer({
         (acc: number, val: unknown) => acc + (parseInt(val as string) || 0),
         0
       ) + score;
+    console.log("handleAllScores: ", totalScore);
     // Mettre à jour le score global
     setScores((prevScores) => ({
       ...prevScores,
@@ -69,7 +78,24 @@ export default function FormContainer({
   };
 
   const handleNext = (values, errors, dirty) => {
-    setShowErrors(false);
+    // setShowErrors(false);
+    // const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
+    //   (acc, question) => {
+    //     acc[question.id] = values[question.id];
+    //     return acc;
+    //   },
+    //   {}
+    // );
+
+    // if (
+    //   Object.values(currentCategoryValues).some(
+    //     (value) => value === "" || value === undefined
+    //   ) ||
+    //   Object.keys(errors).length > 0
+    // ) {
+    //   setShowErrors(true);
+    //   return;
+    // }
     const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
       (acc, question) => {
         acc[question.id] = values[question.id];
@@ -78,17 +104,7 @@ export default function FormContainer({
       {}
     );
 
-    if (
-      Object.values(currentCategoryValues).some(
-        (value) => value === "" || value === undefined
-      ) ||
-      Object.keys(errors).length > 0
-    ) {
-      setShowErrors(true);
-      return;
-    }
-
-    const score = Object.values(values).reduce(
+    const score = Object.values(currentCategoryValues).reduce(
       (acc: number, val) => acc + (parseInt(val as string) || 0),
       0
     );
@@ -97,7 +113,14 @@ export default function FormContainer({
   };
 
   const handleSubmit = (values) => {
-    const score = Object.values(values).reduce(
+    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
+      (acc, question) => {
+        acc[question.id] = values[question.id];
+        return acc;
+      },
+      {}
+    );
+    const score = Object.values(currentCategoryValues).reduce(
       (acc: number, val) => acc + (parseInt(val as string) || 0),
       0
     );

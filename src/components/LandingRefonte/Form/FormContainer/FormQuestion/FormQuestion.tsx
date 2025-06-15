@@ -59,11 +59,11 @@ const FormQuestion = ({ item, errors, touched, showErrors }: Props) => {
               </div>
             );
           })}
-          {showErrors && errors[id] && (
+          {/* {showErrors && errors[id] && (
             <div className={`FormQuestion__error`} id={`error-${id}`}>
               {errors[id] || "Veuillez sélectionner une option."}
             </div>
-          )}
+          )} */}
         </div>
       </fieldset>
     </div>
