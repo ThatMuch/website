@@ -1,0 +1,36 @@
+@use "../../../style/vars.scss" as *;
+@use "../../../style/_mixins.scss" as *;
+.ContactFormRefonte {
+  background-color: $dark_1;
+  background-image: url("../../../images/Background_Dark.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-radius: $radius-l;
+  padding: $spacing-xl;
+  color: #fff;
+  overflow: hidden;
+  height: 30rem;
+
+  @include breakpoint(mobile) {
+    padding: $spacing-m;
+    border-radius: $radius-m;
+  }
+
+  img {
+    position: absolute;
+    width: 340px;
+    top: 200px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    @include breakpoint(mobile) {
+      position: relative;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  }
+}

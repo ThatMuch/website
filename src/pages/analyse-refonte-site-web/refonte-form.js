@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 
 import ClickSpark from "../../components/ClickSpark/ClickSpark";
+import ContactForm from "../../components/LandingRefonte/ContactForm/ContactForm";
 import  FormContainer  from '../../components/LandingRefonte/Form/FormContainer/FormContainer';
 import FormStepper from '../../components/LandingRefonte/Form/FormStepper/FormStepper';
 import {HeroSection} from '../../components/LandingRefonte/Landing/HeroSection/HeroSection';
@@ -9,7 +10,7 @@ import data from "../../data/questionquiz.json";
 
 const RefonteForm = () => {
 	const [currentCategoryIndex,setCurrentCategoryIndex] = useState(0);
-	const [isFinished, setIsFinished] = useState(false);
+	const [isFinished, setIsFinished] = useState(true);
 	  const categories = useMemo(() => {
 		// Récupération des catégories à partir des questions
 		const uniqueCategories = new Set(data.map((q) => q));
@@ -29,8 +30,7 @@ const RefonteForm = () => {
         sparkSize={10}
         sparkRadius={15}
         sparkCount={8}
-				duration={400}
-
+        duration={400}
       >
         <div className="bg-form">
           <div className="container-fluid">
@@ -42,7 +42,7 @@ const RefonteForm = () => {
               categories={categories}
               currentCategoryIndex={currentCategoryIndex}
             />
-            {!isFinished && (
+            {!isFinished ? (
               <FormContainer
                 currentCategoryIndex={currentCategoryIndex}
                 categories={categories}
@@ -50,6 +50,8 @@ const RefonteForm = () => {
                 data={data}
                 setIsFinished={setIsFinished}
               />
+            ) : (
+              <ContactForm />
             )}
           </div>
           <div className="d-flex justify-content-center p-2 bg-dark mt-5">
