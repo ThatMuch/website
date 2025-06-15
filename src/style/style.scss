@@ -23,7 +23,7 @@ body {
   }
   .bg-dark {
     color: #fff;
-    background-color: #180d3c !important;
+    background-color: $neutral-900 !important;
   }
 
   .section {
@@ -52,6 +52,13 @@ body {
   }
 }
 
+.bg-form {
+  background-color: $neutral-900;
+  background-image: url("../images/bg-stars.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
 .bg-landing {
   position: relative;
   background-image: url("../images/bg_landing.webp");
@@ -145,4 +152,11 @@ body {
   margin-right: auto;
   padding-left: $spacing-l;
   padding-right: $spacing-l;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
 }
