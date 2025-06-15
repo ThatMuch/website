@@ -9,23 +9,17 @@ import Button from "../../../UI/Button/Button";
 import FormQuestion from "./FormQuestion/FormQuestion";
 import questionquiz from "../../../../data/questionquiz.json";
 
-type Props = {};
+type Props = {
+  currentCategoryIndex: number;
+  categories: { name: string; slug: string }[];
+  setCurrentCategoryIndex?: (index: number) => void;
+};
 
-export default function FormContainer({}: Props) {
-  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
-
-  // Catégorie actuelle
-  const categories = useMemo(() => {
-    // Récupération des catégories à partir des questions
-    const uniqueCategories = new Set(questionquiz.map((q) => q));
-    return Array.from(uniqueCategories).map((item) => ({
-      name: item.category,
-      slug: item.slug,
-    }));
-  }, []);
-  const currentCategory = categories[currentCategoryIndex];
-  const isLastCategory = currentCategoryIndex === categories.length - 1;
-
+export default function FormContainer({
+  currentCategoryIndex,
+  categories,
+  setCurrentCategoryIndex,
+}: Props) {
   const [scores, setScores] = useState({
     globalScore: 0,
     scoresByCategory: {
@@ -35,6 +29,8 @@ export default function FormContainer({}: Props) {
       }, {}),
     },
   });
+  const isLastCategory = currentCategoryIndex === categories.length - 1;
+  const currentCategory = categories[currentCategoryIndex];
 
   const handleScoreByCategory = (category, score) => {
     setScores((prevScores) => ({

@@ -1,0 +1,47 @@
+@use "../../../../style/mixins" as *;
+@use "../../../../style/vars" as *;
+
+.FormStepper {
+  display: flex;
+  width: 37.875rem;
+
+  padding: 0.625rem $spacing-s;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  border-radius: $radius-l;
+  background: $neutral-800;
+  margin: 0 auto $spacing-l;
+  gap: $spacing-s;
+  &__step {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: $spacing-s;
+    color: $neutral-200;
+    &.active &__icon {
+      background-color: $dev-500;
+      color: $neutral-900;
+    }
+    &.completed &__icon {
+      background-color: $project-400;
+      color: $project-900;
+    }
+    &__icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: $neutral-500;
+      color: $neutral-200;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    &__name {
+      text-wrap: wrap;
+      color: #fff;
+    }
+  }
+}
