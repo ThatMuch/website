@@ -7,12 +7,14 @@ import React, { useState } from "react";
 
 import Button from "../../../UI/Button/Button";
 import FormQuestion from "./FormQuestion/FormQuestion";
+import { useScores } from "../../../../contexts/ScoreContext"; // Adjust path as needed
 
 type Props = {
   currentCategoryIndex: number;
   categories: { name: string; slug: string }[];
   setCurrentCategoryIndex: (index: number) => void;
   data: any;
+  setIsFinished: (isFinished: boolean) => void;
 };
 
 export default function FormContainer({
@@ -20,55 +22,30 @@ export default function FormContainer({
   categories,
   setCurrentCategoryIndex,
   data,
+  setIsFinished,
 }: Props) {
+  const { updateScoreByCategory, calculateAndSetGlobalScore } = useScores();
   const [showErrors, setShowErrors] = useState(false);
-  const [scores, setScores] = useState({
-    globalScore: 0,
-    scoresByCategory: {
-      ...categories.reduce((acc, category) => {
-        acc[category.slug] = 0;
-        return acc;
-      }, {}),
-    },
-  });
   const isLastCategory = currentCategoryIndex === categories.length - 1;
   const currentCategory = categories[currentCategoryIndex];
+  const currentCategoryData = data[currentCategoryIndex];
 
-  const handleScoreByCategory = (category, score) => {
-    console.log("handleScoreByCategory: ", score);
-    setScores((prevScores) => ({
-      ...prevScores,
-      scoresByCategory: {
-        ...prevScores.scoresByCategory,
-        [category]: score,
-      },
-    }));
-  };
+  // Helper function to calculate score for the current category based on form values
+  const calculateCurrentCategoryScore = (formValues: any) => {
+    const currentQuestions = currentCategoryData?.questions;
+    if (!currentQuestions || !formValues) return 0;
 
-  const handleAllScores = (values) => {
-    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
+    const currentCategoryFormValues = currentQuestions.reduce(
       (acc, question) => {
-        acc[question.id] = values[question.id];
+        acc[question.id] = formValues[question.id];
         return acc;
       },
       {}
     );
-    let score: number = Object.values(currentCategoryValues).reduce(
-      (acc: number, val: unknown) => acc + (parseInt(val as string) || 0),
+    return Object.values(currentCategoryFormValues).reduce(
+      (sum: number, val: unknown) => sum + (parseInt(val as string) || 0),
       0
     );
-
-    const totalScore =
-      Object.values(scores.scoresByCategory).reduce(
-        (acc: number, val: unknown) => acc + (parseInt(val as string) || 0),
-        0
-      ) + score;
-    console.log("handleAllScores: ", totalScore);
-    // Mettre à jour le score global
-    setScores((prevScores) => ({
-      ...prevScores,
-      globalScore: totalScore,
-    }));
   };
 
   const handlePrevious = () => {
@@ -77,55 +54,24 @@ export default function FormContainer({
     }
   };
 
-  const handleNext = (values, errors, dirty) => {
-    // setShowErrors(false);
-    // const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
-    //   (acc, question) => {
-    //     acc[question.id] = values[question.id];
-    //     return acc;
-    //   },
-    //   {}
-    // );
+  const handleNext = (formValues) => {
+    // Potentially validate current category fields before proceeding
+    // For now, assuming Formik's validation handles this via the disabled state of the button
 
-    // if (
-    //   Object.values(currentCategoryValues).some(
-    //     (value) => value === "" || value === undefined
-    //   ) ||
-    //   Object.keys(errors).length > 0
-    // ) {
-    //   setShowErrors(true);
-    //   return;
-    // }
-    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
-      (acc, question) => {
-        acc[question.id] = values[question.id];
-        return acc;
-      },
-      {}
-    );
-
-    const score = Object.values(currentCategoryValues).reduce(
-      (acc: number, val) => acc + (parseInt(val as string) || 0),
-      0
-    );
-    handleScoreByCategory(currentCategory.slug, score);
+    const score = calculateCurrentCategoryScore(formValues);
+    updateScoreByCategory(currentCategory.slug, score);
     setCurrentCategoryIndex(currentCategoryIndex + 1);
   };
 
-  const handleSubmit = (values) => {
-    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
-      (acc, question) => {
-        acc[question.id] = values[question.id];
-        return acc;
-      },
-      {}
-    );
-    const score = Object.values(currentCategoryValues).reduce(
-      (acc: number, val) => acc + (parseInt(val as string) || 0),
-      0
-    );
-    handleScoreByCategory(currentCategory.slug, score);
-    handleAllScores(values);
+  const handleSubmit = (formValues) => {
+    // Ensure validation passes for the last step (Formik handles this by default on submit)
+    const score = calculateCurrentCategoryScore(formValues);
+    updateScoreByCategory(currentCategory.slug, score);
+
+    // After updating the last category's score, calculate the global score
+    calculateAndSetGlobalScore();
+
+    setIsFinished(true);
   };
 
   // Gestion des touches clavier pour l'accessibilité
@@ -138,18 +84,19 @@ export default function FormContainer({
 
   const handleDisableNext = (values, errors) => {
     // if values of current category are empty disable next button
-    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
+    const currentQuestions = currentCategoryData?.questions;
+    if (!currentQuestions) return true; // No questions, disable
+
+    const currentCategoryFormValues = currentQuestions.reduce(
       (acc, question) => {
-        acc[question.id] = values[question.id];
+        acc[question.id] = values[question.id] ?? ""; // Use empty string for undefined
         return acc;
       },
       {}
     );
 
     if (
-      Object.values(currentCategoryValues).some(
-        (value) => value === "" || value === undefined
-      ) ||
+      Object.values(currentCategoryFormValues).some((value) => value === "") ||
       Object.keys(errors).length > 0
     ) {
       return true;
@@ -168,7 +115,7 @@ export default function FormContainer({
     });
   });
 
-  data[currentCategoryIndex]?.questions?.forEach((q) => {
+  currentCategoryData?.questions?.forEach((q) => {
     validationSchemaShape[q.id] = Yup.string().required(
       "Veuillez répondre à cette question"
     );
@@ -186,7 +133,7 @@ export default function FormContainer({
       >
         {({ errors, touched, values, dirty }) => (
           <Form role="form" aria-labelledby="quiz-title">
-            {data[currentCategoryIndex]?.questions?.map((question) => (
+            {currentCategoryData?.questions?.map((question) => (
               <FormQuestion
                 item={question}
                 key={question.id}
@@ -217,7 +164,7 @@ export default function FormContainer({
                 <Button
                   type="submit"
                   onKeyDown={(e: KeyboardEvent) =>
-                    handleKeyDown(e, handleSubmit)
+                    handleKeyDown(e, () => handleSubmit(values))
                   }
                   label="Envoyer toutes les réponses"
                   className="btn btn-success ml-auto"
@@ -227,10 +174,10 @@ export default function FormContainer({
               ) : (
                 <Button
                   type="button"
-                  onClick={() => handleNext(values, errors, dirty)}
+                  onClick={() => handleNext(values)}
                   disabled={handleDisableNext(values, errors)}
                   onKeyDown={(e: KeyboardEvent) =>
-                    handleKeyDown(e, () => handleNext(values, errors, dirty))
+                    handleKeyDown(e, () => handleNext(values))
                   }
                   label="Passer à la catégorie suivante"
                   className="btn btn-dev ml-auto"
