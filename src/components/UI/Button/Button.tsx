@@ -10,6 +10,7 @@ type Props = {
   url?: string;
   target?: "_blank" | "_self";
   rel?: string;
+  [key: string]: any;
 };
 
 export default function Button({
@@ -22,6 +23,7 @@ export default function Button({
   url,
   target,
   rel,
+  ...rest
 }: Props) {
   return (
     <>
@@ -34,6 +36,7 @@ export default function Button({
           target={target}
           rel={rel}
           role="button"
+          {...rest}
         >
           <div className="btn__content"> {children}</div>
           <div className="btn__overlay"></div>
@@ -45,6 +48,7 @@ export default function Button({
           className={`btn ${className}`}
           disabled={disabled}
           type="submit"
+          {...rest}
         >
           <div className="btn__content"> {children}</div>
           <div className="btn__overlay"></div>
@@ -56,6 +60,7 @@ export default function Button({
           className={`btn ${className}`}
           disabled={disabled}
           type="button"
+          {...rest}
         >
           <div className="btn__content"> {children}</div>
           <div className="btn__overlay"></div>

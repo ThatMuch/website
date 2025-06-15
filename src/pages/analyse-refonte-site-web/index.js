@@ -1,10 +1,10 @@
-import { HeroSection } from "../components/LandingRefonte/Landing/HeroSection/HeroSection";
-import LinkSection from "../components/LandingRefonte/Landing/LinkSection/LinkSection";
-import NumbersSection from "../components/LandingRefonte/Landing/NumbersSection/NumbersSection";
+import { HeroSection } from "../../components/LandingRefonte/Landing/HeroSection/HeroSection";
+import LinkSection from "../../components/LandingRefonte/Landing/LinkSection/LinkSection";
+import NumbersSection from "../../components/LandingRefonte/Landing/NumbersSection/NumbersSection";
 import React from "react";
-import ScoreSection from "../components/LandingRefonte/Landing/ScoreSection/ScoreSection";
-import planetPink from "../images/planet-pink.webp";
-import planetYellow from "../images/planet-yellow.webp";
+import ScoreSection from "../../components/LandingRefonte/Landing/ScoreSection/ScoreSection";
+import planetPink from "../../images/planet-pink.webp";
+import planetYellow from "../../images/planet-yellow.webp";
 const AnalyseRefonteSiteWeb = () => {
   return (
 	  <div className="bg-landing">
@@ -14,7 +14,7 @@ const AnalyseRefonteSiteWeb = () => {
         <HeroSection
           title="Est-ce le moment de refaire  mon site internet ?"
           desc="Nous avons concocté pour vous, une petite évaluation pour répondre à cette question que vous vous êtes sûrement déjà posé : quand faut-il engager la refonte de son site internet ?"
-          url="#"
+          url="./refonte-form"
           label="Evaluer mon site"
         />
         <NumbersSection />
