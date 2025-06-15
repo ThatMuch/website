@@ -6,7 +6,7 @@ import  FormContainer  from '../../components/LandingRefonte/Form/FormContainer/
 import FormStepper from '../../components/LandingRefonte/Form/FormStepper/FormStepper';
 import {HeroSection} from '../../components/LandingRefonte/Landing/HeroSection/HeroSection';
 import { ScoreProvider } from '../../contexts/ScoreContext';
-import data from "../../data/questionquiz_copy.json";
+import data from "../../data/questionquiz.json";
 
 const RefonteForm = () => {
 	const [currentCategoryIndex,setCurrentCategoryIndex] = useState(0);
@@ -38,18 +38,21 @@ const RefonteForm = () => {
               title={"Est-ce le moment de refaire mon site internet ?"}
               isLanding={false}
             />
-            <FormStepper
-              categories={categories}
-              currentCategoryIndex={currentCategoryIndex}
-            />
+
             {!isFinished ? (
-              <FormContainer
-                currentCategoryIndex={currentCategoryIndex}
-                categories={categories}
-                setCurrentCategoryIndex={setCurrentCategoryIndex}
-                data={data}
-                setIsFinished={setIsFinished}
-              />
+              <>
+                <FormStepper
+                  categories={categories}
+                  currentCategoryIndex={currentCategoryIndex}
+                />
+                <FormContainer
+                  currentCategoryIndex={currentCategoryIndex}
+                  categories={categories}
+                  setCurrentCategoryIndex={setCurrentCategoryIndex}
+                  data={data}
+                  setIsFinished={setIsFinished}
+                />
+              </>
             ) : (
               <ContactForm />
             )}

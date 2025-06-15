@@ -67,6 +67,8 @@ export default function FormContainer({
     updateScoreByCategory(currentCategory.slug, score);
     setAnswersByCategory(currentCategory.slug, currentCategoryformValues);
     setCurrentCategoryIndex(currentCategoryIndex + 1);
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const getCurrentCategoryData = (values) => {
@@ -80,16 +82,14 @@ export default function FormContainer({
 
   const handleSubmit = (formValues) => {
     const currentCategoryformValues = getCurrentCategoryData(formValues);
-
     // Ensure validation passes for the last step (Formik handles this by default on submit)
     const score = calculateCurrentCategoryScore(formValues);
     setAnswersByCategory(currentCategory.slug, currentCategoryformValues);
     updateScoreByCategory(currentCategory.slug, score);
-
     // After updating the last category's score, calculate the global score
     calculateAndSetGlobalScore();
-
     setIsFinished(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Gestion des touches clavier pour l'accessibilité
@@ -175,6 +175,7 @@ export default function FormContainer({
               {isLastCategory ? (
                 <Button
                   type="submit"
+                  disabled={handleDisableNext(values, errors)}
                   onKeyDown={(e: KeyboardEvent) =>
                     handleKeyDown(e, () => handleSubmit(values))
                   }
