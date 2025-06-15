@@ -8,6 +8,7 @@ import React, { useContext } from "react";
 import tardis from "../../../images/tardis.png";
 import { useAddDoc } from "../../../hooks/use-firebase";
 import { useScores } from "../../../contexts/ScoreContext";
+import { useSendContactBrevo } from "../../../hooks/use-brev";
 
 const initialValues = {
   firstName: "",
@@ -24,6 +25,7 @@ export default function ContactForm() {
   const { scores } = useScores();
 
   const { addDocument } = useAddDoc("submissions");
+  const { sendContact } = useSendContactBrevo();
   return (
     <div className="ContactFormRefonte">
       <div className="row">
@@ -42,6 +44,15 @@ export default function ContactForm() {
                 ...values,
                 scores: scores, // Include scores from context
               };
+              sendContact(submissionData)
+                .then(() => {
+                  console.log("Brevo submission successful");
+                  // Optionally, you can handle Brevo submission success here
+                })
+                .catch((error) => {
+                  console.error("Error submitting to Brevo:", error);
+                  // Optionally, you can handle Brevo submission error here
+                });
               addDocument(submissionData)
                 .then(() => {
                   console.log("Submission successful");
