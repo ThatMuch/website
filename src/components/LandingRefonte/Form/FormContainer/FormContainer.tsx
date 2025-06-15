@@ -2,24 +2,26 @@ import "./style.scss";
 
 import * as Yup from "yup";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useMemo, useState } from "react";
+import { Form, Formik } from "formik";
+import React, { useState } from "react";
 
 import Button from "../../../UI/Button/Button";
 import FormQuestion from "./FormQuestion/FormQuestion";
-import questionquiz from "../../../../data/questionquiz.json";
 
 type Props = {
   currentCategoryIndex: number;
   categories: { name: string; slug: string }[];
-  setCurrentCategoryIndex?: (index: number) => void;
+  setCurrentCategoryIndex: (index: number) => void;
+  data: any;
 };
 
 export default function FormContainer({
   currentCategoryIndex,
   categories,
   setCurrentCategoryIndex,
+  data,
 }: Props) {
+  const [showErrors, setShowErrors] = useState(false);
   const [scores, setScores] = useState({
     globalScore: 0,
     scoresByCategory: {
@@ -62,17 +64,36 @@ export default function FormContainer({
 
   const handlePrevious = () => {
     if (currentCategoryIndex > 0) {
-      setCurrentCategoryIndex((prev) => prev - 1);
+      setCurrentCategoryIndex(currentCategoryIndex - 1);
     }
   };
 
-  const handleNext = (values) => {
+  const handleNext = (values, errors, dirty) => {
+    setShowErrors(false);
+    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
+      (acc, question) => {
+        acc[question.id] = values[question.id];
+        return acc;
+      },
+      {}
+    );
+
+    if (
+      Object.values(currentCategoryValues).some(
+        (value) => value === "" || value === undefined
+      ) ||
+      Object.keys(errors).length > 0
+    ) {
+      setShowErrors(true);
+      return;
+    }
+
     const score = Object.values(values).reduce(
       (acc: number, val) => acc + (parseInt(val as string) || 0),
       0
     );
     handleScoreByCategory(currentCategory.slug, score);
-    setCurrentCategoryIndex((prev) => prev + 1);
+    setCurrentCategoryIndex(currentCategoryIndex + 1);
   };
 
   const handleSubmit = (values) => {
@@ -82,7 +103,6 @@ export default function FormContainer({
     );
     handleScoreByCategory(currentCategory.slug, score);
     handleAllScores(values);
-    console.log(values);
   };
 
   // Gestion des touches clavier pour l'accessibilité
@@ -93,17 +113,42 @@ export default function FormContainer({
     }
   };
 
+  const handleDisableNext = (values, errors) => {
+    // if values of current category are empty disable next button
+    const currentCategoryValues = data[currentCategoryIndex]?.questions?.reduce(
+      (acc, question) => {
+        acc[question.id] = values[question.id];
+        return acc;
+      },
+      {}
+    );
+
+    if (
+      Object.values(currentCategoryValues).some(
+        (value) => value === "" || value === undefined
+      ) ||
+      Object.keys(errors).length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   // Initialisation des valeurs du formulaire et du schéma de validation
   const initialValues = {};
   const validationSchemaShape = {};
 
-  questionquiz?.forEach((category) => {
+  data?.forEach((category) => {
     category.questions?.forEach((q) => {
       initialValues[q.id] = "";
-      validationSchemaShape[q.id] = Yup.string().required(
-        "Veuillez sélectionner une réponse"
-      );
     });
+  });
+
+  data[currentCategoryIndex]?.questions?.forEach((q) => {
+    validationSchemaShape[q.id] = Yup.string().required(
+      "Veuillez répondre à cette question"
+    );
   });
 
   const validationSchema = Yup.object().shape(validationSchemaShape);
@@ -113,21 +158,22 @@ export default function FormContainer({
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleNext}
+        onSubmit={handleSubmit}
         //enableReinitialize={true}
       >
-        {({ errors, touched, values }) => (
+        {({ errors, touched, values, dirty }) => (
           <Form role="form" aria-labelledby="quiz-title">
-            {questionquiz[currentCategoryIndex]?.questions?.map((question) => (
+            {data[currentCategoryIndex]?.questions?.map((question) => (
               <FormQuestion
                 item={question}
                 key={question.id}
                 errors={errors}
                 touched={touched}
+                showErrors={showErrors}
               />
             ))}
             <div
-              className="quiz-navigation"
+              className="d-flex justify-content-between align-items-center mt-4"
               role="navigation"
               aria-label="Navigation du quiz"
             >
@@ -139,7 +185,7 @@ export default function FormContainer({
                     handleKeyDown(e, handlePrevious)
                   }
                   label="Revenir à la catégorie précédente"
-                  className="btn btn-dev"
+                  className="btn btn-dev btn-outlined"
                 >
                   Précédent
                 </Button>
@@ -147,24 +193,24 @@ export default function FormContainer({
               {isLastCategory ? (
                 <Button
                   type="submit"
-                  onClick={() => handleSubmit(values)}
                   onKeyDown={(e: KeyboardEvent) =>
                     handleKeyDown(e, handleSubmit)
                   }
                   label="Envoyer toutes les réponses"
-                  className="btn btn-dev"
+                  className="btn btn-success ml-auto"
                 >
                   Envoyer
                 </Button>
               ) : (
                 <Button
                   type="button"
-                  onClick={() => handleNext(values)}
+                  onClick={() => handleNext(values, errors, dirty)}
+                  disabled={handleDisableNext(values, errors)}
                   onKeyDown={(e: KeyboardEvent) =>
-                    handleKeyDown(e, () => handleNext(values))
+                    handleKeyDown(e, () => handleNext(values, errors, dirty))
                   }
                   label="Passer à la catégorie suivante"
-                  className="btn btn-dev"
+                  className="btn btn-dev ml-auto"
                 >
                   Suivant
                 </Button>

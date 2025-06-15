@@ -177,6 +177,7 @@
       {
         "id": "seo-1",
         "question": "Mon site est-il dans la première page google dans les mots-clés de mon secteur d’activité ?",
+        "description": "Par exemple : Pour une boutique de bijoux à Nice, vous êtes dans la première page des résultats Google pour la recherche “création de bijoux Nice",
         "options": [
           {
             "text": "Oui",

@@ -1,19 +1,17 @@
 import "./style.scss";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
-
+import { Field } from "formik";
 import React from "react";
 
 type Props = {
   item: any;
   errors: any;
   touched: any;
-  onKeyDown?: (e: React.KeyboardEvent, callback: () => void) => void;
+  showErrors?: boolean;
 };
 
-const FormQuestion = ({ item, errors, touched, onKeyDown }: Props) => {
-  const { question, options, id } = item;
-
+const FormQuestion = ({ item, errors, touched, showErrors }: Props) => {
+  const { question, options, id, description } = item;
   // Gestion des touches clavier pour l'accessibilité
   const handleKeyDown = (event, callback) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -29,6 +27,9 @@ const FormQuestion = ({ item, errors, touched, onKeyDown }: Props) => {
         <legend id={`legend-${id}`}>
           <h3 className="h6 mb-4">{question}</h3>
         </legend>
+        {description && (
+          <p className="FormQuestion__description">{description}</p>
+        )}
         <div
           role="radiogroup"
           aria-labelledby={`legend-${id}`}
@@ -58,15 +59,13 @@ const FormQuestion = ({ item, errors, touched, onKeyDown }: Props) => {
               </div>
             );
           })}
+          {showErrors && errors[id] && (
+            <div className={`FormQuestion__error`} id={`error-${id}`}>
+              {errors[id] || "Veuillez sélectionner une option."}
+            </div>
+          )}
         </div>
       </fieldset>
-      <ErrorMessage
-        name={`question-${question.id}`}
-        component="div"
-        className="error"
-        id={`error-${question.id}`}
-        aria-live="polite"
-      />
     </div>
   );
 };

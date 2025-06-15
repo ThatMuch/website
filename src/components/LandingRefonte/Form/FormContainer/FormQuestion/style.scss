@@ -75,4 +75,12 @@
       transition: 0.5s;
     }
   }
+
+  &__error {
+    background-color: rgba($com-500, 0.3);
+    border-radius: 6.25rem;
+    padding: $spacing-xs $spacing-xs $spacing-xs $spacing-s;
+    font-size: $font-size-xs;
+    margin-top: 0.5rem;
+  }
 }

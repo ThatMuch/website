@@ -47,6 +47,8 @@ export default function Button({
           onClick={onClick}
           className={`btn ${className}`}
           disabled={disabled}
+          aria-label={label}
+          role="button"
           type="submit"
           {...rest}
         >
@@ -60,6 +62,8 @@ export default function Button({
           className={`btn ${className}`}
           disabled={disabled}
           type="button"
+          aria-label={label}
+          role="button"
           {...rest}
         >
           <div className="btn__content"> {children}</div>

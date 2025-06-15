@@ -68,6 +68,10 @@ button {
       margin-left: 0.5rem;
     }
   }
+
+  &:focus-visible {
+    outline: 3px solid;
+  }
   &__content {
     z-index: 5;
     grid-column-gap: 0.5rem;
@@ -150,6 +154,30 @@ button {
     &:disabled {
       background: $status-disabled;
       border-color: $status-disabled;
+      color: $status-disabled-dark;
+    }
+    &.btn-outlined {
+      background-color: transparent;
+      border: 2px solid $dev-500;
+      color: $dev-500;
+      &:hover {
+        background-color: $dev-500;
+        color: $text-color-default;
+        border: 2px solid $neutral-300;
+      }
+    }
+  }
+
+  &-success {
+    color: $text-color-default;
+    background-color: $project-500;
+    &:hover {
+      color: $text-color-default;
+      background-color: $project-500;
+      text-decoration: none;
+    }
+    &:disabled {
+      background: $status-disabled;
       color: $status-disabled-dark;
     }
   }
