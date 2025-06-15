@@ -1,6 +1,5 @@
 import "./style.scss";
 import * as React from "react";
-//import Button from "../../Button/Button";
 import { FaArrowRight } from "react-icons/fa6";
 import logo from "../../../images/THATMUCH_Logo_White.png";
 import planet1 from '../../../images/Planets_blue.png';
@@ -27,7 +26,15 @@ export const HeroSectionAlt: React.FC<IHeroSectionProps> = ({
             <section className="hero-sectionAlt">
                 <div className="hero-content">
                     <div className="hero-title-content">
-                        <h1 className="hero-title">{title}</h1>
+                        <h1 className="hero-title">
+                            {title.split(/(20\d{2})/g).map((part, i) =>
+                                /^\d{4}$/.test(part) ? (
+                                    <span key={i} className="highlight-year">{part}</span>
+                                ) : (
+                                    part
+                                )
+                            )}
+                        </h1>
                         <a href={url} className="btn btn-dev" aria-label={label}>
                             {label}
                             <FaArrowRight className="btn-icon" />
