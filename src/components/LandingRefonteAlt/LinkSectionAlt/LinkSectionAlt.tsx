@@ -19,7 +19,7 @@ export default function LinkSectionAlt({}: Props) {
           Commencer le questionnaire
         </a>
       </div>
-      <img src={img} alt="Tardis dans les étoiles" />
+      <img src={img} alt="r2d2" />
     </div>
   );
 }

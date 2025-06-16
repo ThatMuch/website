@@ -13,6 +13,7 @@
   gap: $spacing-l;
   position: relative;
   overflow: hidden;
+  z-index: 2;
 
   @include breakpoint(mobile) {
     flex-direction: column;
@@ -43,7 +44,7 @@
     right: 50px;
     bottom: 0;
     width: 350px;
-    transform: translateY(150px);
+    transform: translateY(180px);
     z-index: 0;
 
     @include breakpoint(mobile) {

@@ -2,6 +2,8 @@ import React from "react";
 import { HeroSectionAlt } from "../components/LandingRefonteAlt/HeroSectionAlt/HerosSectionAlt";
 import NumbersSectionAlt from "../components/LandingRefonteAlt/NumbersSectionAlt/NumbersSectionAlt";
 import LinkSectionAlt from "../components/LandingRefonteAlt/LinkSectionAlt/LinkSectionAlt";
+import PlanetImage from "../components/LandingRefonteAlt/FooterPlanet/FooterPlanet";
+import FooterPlanet from "../components/LandingRefonteAlt/FooterPlanet/FooterPlanet";
 const AnalyseRefonteSiteWebAlt = () => {
   return (
     <div className="bg-landing-alt">
@@ -15,9 +17,7 @@ const AnalyseRefonteSiteWebAlt = () => {
         <NumbersSectionAlt/>
         <LinkSectionAlt/>
       </div>
-      <div className="d-flex justify-content-center p-2 bg-dark mt-5">
-        <span className="uppercase">thatmuch</span>
-      </div>
+      <FooterPlanet/>
     </div>
   );
 };

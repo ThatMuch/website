@@ -1,0 +1,23 @@
+.footer-planet-container {
+  position: relative;
+  overflow: visible;
+
+  .planet-bottom-img {
+    position: absolute;
+    bottom: -10px;
+    left: -60px;
+    width: 200px;
+    z-index: 0;
+    pointer-events: none;
+
+    @media (max-width: 768px) {
+      width: 140px;
+      bottom: -20px;
+    }
+  }
+
+  .footer-text {
+    position: relative;
+    z-index: 1;
+  }
+}
