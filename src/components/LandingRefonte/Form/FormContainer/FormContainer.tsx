@@ -3,7 +3,7 @@ import "./style.scss";
 import * as Yup from "yup";
 
 import { Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Button from "../../../UI/Button/Button";
 import FormQuestion from "./FormQuestion/FormQuestion";
@@ -34,6 +34,10 @@ export default function FormContainer({
   const currentCategory = categories[currentCategoryIndex];
   const currentCategoryData = data[currentCategoryIndex];
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentCategoryIndex]);
+
   // Helper function to calculate score for the current category based on form values
   const calculateCurrentCategoryScore = (formValues: any) => {
     const currentQuestions = currentCategoryData?.questions;
@@ -59,16 +63,11 @@ export default function FormContainer({
   };
 
   const handleNext = (formValues) => {
-    // Potentially validate current category fields before proceeding
-    // For now, assuming Formik's validation handles this via the disabled state of the button
-    //formValues that starts with the current category
     const currentCategoryformValues = getCurrentCategoryData(formValues);
     const score = calculateCurrentCategoryScore(formValues);
     updateScoreByCategory(currentCategory.slug, score);
     setAnswersByCategory(currentCategory.slug, currentCategoryformValues);
     setCurrentCategoryIndex(currentCategoryIndex + 1);
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const getCurrentCategoryData = (values) => {

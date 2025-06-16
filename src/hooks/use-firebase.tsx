@@ -58,12 +58,6 @@ export function useAddDoc(collectionName: string) {
     setIsAdding(true);
     setError(null);
     setDocumentId(null);
-    console.log(
-      "useAddDoc: Attempting to add document to collection:",
-      collectionName,
-      "Data:",
-      JSON.stringify(newData, null, 2)
-    );
     const collectionRef = collection(db, collectionName);
     try {
       const docRef = await addDoc(collectionRef, {

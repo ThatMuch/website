@@ -31,7 +31,9 @@ export default function ContactForm() {
   // get the score from the context if needed
   const { scores } = useScores();
 
-  const { addDocument } = useAddDoc("submissions");
+  const { addDocument } = useAddDoc(
+    process.env.GATSBY_FIREBASE_COLLECTION_SUBMISSIONS || "submissions"
+  );
   const { sendContact } = useSendContactBrevo([5]);
   const [isSend, setIsSend] = React.useState(false);
   const [emailSent, setEmailSent] = React.useState("");
@@ -86,7 +88,14 @@ export default function ContactForm() {
               {(
                 { isSubmitting, errors, touched, values } // Added errors and touched for aria-invalid
               ) => (
-                <Form className="d-flex flex-column align-items-center justify-content-center">
+                <Form
+                  id="contact-form-refonte-siteweb"
+                  role="form"
+                  aria-labelledby="contact-form-refonte-siteweb-title"
+                  aria-describedby="contact-form-refonte-siteweb-description"
+                  aria-label="Formulaire de contact pour l'analyse de site web"
+                  className="d-flex flex-column align-items-center justify-content-center"
+                >
                   <div className="form-group mb-4 w-100">
                     <label htmlFor="firstName">Prénom</label>
                     <Field
