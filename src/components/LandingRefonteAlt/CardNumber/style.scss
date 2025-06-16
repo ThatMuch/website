@@ -1,11 +1,12 @@
 @use "../../../style/vars" as *;
 div.cardNumber {
   flex: 1;
-  padding: $spacing-s;
-  padding-bottom: 0px;
+  padding: $spacing-l;
+  padding-bottom: $spacing-m;
   background-color: rgba(237, 234, 246, 0.1);
   border-radius: $radius-m;
   position: relative;
+  backdrop-filter: blur(5px);
 
   &::before {
     content: "";
@@ -22,6 +23,8 @@ div.cardNumber {
     mask: var(--m) content-box exclude, var(--m);
     pointer-events: none;
   }
+
+  
 
   p {
     text-align: left;
