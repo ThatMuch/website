@@ -6,6 +6,7 @@ import  FormContainer  from '../../components/LandingRefonte/Form/FormContainer/
 import FormStepper from '../../components/LandingRefonte/Form/FormStepper/FormStepper';
 import {HeroSection} from '../../components/LandingRefonte/Landing/HeroSection/HeroSection';
 import { ScoreProvider } from '../../contexts/ScoreContext';
+import Seo from "../../components/Seo";
 import data from "../../data/questionquiz.json";
 
 const RefonteForm = () => {
@@ -24,7 +25,12 @@ const RefonteForm = () => {
     }));
 
 	return (
-    <ScoreProvider initialCategories={categoriesForProvider}>
+		<ScoreProvider initialCategories={categoriesForProvider}>
+			<Seo
+			title="Test de la refonte de site web"
+			description="Faites le test et découvrez si c'est le bon moment pour refaire votre site internet."
+			pathname="/analyse-refonte-site-web/refonte-form"
+			/>
       <ClickSpark
         sparkColor="#fff"
         sparkSize={10}
