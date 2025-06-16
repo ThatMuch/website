@@ -1,7 +1,7 @@
 // create a custom hook to use brevo
 import { useCallback, useEffect, useState } from "react";
 
-export function useSendContactBrevo() {
+export function useSendContactBrevo(listIds: number[]) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const apikey = process.env.GATSBY_BREVO_API_KEY;
@@ -23,7 +23,7 @@ export function useSendContactBrevo() {
         TOTAL: contactData.scores.globalScore,
       },
       updateEnabled: true,
-      listIds: [6], // Replace with your actual list ID
+      listIds: listIds,
     };
     try {
       const headers: HeadersInit = {

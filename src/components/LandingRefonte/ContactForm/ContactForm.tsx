@@ -32,7 +32,7 @@ export default function ContactForm() {
   const { scores } = useScores();
 
   const { addDocument } = useAddDoc("submissions");
-  const { sendContact } = useSendContactBrevo();
+  const { sendContact } = useSendContactBrevo([5]);
   const [isSend, setIsSend] = React.useState(false);
   const [emailSent, setEmailSent] = React.useState("");
   return (
