@@ -1,6 +1,7 @@
 .footer-planet-container {
   position: relative;
   overflow: visible;
+  
 
   .planet-bottom-img {
     position: absolute;
@@ -17,6 +18,7 @@
   }
 
   .footer-text {
+    border-top: 1px solid #706a7f;
     position: relative;
     z-index: 1;
   }
