@@ -15,13 +15,13 @@ export default function ServiceList({ services, category }: Props) {
       <div className="ServiceList">
         {services.map((service, index) => (
           <div key={index} className={`ServiceList__item ${category}`}>
-            <h3>{service.titre}</h3>
             {service?.image && (
               <img
                 src={service.image.node.mediaItemUrl}
                 alt={service.image.node.altText}
               />
             )}
+            <h3>{service.titre}</h3>
             <div dangerouslySetInnerHTML={{ __html: service.desc }} />
           </div>
         ))}
