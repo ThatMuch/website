@@ -15,7 +15,7 @@ export default function LinkSectionAlt({}: Props) {
         <p className="LinkSection__desc">
           Répondez à notre questionnaire "Dois-je refaire mon site web ?" et obtenez un diagnostic personnalisé en moins de 3 minutes !
         </p>
-        <a href="#" className="btn btn-white">
+        <a href="./refonte-form" className="btn btn-white">
           Évaluer mon site
         </a>
       </div>

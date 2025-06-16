@@ -1,0 +1,121 @@
+[
+  {
+    "category": "Design & Identité visuelle",
+    "slug": "design",
+    "questions": [
+      {
+        "id": "design-1",
+        "question": "Mon identité visuelle existe depuis …",
+        "options": [
+          {
+            "text": "Moins d’un an",
+            "score": 0
+          },
+          {
+            "text": "Entre 1 et 5 ans",
+            "score": 3
+          },
+          {
+            "text": "Plus de 5 ans",
+            "score": 5
+          }
+        ]
+      },
+      {
+        "id": "design-2",
+        "question": "J'ai construit mon identité visuelle …",
+        "options": [
+          {
+            "text": "moi-même en m’aidant de Canva et de templates",
+            "score": 3
+          },
+          {
+            "text": "le stagiaire de 3ème",
+            "score": 5
+          },
+          {
+            "text": "un ux/ui designer",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "design-3",
+        "question": "Mon identité visuelle contient …",
+        "options": [
+          {
+            "text": "un logo",
+            "score": 5
+          },
+          {
+            "text": "un logo, des couleurs, des typographies, des éléments, graphiques...",
+            "score": 0
+          },
+          {
+            "text": "un logo, une typo et une gamme de couleur",
+            "score": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Marketing",
+    "slug": "marketing",
+    "questions": [
+      {
+        "id": "marketing-1",
+        "question": "Les valeurs de la marque que je veux mettre en avant …",
+        "category": "Marketing",
+        "options": [
+          {
+            "text": "ont complètement changé",
+            "score": 3
+          },
+          {
+            "text": "ont peu évolué",
+            "score": 2
+          },
+          {
+            "text": "n’ont pas changé",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "marketing-2",
+        "question": "Mon positionnement sur le marché et auprès de ma cible",
+        "category": "Marketing",
+        "options": [
+          {
+            "text": "j’ai fait un pivot",
+            "score": 3
+          },
+          {
+            "text": "a un peu changé",
+            "score": 2
+          },
+          {
+            "text": "n’a pas changé",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "marketing-3",
+        "question": "Mon site est visible sur Google Maps ?",
+        "category": "Marketing",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 0
+          },
+          {
+            "text": "Non",
+            "score": 4
+          }
+        ]
+      }
+    ]
+  }
+]
