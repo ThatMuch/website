@@ -64,6 +64,18 @@ body {
   }
 }
 
+.bg-landing-alt{
+  background-image: url("../images/bg-landing-alt.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #fff;
+  background-color: #281759;
+  overflow-x: hidden;
+  @include breakpoint(desktop) {
+    background-size: cover;
+  }
+}
+
 // Animations
 
 @-webkit-keyframes rotating /* Safari and Chrome */ {

@@ -4,7 +4,7 @@ import NumbersSectionAlt from "../components/LandingRefonteAlt/NumbersSectionAlt
 import LinkSectionAlt from "../components/LandingRefonteAlt/LinkSectionAlt/LinkSectionAlt";
 const AnalyseRefonteSiteWebAlt = () => {
   return (
-    <div className="bg-landing">
+    <div className="bg-landing-alt">
       <div className="container-fluid">
         <HeroSectionAlt
         title="Votre site web est-il à la hauteur de vos ambitions en 2025 ?"
