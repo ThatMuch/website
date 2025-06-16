@@ -50,15 +50,47 @@ export function useFetchFirebase(collectionName: string) {
 }
 
 export function useAddDoc(collectionName: string) {
+  const [isAdding, setIsAdding] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [documentId, setDocumentId] = useState<string | null>(null);
+
   const addDocument = async (newData: DocumentData) => {
+    setIsAdding(true);
+    setError(null);
+    setDocumentId(null);
+    console.log(
+      "useAddDoc: Attempting to add document to collection:",
+      collectionName,
+      "Data:",
+      JSON.stringify(newData, null, 2)
+    );
     const collectionRef = collection(db, collectionName);
-    return addDoc(collectionRef, {
-      ...newData,
-      createdAt: serverTimestamp(),
-    });
+    try {
+      const docRef = await addDoc(collectionRef, {
+        ...newData,
+        createdAt: serverTimestamp(),
+      });
+      setDocumentId(docRef.id);
+      setIsAdding(false);
+      return docRef;
+    } catch (e) {
+      console.error(
+        "useAddDoc: Error adding document:",
+        e,
+        "Error details:",
+        JSON.stringify(e, Object.getOwnPropertyNames(e))
+      ); // Enhanced error logging
+      setError(e as Error);
+      setIsAdding(false);
+      throw e; // Re-throw the error so it can be caught by the caller
+    }
   };
 
   return {
-    addDocument, // Expose the function to add a document
+    addDocument,
+    isAdding,
+    error,
+    errorMessage: error?.message ?? "",
+    documentId,
   };
 }

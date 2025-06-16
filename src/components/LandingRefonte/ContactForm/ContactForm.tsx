@@ -69,7 +69,12 @@ export default function ContactForm() {
                     resetForm(); // Reset the form after successful submission
                   })
                   .catch((error) => {
-                    console.error("Error submitting form:", error);
+                    console.error(
+                      "Firebase addDocument error:",
+                      error,
+                      "Error details:",
+                      JSON.stringify(error, Object.getOwnPropertyNames(error))
+                    );
                   })
                   .finally(() => {
                     setSubmitting(false); // Set submitting to false after operation
