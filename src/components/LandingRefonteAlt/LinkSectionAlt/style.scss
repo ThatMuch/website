@@ -19,11 +19,27 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    gap:0;
+    gap: 0;
 
-    h2{
+    h2 {
       text-align: left;
     }
+  }
+
+  @include breakpoint(phablet) {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 0;
+
+    h2 {
+      text-align: left;
+    }
+  }
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+    text-align: left;
   }
 
   &__content {
@@ -35,26 +51,50 @@
     @include breakpoint(mobile) {
       width: 100%;
       max-width: 100%;
-      padding:$spacing-l $spacing-l 0;
+      padding: $spacing-l $spacing-l 0;
+    }
+
+    @include breakpoint(phablet) {
+      width: 100%;
+      max-width: 100%;
+      padding: $spacing-l $spacing-l 0;
+    }
+
+    @include breakpoint(tablet) {
+      padding: $spacing-xl $spacing-l $spacing-l;
+      max-width: calc(100% - 320px);
+      
     }
   }
 
   img {
-    position: absolute;
-    right: 50px;
-    bottom: 0;
-    width: 350px;
-    transform: translateY(180px);
-    z-index: 0;
-
     @include breakpoint(mobile) {
       position: relative;
       width: 160px;
-      margin-top: 0; 
+      margin-top: 0;
       right: auto;
       bottom: auto;
       transform: none;
       z-index: 1;
+    }
+
+    @include breakpoint(phablet) {
+      position: relative;
+      width: 160px;
+      margin-top: 0;
+      right: auto;
+      bottom: auto;
+      transform: none;
+      z-index: 1;
+    }
+
+    @include breakpoint(tablet) {
+      position: absolute;
+      right: 20px;
+      bottom: 0;
+      width: 350px;
+      transform: translateY(180px);
+      z-index: 0;
     }
   }
 }
