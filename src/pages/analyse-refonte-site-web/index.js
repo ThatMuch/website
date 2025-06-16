@@ -3,11 +3,17 @@ import LinkSection from "../../components/LandingRefonte/Landing/LinkSection/Lin
 import NumbersSection from "../../components/LandingRefonte/Landing/NumbersSection/NumbersSection";
 import React from "react";
 import ScoreSection from "../../components/LandingRefonte/Landing/ScoreSection/ScoreSection";
+import Seo from "../../components/Seo";
 import planetPink from "../../images/planet-pink.webp";
 import planetYellow from "../../images/planet-yellow.webp";
 const AnalyseRefonteSiteWeb = () => {
   return (
 	  <div className="bg-landing">
+		  <Seo
+		  title="Analyse de la refonte de site web"
+			  description="Découvrez si c'est le bon moment pour refaire votre site internet."
+			  pathname="/analyse-refonte-site-web"
+		  />
 		  <img src={planetPink} className="planet-pink" alt="Planète rose" />
 		  <img src={planetYellow} className="planet-yellow" alt="Planète jaune" />
       <div className="container-fluid z-2 position-relative">
