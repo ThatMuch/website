@@ -16,7 +16,7 @@ export default function LinkSectionAlt({}: Props) {
           Répondez à notre questionnaire "Dois-je refaire mon site web ?" et obtenez un diagnostic personnalisé en moins de 3 minutes !
         </p>
         <a href="#" className="btn btn-white">
-          Commencer le questionnaire
+          Évaluer mon site
         </a>
       </div>
       <img src={img} alt="r2d2" />
