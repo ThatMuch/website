@@ -84,4 +84,16 @@
     font-size: $font-size-xs;
     margin-top: 0.5rem;
   }
+
+  &__input {
+    border-radius: 6.25rem;
+    box-shadow: inset -1px -1px rgba(169, 159, 209, 0.1),
+      inset 1px 1px rgba(86, 68, 156, 1);
+    background: rgba(237, 234, 246, 0.05);
+    cursor: text;
+    color: #fff;
+    padding: 12px 1.5rem;
+    border: none;
+    width: 50%;
+  }
 }
