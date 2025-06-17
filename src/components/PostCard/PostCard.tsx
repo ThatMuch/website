@@ -1,5 +1,6 @@
 import "./PostCard.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
 type PostCardProps = {
@@ -26,7 +27,12 @@ export default function PostCard({
         title={"Image de l'article " + title}
       >
         {image?.mediaItemUrl && (
-          <img src={image.mediaItemUrl} alt={image.altText} className="mb-4" />
+          <LazyLoadImage
+            src={image.mediaItemUrl}
+            alt={image.altText}
+            effect="blur"
+            className="mb-4"
+          />
         )}
       </a>
 

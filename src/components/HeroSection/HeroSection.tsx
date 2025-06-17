@@ -1,5 +1,6 @@
 import "./HeroSection.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
 type Props = {
@@ -30,7 +31,12 @@ export default function HeroSection({ data }: Props) {
       <div className="HeroSection__logos">
         {logos?.images?.nodes.map((logo, index) => (
           <div key={index} className="HeroSection__logos__logo">
-            <img src={logo.mediaItemUrl} alt={logo.altText} />
+            <LazyLoadImage
+              src={logo.mediaItemUrl}
+              alt={logo.altText}
+              effect="blur"
+              className="HeroSection__logos__logo__image"
+            />
           </div>
         ))}
       </div>

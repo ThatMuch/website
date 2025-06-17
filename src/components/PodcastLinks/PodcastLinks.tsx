@@ -1,5 +1,6 @@
 import "./PodcastLinks.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import amazon from "../../images/amazonmusic.svg";
 import apple from "../../images/applepodcast.svg";
@@ -36,7 +37,7 @@ export default function PodcastLinks({}: Props) {
     <div className="PodcastLinks">
       {podcastLinks.map((link) => (
         <a href={link.url} key={link.name} target="_blank" rel="noreferrer">
-          <img src={link.image} alt={link.name} />
+          <LazyLoadImage src={link.image} alt={link.name} />
         </a>
       ))}
     </div>

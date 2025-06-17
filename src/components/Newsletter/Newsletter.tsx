@@ -1,6 +1,7 @@
 import "./Newsletter.scss";
 
 import HubspotForm from "react-hubspot-form";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import image from "../../images/Planetes.png";
 
@@ -9,7 +10,7 @@ type Props = {};
 export default function Newsletter({}: Props) {
   return (
     <div className="Newsletter">
-      <img
+      <LazyLoadImage
         className="Newsletter__image"
         src={image}
         alt="Ensemble de planètes"
