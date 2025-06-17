@@ -52,8 +52,13 @@ export default function ContactForm() {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
+                const cleanValues = {
+                  firstName: values.firstName,
+                  lastName: values.lastName,
+                  email: values.email,
+                };
                 const submissionData = {
-                  ...values,
+                  ...cleanValues,
                   scores: scores, // Include scores from context
                 };
                 sendContact(submissionData)
