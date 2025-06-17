@@ -22,20 +22,16 @@
     display: flex;
     align-items: flex-start;
     padding: 0 $spacing-m;
-    margin: 0 auto $spacing-l;
+    margin: 0 ;
     position: relative;
     gap: $spacing-m;
 
     @include breakpoint(mobile) {
-      flex-direction: column;
-      align-items: center;
-      gap: $spacing-s;
+      flex-direction: row;
     }
 
     @include breakpoint(phablet) {
-      flex-direction: column;
-      align-items: center;
-      gap: $spacing-s;
+      flex-direction: row;
     }
 
     @include breakpoint(tablet) {
@@ -48,22 +44,25 @@
       text-align: left;
       flex: 1;
 
-      @include breakpoint(mobile) {
-        text-align: center;
+      @include breakpoint(phablet) {
+        margin: 60px;
       }
     }
 
     .planet-left {
       @include breakpoint(mobile) {
-        align-self: center;
+        position: absolute;
         width: 80px;
-        transform: none;
+        left: -60px;
+        top:-20px;
       }
 
       @include breakpoint(phablet) {
+        position: absolute;
         align-self: center;
         width: 80px;
-        transform: none;
+        left:-60px;
+        top:-20px;
       }
 
       @include breakpoint(tablet) {
@@ -75,21 +74,24 @@
 
     .planet-right {
       @include breakpoint(mobile) {
+        position: absolute;
         width: 60px;
-        align-self: center;
-        transform: none;
+        right: -20px;
+        bottom: 0px;
+
       }
 
       @include breakpoint(phablet) {
+        position: absolute;
         width: 60px;
-        align-self: center;
-        transform: none;
+        right:-20px;
+        bottom: 0px;
       }
 
       @include breakpoint(tablet) {
         width: 100px;
         align-self: flex-start;
-        transform: translate(40px, -40px);
+        transform: translate(40px, -50px);
       }
     }
   }
