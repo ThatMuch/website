@@ -32,7 +32,7 @@ const FormQuestion = ({ item, errors, touched, showErrors }: Props) => {
         aria-describedby={errors[id] && touched[id] ? `error-${id}` : undefined}
       >
         <legend id={`legend-${id}`}>
-          <h3 className="h6 mb-4">{question}</h3>
+          <h3 className="h5 mb-4">{question}</h3>
         </legend>
         {description && (
           <p className="FormQuestion__description">{description}</p>
