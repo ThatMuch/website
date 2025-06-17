@@ -1,110 +1,75 @@
 [
   {
-    "category": "Design & Identité visuelle",
-    "slug": "design",
+    "category": "Technique & Maintenance",
+    "slug": "technique",
     "questions": [
       {
-        "id": "design-1",
-        "question": "Mon identité visuelle existe depuis …",
+        "id": "technique-1",
+        "question": "Mon site est sous",
         "options": [
           {
-            "text": "Moins d’un an",
-            "score": 0
-          },
-          {
-            "text": "Entre 1 et 5 ans",
+            "text": "Je ne sais pas",
             "score": 3
           },
           {
-            "text": "Plus de 5 ans",
+            "text": "Wix",
             "score": 5
+          },
+          {
+            "text": "Wordpress",
+            "score": 0
+          },
+          {
+            "text": "Autre (préciser)",
+            "score": 2
           }
         ]
       },
       {
-        "id": "design-2",
-        "question": "J'ai construit mon identité visuelle …",
+        "id": "technique-2",
+        "question": "Est-il facile de modifier mon site ?",
         "options": [
           {
-            "text": "moi-même en m’aidant de Canva et de templates",
-            "score": 3
-          },
-          {
-            "text": "le stagiaire de 3ème",
+            "text": "Non, je dois passer par un développeur",
             "score": 5
           },
           {
-            "text": "un ux/ui designer",
+            "text": "Oui mais avec difficulté",
+            "score": 3
+          },
+          {
+            "text": "Oui, sans difficulté",
             "score": 0
           }
         ]
       },
       {
-        "id": "design-3",
-        "question": "Mon identité visuelle contient …",
+        "id": "technique-3",
+        "question": "Je reçois des spams sur le mail de contact de mon site",
         "options": [
           {
-            "text": "un logo",
+            "text": "beaucoup",
             "score": 5
           },
           {
-            "text": "un logo, des couleurs, des typographies, des éléments, graphiques...",
-            "score": 0
+            "text": "un peu",
+            "score": 3
           },
           {
-            "text": "un logo, une typo et une gamme de couleur",
-            "score": 3
+            "text": "pas du tout",
+            "score": 0
           }
         ]
       }
     ]
   },
   {
-    "category": "Marketing",
-    "slug": "marketing",
+    "category": "Légalité & Accessibilité",
+    "slug": "legal",
     "questions": [
       {
-        "id": "marketing-1",
-        "question": "Les valeurs de la marque que je veux mettre en avant …",
-        "category": "Marketing",
-        "options": [
-          {
-            "text": "ont complètement changé",
-            "score": 3
-          },
-          {
-            "text": "ont peu évolué",
-            "score": 2
-          },
-          {
-            "text": "n’ont pas changé",
-            "score": 0
-          }
-        ]
-      },
-      {
-        "id": "marketing-2",
-        "question": "Mon positionnement sur le marché et auprès de ma cible",
-        "category": "Marketing",
-        "options": [
-          {
-            "text": "j’ai fait un pivot",
-            "score": 3
-          },
-          {
-            "text": "a un peu changé",
-            "score": 2
-          },
-          {
-            "text": "n’a pas changé",
-            "score": 0
-          }
-        ]
-      },
-      {
-        "id": "marketing-3",
-        "question": "Mon site est visible sur Google Maps ?",
-        "category": "Marketing",
+        "id": "legal-1",
+        "question": "Mon site a un pop-up pour gérer les cookies ?",
         "options": [
           {
             "text": "Oui",
@@ -112,7 +77,57 @@
           },
           {
             "text": "Non",
-            "score": 4
+            "score": 5
+          },
+          {
+            "text": "Je ne sais pas",
+            "score": 3
+          }
+        ]
+      },
+      {
+        "id": "legal-2",
+        "question": "Mon site a-t-il un formulaire de contact clairement visible sur une page dédiée ou en page d’accueil ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 5
+          },
+          {
+            "text": "Non",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "legal-3",
+        "question": "Mon site a-t-il été réfléchi en prenant compte de l’accessibilité utilisateur ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 0
+          },
+          {
+            "text": "Non",
+            "score": 5
+          },
+          {
+            "text": "Je ne sais pas",
+            "score": 3
+          }
+        ]
+      },
+      {
+        "id": "legal-4",
+        "question": "Mon site a des pages de politiques de confidentialité et/ou conditions générales ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 0
+          },
+          {
+            "text": "Non",
+            "score": 5
           }
         ]
       }

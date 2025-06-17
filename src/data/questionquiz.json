@@ -9,7 +9,7 @@
         "options": [
           {
             "text": "Moins d’un an",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Entre 1 et 5 ans",
@@ -17,25 +17,29 @@
           },
           {
             "text": "Plus de 5 ans",
-            "score": 5
+            "score": 0
           }
         ]
       },
       {
         "id": "design-2",
-        "question": "J'ai construit mon identité visuelle …",
+        "question": "Le design de mon site a été créé par …",
         "options": [
           {
-            "text": "moi-même en m’aidant de Canva et de templates",
-            "score": 3
-          },
-          {
-            "text": "le stagiaire de 3ème",
+            "text": "un ux/ui designer",
             "score": 5
           },
           {
-            "text": "un ux/ui designer",
+            "text": "un stagiaire",
             "score": 0
+          },
+          {
+            "text": "un développeur",
+            "score": 2
+          },
+          {
+            "text": "moi-même en m’aidant de Canva et de templates",
+            "score": 3
           }
         ]
       },
@@ -45,74 +49,15 @@
         "options": [
           {
             "text": "un logo",
-            "score": 5
-          },
-          {
-            "text": "un logo, des couleurs, des typographies, des éléments, graphiques...",
             "score": 0
           },
           {
             "text": "un logo, une typo et une gamme de couleur",
             "score": 3
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category": "Marketing",
-    "slug": "marketing",
-    "questions": [
-      {
-        "id": "marketing-1",
-        "question": "Les valeurs de la marque que je veux mettre en avant …",
-        "category": "Marketing",
-        "options": [
-          {
-            "text": "ont complètement changé",
-            "score": 3
           },
           {
-            "text": "ont peu évolué",
-            "score": 2
-          },
-          {
-            "text": "n’ont pas changé",
-            "score": 0
-          }
-        ]
-      },
-      {
-        "id": "marketing-2",
-        "question": "Mon positionnement sur le marché et auprès de ma cible",
-        "category": "Marketing",
-        "options": [
-          {
-            "text": "j’ai fait un pivot",
-            "score": 3
-          },
-          {
-            "text": "a un peu changé",
-            "score": 2
-          },
-          {
-            "text": "n’a pas changé",
-            "score": 0
-          }
-        ]
-      },
-      {
-        "id": "marketing-3",
-        "question": "Mon site est visible sur Google Maps ?",
-        "category": "Marketing",
-        "options": [
-          {
-            "text": "Oui",
-            "score": 0
-          },
-          {
-            "text": "Non",
-            "score": 4
+            "text": "un logo, des couleurs, des typographies, des éléments, graphiques...",
+            "score": 5
           }
         ]
       }
@@ -128,11 +73,11 @@
         "options": [
           {
             "text": "Oui",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Non",
-            "score": 5
+            "score": 0
           }
         ]
       },
@@ -142,11 +87,11 @@
         "options": [
           {
             "text": "Oui",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Non",
-            "score": 5
+            "score": 0
           },
           {
             "text": "Je ne sais pas",
@@ -155,16 +100,92 @@
         ]
       },
       {
-        "id": "ux-3",
-        "question": "Je souhaite ajouter des nouvelles fonctionnalités à mon site",
+        "id": "ux-4",
+        "question": "Mon site a-t-il été réfléchi en prenant compte de l’accessibilité utilisateur ?",
+        "description": "Par exemple : couleurs, contrastes, polices, taille des textes, navigation au clavier, etc.",
         "options": [
           {
             "text": "Oui",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Non",
+            "score": 0
+          },
+          {
+            "text": "Je ne sais pas",
+            "score": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Stratégie marketing",
+    "slug": "marketing",
+    "questions": [
+      {
+        "id": "marketing-1",
+        "question": "Le branding et les valeurs de ma marque",
+        "category": "Marketing",
+        "options": [
+          {
+            "text": "n’ont pas changé",
+            "score": 3
+          },
+          {
+            "text": "ont peu évolué",
+            "score": 2
+          },
+          {
+            "text": "ont complètement changé",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "marketing-2",
+        "question": "Mon offre sur le marché et auprès de ma cible",
+        "options": [
+          {
+            "text": "n’a pas changé",
             "score": 5
+          },
+          {
+            "text": "a un peu changé",
+            "score": 3
+          },
+          {
+            "text": "j’ai fait un pivot",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "marketing-3",
+        "question": "Je souhaite ajouter des nouvelles pages/services à mon site",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 5
+          },
+          {
+            "text": "Non",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "marketing-4",
+        "question": "Mon site est visible sur Google Maps ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 2
+          },
+          {
+            "text": "Non",
+            "score": 0
           }
         ]
       }
@@ -181,11 +202,11 @@
         "options": [
           {
             "text": "Oui",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Non",
-            "score": 5
+            "score": 0
           }
         ]
       },
@@ -195,15 +216,15 @@
         "options": [
           {
             "text": "Oui",
+            "score": 5
+          },
+          {
+            "text": "Non",
             "score": 0
           },
           {
             "text": "Pas toujours",
             "score": 3
-          },
-          {
-            "text": "Non",
-            "score": 5
           }
         ]
       }
@@ -215,15 +236,15 @@
     "questions": [
       {
         "id": "performance-1",
-        "question": "J’ai installé un outil comme Google analytics pour analyser les performances de votre site",
+        "question": "J’ai installé un outil pour analyser les performances de mon site",
         "options": [
           {
             "text": "Oui",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Non",
-            "score": 5
+            "score": 0
           },
           {
             "text": "Je ne sais pas",
@@ -237,17 +258,17 @@
         "options": [
           {
             "text": "Oui, plus de 3 secondes",
-            "score": 5
+            "score": 0
           },
           {
             "text": "Non, moins de 3 secondes",
-            "score": 0
+            "score": 5
           }
         ]
       },
       {
         "id": "performance-3",
-        "question": "Mon site convertit : prises de contact, ventes, abonnements …",
+        "question": "Est-ce que mon site convertit ? ( prises de contact, ventes, abonnements … )",
         "options": [
           {
             "text": "Un peu",
@@ -255,11 +276,15 @@
           },
           {
             "text": "Beaucoup",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Pas du tout",
-            "score": 5
+            "score": 0
+          },
+          {
+            "text": "Je ne cherche pas à convertir",
+            "score": 4
           }
         ]
       }
@@ -271,23 +296,23 @@
     "questions": [
       {
         "id": "technique-1",
-        "question": "Mon site est sous",
+        "question": "Mon site est sur",
         "options": [
           {
             "text": "Je ne sais pas",
-            "score": 3
-          },
-          {
-            "text": "Wix",
-            "score": 5
-          },
-          {
-            "text": "Wordpress",
             "score": 0
           },
           {
-            "text": "Autre (préciser)",
+            "text": "Wix",
             "score": 2
+          },
+          {
+            "text": "Wordpress",
+            "score": 5
+          },
+          {
+            "text": "Autre (préciser)",
+            "score": 3
           }
         ]
       },
@@ -297,15 +322,15 @@
         "options": [
           {
             "text": "Non, je dois passer par un développeur",
-            "score": 5
+            "score": 0
           },
           {
-            "text": "Oui mais avec difficulté",
+            "text": "Oui mais avec des limites",
             "score": 3
           },
           {
             "text": "Oui, sans difficulté",
-            "score": 0
+            "score": 5
           }
         ]
       },
@@ -315,7 +340,7 @@
         "options": [
           {
             "text": "beaucoup",
-            "score": 5
+            "score": 0
           },
           {
             "text": "un peu",
@@ -323,14 +348,14 @@
           },
           {
             "text": "pas du tout",
-            "score": 0
+            "score": 5
           }
         ]
       }
     ]
   },
   {
-    "category": "Légalité & Accessibilité",
+    "category": "RGPD",
     "slug": "legal",
     "questions": [
       {
@@ -339,11 +364,11 @@
         "options": [
           {
             "text": "Oui",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Non",
-            "score": 5
+            "score": 0
           },
           {
             "text": "Je ne sais pas",
@@ -353,47 +378,29 @@
       },
       {
         "id": "legal-2",
-        "question": "Mon site a-t-il un formulaire de contact clairement visible sur une page dédiée ou en page d’accueil ?",
+        "question": "Mon site a-t-il un email ou un formulaire de contact clairement visible sur une page dédiée ou en page d’accueil ?",
         "options": [
           {
             "text": "Oui",
-            "score": 5
+            "score": 0
           },
           {
             "text": "Non",
-            "score": 0
+            "score": 5
           }
         ]
       },
       {
         "id": "legal-3",
-        "question": "Mon site a-t-il été réfléchi en prenant compte de l’accessibilité utilisateur ?",
-        "options": [
-          {
-            "text": "Oui",
-            "score": 0
-          },
-          {
-            "text": "Non",
-            "score": 5
-          },
-          {
-            "text": "Je ne sais pas",
-            "score": 3
-          }
-        ]
-      },
-      {
-        "id": "legal-4",
         "question": "Mon site a des pages de politiques de confidentialité et/ou conditions générales ?",
         "options": [
           {
             "text": "Oui",
-            "score": 0
+            "score": 5
           },
           {
             "text": "Non",
-            "score": 5
+            "score": 0
           }
         ]
       }
