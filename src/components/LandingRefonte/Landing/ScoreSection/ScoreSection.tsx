@@ -17,7 +17,11 @@ export default function ScoreSection({}: Props) {
           précision les axes à refondre sur votre site.
         </p>
       </div>
-      <LazyLoadImage src={scoreImage} alt="Score refonte site web" />
+      <LazyLoadImage
+        src={scoreImage}
+        alt="Score refonte site web"
+        className="ScoreSection__image"
+      />
     </div>
   );
 }

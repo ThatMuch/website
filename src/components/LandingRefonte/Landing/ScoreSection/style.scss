@@ -16,4 +16,18 @@
   @include breakpoint(mobile) {
     display: block;
   }
+  @media (max-width: 870px) {
+    display: block;
+
+    &__image {
+      display: block;
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+  }
+  @media (min-width: 870px) {
+    display: flex;
+  }
+  
 }

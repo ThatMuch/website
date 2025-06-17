@@ -38,9 +38,8 @@ export default function FormStepper({
       {formattedCategories.map((category, index) => (
         <div
           key={category.slug}
-          className={`FormStepper__step ${
-            currentCategoryIndex === index ? "active" : ""
-          } ${currentCategoryIndex > index ? "completed" : ""}`}
+          className={`FormStepper__step ${currentCategoryIndex === index ? "active" : ""
+            } ${currentCategoryIndex > index ? "completed" : ""}`}
           aria-label={`Étape ${index + 1} : ${category.name}`}
           role="button"
           tabIndex={0}
@@ -51,6 +50,9 @@ export default function FormStepper({
           )}
         </div>
       ))}
+      <div className="FormStepper__activeLabel">
+        {formattedCategories[currentCategoryIndex]?.name}
+      </div>
     </div>
   );
 }
