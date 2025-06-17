@@ -49,16 +49,17 @@
     display: none;
   }
 
-  @include breakpoint(mobile) {
+  @media screen and (max-width: 750px) {
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: $spacing-xs;
     gap: $spacing-xs;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
 
     &__step {
       flex-direction: column;
+      flex:1;
       align-items: center;
       gap: $spacing-xxs;
       flex-shrink: 0;
@@ -67,6 +68,7 @@
         width: 2rem;
         height: 2rem;
         margin: 0;
+        margin-top: 1rem;
       }
 
       &__name {
@@ -79,7 +81,7 @@
       position: absolute;
       bottom: -1.1rem;
       left: 50%;
-      transform: translate(-50%, -1.4rem);
+      transform: translate(-50%, -2rem);
       font-size: 0.75rem;
       color: white;
       white-space: nowrap;
