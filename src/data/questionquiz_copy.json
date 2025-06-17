@@ -1,0 +1,136 @@
+[
+  {
+    "category": "Technique & Maintenance",
+    "slug": "technique",
+    "questions": [
+      {
+        "id": "technique-1",
+        "question": "Mon site est sous",
+        "options": [
+          {
+            "text": "Je ne sais pas",
+            "score": 3
+          },
+          {
+            "text": "Wix",
+            "score": 5
+          },
+          {
+            "text": "Wordpress",
+            "score": 0
+          },
+          {
+            "text": "Autre (préciser)",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "id": "technique-2",
+        "question": "Est-il facile de modifier mon site ?",
+        "options": [
+          {
+            "text": "Non, je dois passer par un développeur",
+            "score": 5
+          },
+          {
+            "text": "Oui mais avec difficulté",
+            "score": 3
+          },
+          {
+            "text": "Oui, sans difficulté",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "technique-3",
+        "question": "Je reçois des spams sur le mail de contact de mon site",
+        "options": [
+          {
+            "text": "beaucoup",
+            "score": 5
+          },
+          {
+            "text": "un peu",
+            "score": 3
+          },
+          {
+            "text": "pas du tout",
+            "score": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Légalité & Accessibilité",
+    "slug": "legal",
+    "questions": [
+      {
+        "id": "legal-1",
+        "question": "Mon site a un pop-up pour gérer les cookies ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 0
+          },
+          {
+            "text": "Non",
+            "score": 5
+          },
+          {
+            "text": "Je ne sais pas",
+            "score": 3
+          }
+        ]
+      },
+      {
+        "id": "legal-2",
+        "question": "Mon site a-t-il un formulaire de contact clairement visible sur une page dédiée ou en page d’accueil ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 5
+          },
+          {
+            "text": "Non",
+            "score": 0
+          }
+        ]
+      },
+      {
+        "id": "legal-3",
+        "question": "Mon site a-t-il été réfléchi en prenant compte de l’accessibilité utilisateur ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 0
+          },
+          {
+            "text": "Non",
+            "score": 5
+          },
+          {
+            "text": "Je ne sais pas",
+            "score": 3
+          }
+        ]
+      },
+      {
+        "id": "legal-4",
+        "question": "Mon site a des pages de politiques de confidentialité et/ou conditions générales ?",
+        "options": [
+          {
+            "text": "Oui",
+            "score": 0
+          },
+          {
+            "text": "Non",
+            "score": 5
+          }
+        ]
+      }
+    ]
+  }
+]

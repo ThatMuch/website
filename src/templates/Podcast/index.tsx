@@ -3,6 +3,7 @@ import React, { use } from "react";
 import AllPosts from "../../components/AllPosts/AllPosts";
 import ContactForm from "../../components/ContactForm";
 import Layout from "../../components/Layout";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import PodcastLinks from "../../components/PodcastLinks";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
@@ -26,7 +27,7 @@ const Podcast = ({ data }) => {
           <div dangerouslySetInnerHTML={{ __html: descriptionHeroSection }} />
         </div>
         <div className="col-md-6 order-1 order-md-2">
-          <img src={mediaItemUrl} alt={altText} className="mb-4" />
+          <LazyLoadImage src={mediaItemUrl} alt={altText} className="mb-4" />
         </div>
       </div>
       <PodcastLinks />

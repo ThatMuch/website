@@ -42,9 +42,12 @@
     display: flex;
     justify-content: center;
     background-color: $neutral-900;
-    color: $neutral-300;
+    color: $neutral-200;
     gap: $spacing-xs;
     padding: $spacing-l;
+    a {
+      color: $neutral-200;
+    }
     a:hover {
       color: $neutral-100;
     }

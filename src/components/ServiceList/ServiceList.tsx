@@ -1,5 +1,6 @@
 import "./ServiceList.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
 type Props = {
@@ -16,7 +17,7 @@ export default function ServiceList({ services, category }: Props) {
         {services.map((service, index) => (
           <div key={index} className={`ServiceList__item ${category}`}>
             {service?.image && (
-              <img
+              <LazyLoadImage
                 src={service.image.node.mediaItemUrl}
                 alt={service.image.node.altText}
               />

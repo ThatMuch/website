@@ -1,7 +1,7 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 
-header {
+header.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +26,16 @@ header {
     @include breakpoint(mobile) {
       width: 8rem;
     }
+  }
+}
+
+header.landing-header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 200px;
   }
 }
 .menu {
@@ -124,7 +134,7 @@ header {
     height: 100vh;
     background-color: $grey_3;
     padding: $spacing-m;
-    background-image: url("../../images/Background-stars.png");
+    background-image: url("../../images/Background-stars.webp");
     background-repeat: no-repeat;
     background-position: 90% 70%;
 

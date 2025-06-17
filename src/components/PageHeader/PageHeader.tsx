@@ -1,5 +1,6 @@
 import "./PageHeader.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import SplitText from "../SplitText/SplitText";
 
@@ -43,7 +44,7 @@ export default function PageHeader({ title, description, image }: Props) {
       </div>
       {image && (
         <div>
-          <img
+          <LazyLoadImage
             src={image.node.mediaItemUrl}
             alt={image.node.altText}
             className="PageHeader__img"
