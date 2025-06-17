@@ -23,7 +23,7 @@ body {
   }
   .bg-dark {
     color: #fff;
-    background-color: #180d3c !important;
+    background-color: $neutral-900 !important;
   }
 
   .section {
@@ -52,8 +52,57 @@ body {
   }
 }
 
+.bg-form {
+  background-color: $neutral-900;
+  background-image: url("../images/bg-stars.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
 .bg-landing {
-  background-image: url("../images/bg-landing.png");
+  position: relative;
+  background-image: url("../images/bg_landing.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #fff;
+  background-color: #281759;
+  overflow: hidden;
+  @include breakpoint(desktop) {
+    background-size: cover;
+  }
+
+  .planet-pink {
+    z-index: 0;
+    position: absolute;
+    background-image: url("../images/planet-pink.webp");
+    left: 0;
+    top: 500px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 0 center;
+    background-size: contain;
+  }
+  .planet-yellow {
+    z-index: 0;
+
+    position: absolute;
+    background-image: url("../images/planet-yellow.webp");
+    right: -50px;
+    top: 500px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: contain;
+    @include breakpoint(mobile) {
+      width: 200px;
+      top: 470px;
+      right: 0;
+    }
+  }
+}
+
+.bg-landing-alt{
+  background-image: url("../images/bg-landing-alt.png");
   background-size: contain;
   background-repeat: no-repeat;
   color: #fff;
@@ -115,4 +164,11 @@ body {
   margin-right: auto;
   padding-left: $spacing-l;
   padding-right: $spacing-l;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
 }

@@ -1,0 +1,99 @@
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
+
+.LinkSectionAlt {
+  background: url("../../../images/Background_Dark.png") no-repeat center/cover;
+  border-radius: 60px;
+  max-width: 1040px;
+  margin: auto 20px;
+  margin-top: $space_L;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-l;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+
+  @include breakpoint(mobile) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    h2 {
+      text-align: left;
+    }
+  }
+
+  @include breakpoint(phablet) {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 0;
+
+    h2 {
+      text-align: left;
+    }
+  }
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  &__content {
+    padding: $spacing-xl $spacing-l $spacing-l;
+    max-width: calc(100% - 320px);
+    flex: 1;
+    z-index: 1;
+
+    @include breakpoint(mobile) {
+      width: 100%;
+      max-width: 100%;
+      padding: $spacing-l $spacing-l 0;
+    }
+
+    @include breakpoint(phablet) {
+      width: 100%;
+      max-width: 100%;
+      padding: $spacing-l $spacing-l 0;
+    }
+
+    @include breakpoint(tablet) {
+      padding: $spacing-xl $spacing-l $spacing-l;
+      max-width: calc(100% - 320px);
+      
+    }
+  }
+
+  img {
+    @include breakpoint(mobile) {
+      position: relative;
+      width: 160px;
+      margin-top: 0;
+      right: auto;
+      bottom: auto;
+      transform: none;
+      z-index: 1;
+    }
+
+    @include breakpoint(phablet) {
+      position: relative;
+      width: 160px;
+      margin-top: 0;
+      right: auto;
+      bottom: auto;
+      transform: none;
+      z-index: 1;
+    }
+
+    @include breakpoint(tablet) {
+      position: absolute;
+      right: 20px;
+      bottom: 0;
+      width: 350px;
+      transform: translateY(180px);
+      z-index: 0;
+    }
+  }
+}

@@ -5,7 +5,7 @@
   max-width: 1040px;
   margin: auto 20px;
 
-  .numbersSection_content{
+  .numbersSection_content {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -23,29 +23,29 @@
     gap: 1rem;
   }
 
-  .cards-row:first-child {
-    .cardNumber {
-      &:first-child {
-        border-radius: 60px $radius-m $radius-m $radius-m;
-      }
+  // .cards-row:first-child {
+  //   .cardNumber {
+  //     &:first-child {
+  //       border-radius: 60px $radius-m $radius-m $radius-m;
+  //     }
 
-      &:last-child {
-        border-radius: $radius-m 60px $radius-m $radius-m;
-      }
-    }
-  }
+  //     &:last-child {
+  //       border-radius: $radius-m 60px $radius-m $radius-m;
+  //     }
+  //   }
+  // }
 
-  .cards-row:last-child {
-    .cardNumber {
-      &:first-child {
-        border-radius: $radius-m $radius-m $radius-m 60px;
-      }
+  // .cards-row:last-child {
+  //   .cardNumber {
+  //     &:first-child {
+  //       border-radius: $radius-m $radius-m $radius-m 60px;
+  //     }
 
-      &:last-child {
-        border-radius: $radius-m $radius-m 60px $radius-m;
-      }
-    }
-  }
+  //     &:last-child {
+  //       border-radius: $radius-m $radius-m 60px $radius-m;
+  //     }
+  //   }
+  // }
 
   @include breakpoint(mobile) {
     .cards-row {
@@ -68,6 +68,90 @@
       .cardNumber {
         &:last-child {
           border-radius: $radius-m $radius-m 60px 60px !important;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(phablet) {
+    .cards-row {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cards-row:first-child {
+      .cardNumber:nth-child(1),
+      .cardNumber:nth-child(2) {
+        flex: 1 1 calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+        border-radius: $radius-m !important;
+      }
+
+      .cardNumber:nth-child(1) {
+        border-radius: 60px $radius-m $radius-m $radius-m !important;
+      }
+
+      .cardNumber:nth-child(2) {
+        border-radius: $radius-m 60px $radius-m $radius-m !important;
+      }
+
+      .cardNumber:nth-child(3) {
+        flex: 1 1 100%;
+        max-width: calc(100% - 1rem);
+        border-radius: $radius-m !important;
+      }
+    }
+
+    .cards-row:last-child {
+      .cardNumber {
+        flex: 1 1 calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+        border-radius: $radius-m !important;
+      }
+
+      .cardNumber:nth-child(1) {
+        border-radius: $radius-m $radius-m $radius-m 60px !important;
+      }
+
+      .cardNumber:nth-child(2) {
+        border-radius: $radius-m $radius-m 60px $radius-m !important;
+      }
+    }
+  }
+
+  @include breakpoint(tablet) {
+    .cards-row {
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+
+    .cards-row:first-child {
+      .cardNumber {
+        flex: 1 1 calc(33.333% - 0.67rem) !important; // Pour gérer l'écart avec gap
+        max-width: calc(33.333% - 0.67rem) !important;
+      }
+      .cardNumber:first-child {
+        border-radius: 60px $radius-m $radius-m $radius-m !important;
+      }
+
+      .cardNumber:nth-child(2) {
+        border-radius: $radius-m !important;
+      }
+
+      .cardNumber:last-child {
+        border-radius: $radius-m 60px $radius-m $radius-m !important;
+      }
+    }
+
+    .cards-row:last-child {
+      .cardNumber {
+        &:first-child {
+          border-radius: $radius-m $radius-m $radius-m 60px !important;
+        }
+
+        &:last-child {
+          border-radius: $radius-m $radius-m 60px $radius-m !important;
         }
       }
     }
