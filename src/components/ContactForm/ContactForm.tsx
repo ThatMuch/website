@@ -1,8 +1,9 @@
 import "./ContactForm.scss";
 
 import HubspotForm from "react-hubspot-form";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import tardis from "../../images/tardis.png";
+import tardis from "../../images/tardis.webp";
 
 type Props = {
   hubspotForm: {
@@ -21,7 +22,7 @@ export default function ContactForm({ hubspotForm }: Props) {
           <h2 className="h3">{hubspotForm.sousTitre}</h2>
           <div className="divider mb-4"></div>
           <h1>{hubspotForm.titre}</h1>
-          <img src={tardis} alt="Tardis" />
+          <LazyLoadImage src={tardis} alt="Tardis" />
         </div>
         <div className="col-md-6">
           <HubspotForm

@@ -106,6 +106,8 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
             <button
               onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 1}
+              aria-label="Page précédente"
+              title="Boutton vers la page précédente"
             >
               <FaChevronLeft />
             </button>
@@ -113,6 +115,8 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
             <button
               onClick={() => setCurrentPage(currentPage + 1)}
               disabled={currentPage === totalPages}
+              aria-label="Page suivante"
+              title="Boutton vers la page suivante"
             >
               <FaChevronRight />
             </button>
@@ -124,6 +128,8 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
               href="/blog"
               className="btn btn-primary"
               onClick={() => setCurrentPage(1)}
+              aria-label="Voir tous les articles"
+              title="Lien vers tous les articles du blog"
             >
               Voir tous les articles
             </a>

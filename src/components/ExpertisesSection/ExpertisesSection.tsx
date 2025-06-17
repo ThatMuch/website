@@ -1,5 +1,6 @@
 import "./ExpertisesSection.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import { usePostExpertises } from "../../hooks/use-custom-expertises";
 
@@ -12,7 +13,6 @@ type Props = {
 
 export default function ExpertisesSection({ section }: Props) {
   const expertises = usePostExpertises();
-  console.log(expertises);
   return (
     <div className="ExpertisesSection">
       <h2 className="h3">{section.subtitle}</h2>
@@ -26,9 +26,10 @@ export default function ExpertisesSection({ section }: Props) {
           >
             <div>
               <div className="ExpertisesSection__card-image">
-                <img
+                <LazyLoadImage
                   src={expertise.featuredImage.mediaItemUrl}
                   alt={expertise.featuredImage.altText}
+                  effect="blur"
                 />
               </div>
               <h2>{expertise.title}</h2>

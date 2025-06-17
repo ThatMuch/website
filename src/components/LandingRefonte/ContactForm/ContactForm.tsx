@@ -6,8 +6,9 @@ import { ErrorMessage, Field, Form, Formik } from "formik"; // Added Field
 import React, { useContext } from "react";
 
 import Button from "../../UI/Button/Button";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import tardis from "../../../images/tardis.png";
+import tardis from "../../../images/tardis.webp";
 import { useAddDoc } from "../../../hooks/use-firebase";
 import { useScores } from "../../../contexts/ScoreContext";
 import { useSendContactBrevo } from "../../../hooks/use-brev";
@@ -44,7 +45,7 @@ export default function ContactForm() {
           <h2 className="h3">Analyse terminée !</h2>
           <div className="divider mb-4"></div>
           <h3 className="h1">Recevez votre résulat par mail</h3>
-          <img src={tardis} alt="Tardis" />
+          <LazyLoadImage src={tardis} alt="Tardis" />
         </div>
         <div className="col-md-6">
           {!isSend ? (
@@ -52,8 +53,13 @@ export default function ContactForm() {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
+                const cleanValues = {
+                  firstName: values.firstName,
+                  lastName: values.lastName,
+                  email: values.email,
+                };
                 const submissionData = {
-                  ...values,
+                  ...cleanValues,
                   scores: scores, // Include scores from context
                 };
                 sendContact(submissionData)

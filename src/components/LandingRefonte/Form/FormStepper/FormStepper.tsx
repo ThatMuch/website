@@ -2,6 +2,7 @@ import "./style.scss";
 
 import { MdAdsClick, MdDesignServices, MdSearch } from "react-icons/md";
 
+import { CgIfDesign } from "react-icons/cg";
 import { FaScaleBalanced } from "react-icons/fa6";
 import { IoStatsChart } from "react-icons/io5";
 import React from "react";
@@ -20,7 +21,8 @@ export default function FormStepper({
   const icons = {
     design: <MdDesignServices className="step-icon" />,
     marketing: <MdAdsClick className="step-icon" />,
-    ux: <SiTmux className="step-icon" />,
+    ux: <CgIfDesign className="step-icon" />,
+    dev: <SiTmux className="step-icon" />,
     seo: <MdSearch className="step-icon" />,
     performance: <IoStatsChart className="step-icon" />,
     technique: <TiSpanner className="step-icon" />,
@@ -36,9 +38,8 @@ export default function FormStepper({
       {formattedCategories.map((category, index) => (
         <div
           key={category.slug}
-          className={`FormStepper__step ${
-            currentCategoryIndex === index ? "active" : ""
-          } ${currentCategoryIndex > index ? "completed" : ""}`}
+          className={`FormStepper__step ${currentCategoryIndex === index ? "active" : ""
+            } ${currentCategoryIndex > index ? "completed" : ""}`}
           aria-label={`Étape ${index + 1} : ${category.name}`}
           role="button"
           tabIndex={0}
@@ -49,6 +50,9 @@ export default function FormStepper({
           )}
         </div>
       ))}
+      <div className="FormStepper__activeLabel">
+        {formattedCategories[currentCategoryIndex]?.name}
+      </div>
     </div>
   );
 }

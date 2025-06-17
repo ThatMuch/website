@@ -16,15 +16,20 @@ const FrontPage = ({ data }) => {
         switch (section.fieldGroupName) {
           case "HomePageBuilderTestimonialsLayout":
             return (
-              <Testimonials
-                key={index}
-                title={section.titre}
-                description={section.desc}
-                subtitle={section.sousTitre}
-              />
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <Testimonials
+                  title={section.titre}
+                  description={section.desc}
+                  subtitle={section.sousTitre}
+                />
+              </div>
             );
           case "HomePageBuilderExpertisesLayout":
-            return <ExpertisesSection key={section.id} section={section} />;
+            return (
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <ExpertisesSection section={section} />
+              </div>
+            );
           default:
             return null;
         }

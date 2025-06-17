@@ -1,3 +1,7 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../style/style.scss";
+import "aos/dist/aos.css";
+
 import FrontPage from "../templates/FrontPage";
 import React from "react";
 import { graphql } from "gatsby";
@@ -66,11 +70,9 @@ const query = graphql`
 
 const IndexPage = () => {
   const data = useStaticQuery(query);
-	const { wpPage } = data;
-	  const { home } = wpPage;
-	  return (
-	<FrontPage data={home} />
-  );
+  const { wpPage } = data;
+  const { home } = wpPage;
+  return <FrontPage data={home} />;
 };
 
 export default IndexPage;

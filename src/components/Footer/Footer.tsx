@@ -9,8 +9,9 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import logoThatIsWhite from "../../images/THATMUCH_Logo_White.png";
+import logoThatIsWhite from "../../images/THATMUCH_Logo_White.webp";
 import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSitePosts } from "../../hooks/use-site-posts";
 import { useSiteSeo } from "../../hooks/use-site-seo";
@@ -84,7 +85,7 @@ export default function Footer({}: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="RS_Section__item"
-              title={link.name}
+              title={"Lien vers " + link.name}
               aria-label={link.name}
             >
               {link.icon}
@@ -97,10 +98,10 @@ export default function Footer({}: Props) {
         <a
           href={siteUrl}
           className="Footer__logo"
-          title="Logo Thatmuch"
+          title="Logo de Thatmuch"
           aria-label="Logo Thatmuch"
         >
-          <img src={logoThatIsWhite} alt="Logo Thatmuch en blanc" />
+          <LazyLoadImage src={logoThatIsWhite} alt="Logo Thatmuch en blanc" />
         </a>
         <div>
           <h4 className="mb-2">Articles récents</h4>

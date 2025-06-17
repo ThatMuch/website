@@ -45,6 +45,8 @@ export default function FormContainer({
 
     const currentCategoryFormValues = currentQuestions.reduce(
       (acc, question) => {
+        // ignore questions that contain "ignore" in their id
+        if (question.id.includes("ignore")) return acc;
         acc[question.id] = formValues[question.id];
         return acc;
       },

@@ -4,8 +4,8 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    defaultTitle: `Thatmuch`,
-    defaultDescription: `THATMUCH : Agence web de design et développement front pour les sites WordPress et SaaS.`,
+    defaultTitle: `Thatmuch : Agence web de design et développement front pour les sites WordPress et SaaS.`,
+    defaultDescription: `Agence web experte en design et développement front sur WordPress et SaaS. Créons ensemble un site performant, moderne et sur-mesure.`,
     author: `Thatmuch`,
     siteUrl: process.env.SITE_URL, // Replace with your domain
     defaultImage: `/og_image_THATMUCH.png`,

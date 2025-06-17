@@ -1,7 +1,8 @@
 import "./ContactCTA.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import tardis from "../../images/tardis.png";
+import tardis from "../../images/tardis.webp";
 
 export default function ContactCTA() {
   return (
@@ -23,7 +24,7 @@ export default function ContactCTA() {
           Programmez un appel
         </a>
       </div>
-      <img src={tardis} alt="Tardis" />
+      <LazyLoadImage src={tardis} alt="Tardis" />
     </div>
   );
 }
