@@ -6,7 +6,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
-import logo from "../../images/THATMUCH_Logo_Black.png";
+import logo from "../../images/THATMUCH_Logo_Black.webp";
 import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSiteSeo } from "../../hooks/use-site-seo";
 

@@ -2,7 +2,7 @@ import "./style.scss";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import scoreImage from "./ScoreInbox.png";
+import scoreImage from "./ScoreInbox.webp";
 
 type Props = {};
 

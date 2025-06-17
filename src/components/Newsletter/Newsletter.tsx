@@ -3,7 +3,7 @@ import "./Newsletter.scss";
 import HubspotForm from "react-hubspot-form";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import image from "../../images/Planetes.png";
+import image from "../../images/Planetes.webp";
 
 type Props = {};
 

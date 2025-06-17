@@ -8,7 +8,7 @@ import React, { useContext } from "react";
 import Button from "../../UI/Button/Button";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import tardis from "../../../images/tardis.png";
+import tardis from "../../../images/tardis.webp";
 import { useAddDoc } from "../../../hooks/use-firebase";
 import { useScores } from "../../../contexts/ScoreContext";
 import { useSendContactBrevo } from "../../../hooks/use-brev";

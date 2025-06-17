@@ -11,7 +11,7 @@ import {
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import logoThatIsWhite from "../../images/THATMUCH_Logo_White.png";
+import logoThatIsWhite from "../../images/THATMUCH_Logo_White.webp";
 import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSitePosts } from "../../hooks/use-site-posts";
 import { useSiteSeo } from "../../hooks/use-site-seo";

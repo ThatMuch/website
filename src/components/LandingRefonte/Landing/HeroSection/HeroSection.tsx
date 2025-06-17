@@ -5,7 +5,7 @@ import * as React from "react";
 import Button from "../../../UI/Button/Button";
 import { FaArrowRight } from "react-icons/fa6";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import logo from "../../../../images/THATMUCH_Logo_White.png";
+import logo from "../../../../images/THATMUCH_Logo_White.webp";
 
 export interface IHeroSectionProps {
   title: string;

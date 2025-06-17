@@ -3,7 +3,7 @@ import "./ContactForm.scss";
 import HubspotForm from "react-hubspot-form";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import tardis from "../../images/tardis.png";
+import tardis from "../../images/tardis.webp";
 
 type Props = {
   hubspotForm: {
