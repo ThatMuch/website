@@ -1,16 +1,4 @@
 @font-face {
-  font-family: "Tourney";
-  src: local("Tourney"), url(../fonts/Tourney-Black.ttf) format("truetype");
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "Tourney";
-  src: local("Tourney"), url(../fonts/Tourney-Regular.ttf) format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
   font-family: "Operator Mono";
   src: local("Operator Mono"),
     url(../fonts/OperatorMono-Book.otf) format("OpenType");
@@ -36,8 +24,6 @@
     url(../fonts/NeueMachina-Regular.ttf) format("TrueType");
   font-weight: normal;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap");
 
 @font-face {
   font-family: "SpaceMono";
