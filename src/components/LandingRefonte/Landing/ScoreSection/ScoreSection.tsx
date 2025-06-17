@@ -16,7 +16,7 @@ export default function ScoreSection({}: Props) {
           précision les axes à refondre sur votre site.
         </p>
       </div>
-      <img src={scoreImage} alt="Score refonte site web" />
+      <img src={scoreImage} alt="Score refonte site web" className="ScoreSection__image"/>
     </div>
   );
 }
