@@ -2,6 +2,7 @@ import "./Header.scss";
 
 import React, { use, useEffect, useState } from "react";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
@@ -66,15 +67,19 @@ export default function Header() {
               className="btn_close"
               onClick={() => setIsOpened(false)}
             >
-              <img className="close" src={close} alt="Close Thatmuch" />
-              <img
+              <LazyLoadImage
+                className="close"
+                src={close}
+                alt="Close Thatmuch"
+              />
+              <LazyLoadImage
                 className="close_hover"
                 src={close_gif}
                 alt="Close Thatmuch"
               />
             </button>
             <a href={siteUrl} title="Logo Thatmuch" aria-label="Logo Thatmuch">
-              <img src={logo} alt="Thatmuch" className="logo" />
+              <LazyLoadImage src={logo} alt="Thatmuch" className="logo" />
             </a>
             <div className="row">
               <div className="col-12 col-sm-4 ">
@@ -103,19 +108,19 @@ export default function Header() {
                   </p>
                 )}
                 <div className="comets">
-                  <img
+                  <LazyLoadImage
                     data-aos="fade-down-left"
                     data-aos-delay="100"
                     src={comet}
                     alt="Comet Thatmuch"
                   />
-                  <img
+                  <LazyLoadImage
                     data-aos="fade-down-left"
                     data-aos-delay="200"
                     src={comet}
                     alt="Comet Thatmuch"
                   />
-                  <img
+                  <LazyLoadImage
                     data-aos="fade-down-left"
                     data-aos-delay="300"
                     src={comet}
@@ -128,7 +133,7 @@ export default function Header() {
         ) : null}
       </div>
       <a href="/">
-        <img src={logo} alt="Thatmuch" className="logo--header" />
+        <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
       </a>
       <a
         href="https://meetings-eu1.hubspot.com/mathilde-arconte"

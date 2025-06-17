@@ -2,6 +2,7 @@ import "./style.scss";
 
 import Button from "../../../UI/Button/Button";
 import { FaArrowRight } from "react-icons/fa6";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import img from "./tardisStars.webp";
 
@@ -10,7 +11,7 @@ type Props = {};
 export default function LinkSection({}: Props) {
   return (
     <div className="LinkSection">
-      <img src={img} alt="Tardis dans les étoiles" />
+      <LazyLoadImage src={img} alt="Tardis dans les étoiles" />
       <div className="LinkSection__content">
         <h2 className="h4">Prêt à faire le point de votre site ?</h2>
         <div className="divider mb-2"></div>

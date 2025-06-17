@@ -6,6 +6,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik"; // Added Field
 import React, { useContext } from "react";
 
 import Button from "../../UI/Button/Button";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import tardis from "../../../images/tardis.png";
 import { useAddDoc } from "../../../hooks/use-firebase";
@@ -44,7 +45,7 @@ export default function ContactForm() {
           <h2 className="h3">Analyse terminée !</h2>
           <div className="divider mb-4"></div>
           <h3 className="h1">Recevez votre résulat par mail</h3>
-          <img src={tardis} alt="Tardis" />
+          <LazyLoadImage src={tardis} alt="Tardis" />
         </div>
         <div className="col-md-6">
           {!isSend ? (

@@ -1,4 +1,5 @@
 import { HeroSection } from "../../components/LandingRefonte/Landing/HeroSection/HeroSection";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import LinkSection from "../../components/LandingRefonte/Landing/LinkSection/LinkSection";
 import NumbersSection from "../../components/LandingRefonte/Landing/NumbersSection/NumbersSection";
 import React from "react";
@@ -14,8 +15,8 @@ const AnalyseRefonteSiteWeb = () => {
 			  description="Découvrez si c'est le bon moment pour refaire votre site internet."
 			  pathname="/analyse-refonte-site-web"
 		  />
-		  <img src={planetPink} className="planet-pink" alt="Planète rose" />
-		  <img src={planetYellow} className="planet-yellow" alt="Planète jaune" />
+		  <LazyLoadImage src={planetPink} className="planet-pink" alt="Planète rose" />
+		  <LazyLoadImage src={planetYellow} className="planet-yellow" alt="Planète jaune" />
       <div className="container-fluid z-2 position-relative">
         <HeroSection
           title="Est-ce le moment de refaire  mon site internet ?"
