@@ -10,7 +10,7 @@ type Props = {};
 export default function LinkSection({}: Props) {
   return (
     <div className="LinkSection">
-      <img src={img} alt="Tardis dans les étoiles" />
+      
       <div className="LinkSection__content">
         <h2 className="h4">Prêt à faire le point de votre site ?</h2>
         <div className="divider mb-2"></div>
@@ -29,6 +29,7 @@ export default function LinkSection({}: Props) {
           <FaArrowRight className="btn-icon" />
         </Button>
       </div>
+      <img className="LinkSection__image" src={img} alt="Tardis dans les étoiles" />
     </div>
   );
 }
