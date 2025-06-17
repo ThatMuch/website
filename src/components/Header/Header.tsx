@@ -135,7 +135,7 @@ export default function Header() {
         className="btn btn-primary"
         target="_blank"
         rel="noopener noreferrer"
-        title="Programmez un appel"
+        title="Lien vers la prise de rendez-vous"
         aria-label="Programmez un appel"
         data-aos="fade-down"
         data-aos-delay="100"

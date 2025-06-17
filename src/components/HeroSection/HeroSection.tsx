@@ -20,6 +20,8 @@ export default function HeroSection({ data }: Props) {
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-primary HeroSection__btn"
+        aria-label={boutton.title}
+        title={"Lien dans la hero section vers " + boutton.title}
       >
         {boutton.title}
       </a>

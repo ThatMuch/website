@@ -84,7 +84,7 @@ export default function Footer({}: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="RS_Section__item"
-              title={link.name}
+              title={"Lien vers " + link.name}
               aria-label={link.name}
             >
               {link.icon}
@@ -97,7 +97,7 @@ export default function Footer({}: Props) {
         <a
           href={siteUrl}
           className="Footer__logo"
-          title="Logo Thatmuch"
+          title="Logo de Thatmuch"
           aria-label="Logo Thatmuch"
         >
           <img src={logoThatIsWhite} alt="Logo Thatmuch en blanc" />
