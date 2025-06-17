@@ -3,9 +3,9 @@ import "./style.scss";
 import React from "react";
 import img from "../../../images/R2D2.svg";
 
-type Props = {};
+type Props = {url:string};
 
-export default function LinkSectionAlt({}: Props) {
+export default function LinkSectionAlt({url}: Props) {
   return (
     <div className="LinkSectionAlt">
       <div className="LinkSectionAlt__content">
@@ -15,7 +15,7 @@ export default function LinkSectionAlt({}: Props) {
         <p className="LinkSection__desc">
           Répondez à notre questionnaire "Dois-je refaire mon site web ?" et obtenez un diagnostic personnalisé en moins de 3 minutes !
         </p>
-        <a href="./refonte-form" className="btn btn-white">
+        <a href={url} className="btn btn-white">
           Évaluer mon site
         </a>
       </div>

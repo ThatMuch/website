@@ -5,6 +5,7 @@ import LinkSectionAlt from "../../components/LandingRefonteAlt/LinkSectionAlt/Li
 import FooterPlanet from "../../components/LandingRefonteAlt/FooterPlanet/FooterPlanet";
 import Seo from "../../components/Seo";
 const AnalyseRefonteSiteWeb = () => {
+  const url ="./refonte-form";
   return (
 	  <div className="bg-landing-alt">
 		  <Seo
@@ -16,11 +17,11 @@ const AnalyseRefonteSiteWeb = () => {
         <HeroSectionAlt
         title="Votre site web est-il à la hauteur de vos ambitions en 2025 ?"
         desc="Le monde digital évolue à une vitesse fulgurante. Un site web performant hier peut rapidement devenir obsolète aujourd’hui. Mais comment savoir si le vôtre répond encore aux attentes de vos clients et aux exigences du marché ?"
-        url="./refonte-form"
+        url={url}
         label="Évaluer mon site"
         />
         <NumbersSectionAlt/>
-        <LinkSectionAlt/>
+        <LinkSectionAlt url={url}/>
       </div>
       <FooterPlanet/>
     </div>
