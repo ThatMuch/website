@@ -51,6 +51,8 @@ export default function Header() {
           id="bento-menu"
           className="ml-auto menu__button"
           onClick={() => setIsOpened(true)}
+          aria-label="Menu"
+          title="Ouvrir le menu"
         >
           <div className="bento">
             <div className="circle"></div>
@@ -66,6 +68,8 @@ export default function Header() {
               id="btn_close"
               className="btn_close"
               onClick={() => setIsOpened(false)}
+              aria-label="Fermer le menu"
+              title="Fermer le menu"
             >
               <LazyLoadImage
                 className="close"
@@ -78,7 +82,11 @@ export default function Header() {
                 alt="Close Thatmuch"
               />
             </button>
-            <a href={siteUrl} title="Logo Thatmuch" aria-label="Logo Thatmuch">
+            <a
+              href={siteUrl}
+              title="Lien vers l'accueil de Thatmuch"
+              aria-label="Logo Thatmuch"
+            >
               <LazyLoadImage src={logo} alt="Thatmuch" className="logo" />
             </a>
             <div className="row">
@@ -94,6 +102,8 @@ export default function Header() {
                         href={item.url}
                         target={item.target}
                         onClick={() => setIsOpened(false)}
+                        title={"Lien vers " + item.label}
+                        aria-label={item.label}
                       >
                         {item.label}
                       </a>
@@ -132,7 +142,12 @@ export default function Header() {
           </div>
         ) : null}
       </div>
-      <a href="/">
+      <a
+        href="/"
+        className="landing-header__logo"
+        aria-label="Accueil"
+        title="Accueil du site THATMUCH"
+      >
         <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
       </a>
       <a

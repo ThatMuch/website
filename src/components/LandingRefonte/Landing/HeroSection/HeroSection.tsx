@@ -25,7 +25,14 @@ export const HeroSection: React.FC<IHeroSectionProps> = ({
   return (
     <React.Fragment>
       <header className="landing-header">
-        <LazyLoadImage src={logo} alt="THATMUCH" />
+        <a
+          href="/"
+          className="landing-header__logo"
+          aria-label="Accueil"
+          title="Accueil du site THATMUCH"
+        >
+          <LazyLoadImage src={logo} alt="THATMUCH" />
+        </a>
       </header>
       {!isLanding && <h1 className="hero-title">{title}</h1>}
       {isLanding && (
