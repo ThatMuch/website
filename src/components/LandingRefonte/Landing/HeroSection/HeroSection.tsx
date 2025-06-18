@@ -4,7 +4,8 @@ import * as React from "react";
 
 import Button from "../../../UI/Button/Button";
 import { FaArrowRight } from "react-icons/fa6";
-import logo from "../../../../images/THATMUCH_Logo_White.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import logo from "../../../../images/THATMUCH_Logo_White.webp";
 
 export interface IHeroSectionProps {
   title: string;
@@ -24,7 +25,14 @@ export const HeroSection: React.FC<IHeroSectionProps> = ({
   return (
     <React.Fragment>
       <header className="landing-header">
-        <img src={logo} alt="THATMUCH" />
+        <a
+          href="/"
+          className="landing-header__logo"
+          aria-label="Accueil"
+          title="Accueil du site THATMUCH"
+        >
+          <LazyLoadImage src={logo} alt="THATMUCH" />
+        </a>
       </header>
       {!isLanding && <h1 className="hero-title">{title}</h1>}
       {isLanding && (

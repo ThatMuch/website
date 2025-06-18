@@ -6,8 +6,9 @@ import { ErrorMessage, Field, Form, Formik } from "formik"; // Added Field
 import React, { useContext } from "react";
 
 import Button from "../../UI/Button/Button";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import tardis from "../../../images/tardis.png";
+import tardis from "../../../images/tardis.webp";
 import { useAddDoc } from "../../../hooks/use-firebase";
 import { useScores } from "../../../contexts/ScoreContext";
 import { useSendContactBrevo } from "../../../hooks/use-brev";
@@ -44,7 +45,7 @@ export default function ContactForm() {
           <h2 className="h3">Analyse terminée !</h2>
           <div className="divider mb-4"></div>
           <h3 className="h1">Recevez votre résulat par mail</h3>
-          <img src={tardis} alt="Tardis" />
+          <LazyLoadImage src={tardis} alt="Tardis" />
         </div>
         <div className="col-md-6">
           {!isSend ? (
@@ -161,9 +162,20 @@ export default function ContactForm() {
                         id="terms"
                         aria-label="Accepter les conditions d'utilisation" // Added aria-label
                       />
-                      <label htmlFor="terms" className="form-check-label">
-                        J'accepte de transmettre mes coordonnées, pour être
-                        recontacté par THATMUCH
+                      <label htmlFor="terms" className="form-check-label ">
+                        <small>
+                          J'accepte que{" "}
+                          <span className="uppercase">Thatmuch</span> collecte
+                          mes données selon sa{" "}
+                          <a
+                            href="/politique-de-confidentialite"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-underline"
+                          >
+                            politique de confidentialité.
+                          </a>
+                        </small>
                       </label>
                     </div>
 
@@ -191,7 +203,8 @@ export default function ContactForm() {
               </span>
               <p className="text-center mt-3">
                 L’analyse de votre site web vous attend dans votre boîte mail à
-                l'adresse <strong> {emailSent}email@mail.com</strong>.
+                l'adresse <strong>{emailSent}</strong>. Pensez à vérifier vos
+                spams si vous ne le voyez pas dans votre boîte de réception.
               </p>
               <Button
                 type="button"

@@ -2,10 +2,11 @@ import "./Header.scss";
 
 import React, { use, useEffect, useState } from "react";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
-import logo from "../../images/THATMUCH_Logo_Black.png";
+import logo from "../../images/THATMUCH_Logo_Black.webp";
 import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSiteSeo } from "../../hooks/use-site-seo";
 
@@ -50,6 +51,8 @@ export default function Header() {
           id="bento-menu"
           className="ml-auto menu__button"
           onClick={() => setIsOpened(true)}
+          aria-label="Menu"
+          title="Ouvrir le menu"
         >
           <div className="bento">
             <div className="circle"></div>
@@ -65,16 +68,26 @@ export default function Header() {
               id="btn_close"
               className="btn_close"
               onClick={() => setIsOpened(false)}
+              aria-label="Fermer le menu"
+              title="Fermer le menu"
             >
-              <img className="close" src={close} alt="Close Thatmuch" />
-              <img
+              <LazyLoadImage
+                className="close"
+                src={close}
+                alt="Close Thatmuch"
+              />
+              <LazyLoadImage
                 className="close_hover"
                 src={close_gif}
                 alt="Close Thatmuch"
               />
             </button>
-            <a href={siteUrl} title="Logo Thatmuch" aria-label="Logo Thatmuch">
-              <img src={logo} alt="Thatmuch" className="logo" />
+            <a
+              href={siteUrl}
+              title="Lien vers l'accueil de Thatmuch"
+              aria-label="Logo Thatmuch"
+            >
+              <LazyLoadImage src={logo} alt="Thatmuch" className="logo" />
             </a>
             <div className="row">
               <div className="col-12 col-sm-4 ">
@@ -89,6 +102,8 @@ export default function Header() {
                         href={item.url}
                         target={item.target}
                         onClick={() => setIsOpened(false)}
+                        title={"Lien vers " + item.label}
+                        aria-label={item.label}
                       >
                         {item.label}
                       </a>
@@ -103,19 +118,19 @@ export default function Header() {
                   </p>
                 )}
                 <div className="comets">
-                  <img
+                  <LazyLoadImage
                     data-aos="fade-down-left"
                     data-aos-delay="100"
                     src={comet}
                     alt="Comet Thatmuch"
                   />
-                  <img
+                  <LazyLoadImage
                     data-aos="fade-down-left"
                     data-aos-delay="200"
                     src={comet}
                     alt="Comet Thatmuch"
                   />
-                  <img
+                  <LazyLoadImage
                     data-aos="fade-down-left"
                     data-aos-delay="300"
                     src={comet}
@@ -127,15 +142,20 @@ export default function Header() {
           </div>
         ) : null}
       </div>
-      <a href="/">
-        <img src={logo} alt="Thatmuch" className="logo--header" />
+      <a
+        href="/"
+        className="landing-header__logo"
+        aria-label="Accueil"
+        title="Accueil du site THATMUCH"
+      >
+        <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
       </a>
       <a
         href="https://meetings-eu1.hubspot.com/mathilde-arconte"
         className="btn btn-primary"
         target="_blank"
         rel="noopener noreferrer"
-        title="Programmez un appel"
+        title="Lien vers la prise de rendez-vous"
         aria-label="Programmez un appel"
         data-aos="fade-down"
         data-aos-delay="100"

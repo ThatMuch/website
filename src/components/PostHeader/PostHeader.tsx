@@ -1,5 +1,6 @@
 import "./PostHeader.scss";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
 type Props = {
@@ -20,7 +21,7 @@ export default function PostHeader({
       <div>
         <h1 className="PostHeader__title">{title}</h1>
         <div className="PostHeader__meta">
-          <img
+          <LazyLoadImage
             src={author.avatar.url}
             alt={author.name}
             className="PostHeader__avatar"

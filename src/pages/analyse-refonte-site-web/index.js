@@ -1,8 +1,8 @@
-import React from "react";
-import { HeroSectionAlt } from "../../components/LandingRefonteAlt/HeroSectionAlt/HerosSectionAlt";
-import NumbersSectionAlt from "../../components/LandingRefonteAlt/NumbersSectionAlt/NumbersSectionAlt";
-import LinkSectionAlt from "../../components/LandingRefonteAlt/LinkSectionAlt/LinkSectionAlt";
 import FooterPlanet from "../../components/LandingRefonteAlt/FooterPlanet/FooterPlanet";
+import { HeroSectionAlt } from "../../components/LandingRefonteAlt/HeroSectionAlt/HerosSectionAlt";
+import LinkSectionAlt from "../../components/LandingRefonteAlt/LinkSectionAlt/LinkSectionAlt";
+import NumbersSectionAlt from "../../components/LandingRefonteAlt/NumbersSectionAlt/NumbersSectionAlt";
+import React from "react";
 import Seo from "../../components/Seo";
 const AnalyseRefonteSiteWeb = () => {
   const url ="./refonte-form";
