@@ -162,9 +162,20 @@ export default function ContactForm() {
                         id="terms"
                         aria-label="Accepter les conditions d'utilisation" // Added aria-label
                       />
-                      <label htmlFor="terms" className="form-check-label">
-                        J'accepte de transmettre mes coordonnées, pour être
-                        recontacté par THATMUCH
+                      <label htmlFor="terms" className="form-check-label ">
+                        <small>
+                          J'accepte que{" "}
+                          <span className="uppercase">Thatmuch</span> collecte
+                          mes données selon sa{" "}
+                          <a
+                            href="/politique-de-confidentialite"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-underline"
+                          >
+                            politique de confidentialité.
+                          </a>
+                        </small>
                       </label>
                     </div>
 
@@ -192,7 +203,8 @@ export default function ContactForm() {
               </span>
               <p className="text-center mt-3">
                 L’analyse de votre site web vous attend dans votre boîte mail à
-                l'adresse <strong>{emailSent}</strong>.
+                l'adresse <strong>{emailSent}</strong>. Pensez à vérifier vos
+                spams si vous ne le voyez pas dans votre boîte de réception.
               </p>
               <Button
                 type="button"
