@@ -192,7 +192,7 @@ export default function ContactForm() {
               </span>
               <p className="text-center mt-3">
                 L’analyse de votre site web vous attend dans votre boîte mail à
-                l'adresse <strong> {emailSent}email@mail.com</strong>.
+                l'adresse <strong>{emailSent}</strong>.
               </p>
               <Button
                 type="button"

@@ -132,7 +132,12 @@ export default function Header() {
           </div>
         ) : null}
       </div>
-      <a href="/">
+      <a
+        href="/"
+        className="landing-header__logo"
+        aria-label="Accueil"
+        title="Accueil du site THATMUCH"
+      >
         <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
       </a>
       <a
