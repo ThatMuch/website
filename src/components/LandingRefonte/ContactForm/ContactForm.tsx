@@ -17,12 +17,18 @@ const initialValues = {
   firstName: "",
   lastName: "",
   email: "",
-  terms: false, // Added terms field for checkbox
+  url: "",
+  terms: false,
 };
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("Votre prénom est requis"),
   lastName: Yup.string().required("Votre nom est requis"),
   email: Yup.string().email("Email invalide").required("Email est requis"),
+  url: Yup.string()
+    .required("URL du site web est requise")
+    .url("URL invalide")
+    .notRequired(), // Optional URL field
+  // terms: Yup.boolean
   terms: Yup.boolean().oneOf(
     [true],
     "Vous devez accepter les conditions d'utilisation"
@@ -57,6 +63,7 @@ export default function ContactForm() {
                   firstName: values.firstName,
                   lastName: values.lastName,
                   email: values.email,
+                  url: values.url,
                 };
                 const submissionData = {
                   ...cleanValues,
@@ -102,6 +109,23 @@ export default function ContactForm() {
                   aria-label="Formulaire de contact pour l'analyse de site web"
                   className="d-flex flex-column align-items-center justify-content-center"
                 >
+                  <div className="form-group mb-4 w-100">
+                    <label htmlFor="url">URL du site web</label>
+                    <Field
+                      type="url"
+                      id="url"
+                      name="url"
+                      className="form-control"
+                      aria-invalid={touched.url && !!errors.url} // Added aria-invalid
+                      aria-describedby="urlError" // Added aria-describedby
+                    />
+                    <ErrorMessage
+                      name="url"
+                      component="div"
+                      id="urlError" // Added id for aria-describedby
+                      className="text-danger"
+                    />
+                  </div>
                   <div className="form-group mb-4 w-100">
                     <label htmlFor="firstName">Prénom</label>
                     <Field
