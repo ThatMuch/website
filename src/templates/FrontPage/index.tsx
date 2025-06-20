@@ -3,6 +3,7 @@ import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import ExpertisesSection from "../../components/ExpertisesSection";
 import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
+import PortfolioSection from "../../components/PortfolioSection/PortfolioSection";
 import React from "react";
 import Seo from "../../components/Seo";
 import Testimonials from "../../components/TestimonialsSection";
@@ -28,6 +29,12 @@ const FrontPage = ({ data }) => {
             return (
               <div key={`${section.fieldGroupName}-${index}`}>
                 <ExpertisesSection section={section} />
+              </div>
+            );
+          case "HomePageBuilderPortfolioLayout":
+            return (
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <PortfolioSection section={section} />
               </div>
             );
           default:
