@@ -1,136 +1,101 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useFetchFirebase } from "../../hooks/use-firebase";
-import GlobalAverageScore from "../../components/AdminStats/GlobalAverageScore/GlobalAverageScore";
-import AveragesByCategory from "../../components/AdminStats/AveragesByCategory/AveragesByCategory";
 import questionsData from "../../data/questionquiz.json";
+import CategorySelector from "../../components/AdminStats/CategorySelector/CategorySelector";
+import QuestionStats from "../../components/AdminStats/QuestionStats/QuestionStats";
 
+/**
+ * Composant principal d'administration des statistiques du quiz.
+ */
 const AdminStats = () => {
-  const { data, isLoading, errorMessage, refetch } =
-    useFetchFirebase("submissions");
-  const responseCount = data.length;
+  const [selectedCategorySlug, setSelectedCategorySlug] = useState(null);
 
-  const { averages, globalAverageScore } = computeAverageScores(data);
-  const result = computeAverageScoresByQuestion(data, questionsData);
-  console.log("Moyennes par question :", result);
+  // Récupération des soumissions depuis Firebase
+  const { data, isLoading, errorMessage } = useFetchFirebase("submissions");
 
-  console.log(data);
-  return (
-    <div>
-      <h1>Test de Fetch Firebase</h1>
+  const submissions = data || [];
 
-      {isLoading && <p>Chargement...</p>}
+  // Calcul des statistiques par catégorie
+  const categoryStats = questionsData.map((category) => {
+    const slug = category.slug;
 
-      {errorMessage && <p>Erreur : {errorMessage}</p>}
+    // Score total obtenu pour cette catégorie dans toutes les soumissions
+    const totalScore = submissions.reduce((acc, submission) => {
+      const score = submission?.scores?.scoresByCategory?.[slug] || 0;
+      return acc + score;
+    }, 0);
 
-      {!isLoading && responseCount === 0 && <p>Aucun document trouvé.</p>}
+    // Score maximum possible pour une seule soumission dans cette catégorie
+    const maxScorePerSubmission = category.questions.reduce(
+      (maxSum, question) => {
+        const maxOptionScore = Math.max(
+          ...question.options.map((opt) => opt.score)
+        );
+        return maxSum + maxOptionScore;
+      },
+      0
+    );
 
-      {!isLoading && responseCount > 0 && (
-        <>
-          <p>{formatResponseLabel(responseCount)}</p>
-          <GlobalAverageScore score={globalAverageScore} />
-          <AveragesByCategory averages={averages} />
+    // Score maximum possible global pour cette catégorie
+    const maxPossibleScore = submissions.length * maxScorePerSubmission;
 
-          <h2>Moyennes par question :</h2>
-          <ul>
-            {result.map(({ questionKey, questionLabel, averageScore }) => (
-              <li key={questionKey}>
-                <strong>{questionLabel}</strong> ({questionKey}) :{" "}
-                {averageScore.toFixed(2)}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+    const averageScore = totalScore / submissions.length || 0;
 
-      <button onClick={refetch}>Recharger</button>
-    </div>
-  );
-};
+    // Pourcentage de réussite dans cette catégorie
+    const percentage = maxPossibleScore
+      ? (totalScore / maxPossibleScore) * 100
+      : 0;
 
-function formatResponseLabel(count) {
-  return `${count} réponse${count > 1 ? "s" : ""} soumise${
-    count > 1 ? "s" : ""
-  } au test`;
-}
-
-function computeAverageScores(data) {
-  const categorySums = {};
-  const categoryCounts = {};
-  let globalScoreSum = 0;
-
-  data.forEach((entry) => {
-    console.log(entry.scores.answersByCategory);
-    const scores = entry.scores.scoresByCategory || {};
-    const globalScore = entry.scores.globalScore || 0;
-
-    globalScoreSum += globalScore;
-
-    // Moyennes par catégorie
-    Object.entries(scores).forEach(([category, score]) => {
-      if (!categorySums[category]) {
-        categorySums[category] = 0;
-        categoryCounts[category] = 0;
-      }
-      categorySums[category] += score;
-      categoryCounts[category] += 1;
-    });
-  });
-
-  const averages = {};
-  Object.entries(categorySums).forEach(([category, total]) => {
-    averages[category] = total / categoryCounts[category];
-  });
-
-  // Moyenne global
-  const globalAverageScore = data.length > 0 ? globalScoreSum / data.length : 0;
-
-  return { averages, globalAverageScore };
-}
-
-function computeAverageScoresByQuestion(data, questionsData) {
-  const questionSums = {};
-  const questionCounts = {};
-
-  data.forEach((entry) => {
-    const answers = entry.scores.answersByCategory || {};
-
-    Object.entries(answers).forEach(([category, questions]) => {
-      Object.entries(questions).forEach(([questionKey, scoreStr]) => {
-        const score = parseInt(scoreStr, 10);
-
-        if (!questionSums[questionKey]) {
-          questionSums[questionKey] = 0;
-          questionCounts[questionKey] = 0;
-        }
-
-        questionSums[questionKey] += score;
-        questionCounts[questionKey] += 1;
-      });
-    });
-  });
-
-  const results = Object.entries(questionSums).map(([questionKey, total]) => {
-    const averageScore = total / questionCounts[questionKey];
-    const questionLabel = getQuestionById(questionKey, questionsData);
     return {
-      questionKey,
-      questionLabel,
+      ...category,
       averageScore,
+      totalScore,
+      maxPossibleScore,
+      percentage: Math.round(percentage), // arrondi à l'entier
     };
   });
 
-  return results;
-}
+  // Statistiques globales tous quiz confondus
+  const totalSubmissions = submissions.length;
 
-function getQuestionById(questionId, allCategories) {
-  for (const category of allCategories) {
-    for (const question of category.questions) {
-      if (question.id === questionId) {
-        return question.question;
-      }
-    }
-  }
-  return questionId;
-}
+  const totalGlobalScore = submissions.reduce(
+    (acc, submission) => acc + (submission?.scores?.globalScore || 0),
+    0
+  );
+  
+  const averageGlobalScore = totalGlobalScore / totalSubmissions || 0;
+
+  // Gère la sélection d'une catégorie via le composant CategorySelector
+  const handleCategoryClick = (slug) => {
+    setSelectedCategorySlug(slug);
+  };
+
+  // Récupère la catégorie sélectionnée depuis les données de base
+  const selectedCategory = questionsData.find(
+    (cat) => cat.slug === selectedCategorySlug
+  );
+
+  return (
+    <div className="bg-landing">
+      <h1 className="text-2xl font-bold">Statistiques des réponses</h1>
+      
+      {/* Affichage du nombre de réponses et du score global moyen */}
+      <p>Total de réponses : {totalSubmissions}</p>
+      <p>Score global moyen : {averageGlobalScore.toFixed(2)}</p>
+
+      {/* Sélecteur de catégories avec leurs statistiques */}
+      <CategorySelector
+        categories={categoryStats}
+        selectedSlug={selectedCategorySlug}
+        onSelect={handleCategoryClick}
+      />
+
+      {/* Affichage des statistiques détaillées pour la catégorie sélectionnée */}
+      {selectedCategory && (
+        <QuestionStats category={selectedCategory} submissions={submissions} />
+      )}
+    </div>
+  );
+};
 
 export default AdminStats;

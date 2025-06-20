@@ -1,0 +1,85 @@
+.categoryContent {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+
+  .category-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 50px;
+    border-radius: 20px;
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    border: 2px solid transparent;
+    color: white;
+    font-family: monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    .score {
+      font-size: 1.5rem;
+
+      &.small {
+        font-size: 0.9rem;
+      }
+    }
+
+    .label {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-size: 10px;
+      margin: 8px 0;
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .icon {
+      font-size: 1.5rem;
+      opacity: 0.9;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    &.selected {
+      border-color: white;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    // Couleurs spécifiques
+    &.design {
+      border-color: #78e08f;
+    }
+    &.seo {
+      border-color: #eb4d4b;
+    }
+    &.marketing {
+      border-color: #f6b93b;
+    }
+    &.ux {
+      border-color: #f6b93b;
+    }
+    &.performance {
+      border-color: #60a3bc;
+    }
+    &.technique {
+      border-color: #f8c291;
+    }
+    &.legal {
+      border-color: #e58e26;
+    }
+  }
+}
+
+
