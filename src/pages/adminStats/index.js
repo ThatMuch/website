@@ -20,7 +20,7 @@ const AdminStats = () => {
     questionsData[0]?.slug || null
   );
 
-  const { data, isLoading, errorMessage } = useFetchFirebase("submissions");
+  const { data, isLoading, errorMessage } = useFetchFirebase("submissions-test");
   const submissions = data || [];
 
   const maxScorePerCategory = getMaxScoreByCategory(questionsData);

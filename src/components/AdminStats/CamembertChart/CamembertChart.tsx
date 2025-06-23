@@ -4,33 +4,28 @@ import {
 } from 'recharts';
 import './style.scss';
 
-const COLORS = ['#5B8FF9', '#5AD8A6', '#F6BD16', '#E8684A', '#6DC8EC'];
+const COLORS = ['#7F00FF', '#eb4d4b', '#f6b93b', '#60a3bc', '#78e08f'];
 
 const CamembertChart = ({ data }) => {
   return (
     <div className="camembert-chart__container">
       <PieChart width={300} height={300}>
-        <defs>
-          {/* Définition d’un filtre de néon */}
-          <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
-            <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#00ffff" floodOpacity="0.7" />
-            <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#00ffff" floodOpacity="0.5" />
-          </filter>
-        </defs>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
           outerRadius={100}
-          innerRadius={60}
-          label
+          innerRadius={40}
           dataKey="value"
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}stroke="none" />
+            <Cell
+              key={`cell-${index}`}
+              fill={COLORS[index % COLORS.length]}
+              stroke="none"
+            />
           ))}
         </Pie>
-        <Tooltip />
       </PieChart>
 
       <div className="camembert-chart__legend">
