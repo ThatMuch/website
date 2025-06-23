@@ -10,7 +10,7 @@ $neon-ux: #f6b93b;
 $neon-performance: #60a3bc;
 $neon-technique: #f8c291;
 $neon-legal: #e58e26;
-$neon-global: #7F00FF;
+$neon-global: #7f00ff;
 
 // Mixin pour créer l'effet néon
 @mixin neon-glow($color, $intensity: $neon-glow-intensity) {
@@ -196,7 +196,6 @@ $neon-global: #7F00FF;
         }
       }
 
-      
       .averageGlobalScore {
         position: absolute;
         bottom: 100%;
@@ -218,11 +217,35 @@ $neon-global: #7F00FF;
         font-family: "Courier New", monospace;
         z-index: 10;
 
+        &.good {
+          color: $neon-design;
+          border-color: $neon-design;
+        }
+        &.medium {
+          color: $neon-ux;
+          border-color: $neon-ux;
+        }
+        &.low {
+          color: $neon-seo;
+          border-color: $neon-seo;
+        }
+
         // Effet néon complet
-        @include neon-glow($neon-global);
+        &.good {
+          @include neon-glow($neon-design);
+        }
+        &.medium {
+          @include neon-glow($neon-ux);
+        }
+        &.low {
+          @include neon-glow($neon-seo);
+        }
+        &:not(.good):not(.medium):not(.low) {
+          @include neon-glow($neon-global);
+        }
       }
 
-      .totalSubmissions{
+      .totalSubmissions {
         position: absolute;
         bottom: calc(100% + 15px);
         left: 0;

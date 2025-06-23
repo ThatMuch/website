@@ -1,23 +1,19 @@
 import React from "react";
 
-const SubmissionListTable = ({ submissions }) => {
-  // Fonction pour formater la date
+const SubmissionListTable = ({ submissions, onClick }) => {
   const formatDate = (createdAt) => {
     if (!createdAt) return 'Date non disponible';
-    
+
     let date;
-    
+
     if (createdAt.seconds) {
       date = new Date(createdAt.seconds * 1000);
     }
-    
-    
-    // Vérifier si la date est valide
+
     if (isNaN(date.getTime())) {
       return 'Date invalide';
     }
-    
-    // Formater en français
+
     return date.toLocaleString('fr-FR', {
       year: 'numeric',
       month: '2-digit',
@@ -27,24 +23,26 @@ const SubmissionListTable = ({ submissions }) => {
     });
   };
 
-  // trie des soummisions du plus résent au plus ancien
+  const handleClick =(id) =>{
+    if(onClick){
+      onClick(id);
+    }
+  }
+
   const sortedSubmissions = [...submissions].sort((a, b) => {
     const aSeconds = a.createdAt?.seconds || 0;
     const bSeconds = b.createdAt?.seconds || 0;
-    return bSeconds - aSeconds; // ordre décroissant
+    return bSeconds - aSeconds;
   });
 
   return (
-    <div className="overflow-x-auto">
+    <div>
       <table>
-        <thead className="bg-gray-50">
+        <thead>
           <tr>
-            <th>
-              Nom
-            </th>
-            <th>
-              Date de soumission
-            </th>
+            <th>Nom</th>
+            <th>E-mail</th>
+            <th>Date de soumission</th>
           </tr>
         </thead>
         <tbody>
@@ -54,13 +52,20 @@ const SubmissionListTable = ({ submissions }) => {
                 {item.firstName || 'N/A'} {item.lastName || 'N/A'}
               </td>
               <td>
+                <button
+                  onClick={() => handleClick(item.id)}
+                >
+                  {item.email || 'Email inconnu'}
+                </button>
+              </td>
+              <td>
                 {formatDate(item.createdAt)}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      
+
       {submissions.length === 0 && (
         <div>
           Aucune soumission trouvée

@@ -3,6 +3,7 @@ import { useFetchFirebase } from "../../hooks/use-firebase";
 import questionsData from "../../data/questionquiz.json";
 import HeroSection from "../../components/AdminStats/HeroSection/HeroSection";
 import CategorySelector from "../../components/AdminStats/CategorySelector/CategorySelector";
+import CategoryDisplayReadOnly from "../../components/AdminStats/CategorySelector/CategoryDisplauReadOnly";
 import QuestionStats from "../../components/AdminStats/QuestionStats/QuestionStats";
 import SubmissionListTable from "../../components/AdminStats/SubmissionListTable/SubmissionListTable";
 import {
@@ -19,8 +20,10 @@ const AdminStats = () => {
   const [selectedCategorySlug, setSelectedCategorySlug] = useState(
     questionsData[0]?.slug || null
   );
+  const [selectedSubmission, setSelectedSubmission] = useState(null);
 
-  const { data, isLoading, errorMessage } = useFetchFirebase("submissions-test");
+  const { data, isLoading, errorMessage } =
+    useFetchFirebase("submissions-test");
   const submissions = data || [];
 
   const maxScorePerCategory = getMaxScoreByCategory(questionsData);
@@ -61,7 +64,30 @@ const AdminStats = () => {
       )}
 
       {/* Vue des soumissions individuelles */}
-      {!isGlobalStat && <SubmissionListTable submissions={submissions} />}
+      {!isGlobalStat && (
+        <SubmissionListTable
+          submissions={submissions}
+          onClick={(id) => {
+            const selected = submissions.find((s) => s.id === id);
+            setSelectedSubmission(selected);
+          }}
+        />
+      )}
+      {selectedSubmission && (
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4">
+            Détail des scores de {selectedSubmission.firstName}{" "}
+            {selectedSubmission.lastName}
+          </h2>
+          <CategoryDisplayReadOnly
+            categories={computeCategoryStats(
+              selectedSubmission ? [selectedSubmission] : [],
+              questionsData
+            )}
+            globalScore={selectedSubmission.scores.globalScore}
+          />
+        </div>
+      )}
     </div>
   );
 };
