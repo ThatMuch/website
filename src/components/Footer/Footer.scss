@@ -45,6 +45,11 @@
     color: $neutral-200;
     gap: $spacing-xs;
     padding: $spacing-l;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
     a {
       color: $neutral-200;
     }

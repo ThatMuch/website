@@ -87,7 +87,12 @@ export default function Header() {
               title="Lien vers l'accueil de Thatmuch"
               aria-label="Logo Thatmuch"
             >
-              <LazyLoadImage src={logo} alt="Thatmuch" className="logo" />
+              <LazyLoadImage
+                src={logo}
+                alt="Thatmuch"
+                className="logo"
+                width="230"
+              />
             </a>
             <div className="row">
               <div className="col-12 col-sm-4 ">
