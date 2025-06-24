@@ -59,7 +59,6 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
               onClick={() => setSelectedCategory("")}
             >
               Tous les articles
-              <span>({posts?.length})</span>
             </button>
 
             {/* Category Buttons */}
@@ -72,7 +71,6 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
                 onClick={() => setSelectedCategory(category.slug)}
               >
                 {category.name}
-                {category.count && <span>({category?.count})</span>}
               </button>
             ))}
           </div>
