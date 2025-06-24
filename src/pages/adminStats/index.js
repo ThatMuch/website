@@ -42,57 +42,59 @@ const AdminStats = () => {
 
   return (
     <div className="bg-landing">
-      <HeroSection isGlobalStat={isGlobalStat} onToggle={setGlobalStat} />
+      <div className="container-fluid z-2 position-relative">
+        <HeroSection isGlobalStat={isGlobalStat} onToggle={setGlobalStat} />
 
-      {/* Vue globale */}
-      {isGlobalStat && (
-        <>
-          <CategorySelector
-            totalSubmissions={totalSubmissions}
-            averageGlobalScore={averageGlobalScore.toFixed(0)}
-            categories={categoryStats}
-            selectedSlug={selectedCategorySlug}
-            onSelect={handleCategoryClick}
-          />
-
-          {selectedCategory && (
-            <QuestionStats
-              category={selectedCategory}
-              submissions={submissions}
+        {/* Vue globale */}
+        {isGlobalStat && (
+          <>
+            <CategorySelector
+              totalSubmissions={totalSubmissions}
+              averageGlobalScore={averageGlobalScore.toFixed(0)}
+              categories={categoryStats}
+              selectedSlug={selectedCategorySlug}
+              onSelect={handleCategoryClick}
             />
-          )}
-        </>
-      )}
 
-      {/* Vue des soumissions individuelles */}
-      {!isGlobalStat && (
-        <SubmissionListTable
-          submissions={submissions}
-          onClick={(id) => {
-            const selected = submissions.find((s) => s.id === id);
-            setSelectedSubmission(selected);
-          }}
-        />
-      )}
-      {selectedSubmission && (
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">
-            Détail des scores de {selectedSubmission.firstName}{" "}
-            {selectedSubmission.lastName}
-          </h2>
-          <CategoryDisplayReadOnly
-            categories={computeCategoryStats(
-              selectedSubmission ? [selectedSubmission] : [],
-              questionsData
+            {selectedCategory && (
+              <QuestionStats
+                category={selectedCategory}
+                submissions={submissions}
+              />
             )}
-            globalScore={selectedSubmission.scores.globalScore}
+          </>
+        )}
+
+        {/* Vue des soumissions individuelles */}
+        {!isGlobalStat && (
+          <SubmissionListTable
+            submissions={submissions}
+            onClick={(id) => {
+              const selected = submissions.find((s) => s.id === id);
+              setSelectedSubmission(selected);
+            }}
           />
-          <SubmissionAnswers
-            selectedSubmission={selectedSubmission}
-            questionsData={questionsData}
-          />
-        </div>
-      )}
+        )}
+        {!isGlobalStat && selectedSubmission && (
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-4">
+              Détail des scores de {selectedSubmission.firstName}{" "}
+              {selectedSubmission.lastName}
+            </h2>
+            <CategoryDisplayReadOnly
+              categories={computeCategoryStats(
+                selectedSubmission ? [selectedSubmission] : [],
+                questionsData
+              )}
+              globalScore={selectedSubmission.scores.globalScore}
+            />
+            <SubmissionAnswers
+              selectedSubmission={selectedSubmission}
+              questionsData={questionsData}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
