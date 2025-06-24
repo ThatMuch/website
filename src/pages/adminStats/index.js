@@ -77,7 +77,7 @@ const AdminStats = () => {
         )}
         {!isGlobalStat && selectedSubmission && (
           <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="text-xl font-semibold mb-1">
               Détail des scores de {selectedSubmission.firstName}{" "}
               {selectedSubmission.lastName}
             </h2>

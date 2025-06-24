@@ -1,53 +1,57 @@
 import React from "react";
+import { categories } from "../utils/categoryIcons";
+import "./style.scss";
 
 const SubmissionAnswers = ({ selectedSubmission, questionsData }) => {
   if (!selectedSubmission || !questionsData) return null;
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Réponses du questionnaire</h2>
-
+    <div className="submission-answers">
       <div>
-        {questionsData.map((category) => (
-          <div key={category.slug} className="mb-6">
-            <h3 className="text-lg font-bold text-primary mb-2">
-              {category.category}
-            </h3>
+        {questionsData.map((category) => {
+          const categoryInfo = categories.find((c) => c.key === category.slug);
 
-            <ul className="space-y-3">
-              {category.questions.map((question, index) => {
-                // Clé pour identifier la réponse dans answersByCategory
-                const answerKey = `${category.slug}-${index + 1}`;
+          return (
+            <div key={category.slug} className="submission-answers__category">
+              <h3 className="submission-answers__category-title">
+                {categoryInfo?.icon}
+                {categoryInfo?.label || category.category}
+              </h3>
 
-                // Score obtenu
-                const selectedScore = parseInt(
-                  selectedSubmission.scores.answersByCategory?.[
-                    category.slug
-                  ]?.[answerKey]
-                );
+              <ul className="submission-answers__question-list">
+                {category.questions.map((question, index) => {
+                  const answerKey = `${category.slug}-${index + 1}`;
 
-                // Option correspondant au score
-                const selectedOption = isNaN(selectedScore)
-                  ? null
-                  : question.options?.find(
-                      (option) => option.score === selectedScore
-                    );
+                  const selectedScore = parseInt(
+                    selectedSubmission.scores.answersByCategory?.[
+                      category.slug
+                    ]?.[answerKey]
+                  );
 
-                return (
-                  <li key={question.id} className="border rounded p-3">
-                    <p className="font-medium">{question.question}</p>
-                    <p className="text-sm text-gray-600">
-                      Réponse :{" "}
-                      {selectedOption
-                        ? `${selectedOption.text} (score : ${selectedOption.score})`
-                        : "Non répondu"}
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+                  const selectedOption = isNaN(selectedScore)
+                    ? null
+                    : question.options?.find(
+                        (option) => option.score === selectedScore
+                      );
+
+                  return (
+                    <li key={question.id} className="submission-answers__question-item">
+                      <p className="submission-answers__question-text">
+                        {question.question}
+                      </p>
+                      <p className="submission-answers__answer-text">
+                        Réponse :{" "}
+                        {selectedOption
+                          ? `${selectedOption.text} (score : ${selectedOption.score})`
+                          : "Non répondu"}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
