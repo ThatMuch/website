@@ -66,7 +66,7 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
               <button
                 key={category.slug}
                 className={`AllPosts_list_button ${
-                  selectedCategory === category.name && "active"
+                  selectedCategory === category.slug && "active"
                 }`}
                 onClick={() => setSelectedCategory(category.slug)}
               >
