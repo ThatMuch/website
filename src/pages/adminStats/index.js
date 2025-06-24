@@ -6,6 +6,7 @@ import CategorySelector from "../../components/AdminStats/CategorySelector/Categ
 import CategoryDisplayReadOnly from "../../components/AdminStats/CategorySelector/CategoryDisplauReadOnly";
 import QuestionStats from "../../components/AdminStats/QuestionStats/QuestionStats";
 import SubmissionListTable from "../../components/AdminStats/SubmissionListTable/SubmissionListTable";
+import SubmissionAnswers from "../../components/AdminStats/SubmissionAnswers/SubmissionAnswers";
 import {
   getMaxScoreByCategory,
   computeCategoryStats,
@@ -16,7 +17,7 @@ import {
  * Composant principal d'administration des statistiques du quiz.
  */
 const AdminStats = () => {
-  const [isGlobalStat, setGlobalStat] = useState(true); // true par défaut ?
+  const [isGlobalStat, setGlobalStat] = useState(false); // true par défaut ?
   const [selectedCategorySlug, setSelectedCategorySlug] = useState(
     questionsData[0]?.slug || null
   );
@@ -85,6 +86,10 @@ const AdminStats = () => {
               questionsData
             )}
             globalScore={selectedSubmission.scores.globalScore}
+          />
+          <SubmissionAnswers
+            selectedSubmission={selectedSubmission}
+            questionsData={questionsData}
           />
         </div>
       )}
