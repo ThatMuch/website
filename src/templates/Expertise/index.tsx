@@ -8,7 +8,7 @@ import ServiceList from "../../components/ServiceList";
 import { graphql } from "gatsby";
 export default function Expertise({ data }) {
   const page = data.wpExpertise;
-  console.log(data);
+
   return (
     <Layout>
       <Seo title={page.title} description={page.seo.metaDesc} />

@@ -17,6 +17,27 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+	const templates = await graphql(`
+	query GET_TEMPLATES {
+		allWpTemplate {
+			edges {
+				node {
+					templateName
+					slug
+					id
+					uri
+					featuredImage {
+						node {
+							altText
+							mediaItemUrl
+						}
+					}
+
+				}
+			}
+		}
+	}
+  `);
 	const expertises = await graphql(`
 	query GET_EXPERTISES {
       allWpExpertise {
@@ -71,7 +92,8 @@ exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`);
   const contactTemplete = path.resolve(`./src/templates/Contact/index.tsx`);
   const podcastTemplate = path.resolve(`./src/templates/Podcast/index.tsx`);
- const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
+	const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
+	const ressourcesTemplate = path.resolve(`./src/templates/Ressources/index.tsx`);
   pages.data.allWpPage.edges.forEach((edge) => {
     switch (true) {
       case edge.node.slug === "blog":
@@ -100,7 +122,13 @@ exports.createPages = async ({ graphql, actions }) => {
             id: edge.node.id,
           },
         });
-        break;
+			break;
+		case edge.node.template.templateName === "Ressources":
+		createPage({
+			path: "/ressources",
+			component: slash(ressourcesTemplate),
+		});
+		break;
       default:
         createPage({
           path: edge.node.slug,
@@ -125,6 +153,23 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
+
+	templates.data.allWpTemplate.edges.forEach((edge) => {
+		createPage({
+			// `path` will be the url for the page
+			path :`/template/${edge.node.slug}`,
+			// specify the component template of your choice
+			component : slash(pageTemplate),
+			// In the ^template's GraphQL query, 'id' will be available
+			// as a GraphQL variable to query for this posts's data.
+			context : {
+				id : edge.node.id,
+				templateName: edge.node.templateName,
+				uri: edge.node.uri,
+				featuredImage: edge.node.featuredImage,
+			},
+		});
+	});
 
 	expertises.data.allWpExpertise.edges.forEach((edge) => {
 		createPage({
