@@ -14,9 +14,6 @@ exports.createPages = async ({ graphql, actions }) => {
             link
           }
         }
-        pageInfo {
-          hasNextPage
-        }
       }
     }
   `);
@@ -49,9 +46,6 @@ exports.createPages = async ({ graphql, actions }) => {
               fieldGroupName
             }
           }
-        }
-        pageInfo {
-          hasNextPage
         }
       }
     }`);
