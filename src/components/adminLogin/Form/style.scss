@@ -1,0 +1,62 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-bottom: 16px;
+    width: 100%;
+    color: #fff;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+
+    &::placeholder {
+      color: #fff;
+      opacity: 0.7;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #fff;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  button {
+    background-color: #fff;
+    color: #000;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 14px 32px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #eaeaea;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  
+  .error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
