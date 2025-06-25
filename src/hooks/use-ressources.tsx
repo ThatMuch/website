@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-export const useRessources = () => {
+export const useRessources = (categorySlug?: string) => {
   const data = useStaticQuery(graphql`
     query GET_RESSOURCES {
       allWpTemplate {
@@ -34,8 +34,8 @@ export const useRessources = () => {
       }
     }
   `);
-  console.log(data);
-  const templates = data.allWpTemplate.edges.map((edge) => {
+
+  let templates = data.allWpTemplate.edges.map((edge) => {
     const { node } = edge;
     return {
       id: node.id,
@@ -43,11 +43,17 @@ export const useRessources = () => {
       title: node.title,
       content: node.content,
       featuredImage: node.featuredImage?.node,
-
       hubspotForm: node.hubspotForm,
       category: node.categories?.nodes[0] || {},
+      categories: node.categories || [],
     };
   });
-  console.log(templates);
+
+  if (categorySlug) {
+    templates = templates.filter((post) =>
+      post.categories.nodes.some((category) => category.slug === categorySlug)
+    );
+  }
+
   return templates;
 };

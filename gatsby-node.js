@@ -107,6 +107,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
 	const ressourcesTemplate = path.resolve(`./src/templates/Ressources/index.tsx`);
 	const templateTemplate = path.resolve(`./src/templates/Template/index.tsx`);
+	const templatesTemplate = path.resolve(`./src/templates/Templates/index.tsx`);
   pages.data.allWpPage.edges.forEach((edge) => {
     switch (true) {
       case edge.node.slug === "blog":
@@ -143,8 +144,16 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         id: edge.node.id,
       },
-    });
-		break;
+		});
+			break;
+		case edge.node.template.templateName === "Templates":
+		createPage({
+      path: "/ressources/templates",
+      component: slash(templatesTemplate),
+      context: {
+        id: edge.node.id,
+      },
+		});
       default:
         createPage({
           path: edge.node.slug,
@@ -156,6 +165,7 @@ exports.createPages = async ({ graphql, actions }) => {
         break;
     }
   });
+
   posts.data.allWpPost.edges.forEach((edge) => {
     createPage({
       // `path` will be the url for the page
@@ -173,7 +183,7 @@ exports.createPages = async ({ graphql, actions }) => {
 	templates.data.allWpTemplate.edges.forEach((edge) => {
     createPage({
       // `path` will be the url for the page
-      path: `/ressources/template/${edge.node.slug}`,
+      path: `/ressources/templates/${edge.node.slug}`,
       // specify the component template of your choice
       component: slash(templateTemplate),
       // In the ^template's GraphQL query, 'id' will be available
