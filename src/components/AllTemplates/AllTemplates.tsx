@@ -21,6 +21,12 @@ export default function AllTemplates({
   const templates = useRessources();
   return (
     <div className="AllTemplates">
+      {title && (
+        <>
+          <h2 className="DividerTitle">{title}</h2>
+          <div className="divider mb-4"></div>
+        </>
+      )}
       <div className="PostsGrid">
         {templates.map((template) => (
           <div key={template?.id}>

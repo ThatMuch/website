@@ -37,6 +37,11 @@
       max-width: 750px;
     }
   }
+  &--template {
+    .container {
+      max-width: 860px;
+    }
+  }
   &--frontpage {
     background-image: url("../../images/Background_Light.webp");
     background-size: contain;

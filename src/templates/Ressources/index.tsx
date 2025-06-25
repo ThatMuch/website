@@ -9,7 +9,7 @@ import { graphql } from "gatsby";
 
 const Ressources = ({ data }) => {
   const page = data?.wpPage;
-  console.log(data);
+
   return (
     <Layout>
       <Seo
