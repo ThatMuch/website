@@ -42,12 +42,6 @@ exports.createPages = async ({ graphql, actions }) => {
                 slug
               }
             }
-            hubspotForm {
-              formId
-              portalid
-              titre
-              fieldGroupName
-            }
           }
         }
         pageInfo {
