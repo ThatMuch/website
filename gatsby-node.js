@@ -19,25 +19,37 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
 	const templates = await graphql(`
 	query GET_TEMPLATES {
-		allWpTemplate {
-			edges {
-				node {
-					templateName
-					slug
-					id
-					uri
-					featuredImage {
-						node {
-							altText
-							mediaItemUrl
-						}
-					}
+	      allWpTemplate {
+        edges {
+          node {
+            content
+            id
+            slug
+            title
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+                title
+              }
+            }
+            categories {
+              nodes {
+                name
+                slug
+              }
+            }
+            hubspotForm {
+              formId
+              portalid
+              titre
+              fieldGroupName
+            }
+          }
+        }
+      }
+    }`);
 
-				}
-			}
-		}
-	}
-  `);
 	const expertises = await graphql(`
 	query GET_EXPERTISES {
       allWpExpertise {
@@ -125,9 +137,12 @@ exports.createPages = async ({ graphql, actions }) => {
 			break;
 		case edge.node.template.templateName === "Ressources":
 		createPage({
-			path: "/ressources",
-			component: slash(ressourcesTemplate),
-		});
+      path: "/ressources",
+      component: slash(ressourcesTemplate),
+      context: {
+        id: edge.node.id,
+      },
+    });
 		break;
       default:
         createPage({
@@ -155,21 +170,18 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
 	templates.data.allWpTemplate.edges.forEach((edge) => {
-		createPage({
-			// `path` will be the url for the page
-			path :`/template/${edge.node.slug}`,
-			// specify the component template of your choice
-			component : slash(pageTemplate),
-			// In the ^template's GraphQL query, 'id' will be available
-			// as a GraphQL variable to query for this posts's data.
-			context : {
-				id : edge.node.id,
-				templateName: edge.node.templateName,
-				uri: edge.node.uri,
-				featuredImage: edge.node.featuredImage,
-			},
-		});
-	});
+    createPage({
+      // `path` will be the url for the page
+      path: `/ressources/template/${edge.node.slug}`,
+      // specify the component template of your choice
+      component: slash(pageTemplate),
+      // In the ^template's GraphQL query, 'id' will be available
+      // as a GraphQL variable to query for this posts's data.
+      context: {
+        id: edge.node.id,
+      },
+    });
+  });
 
 	expertises.data.allWpExpertise.edges.forEach((edge) => {
 		createPage({
