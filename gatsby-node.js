@@ -106,6 +106,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const podcastTemplate = path.resolve(`./src/templates/Podcast/index.tsx`);
 	const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
 	const ressourcesTemplate = path.resolve(`./src/templates/Ressources/index.tsx`);
+	const templateTemplate = path.resolve(`./src/templates/Template/index.tsx`);
   pages.data.allWpPage.edges.forEach((edge) => {
     switch (true) {
       case edge.node.slug === "blog":
@@ -174,7 +175,7 @@ exports.createPages = async ({ graphql, actions }) => {
       // `path` will be the url for the page
       path: `/ressources/template/${edge.node.slug}`,
       // specify the component template of your choice
-      component: slash(pageTemplate),
+      component: slash(templateTemplate),
       // In the ^template's GraphQL query, 'id' will be available
       // as a GraphQL variable to query for this posts's data.
       context: {

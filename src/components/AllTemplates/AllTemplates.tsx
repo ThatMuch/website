@@ -28,7 +28,7 @@ export default function AllTemplates({
               image={template?.featuredImage}
               title={template?.title}
               category={template?.category}
-              url={`/template/${template?.slug}`}
+              url={`/ressources/template/${template?.slug}`}
             />
           </div>
         ))}
