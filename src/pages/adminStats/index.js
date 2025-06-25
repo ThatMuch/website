@@ -17,7 +17,7 @@ import {
  * Composant principal d'administration des statistiques du quiz.
  */
 const AdminStats = () => {
-  const [isGlobalStat, setGlobalStat] = useState(false); // true par défaut ?
+  const [isGlobalStat, setGlobalStat] = useState(true); // true par défaut ?
   const [selectedCategorySlug, setSelectedCategorySlug] = useState(
     questionsData[0]?.slug || null
   );
@@ -60,6 +60,11 @@ const AdminStats = () => {
               <QuestionStats
                 category={selectedCategory}
                 submissions={submissions}
+                onClick={(id) =>{
+                  const selected =submissions.find((s) => s.id === id);
+                  setSelectedSubmission(selected);
+                  setGlobalStat(false);
+                }}
               />
             )}
           </>
