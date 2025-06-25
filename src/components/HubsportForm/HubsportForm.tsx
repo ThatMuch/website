@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
-
-const HubSpotForm: React.FC = () => {
+type HubSpotFormProps = {
+  portalid: string;
+  formId: string;
+  target: string;
+};
+const HubSpotForm: React.FC<HubSpotFormProps> = ({
+  portalid,
+  formId,
+  target,
+}) => {
   useEffect(() => {
     // Function to load the script
     const loadScript = (src: string, id: string) => {
@@ -22,8 +30,8 @@ const HubSpotForm: React.FC = () => {
       if ((window as any).hbspt) {
         (window as any).hbspt.forms.create({
           region: "eu1",
-          portalId: "25329660",
-          formId: "1e3d25e4-af3c-46f0-ab85-997a1216b5b6",
+          portalId: portalid || "25329660",
+          formId: formId || "1e3d25e4-af3c-46f0-ab85-997a1216b5b6",
           target: "#hubspotForm",
         });
       } else {
@@ -43,7 +51,7 @@ const HubSpotForm: React.FC = () => {
     };
   }, []);
 
-  return <div id="hubspotForm"></div>;
+  return <div id={"hubspotForm"}></div>;
 };
 
 export default HubSpotForm;

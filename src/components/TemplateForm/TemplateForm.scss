@@ -1,0 +1,20 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.TemplateForm {
+  display: flex;
+  border-radius: 6.25rem;
+  padding: $spacing-xl;
+  align-items: center;
+  gap: $spacing-m;
+  background-image: url("../../images/Background_Light.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: inset -3px -3px rgba(63, 210, 219, 0.5),
+    inset 3px 3px rgba(231, 249, 251, 0.5);
+  margin-bottom: $spacing-xl;
+  img {
+    border-radius: 2.75rem;
+    width: 15.67956rem;
+  }
+}
