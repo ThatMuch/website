@@ -82,7 +82,7 @@ export default function AllTemplates({
                   image={template?.featuredImage}
                   title={template?.title}
                   category={template?.category}
-                  url={`/ressources/template/${template?.slug}`}
+                  url={`/ressources/templates/${template?.slug}`}
                 />
               </div>
             ))
@@ -92,7 +92,7 @@ export default function AllTemplates({
                   image={template?.featuredImage}
                   title={template?.title}
                   category={template?.category}
-                  url={`/ressources/template/${template?.slug}`}
+                  url={`/ressources/templates/${template?.slug}`}
                 />
               </div>
             ))}
@@ -121,7 +121,7 @@ export default function AllTemplates({
       {isHome && (
         <div className="AllPosts__btn">
           <a
-            href="/ressources/templates"
+            href="/ressources/templates/"
             className="btn btn-primary"
             onClick={() => setCurrentPage(1)}
             aria-label="Voir tous les templates"

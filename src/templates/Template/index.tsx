@@ -19,6 +19,10 @@ export default function Template({ data }) {
               pathname: `/ressources`,
               label: "Ressources",
             },
+            {
+              pathname: `/ressources/templates`,
+              label: "Templates",
+            },
           ]}
           currentPage={page.title}
         />
