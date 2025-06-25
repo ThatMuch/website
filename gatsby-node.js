@@ -14,9 +14,48 @@ exports.createPages = async ({ graphql, actions }) => {
             link
           }
         }
+        pageInfo {
+          hasNextPage
+        }
       }
     }
   `);
+	const templates = await graphql(`
+	query GET_TEMPLATES {
+	      allWpTemplate {
+        edges {
+          node {
+            content
+            id
+            slug
+            title
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+                title
+              }
+            }
+            categories {
+              nodes {
+                name
+                slug
+              }
+            }
+            hubspotForm {
+              formId
+              portalid
+              titre
+              fieldGroupName
+            }
+          }
+        }
+        pageInfo {
+          hasNextPage
+        }
+      }
+    }`);
+
 	const expertises = await graphql(`
 	query GET_EXPERTISES {
       allWpExpertise {
@@ -46,6 +85,9 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        pageInfo {
+          hasNextPage
+        }
       }
     }`);
 
@@ -62,6 +104,9 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        pageInfo {
+          hasNextPage
+        }
       }
     }
   `);
@@ -71,7 +116,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`);
   const contactTemplete = path.resolve(`./src/templates/Contact/index.tsx`);
   const podcastTemplate = path.resolve(`./src/templates/Podcast/index.tsx`);
- const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
+	const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
+	const ressourcesTemplate = path.resolve(`./src/templates/Ressources/index.tsx`);
+	const templateTemplate = path.resolve(`./src/templates/Template/index.tsx`);
+	const templatesTemplate = path.resolve(`./src/templates/Templates/index.tsx`);
   pages.data.allWpPage.edges.forEach((edge) => {
     switch (true) {
       case edge.node.slug === "blog":
@@ -100,7 +148,24 @@ exports.createPages = async ({ graphql, actions }) => {
             id: edge.node.id,
           },
         });
-        break;
+			break;
+		case edge.node.template.templateName === "Ressources":
+		createPage({
+      path: "/ressources",
+      component: slash(ressourcesTemplate),
+      context: {
+        id: edge.node.id,
+      },
+		});
+			break;
+		case edge.node.template.templateName === "Templates":
+		createPage({
+      path: "/ressources/templates",
+      component: slash(templatesTemplate),
+      context: {
+        id: edge.node.id,
+      },
+		});
       default:
         createPage({
           path: edge.node.slug,
@@ -112,12 +177,27 @@ exports.createPages = async ({ graphql, actions }) => {
         break;
     }
   });
+
   posts.data.allWpPost.edges.forEach((edge) => {
     createPage({
       // `path` will be the url for the page
       path: edge.node.link,
       // specify the component template of your choice
       component: slash(postTemplate),
+      // In the ^template's GraphQL query, 'id' will be available
+      // as a GraphQL variable to query for this posts's data.
+      context: {
+        id: edge.node.id,
+      },
+    });
+  });
+
+	templates.data.allWpTemplate.edges.forEach((edge) => {
+    createPage({
+      // `path` will be the url for the page
+      path: `/ressources/templates/${edge.node.slug}`,
+      // specify the component template of your choice
+      component: slash(templateTemplate),
       // In the ^template's GraphQL query, 'id' will be available
       // as a GraphQL variable to query for this posts's data.
       context: {
