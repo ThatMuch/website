@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { useFetchFirebase } from "../../hooks/use-firebase";
-import questionsData from "../../data/questionquiz.json";
-import HeroSection from "../../components/AdminStats/HeroSection/HeroSection";
-import CategorySelector from "../../components/AdminStats/CategorySelector/CategorySelector";
-import CategoryDisplayReadOnly from "../../components/AdminStats/CategorySelector/CategoryDisplauReadOnly";
-import QuestionStats from "../../components/AdminStats/QuestionStats/QuestionStats";
-import SubmissionListTable from "../../components/AdminStats/SubmissionListTable/SubmissionListTable";
-import SubmissionAnswers from "../../components/AdminStats/SubmissionAnswers/SubmissionAnswers";
 import {
-  getMaxScoreByCategory,
   computeCategoryStats,
   computeGlobalScoreStats,
+  getMaxScoreByCategory,
 } from "../../components/AdminStats/utils/quizStatsUtils";
+
+import CategoryDisplayReadOnly from "../../components/AdminStats/CategorySelector/CategoryDisplauReadOnly";
+import CategorySelector from "../../components/AdminStats/CategorySelector/CategorySelector";
+import HeroSection from "../../components/AdminStats/HeroSection/HeroSection";
+import QuestionStats from "../../components/AdminStats/QuestionStats/QuestionStats";
+import SubmissionAnswers from "../../components/AdminStats/SubmissionAnswers/SubmissionAnswers";
+import SubmissionListTable from "../../components/AdminStats/SubmissionListTable/SubmissionListTable";
+import questionsData from "../../data/questionquiz.json";
+import { useFetchFirebase } from "../../hooks/use-firebase";
 
 /**
  * Composant principal d'administration des statistiques du quiz.
@@ -23,8 +24,7 @@ const AdminStats = () => {
   );
   const [selectedSubmission, setSelectedSubmission] = useState(null);
 
-  const { data, isLoading, errorMessage } =
-    useFetchFirebase("submissions-test");
+  const { data, isLoading, errorMessage } = useFetchFirebase("submissions");
   const submissions = data || [];
 
   const maxScorePerCategory = getMaxScoreByCategory(questionsData);
@@ -60,8 +60,8 @@ const AdminStats = () => {
               <QuestionStats
                 category={selectedCategory}
                 submissions={submissions}
-                onClick={(id) =>{
-                  const selected =submissions.find((s) => s.id === id);
+                onClick={(id) => {
+                  const selected = submissions.find((s) => s.id === id);
                   setSelectedSubmission(selected);
                   setGlobalStat(false);
                 }}
