@@ -2,6 +2,7 @@
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.03);
+  margin: 20px;
   overflow: hidden;
   background-color: #ffffff;
 
@@ -100,6 +101,11 @@
             color: #991b1b;
             border-color: #ef4444;
           }
+        }
+        .big {
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
         }
       }
     }

@@ -3,7 +3,7 @@ import AdminLogin from "./AdminLogin"; // ajuste le chemin selon ton arborescenc
 import AdminStats from "./AdminStats"; // ta page actuelle
 
 const AdminWrapper = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return isAuthenticated ? (
     <AdminStats />

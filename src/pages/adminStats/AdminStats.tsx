@@ -17,7 +17,7 @@ import {
  * Composant principal d'administration des statistiques du quiz.
  */
 const AdminStats = () => {
-  const [isGlobalStat, setGlobalStat] = useState(true); // true par défaut ?
+  const [isGlobalStat, setGlobalStat] = useState(false); // true par défaut ?
   const [selectedCategorySlug, setSelectedCategorySlug] = useState(
     questionsData[0]?.slug || null
   );
@@ -42,7 +42,7 @@ const AdminStats = () => {
 
   return (
     <div className="bg-landing">
-      <div className="container-fluid z-2 position-relative">
+      <div className="">
         <HeroSection isGlobalStat={isGlobalStat} onToggle={setGlobalStat} />
 
         {/* Vue globale */}

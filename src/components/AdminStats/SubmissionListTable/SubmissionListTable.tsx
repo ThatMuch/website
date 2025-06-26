@@ -1,7 +1,7 @@
 import React from "react";
 import { categories } from "../utils/categoryIcons";
 import { formatDate } from "../utils/dateUtils";
-import { scoreResult } from "../utils/scoreResult";
+import { scoreResult, sectionResul } from "../utils/scoreResult";
 import "./style.scss";
 
 const SubmissionListTable = ({ submissions, onClick }) => {
@@ -53,11 +53,13 @@ const SubmissionListTable = ({ submissions, onClick }) => {
                 <td>{formatDate(item.createdAt)}</td>
                 {categories.map(({ key }) => (
                   <td key={key} className="score">
-                    {item.scores?.scoresByCategory?.[key] ?? "-"}
+                    <span className={`pastille ${sectionResul(key, item.scores?.scoresByCategory?.[key])}`}>
+                      {item.scores?.scoresByCategory?.[key] ?? "-"}
+                    </span>
                   </td>
                 ))}
                 <td className="score">
-                  <span className={`pastille ${scoreResult(item.scores.globalScore)}`}>
+                  <span className={`pastille big ${scoreResult(item.scores.globalScore)}`}>
                     {item.scores.globalScore}
                   </span>
                 </td>
