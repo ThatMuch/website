@@ -2,7 +2,7 @@
 @use "./fonts" as *;
 @use "./mixins" as *;
 @use "./atoms/atoms" as *;
-
+@use "./organism/TemplateSection" as *;
 body {
   font-family: "SpaceMono", sans-serif;
   font-size: 16px;
