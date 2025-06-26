@@ -27,6 +27,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
     setError("");
 
     const hashedPass = await hashPassword(pass);
+    //console.log(hashedPass);
     const match = admins.find(
       (admin) => admin.pseudo === pseudo && admin.pass === hashedPass
     );
