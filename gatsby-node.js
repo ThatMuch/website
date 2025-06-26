@@ -14,9 +14,6 @@ exports.createPages = async ({ graphql, actions }) => {
             link
           }
         }
-        pageInfo {
-          hasNextPage
-        }
       }
     }
   `);
@@ -43,9 +40,6 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
-        }
-        pageInfo {
-          hasNextPage
         }
       }
     }`);
@@ -152,7 +146,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
 		});
 			break;
-		case edge?.node?.template?.templateName === "Templates":
+		case edge.node.template.templateName === "Ressource template page":
 		createPage({
       path: "/ressources/templates",
       component: slash(templatesTemplate),
