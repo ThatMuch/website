@@ -100,7 +100,7 @@
         ]
       },
       {
-        "id": "ux-4",
+        "id": "ux-3",
         "question": "Mon site a-t-il été réfléchi en prenant compte de l’accessibilité utilisateur ?",
         "description": "Par exemple : couleurs, contrastes, polices, taille des textes, navigation au clavier, etc.",
         "options": [
