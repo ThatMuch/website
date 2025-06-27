@@ -2,14 +2,12 @@
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.03);
-  margin: 20px;
+  margin-bottom: 3rem;
   overflow: hidden;
   background-color: #ffffff;
 
   &__scroll-container {
-    max-height: 250px; // pour environ 3 lignes visibles
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
   }
 
   table {

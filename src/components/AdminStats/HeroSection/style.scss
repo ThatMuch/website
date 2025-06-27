@@ -1,5 +1,6 @@
 .stat-hero-section {
   width: 100%;
+  margin-bottom: 2.5rem;
   .section-button {
     grid-column: 1;
     grid-row: 3;
@@ -13,5 +14,6 @@
     width: 100%;
     flex-direction: row;
     gap: 1rem;
+    margin-bottom: 2rem;
   }
 }

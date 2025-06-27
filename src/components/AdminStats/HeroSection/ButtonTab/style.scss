@@ -1,9 +1,9 @@
+@use "../../../../style/vars" as *;
 .buttonTab {
   background: transparent;
   border: none;
-  color: white;
-  font-size: 2rem;
-  padding: 0.75rem 1.25rem;
+  font-size: 1.5rem;
+  padding: 0.5rem;
   position: relative;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -11,19 +11,21 @@
   &::after {
     content: "";
     position: absolute;
-    bottom: 15px;
+    bottom: -15px;
     left: 0;
-    height: 2px;
+    height: 4px;
     width: 0;
-    background-color: white;
+    background-color: $neutral-500;
     transition: width 0.3s ease;
   }
 
-  &.active::after {
-    width: 100%;
+  &.active {
+    color: $neutral-500;
+    &::after {
+      width: 100%;
+    }
   }
-
   &:hover {
-    color: #ddd;
+    color: $neutral-500;
   }
 }
