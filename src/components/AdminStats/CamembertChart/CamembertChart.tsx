@@ -1,13 +1,12 @@
-import React from 'react';
-import {
-  PieChart, Pie, Cell, Tooltip,
-} from 'recharts';
-import './style.scss';
+import "./style.scss";
 
-const COLORS = ['#7F00FF', '#eb4d4b', '#f6b93b', '#60a3bc', '#78e08f'];
+import { Cell, Pie, PieChart, Tooltip } from "recharts";
+
+import React from "react";
+
+const COLORS = ["#de3d64", "#fdc500", "#0fc7d2", "#9fdf6c", "#482aa2"];
 
 const CamembertChart = ({ data, onSectionClick }) => {
-  
   // Gère le clic sur une section du camembert
   const handlePieClick = (data, index) => {
     if (onSectionClick && data.value > 0) {
@@ -39,24 +38,26 @@ const CamembertChart = ({ data, onSectionClick }) => {
               key={`cell-${index}`}
               fill={COLORS[index % COLORS.length]}
               stroke="none"
-              style={{ 
-                cursor: entry.value > 0 ? 'pointer' : 'default',
-                opacity: entry.value > 0 ? 1 : 0.5
+              style={{
+                cursor: entry.value > 0 ? "pointer" : "default",
+                opacity: entry.value > 0 ? 1 : 0.5,
               }}
             />
           ))}
         </Pie>
-        <Tooltip 
+        <Tooltip
           formatter={(value, name) => [value, name]}
-          labelFormatter={() => ''}
+          labelFormatter={() => ""}
         />
       </PieChart>
 
       <div className="camembert-chart__legend">
         {data.map((entry, index) => (
-          <div 
-            key={index} 
-            className={`camembert-chart__legend-item ${entry.value > 0 ? 'clickable' : 'disabled'}`}
+          <div
+            key={index}
+            className={`camembert-chart__legend-item ${
+              entry.value > 0 ? "clickable" : "disabled"
+            }`}
             onClick={() => handleLegendClick(entry)}
           >
             <span

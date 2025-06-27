@@ -1,10 +1,12 @@
-import React from "react";
 import "./style.scss";
+
 import { MdAdsClick, MdDesignServices, MdSearch } from "react-icons/md";
-import { SiTmux } from "react-icons/si";
-import { TiSpanner } from "react-icons/ti";
+
 import { FaScaleBalanced } from "react-icons/fa6";
 import { IoStatsChart } from "react-icons/io5";
+import React from "react";
+import { SiTmux } from "react-icons/si";
+import { TiSpanner } from "react-icons/ti";
 
 const MAX_HEIGHT = 380;
 const COMPACT_THRESHOLD = 145;
@@ -33,8 +35,8 @@ const CategorySelector = ({
       <div className="buttons">
         <div className="pill-wrapper">
           {sorted.map((category) => {
-            const height = (category.percentage / 100) * MAX_HEIGHT;
-            const isCompact = height < COMPACT_THRESHOLD;
+            const width = (category.percentage / 100) * MAX_HEIGHT;
+            const isCompact = width < COMPACT_THRESHOLD;
 
             return (
               <button
@@ -43,7 +45,7 @@ const CategorySelector = ({
                 className={`category-pill ${
                   selectedSlug === category.slug ? "selected" : ""
                 } ${category.slug} ${isCompact ? "compact" : ""}`}
-                style={{ height: `${height}px` }}
+                style={{ width: `${width}px` }}
               >
                 <div className="score">{category.averageScore.toFixed(0)}</div>
                 <div className="label">{category.slug}</div>
@@ -51,8 +53,6 @@ const CategorySelector = ({
               </button>
             );
           })}
-          <div className="totalSubmissions">{totalSubmissions} réponses</div>
-          <div className="averageGlobalScore">{averageGlobalScore}</div>
         </div>
       </div>
     </div>

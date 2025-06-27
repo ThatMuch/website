@@ -1,6 +1,10 @@
+@use "../../../style/vars" as *;
 .stat-questions-wrapper {
   margin-bottom: 2rem;
   flex: 1;
+  background: $neutral-0;
+  border-radius: $radius-m;
+  padding: $spacing-s $spacing-m;
 
   .stat-questions-section {
     display: grid;
@@ -14,7 +18,7 @@
       width: 100%;
       max-width: 500px;
       box-sizing: border-box;
-      background: rgba(191, 194, 222, 0.06);
+      background: white;
     }
   }
 

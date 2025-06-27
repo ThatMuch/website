@@ -49,7 +49,7 @@ const AdminStats = () => {
   );
 
   return (
-    <div>
+    <div className="AdminStats">
       <div className="container">
         <HeroSection
           isGlobalStat={isGlobalStat}
@@ -61,7 +61,7 @@ const AdminStats = () => {
 
         {/* Vue globale */}
         {isGlobalStat && (
-          <div className="d-flex gap-2 w-100 flex-row">
+          <div className=" d-flex gap-2 w-100 flex-row align-items-start">
             <CategorySelector
               totalSubmissions={totalSubmissions}
               averageGlobalScore={averageGlobalScore.toFixed(0)}
