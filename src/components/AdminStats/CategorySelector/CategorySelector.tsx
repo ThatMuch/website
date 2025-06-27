@@ -4,37 +4,41 @@ import { MdAdsClick, MdDesignServices, MdSearch } from "react-icons/md";
 
 import { FaScaleBalanced } from "react-icons/fa6";
 import { IoStatsChart } from "react-icons/io5";
+import Pastille from "../Pastille/Pastille";
 import React from "react";
 import { SiTmux } from "react-icons/si";
 import { TiSpanner } from "react-icons/ti";
+import { categories as categoriesIcon } from "../utils/categoryIcons";
 
 const MAX_HEIGHT = 380;
 const COMPACT_THRESHOLD = 145;
 
+type CategorySelectorProps = {
+  categories: Array<{
+    slug: string;
+    averageScore: number;
+    percentage: number;
+  }>;
+  selectedSlug: string | null;
+  onSelect: (slug: string) => void;
+  globalScore?: number;
+  title?: string;
+};
+
 const CategorySelector = ({
-  averageGlobalScore,
-  totalSubmissions,
   categories,
   selectedSlug,
   onSelect,
-}) => {
-  const sorted = [...categories].sort((a, b) => a.percentage - b.percentage);
-
-  const icons = {
-    design: <MdDesignServices className="step-icon" />,
-    marketing: <MdAdsClick className="step-icon" />,
-    ux: <SiTmux className="step-icon" />,
-    seo: <MdSearch className="step-icon" />,
-    performance: <IoStatsChart className="step-icon" />,
-    technique: <TiSpanner className="step-icon" />,
-    legal: <FaScaleBalanced className="step-icon" />,
-  };
-
+  globalScore,
+  title,
+}: CategorySelectorProps) => {
   return (
     <div className="categoryContent">
+      {title && <h3>{title}</h3>}
+      {globalScore !== undefined && <Pastille value={globalScore} big />}
       <div className="buttons">
         <div className="pill-wrapper">
-          {sorted.map((category) => {
+          {categories.map((category) => {
             const width = (category.percentage / 100) * MAX_HEIGHT;
             const isCompact = width < COMPACT_THRESHOLD;
 
@@ -49,7 +53,12 @@ const CategorySelector = ({
               >
                 <div className="score">{category.averageScore.toFixed(0)}</div>
                 <div className="label">{category.slug}</div>
-                <div className="icon">{icons[category.slug]}</div>
+                <div className="icon">
+                  {
+                    categoriesIcon.find((icon) => icon.key === category.slug)
+                      ?.icon
+                  }
+                </div>
               </button>
             );
           })}

@@ -1,4 +1,9 @@
+@use "../../../style/vars" as *;
 .submission-answers {
+  background: $neutral-0;
+  border-radius: $radius-m;
+  padding: $spacing-s $spacing-m;
+  flex: 1;
   &__title {
     font-size: 1.25rem;
     font-weight: bold;
@@ -9,40 +14,40 @@
     margin-bottom: 1.5rem;
   }
 
-  &__category-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 0.5rem;
-
-    .step-icon {
-      font-size: 1.25rem;
-      color: #4b5563;
-    }
-  }
-
   &__question-list {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   &__question-item {
-    border: 1px solid #4b4b4d;
+    border: 1px solid $neutral-50;
+    background-color: #fff;
     border-radius: 0.375rem;
-    padding: 0.75rem;
+    padding: 1rem 1.5rem;
+    position: relative;
   }
 
   &__question-text {
-    font-weight: 500;
+    font-weight: 700;
   }
 
   &__answer-text {
+  }
+  &__answer-score {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    text-align: right;
+    font-weight: 700;
     font-size: 0.875rem;
-    color: #4b5563;
-    margin-top: 0.25rem;
+    color: $neutral-700;
+    padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: $neutral-50;
+    border: 1px solid $neutral-200;
+    text-align: center;
   }
 }

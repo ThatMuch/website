@@ -5,17 +5,14 @@ $neon-transition: all 0.3s ease;
 .categoryContent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 1rem;
   background: $neutral-0;
   border-radius: $radius-m;
   padding: $spacing-s $spacing-m;
-
+  width: 450px;
   .buttons {
     position: relative;
     padding: 1rem 0;
-    display: flex;
-    justify-content: center;
 
     .pill-wrapper {
       display: flex;
@@ -40,6 +37,7 @@ $neon-transition: all 0.3s ease;
         transition: $neon-transition;
         overflow: hidden;
         position: relative;
+        min-width: 100px;
 
         &:hover,
         &.selected {

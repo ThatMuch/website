@@ -61,22 +61,27 @@ const SubmissionListTable = ({
             {sortedSubmissions.map((item) => (
               <tr key={item.id}>
                 <td>
-                  <button
-                    onClick={() => onClick && onClick(item.id)}
-                    className="submission-table__user-button"
-                  >
-                    <span className="submission-table__user-name">
+                  <div className="submission-table__user-button">
+                    <span
+                      onClick={() => onClick && onClick(item.id)}
+                      className="submission-table__user-name"
+                    >
                       {item.firstName} {item.lastName}
                     </span>
                     <span className="submission-table__user-email">
                       {item.email}
                     </span>
                     {item.url && (
-                      <span className="submission-table__user-url">
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="submission-table__user-url"
+                      >
                         {item.url}
-                      </span>
+                      </a>
                     )}
-                  </button>
+                  </div>
                 </td>
                 <td>{formatDate(item.createdAt)}</td>
                 {categories.map(({ key }) => (

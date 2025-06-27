@@ -95,22 +95,24 @@ const AdminStats = () => {
           />
         )}
         {!isGlobalStat && selectedSubmission && (
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-1">
-              Détail des scores de {selectedSubmission.firstName}{" "}
-              {selectedSubmission.lastName}
-            </h2>
-            <CategoryDisplayReadOnly
-              categories={computeCategoryStats(
-                selectedSubmission ? [selectedSubmission] : [],
-                questionsData
-              )}
-              globalScore={selectedSubmission.scores.globalScore}
-            />
-            <SubmissionAnswers
-              selectedSubmission={selectedSubmission}
-              questionsData={questionsData}
-            />
+          <div>
+            <div className=" d-flex gap-2 w-100 flex-row align-items-start">
+              <CategorySelector
+                categories={computeCategoryStats(
+                  selectedSubmission ? [selectedSubmission] : [],
+                  questionsData
+                )}
+                selectedSlug={selectedCategorySlug}
+                onSelect={handleCategoryClick}
+                title={`${selectedSubmission.firstName} ${selectedSubmission.lastName}`}
+                globalScore={selectedSubmission.scores.globalScore}
+              />
+              <SubmissionAnswers
+                selectedSubmission={selectedSubmission}
+                selectedCategorySlug={selectedCategorySlug}
+                questionsData={questionsData}
+              />
+            </div>
           </div>
         )}
       </div>

@@ -1,7 +1,7 @@
+@use "../../../style/vars" as *;
 .submission-table {
-  border: 1px solid #e5e7eb;
+  border: 1px solid $neutral-50;
   border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.03);
   margin-bottom: 3rem;
   overflow: hidden;
   background-color: #ffffff;
@@ -16,7 +16,6 @@
     font-size: 0.95rem;
 
     thead {
-      background-color: #f9fafb;
       position: sticky;
       top: 0;
       z-index: 1;
@@ -25,11 +24,11 @@
         text-align: left;
         padding: 12px 16px;
         font-weight: 600;
-        color: #374151;
+        color: $neutral-900;
         font-size: 0.75rem;
         text-transform: uppercase;
-        border-bottom: 1px solid #e5e7eb;
-        background-color: #f9fafb;
+        border-bottom: 1px solid $neutral-50;
+        background-color: $neutral-50;
       }
 
       .submission-table__category-header {
@@ -42,7 +41,7 @@
 
         .step-icon {
           font-size: 1rem;
-          color: #4b5563;
+          color: $neutral-300;
         }
       }
     }
@@ -52,17 +51,20 @@
         transition: background-color 0.2s;
 
         &:hover {
-          background-color: #f3f4f6;
+          background-color: $neutral-0;
+          .pastille {
+            opacity: 1;
+          }
         }
 
         &:nth-of-type(even) {
-          background-color: #f9fafb;
+          background-color: $neutral-0;
         }
 
         td {
           padding: 12px 16px;
-          border-bottom: 1px solid #e5e7eb;
-          color: #374151;
+          border-bottom: 1px solid $neutral-50;
+          color: $neutral-900;
         }
 
         .score {
@@ -70,6 +72,7 @@
         }
 
         .pastille {
+          opacity: 0.5;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -101,6 +104,7 @@
           }
         }
         .big {
+          opacity: 1;
           width: 60px;
           height: 60px;
           font-size: 1.5rem;
@@ -117,27 +121,31 @@
     background: none;
     border: none;
     padding: 0;
-    cursor: pointer;
     color: inherit;
 
-    &:hover .submission-table__user-name {
+    .submission-table__user-name:hover {
       text-decoration: underline;
+      cursor: pointer;
     }
   }
 
   &__user-name {
     font-weight: 600;
-    color: #111827;
   }
 
   &__user-email {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: $neutral-300;
+  }
+
+  &__user-url {
+    font-size: 0.85rem;
+    color: $neutral-500;
   }
 
   &__empty {
     font-style: italic;
-    color: #6b7280;
+    color: $neutral-700;
     margin-top: 1rem;
     padding: 1rem;
   }
