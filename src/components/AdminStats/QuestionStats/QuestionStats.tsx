@@ -1,4 +1,8 @@
+import "./style.scss";
+
 import React, { useState } from "react";
+
+import CamembertChart from "../CamembertChart/CamembertChart";
 
 // Interface pour TypeScript
 interface SelectedAnswer {
@@ -7,11 +11,11 @@ interface SelectedAnswer {
   optionText: string;
   people: any[];
 }
-import CamembertChart from "../CamembertChart/CamembertChart";
-import "./style.scss"
 
 const QuestionStats = ({ category, submissions, onClick }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<SelectedAnswer | null>(
+    null
+  );
 
   if (!category) return null;
 
@@ -32,7 +36,8 @@ const QuestionStats = ({ category, submissions, onClick }) => {
   // Récupère la liste des personnes ayant donné une réponse spécifique
   const getPeopleByAnswer = (questionId, score) => {
     const result = submissions.filter((submission) => {
-      const allAnswers = submission?.scores?.answersByCategory?.[category.slug] || {};
+      const allAnswers =
+        submission?.scores?.answersByCategory?.[category.slug] || {};
       const submissionScore = allAnswers?.[questionId];
 
       // Conversion pour comparer string avec number
@@ -45,13 +50,17 @@ const QuestionStats = ({ category, submissions, onClick }) => {
   };
 
   // Gère le clic sur une section du camembert
-  const handleSectionClick = (questionId: string, optionScore: string, optionText: string) => {
+  const handleSectionClick = (
+    questionId: string,
+    optionScore: string,
+    optionText: string
+  ) => {
     const people = getPeopleByAnswer(questionId, optionScore);
     const answerData: SelectedAnswer = {
       questionId,
       optionScore,
       optionText,
-      people
+      people,
     };
     setSelectedAnswer(answerData);
   };
@@ -75,10 +84,12 @@ const QuestionStats = ({ category, submissions, onClick }) => {
 
           return (
             <div key={question.id} className="question">
-              <p className="font-semibold mb-2">{question.question}</p>
+              <h4>{question.question}</h4>
               <CamembertChart
                 data={chartData}
-                onSectionClick={(data) => handleSectionClick(question.id, data.score, data.name)}
+                onSectionClick={(data) =>
+                  handleSectionClick(question.id, data.score, data.name)
+                }
               />
             </div>
           );
@@ -91,14 +102,16 @@ const QuestionStats = ({ category, submissions, onClick }) => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h3>Personnes ayant répondu : "{selectedAnswer.optionText}"</h3>
-              <button className="modal-close" onClick={closeModal}>×</button>
+              <button className="modal-close" onClick={closeModal}>
+                ×
+              </button>
             </div>
             <div className="modal-body">
               {selectedAnswer.people.length > 0 ? (
                 <ul className="people-list">
                   {selectedAnswer.people.map((person, index) => (
                     <li key={person.id || index} className="person-item">
-                      <button onClick={() => onClick && onClick(person.id)} >
+                      <button onClick={() => onClick && onClick(person.id)}>
                         <span className="person-name">
                           {person.firstName} {person.lastName}
                         </span>

@@ -5,7 +5,6 @@ import {
   getMaxScoreByCategory,
 } from "../../components/AdminStats/utils/quizStatsUtils";
 
-import CategoryDisplayReadOnly from "../../components/AdminStats/CategorySelector/CategoryDisplauReadOnly";
 import CategorySelector from "../../components/AdminStats/CategorySelector/CategorySelector";
 import HeroSection from "../../components/AdminStats/HeroSection/HeroSection";
 import QuestionStats from "../../components/AdminStats/QuestionStats/QuestionStats";
@@ -27,8 +26,7 @@ const AdminStats = () => {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
 
   // données de la bdd
-  const { data, isLoading, errorMessage } =
-    useFetchFirebase("submissions-test");
+  const { data, isLoading, errorMessage } = useFetchFirebase("submissions");
   const submissions = data || [];
 
   const maxScorePerCategory = getMaxScoreByCategory(questionsData);

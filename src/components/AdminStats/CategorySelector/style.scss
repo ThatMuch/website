@@ -10,6 +10,9 @@ $neon-transition: all 0.3s ease;
   border-radius: $radius-m;
   padding: $spacing-s $spacing-m;
   width: 450px;
+  position: sticky;
+  top: 1.5rem;
+  z-index: 1;
   .buttons {
     position: relative;
     padding: 1rem 0;
