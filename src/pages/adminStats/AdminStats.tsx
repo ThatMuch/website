@@ -18,19 +18,27 @@ import { useFetchFirebase } from "../../hooks/use-firebase";
  * Composant principal d'administration des statistiques du quiz.
  */
 const AdminStats = () => {
-  const [isGlobalStat, setGlobalStat] = useState(false); // true par défaut ?
+  const currentMonth = new Date().getMonth();
+  //const currentMonth = 4;
+  const [isGlobalStat, setGlobalStat] = useState(false);
   const [selectedCategorySlug, setSelectedCategorySlug] = useState(
     questionsData[0]?.slug || null
   );
   const [selectedSubmission, setSelectedSubmission] = useState(null);
 
-  const { data, isLoading, errorMessage } = useFetchFirebase("submissions");
+  // données de la bdd
+  const { data, isLoading, errorMessage } =
+    useFetchFirebase("submissions-test");
   const submissions = data || [];
 
   const maxScorePerCategory = getMaxScoreByCategory(questionsData);
   const categoryStats = computeCategoryStats(submissions, questionsData);
-  const { totalSubmissions, totalGlobalScore, averageGlobalScore } =
-    computeGlobalScoreStats(submissions);
+  const {
+    totalSubmissions,
+    totalGlobalScore,
+    averageGlobalScore,
+    numberThisMonth,
+  } = computeGlobalScoreStats(submissions, currentMonth);
 
   const handleCategoryClick = (slug) => {
     setSelectedCategorySlug(slug);
@@ -43,7 +51,13 @@ const AdminStats = () => {
   return (
     <div className="bg-landing">
       <div className="">
-        <HeroSection isGlobalStat={isGlobalStat} onToggle={setGlobalStat} />
+        <HeroSection
+          isGlobalStat={isGlobalStat}
+          onToggle={setGlobalStat}
+          responseCount={totalSubmissions}
+          responseThisMonth={numberThisMonth}
+          average={averageGlobalScore.toFixed(0)}
+        />
 
         {/* Vue globale */}
         {isGlobalStat && (

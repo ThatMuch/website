@@ -1,0 +1,99 @@
+// Variables couleurs
+$neon-design: #78e08f;
+$neon-seo: #eb4d4b;
+$neon-marketing: #f9ca24;
+$neon-ux: #e84393;
+$neon-performance: #60a3bc;
+$neon-technique: #f8c291;
+$neon-legal: #e58e26;
+$neon-global: #7f00ff;
+
+.legend_section {
+  display: flex;
+  align-items: center;
+
+  .button_section {
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .button {
+    padding: 0.5rem 1rem;
+    border: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      //background-color: #e0e0e0;
+    }
+
+    svg {
+      font-size: 1.2rem;
+    }
+  }
+
+  // Couleurs par catégorie
+  .button-design {
+    color: $neon-design;
+  }
+
+  .button-seo {
+    color: $neon-seo;
+  }
+
+  .button-marketing {
+    color: $neon-marketing;
+  }
+
+  .button-ux {
+    color: $neon-ux;
+  }
+
+  .button-performance {
+    color: $neon-performance;
+  }
+
+  .button-technique {
+    color: $neon-technique;
+  }
+
+  .button-legal {
+    color: $neon-legal;
+  }
+
+  .button-design.active {
+    border-bottom: solid 2px $neon-design;
+  }
+
+  .button-seo.active {
+    border-bottom: solid 2px $neon-seo;
+  }
+
+  .button-marketing.active {
+    border-bottom: solid 2px $neon-marketing;
+  }
+
+  .button-ux.active {
+    border-bottom: solid 2px $neon-ux;
+  }
+
+  .button-performance.active {
+    border-bottom: solid 2px $neon-performance;
+  }
+
+  .button-technique.active {
+    border-bottom: solid 2px $neon-technique;
+  }
+
+  .button-legal.active {
+    border-bottom: solid 2px $neon-legal;
+  }
+}
