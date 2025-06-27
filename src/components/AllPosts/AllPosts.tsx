@@ -41,99 +41,95 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
   };
 
   return (
-    <div>
-      <div className="AllPosts">
-        {title && (
-          <>
-            <h2 className="DividerTitle">{title}</h2>
-            <div className="divider mb-4"></div>
-          </>
-        )}
-        {filter && (
-          <div className="AllPosts_list">
-            {/* All Posts Button */}
+    <div className="AllPosts">
+      {title && (
+        <>
+          <h2 className="DividerTitle">{title}</h2>
+          <div className="divider mb-4"></div>
+        </>
+      )}
+      {filter && (
+        <div className="AllPosts_list">
+          {/* All Posts Button */}
+          <button
+            className={`AllPosts_list_button ${!selectedCategory && "active"}`}
+            onClick={() => setSelectedCategory("")}
+          >
+            Tous les articles
+          </button>
+
+          {/* Category Buttons */}
+          {categories.map((category) => (
             <button
+              key={category.slug}
               className={`AllPosts_list_button ${
-                !selectedCategory && "active"
+                selectedCategory === category.slug && "active"
               }`}
-              onClick={() => setSelectedCategory("")}
+              onClick={() => setSelectedCategory(category.slug)}
             >
-              Tous les articles
+              {category.name}
             </button>
-
-            {/* Category Buttons */}
-            {categories.map((category) => (
-              <button
-                key={category.slug}
-                className={`AllPosts_list_button ${
-                  selectedCategory === category.slug && "active"
-                }`}
-                onClick={() => setSelectedCategory(category.slug)}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        )}
-        <div className="PostsGrid">
-          {!isHome
-            ? paginatedPosts?.map((post, index) => (
-                <div key={index}>
-                  <PostCard
-                    title={post.title}
-                    category={post?.categories?.nodes[0]}
-                    url={post.link}
-                    image={post.featuredImage?.node}
-                  />
-                </div>
-              ))
-            : posts?.slice(0, 4).map((post, index) => (
-                <div key={index}>
-                  <PostCard
-                    title={post.title}
-                    category={post?.categories?.nodes[0]}
-                    url={post.link}
-                    image={post.featuredImage?.node}
-                  />
-                </div>
-              ))}
+          ))}
         </div>
-
-        {totalPages > 1 && !isHome && (
-          <div className="Pagination">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              aria-label="Page précédente"
-              title="Boutton vers la page précédente"
-            >
-              <FaChevronLeft />
-            </button>
-            {renderPageNumbers()}
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              aria-label="Page suivante"
-              title="Boutton vers la page suivante"
-            >
-              <FaChevronRight />
-            </button>
-          </div>
-        )}
-        {isHome && (
-          <div className="AllPosts__btn">
-            <a
-              href="/blog"
-              className="btn btn-primary"
-              onClick={() => setCurrentPage(1)}
-              aria-label="Voir tous les articles"
-              title="Lien vers tous les articles du blog"
-            >
-              Voir tous les articles
-            </a>
-          </div>
-        )}
+      )}
+      <div className="PostsGrid">
+        {!isHome
+          ? paginatedPosts?.map((post, index) => (
+              <div key={index}>
+                <PostCard
+                  title={post.title}
+                  category={post?.categories?.nodes[0]}
+                  url={post.link}
+                  image={post.featuredImage?.node}
+                />
+              </div>
+            ))
+          : posts?.slice(0, 4).map((post, index) => (
+              <div key={index}>
+                <PostCard
+                  title={post.title}
+                  category={post?.categories?.nodes[0]}
+                  url={post.link}
+                  image={post.featuredImage?.node}
+                />
+              </div>
+            ))}
       </div>
+
+      {totalPages > 1 && !isHome && (
+        <div className="Pagination">
+          <button
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+            aria-label="Page précédente"
+            title="Boutton vers la page précédente"
+          >
+            <FaChevronLeft />
+          </button>
+          {renderPageNumbers()}
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            aria-label="Page suivante"
+            title="Boutton vers la page suivante"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      )}
+      {isHome && (
+        <div className="AllPosts__btn">
+          <a
+            href="/blog"
+            className="btn btn-primary"
+            onClick={() => setCurrentPage(1)}
+            aria-label="Voir tous les articles"
+            title="Lien vers tous les articles du blog"
+          >
+            Voir tous les articles
+          </a>
+        </div>
+      )}
     </div>
   );
 }

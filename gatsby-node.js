@@ -14,9 +14,6 @@ exports.createPages = async ({ graphql, actions }) => {
             link
           }
         }
-        pageInfo {
-          hasNextPage
-        }
       }
     }
   `);
@@ -42,16 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 slug
               }
             }
-            hubspotForm {
-              formId
-              portalid
-              titre
-              fieldGroupName
-            }
           }
-        }
-        pageInfo {
-          hasNextPage
         }
       }
     }`);
@@ -131,7 +119,7 @@ exports.createPages = async ({ graphql, actions }) => {
           },
         });
         break;
-      case edge.node.template.templateName === "Podcast":
+      case edge?.node?.template?.templateName === "Podcast":
         createPage({
           path: "/ipeach",
           component: slash(podcastTemplate),
@@ -149,7 +137,7 @@ exports.createPages = async ({ graphql, actions }) => {
           },
         });
 			break;
-		case edge.node.template.templateName === "Ressources":
+		case edge?.node?.template?.templateName === "Ressources":
 		createPage({
       path: "/ressources",
       component: slash(ressourcesTemplate),
@@ -158,7 +146,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
 		});
 			break;
-		case edge.node.template.templateName === "Templates":
+		case edge.node.template.templateName === "Ressource template page":
 		createPage({
       path: "/ressources/templates",
       component: slash(templatesTemplate),
