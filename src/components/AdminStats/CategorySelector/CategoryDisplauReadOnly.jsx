@@ -47,7 +47,7 @@ const CategoryDisplayReadOnly = ({ categories, globalScore }) => {
                 style={{ height: `${height}px`, cursor: "default" }}
               >
                 <div className="score">{category.averageScore.toFixed(0)}</div>
-                <div className="label">{category.slug}</div>
+                {/* <div className="label">{category.slug}</div> */}
                 <div className="icon">{icons[category.slug]}</div>
               </div>
             );
