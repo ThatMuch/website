@@ -1,0 +1,14 @@
+.number {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: rgba(1, 1, 1, 0.273);
+  border-radius: 5px;
+
+  .value {
+    font-size: 2rem;
+  }
+  .month {
+    text-align: right;
+  }
+}
