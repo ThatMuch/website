@@ -61,7 +61,7 @@ const AdminStats = () => {
 
         {/* Vue globale */}
         {isGlobalStat && (
-          <>
+          <div className="d-flex gap-2 w-100 flex-row">
             <CategorySelector
               totalSubmissions={totalSubmissions}
               averageGlobalScore={averageGlobalScore.toFixed(0)}
@@ -81,7 +81,7 @@ const AdminStats = () => {
                 }}
               />
             )}
-          </>
+          </div>
         )}
 
         {/* Vue des soumissions individuelles */}
