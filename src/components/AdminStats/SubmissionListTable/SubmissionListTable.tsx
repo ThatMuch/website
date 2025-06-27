@@ -1,10 +1,31 @@
+import "./style.scss";
+
+import { scoreResult, sectionResul } from "../utils/scoreResult";
+
 import React from "react";
 import { categories } from "../utils/categoryIcons";
 import { formatDate } from "../utils/dateUtils";
-import { scoreResult, sectionResul } from "../utils/scoreResult";
-import "./style.scss";
 
-const SubmissionListTable = ({ submissions, onClick }) => {
+type SubmissionListTableProps = {
+  submissions: Array<{
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    createdAt: { seconds: number };
+    url?: string;
+    scores: {
+      globalScore: number;
+      scoresByCategory: Record<string, number>;
+    };
+  }>;
+  onClick?: (id: string) => void;
+};
+
+const SubmissionListTable = ({
+  submissions,
+  onClick,
+}: SubmissionListTableProps) => {
   const sortedSubmissions = [...submissions].sort((a, b) => {
     const aSeconds = a.createdAt?.seconds || 0;
     const bSeconds = b.createdAt?.seconds || 0;
@@ -12,7 +33,9 @@ const SubmissionListTable = ({ submissions, onClick }) => {
   });
 
   if (submissions.length === 0) {
-    return <div className="submission-table__empty">Aucune soumission trouvée</div>;
+    return (
+      <div className="submission-table__empty">Aucune soumission trouvée</div>
+    );
   }
 
   return (
@@ -36,7 +59,7 @@ const SubmissionListTable = ({ submissions, onClick }) => {
           </thead>
           <tbody>
             {sortedSubmissions.map((item) => (
-              <tr key={item.id || item.email}>
+              <tr key={item.id}>
                 <td>
                   <button
                     onClick={() => onClick && onClick(item.id)}
@@ -48,18 +71,32 @@ const SubmissionListTable = ({ submissions, onClick }) => {
                     <span className="submission-table__user-email">
                       {item.email}
                     </span>
+                    {item.url && (
+                      <span className="submission-table__user-url">
+                        {item.url}
+                      </span>
+                    )}
                   </button>
                 </td>
                 <td>{formatDate(item.createdAt)}</td>
                 {categories.map(({ key }) => (
                   <td key={key} className="score">
-                    <span className={`pastille ${sectionResul(key, item.scores?.scoresByCategory?.[key])}`}>
+                    <span
+                      className={`pastille ${sectionResul(
+                        key,
+                        item.scores?.scoresByCategory?.[key]
+                      )}`}
+                    >
                       {item.scores?.scoresByCategory?.[key] ?? "-"}
                     </span>
                   </td>
                 ))}
                 <td className="score">
-                  <span className={`pastille big ${scoreResult(item.scores.globalScore)}`}>
+                  <span
+                    className={`pastille big ${scoreResult(
+                      item.scores.globalScore
+                    )}`}
+                  >
                     {item.scores.globalScore}
                   </span>
                 </td>

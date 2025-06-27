@@ -1,8 +1,13 @@
-import React from "react";
-import { categories } from "../utils/categoryIcons";
 import "./style.scss";
 
-const Legend = ({ questionsData, activeTab, onTabChange }) => {
+import React from "react";
+import { categories } from "../utils/categoryIcons";
+type LegendProps = {
+  questionsData: { slug: string; category: string }[];
+  activeTab: string;
+  onTabChange: (slug: string) => void;
+};
+const Legend = ({ questionsData, activeTab, onTabChange }: LegendProps) => {
   return (
     <div className="legend_section">
       <div className="button_section">
@@ -13,8 +18,9 @@ const Legend = ({ questionsData, activeTab, onTabChange }) => {
           return (
             <button
               key={category.slug}
-              className={`button button-${category.slug} ${isActive ? "active" : ""
-                }`}
+              className={`button button-${category.slug} ${
+                isActive ? "active" : ""
+              }`}
               onClick={() => onTabChange(category.slug)}
             >
               {categoryInfo?.icon} {categoryInfo?.label || category.category}
@@ -23,7 +29,6 @@ const Legend = ({ questionsData, activeTab, onTabChange }) => {
         })}
       </div>
     </div>
-
   );
 };
 

@@ -1,19 +1,24 @@
 import "./style.scss";
 
 import ButtonTab from "./ButtonTab/buttonTab";
-import Pastille from "../Pastille/pastille";
 import React from "react";
 import ResponseCount from "./ResponseCount/ResponseCount";
 import { getCurrentMonth } from "../utils/dateUtils";
-import { scoreResult } from "../utils/scoreResult";
 
+type HeroSectionProps = {
+  isGlobalStat: boolean;
+  onToggle: (isGlobalStat: boolean) => void;
+  responseCount: number;
+  responseThisMonth: number;
+  average: number;
+};
 const HeroSection = ({
   isGlobalStat,
   onToggle,
   responseCount,
   responseThisMonth,
   average,
-}) => {
+}: HeroSectionProps) => {
   return (
     <div className="stat-hero-section">
       <h1>Statistiques des réponses</h1>

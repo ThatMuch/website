@@ -6,9 +6,16 @@ import React from "react";
 
 const COLORS = ["#de3d64", "#fdc500", "#0fc7d2", "#9fdf6c", "#482aa2"];
 
-const CamembertChart = ({ data, onSectionClick }) => {
+type CamembertChartProps = {
+  data: { name: string; value: number }[];
+  onSectionClick?: (data: { name: string; value: number }) => void;
+};
+const CamembertChart = ({ data, onSectionClick }: CamembertChartProps) => {
   // Gère le clic sur une section du camembert
-  const handlePieClick = (data, index) => {
+  const handlePieClick = (
+    data: { name: string; value: number },
+    index: number
+  ) => {
     if (onSectionClick && data.value > 0) {
       onSectionClick(data);
     }

@@ -1,22 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
 import "./style.scss";
 
-const ButtonTab = ({ isActive, onClick, label }) => {
-    return (
-        <button
-            className={`buttonTab ${isActive ? "active" : ""}`}
-            onClick={onClick}
-        >
-            {label}
-        </button>
-    );
-};
+import React from "react";
 
-ButtonTab.propTypes = {
-    isActive: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
-    label: PropTypes.string.isRequired,
+type ButtonTabProps = {
+  isActive: boolean;
+  onClick: () => void;
+  label: string;
 };
-
+const ButtonTab = ({ isActive, onClick, label }: ButtonTabProps) => {
+  return (
+    <button
+      className={`buttonTab ${isActive ? "active" : ""}`}
+      onClick={onClick}
+    >
+      {label}
+    </button>
+  );
+};
 export default ButtonTab;
