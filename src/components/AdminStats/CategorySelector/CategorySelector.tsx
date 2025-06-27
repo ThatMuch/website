@@ -1,13 +1,7 @@
 import "./style.scss";
 
-import { MdAdsClick, MdDesignServices, MdSearch } from "react-icons/md";
-
-import { FaScaleBalanced } from "react-icons/fa6";
-import { IoStatsChart } from "react-icons/io5";
 import Pastille from "../Pastille/Pastille";
 import React from "react";
-import { SiTmux } from "react-icons/si";
-import { TiSpanner } from "react-icons/ti";
 import { categories as categoriesIcon } from "../utils/categoryIcons";
 
 const MAX_HEIGHT = 380;
@@ -51,13 +45,22 @@ const CategorySelector = ({
                 } ${category.slug} ${isCompact ? "compact" : ""}`}
                 style={{ width: `${width}px` }}
               >
-                <div className="score">{category.averageScore.toFixed(0)}</div>
-                <div className="label">{category.slug}</div>
-                <div className="icon">
+                <div className="category-pill__label">
                   {
                     categoriesIcon.find((icon) => icon.key === category.slug)
-                      ?.icon
+                      ?.label
                   }
+                </div>
+                <div className="content">
+                  <span className="score">
+                    {category.averageScore.toFixed(0)}
+                  </span>
+                  <div className="icon">
+                    {
+                      categoriesIcon.find((icon) => icon.key === category.slug)
+                        ?.icon
+                    }
+                  </div>
                 </div>
               </button>
             );

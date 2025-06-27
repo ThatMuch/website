@@ -61,8 +61,6 @@ const AdminStats = () => {
         {isGlobalStat && (
           <div className=" d-flex gap-2 w-100 flex-row align-items-start">
             <CategorySelector
-              totalSubmissions={totalSubmissions}
-              averageGlobalScore={averageGlobalScore.toFixed(0)}
               categories={categoryStats}
               selectedSlug={selectedCategorySlug}
               onSelect={handleCategoryClick}

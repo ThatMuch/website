@@ -45,9 +45,9 @@ const SubmissionAnswers = ({
                       key={question.id}
                       className="submission-answers__question-item"
                     >
-                      <p className="submission-answers__question-text">
+                      <h4 className="submission-answers__question-text">
                         {question.question}
-                      </p>
+                      </h4>
                       <p className="submission-answers__answer-text">
                         {selectedOption
                           ? `${selectedOption.text}`
