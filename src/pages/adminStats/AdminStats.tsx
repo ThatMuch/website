@@ -49,8 +49,8 @@ const AdminStats = () => {
   );
 
   return (
-    <div className="bg-landing">
-      <div className="">
+    <div>
+      <div className="container">
         <HeroSection
           isGlobalStat={isGlobalStat}
           onToggle={setGlobalStat}

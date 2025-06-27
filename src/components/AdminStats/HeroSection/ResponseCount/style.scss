@@ -1,14 +1,16 @@
-.number {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background-color: rgba(1, 1, 1, 0.273);
-  border-radius: 5px;
-
-  .value {
-    font-size: 2rem;
+@use "../../../../style/vars" as *;
+.ResponseCount {
+  padding: $spacing-s $spacing-m;
+  background-color: $neutral-50;
+  border-radius: $radius-m;
+  flex: 1;
+  &__count {
+    font-size: 4rem;
+    font-weight: 600;
+    color: $neutral-500;
+    margin-bottom: 5px;
   }
-  .month {
-    text-align: right;
+  &__label {
+    color: $neutral-600;
   }
 }
