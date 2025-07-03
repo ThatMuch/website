@@ -1,0 +1,40 @@
+.wp-block-faq-block-for-gutenberg-faq {
+  background: #f9f9f9;
+  line-height: 1.6em;
+  padding: 20px;
+  margin-bottom: 10px;
+  .question {
+    font-weight: 700;
+    font-size: 120%;
+    cursor: pointer;
+    padding: 7px;
+    &:before {
+      content: "+";
+      font-size: 20px;
+      float: right;
+      margin-left: 5px;
+    }
+    h4 {
+      margin-bottom: 10px;
+      padding: 0;
+      clear: none;
+      margin: 0 !important;
+      font-size: inherit;
+    }
+  }
+  .answer {
+    display: none;
+    transition-delay: 0s;
+  }
+  .active {
+    &:before {
+      content: "−" !important;
+    }
+    + {
+      .answer {
+        display: block;
+        transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+      }
+    }
+  }
+}

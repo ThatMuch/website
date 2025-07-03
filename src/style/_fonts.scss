@@ -1,44 +1,10 @@
 @font-face {
-  font-family: "Operator Mono";
-  src: local("Operator Mono"),
-    url(../fonts/OperatorMono-Book.otf) format("OpenType");
-}
-
-@font-face {
-  font-family: "Operator Mono";
-  src: local("Operator Mono"),
-    url(../fonts/OperatorMono-Bold.otf) format("OpenType");
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "Operator Mono";
-  src: local("Operator Mono"),
-    url(../fonts/OperatorMono-Light.otf) format("OpenType");
-  font-weight: light;
-}
-
-@font-face {
   font-family: "Neue Machina";
-  src: local("Operator Mono"),
-    url(../fonts/NeueMachina-Regular.ttf) format("TrueType");
+  src: url(../fonts/NeueMachina-Regular.woff2) format("woff2"),
+    url(../fonts/NeueMachina-Regular.woff) format("woff"),
+    url(../fonts/NeueMachina-Regular.ttf) format("truetype");
   font-weight: normal;
-}
-
-@font-face {
-  font-family: "SpaceMono";
-  src: url("../fonts/SpaceMono-Regular.woff") format("woff"),
-    url("../fonts/SpaceMono-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SpaceMono";
-  src: url("../fonts/SpaceMono-Bold.woff") format("woff"),
-    url("../fonts/SpaceMono-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -47,6 +13,7 @@
     url("../fonts/NeueMachina-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -55,6 +22,7 @@
     url("../fonts/NeueMachina-Ultrabold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -63,4 +31,23 @@
     url("../fonts/NeueMachina-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpaceMono";
+  src: url("../fonts/SpaceMono-Regular.woff") format("woff"),
+    url("../fonts/SpaceMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpaceMono";
+  src: url("../fonts/SpaceMono-Bold.woff") format("woff"),
+    url("../fonts/SpaceMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }

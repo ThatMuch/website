@@ -30,6 +30,19 @@ export const useSitePosts = (categorySlug?: string) => {
               twitterDescription
               twitterTitle
             }
+            blocks {
+              ... on WpFaqBlockForGutenbergFaqBlock {
+                attributesJSON
+                saveContent
+              }
+              name
+              saveContent
+              innerBlocks {
+                name
+                saveContent
+                attributesJSON
+              }
+            }
           }
         }
       }
