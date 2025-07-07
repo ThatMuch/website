@@ -147,7 +147,7 @@ header.landing-header {
       margin-bottom: $space_XL;
     }
 
-    ul {
+    .menu__items {
       list-style: none;
       padding: 0;
       border-right: 3px solid $neutral-50;
@@ -211,6 +211,28 @@ header.landing-header {
           }
         }
 
+        a {
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 2.5rem;
+          margin: auto 0;
+          color: $neutral-900;
+
+          @include breakpoint(mobile) {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+
+    .menu__items__sub {
+      list-style: none;
+      padding: 0;
+      li {
+        height: calc(100% / 4);
+        display: flex;
+        position: relative;
+        transition-duration: $slow;
         a {
           text-decoration: none;
           font-weight: 700;

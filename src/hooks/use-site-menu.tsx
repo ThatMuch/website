@@ -11,6 +11,13 @@ export const useSiteMenu = () => {
           target
           description
           locations
+          parentId
+          childItems {
+            nodes {
+              url
+              label
+            }
+          }
         }
       }
     }

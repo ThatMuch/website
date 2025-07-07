@@ -39,10 +39,11 @@ export default function Header() {
     }
   }, [isOpened]);
 
-  const menuItems = useSiteMenu().filter((item) =>
-    item.locations.includes("GATSBY_HEADER_MENU")
+  const menuItems = useSiteMenu().filter(
+    (item) =>
+      item.locations.includes("GATSBY_HEADER_MENU") && item.parentId === null
   );
-  console.log(menuItems);
+
   const site = useSiteSeo();
   const { siteUrl } = site;
   return (
@@ -97,31 +98,69 @@ export default function Header() {
             </a>
             <div className="row">
               <div className="col-12 col-sm-4 ">
-                <ul>
-                  {menuItems.map((item, index) => (
-                    <li
-                      key={item.id}
-                      onMouseEnter={() => setIsActive(index)}
-                      className="pr-1"
-                    >
-                      <a
-                        href={item.url}
-                        target={item.target}
-                        onClick={() => setIsOpened(false)}
-                        title={"Lien vers " + item.label}
-                        aria-label={item.label}
+                <ul className="menu__items">
+                  {menuItems.map((item, index) => {
+                    const hasChildren = item.childItems.nodes.length > 0;
+                    return (
+                      <li
+                        key={item.id}
+                        onMouseEnter={() => setIsActive(index)}
+                        className="pr-1"
                       >
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
+                        <a
+                          href={item.url}
+                          target={item.target}
+                          onClick={() => setIsOpened(false)}
+                          title={"Lien vers " + item.label}
+                          aria-label={item.label}
+                        >
+                          {item.label}
+                          {hasChildren && (
+                            <span className="arrow">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                              </svg>
+                            </span>
+                          )}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
-              <div className="d-none d-sm-flex col-sm-8  align-items-center">
-                {menuItems[isActive].description && (
+              <div className="d-none d-sm-flex col-sm-8 ">
+                {menuItems[isActive].description ? (
                   <p className="menu__item__desc">
                     {menuItems[isActive].description}
                   </p>
+                ) : (
+                  menuItems[isActive].childItems.nodes.length > 0 && (
+                    <ul className="menu__items__sub">
+                      {menuItems[isActive].childItems.nodes.map((child) => (
+                        <li key={child.url}>
+                          <a
+                            href={child.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={"Lien vers " + child.label}
+                            aria-label={child.label}
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )
                 )}
                 <div className="comets">
                   <LazyLoadImage
