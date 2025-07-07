@@ -155,7 +155,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
 		});
 			break;
-		case edge.node.template.templateName === "Ressource template page":
+		case edge.node.template.templateName === "Ressource Template Page":
 		createPage({
       path: "/ressources/templates",
       component: slash(templatesTemplate),
