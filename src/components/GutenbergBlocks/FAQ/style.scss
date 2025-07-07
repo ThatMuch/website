@@ -1,8 +1,10 @@
+@use "../../../style/vars" as *;
 .wp-block-faq-block-for-gutenberg-faq {
-  background: #f9f9f9;
+  background: $neutral-50 !important;
   line-height: 1.6em;
   padding: 20px;
   margin-bottom: 10px;
+  border-radius: $radius-m;
   .question {
     font-weight: 700;
     font-size: 120%;

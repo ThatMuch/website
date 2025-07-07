@@ -1,5 +1,6 @@
 import "../../components/GutenbergBlocks/FAQ/style.scss"; // Import Gutenberg styles
 
+import FAQ from "../../components/GutenbergBlocks/FAQ/Faq";
 import Layout from "../../components/Layout";
 import PostHeader from "../../components/PostHeader/PostHeader";
 import React from "react";
@@ -34,11 +35,7 @@ const Post = ({ data }) => {
         {blocks.map((block, index) => {
           switch (block.name) {
             case "faq-block-for-gutenberg/faq":
-              return (
-                <div key={index}>
-                  <p>{block.name}</p>
-                </div>
-              );
+              return <FAQ key={index} content={block.saveContent} />;
             default:
               return (
                 <div
@@ -48,7 +45,6 @@ const Post = ({ data }) => {
               );
           }
         })}
-        {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
         <RelatedPosts
           category={post.categories.nodes[0].slug}
           currentPostId={post.id}
