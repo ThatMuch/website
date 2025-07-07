@@ -10,7 +10,7 @@ header.header {
   left: $spacing-m;
   top: 0;
   z-index: 1000;
-  background-color: rgba($white, 0.2);
+  background-color: rgba($neutral-0, 0.2);
   backdrop-filter: blur(5px);
   border-radius: $radius-l;
   padding: $spacing-s;
@@ -115,7 +115,7 @@ header.landing-header {
         transform: rotate(45deg);
 
         .circle {
-          background: $dark_1 !important;
+          background: $neutral-900 !important;
 
           &:nth-child(3) {
             display: none;
@@ -132,7 +132,7 @@ header.landing-header {
     z-index: 1001;
     width: 100vw;
     height: 100vh;
-    background-color: $grey_3;
+    background-color: $neutral-50;
     padding: $spacing-m;
     background-image: url("../../images/Background-stars.webp");
     background-repeat: no-repeat;
@@ -150,7 +150,7 @@ header.landing-header {
     ul {
       list-style: none;
       padding: 0;
-      border-right: 3px solid $grey_2;
+      border-right: 3px solid $neutral-50;
       height: calc(100vh - calc(#{$space_XL} * 3 + 35px));
 
       @include breakpoint(mobile) {
@@ -216,7 +216,7 @@ header.landing-header {
           font-weight: 700;
           font-size: 2.5rem;
           margin: auto 0;
-          color: $dark_1;
+          color: $neutral-900;
 
           @include breakpoint(mobile) {
             font-size: 2rem;

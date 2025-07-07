@@ -8,7 +8,6 @@ body {
   font-size: 16px;
   line-height: 1.8;
   box-sizing: border-box;
-  font-size: 16px;
   color: $text-color-default;
   transition-duration: 1s;
   background: linear-gradient(#fff, $neutral-0) no-repeat fixed;
@@ -49,7 +48,7 @@ body {
   }
 
   .bg-grey-2 {
-    background-color: $grey_2;
+    background-color: $neutral-50;
   }
 }
 
@@ -104,43 +103,17 @@ body {
 
 // Animations
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
-  from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes rotating {
   from {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   to {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 
 .rotating {
-  -webkit-animation: rotating 2s linear infinite;
-  -moz-animation: rotating 2s linear infinite;
-  -ms-animation: rotating 2s linear infinite;
-  -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
 }
 .uppercase {
