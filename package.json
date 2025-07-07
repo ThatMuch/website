@@ -57,5 +57,7 @@
     "sass": "^1.70.0",
     "yup": "^1.6.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@svgr/cli": "^8.1.0"
+  }
 }
