@@ -1,3 +1,4 @@
+import "@wordpress/block-library/build-style/style.css";
 import "./Layout.scss";
 
 import React, { useEffect } from "react";

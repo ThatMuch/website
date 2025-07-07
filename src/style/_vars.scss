@@ -3,15 +3,6 @@ $yellow: #fdc500;
 $cyan: #0fc7d2;
 $green: #9fdf6c;
 
-//Shades
-$dark_1: #190e3d;
-$dark_2: #514561;
-$dark_3: #716a81;
-$grey_1: #ada6bb;
-$grey_2: #dfdce4;
-$grey_3: #f4f2f6;
-$white: #ffffff;
-
 //Gradient
 $gradient_rainbow: linear-gradient(
   90deg,
@@ -28,18 +19,12 @@ $gradient_rainbow: linear-gradient(
 // Spaces
 $space_XXL: 100px;
 $space_XL: 50px;
-$space_L: 30px;
 $space_M: 20px;
 $space_S: 15px;
-$space_XS: 10px;
 
 // Speed
 $fast: 0.5s;
 $slow: 1s;
-
-.fp-watermark {
-  display: none;
-}
 
 // +===============================
 /* Primitive */
