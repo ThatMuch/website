@@ -1,8 +1,11 @@
 import "./Header.scss";
 
+import { FiArrowRight, FiChevronRight } from "react-icons/fi";
 import React, { use, useEffect, useState } from "react";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { LuSquareArrowOutUpRight } from "react-icons/lu";
+import { MdChevronRight } from "react-icons/md";
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
@@ -13,7 +16,7 @@ import { useSiteSeo } from "../../hooks/use-site-seo";
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
-  const [isActive, setIsActive] = useState(0);
+  const [isActive, setIsActive] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleResize = () => {
@@ -105,7 +108,7 @@ export default function Header() {
                       <li
                         key={item.id}
                         onMouseEnter={() => setIsActive(index)}
-                        className="pr-1"
+                        className={isActive === index ? " active" : ""}
                       >
                         <a
                           href={item.url}
@@ -116,21 +119,7 @@ export default function Header() {
                         >
                           {item.label}
                           {hasChildren && (
-                            <span className="arrow">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              >
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                              </svg>
-                            </span>
+                            <FiChevronRight size={42} aria-hidden="true" />
                           )}
                         </a>
                       </li>
@@ -139,29 +128,37 @@ export default function Header() {
                 </ul>
               </div>
               <div className="d-none d-sm-flex col-sm-8 ">
-                {menuItems[isActive].description ? (
+                {isActive && menuItems[isActive]?.description ? (
                   <p className="menu__item__desc">
-                    {menuItems[isActive].description}
+                    {menuItems[isActive]?.description}
                   </p>
-                ) : (
-                  menuItems[isActive].childItems.nodes.length > 0 && (
+                ) : isActive !== null ? (
+                  menuItems[isActive]?.childItems.nodes.length > 0 && (
                     <ul className="menu__items__sub">
-                      {menuItems[isActive].childItems.nodes.map((child) => (
+                      {menuItems[isActive]?.childItems.nodes.map((child) => (
                         <li key={child.url}>
                           <a
                             href={child.url}
-                            target="_blank"
+                            target={child.target}
                             rel="noopener noreferrer"
                             title={"Lien vers " + child.label}
                             aria-label={child.label}
                           >
                             {child.label}
+                            {child.target === "_blank" ? (
+                              <LuSquareArrowOutUpRight
+                                size={42}
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <FiArrowRight size={42} aria-hidden="true" />
+                            )}
                           </a>
                         </li>
                       ))}
                     </ul>
                   )
-                )}
+                ) : null}
                 <div className="comets">
                   <LazyLoadImage
                     data-aos="fade-down-left"

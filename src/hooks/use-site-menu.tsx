@@ -16,6 +16,7 @@ export const useSiteMenu = () => {
             nodes {
               url
               label
+              target
             }
           }
         }
