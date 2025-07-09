@@ -1,11 +1,10 @@
 import "./Header.scss";
 
-import { FiArrowRight, FiChevronRight } from "react-icons/fi";
+import { FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import React, { use, useEffect, useState } from "react";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
-import { MdChevronRight } from "react-icons/md";
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
@@ -18,7 +17,7 @@ export default function Header() {
   const [isOpened, setIsOpened] = useState(false);
   const [isActive, setIsActive] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [isDescShown, setIsDescShown] = useState(false);
   const handleResize = () => {
     if (window.innerWidth <= 768) {
       setIsMobile(true);
@@ -40,6 +39,12 @@ export default function Header() {
     } else {
       document.body.style.overflow = "auto";
     }
+    return () => {
+      setIsDescShown(false);
+      setIsScrolled(false);
+      setIsActive(null);
+      document.body.style.overflow = "auto";
+    };
   }, [isOpened]);
 
   const menuItems = useSiteMenu().filter(
@@ -110,31 +115,64 @@ export default function Header() {
                         onMouseEnter={() => setIsActive(index)}
                         className={isActive === index ? " active" : ""}
                       >
-                        <a
-                          href={item.url}
-                          target={item.target}
-                          onClick={() => setIsOpened(false)}
-                          title={"Lien vers " + item.label}
-                          aria-label={item.label}
-                        >
-                          {item.label}
-                          {hasChildren && (
-                            <FiChevronRight size={42} aria-hidden="true" />
-                          )}
-                        </a>
+                        {hasChildren ? (
+                          <div
+                            className="menu__item"
+                            onClick={() => {
+                              isMobile
+                                ? (setIsDescShown(!isDescShown),
+                                  setIsActive(index))
+                                : setIsActive(index);
+                            }}
+                          >
+                            {item.label}
+                            {hasChildren && (
+                              <FiChevronRight size={42} aria-hidden="true" />
+                            )}
+                          </div>
+                        ) : (
+                          <a
+                            className="menu__item"
+                            href={item.url}
+                            target={item.target}
+                            onClick={() => setIsOpened(false)}
+                            title={"Lien vers " + item.label}
+                            aria-label={item.label}
+                          >
+                            {item.label}
+                          </a>
+                        )}
                       </li>
                     );
                   })}
                 </ul>
               </div>
-              <div className="d-none d-sm-flex col-sm-8 ">
+              <div
+                className={`menu__items__desc col-sm-8 ${
+                  isMobile && isDescShown ? "is-open" : ""
+                }`}
+              >
+                {isMobile ? (
+                  <div className="menu__items__desc__back">
+                    <FiChevronLeft
+                      size={42}
+                      onClick={() => {
+                        setIsDescShown(false);
+                        setIsActive(null);
+                      }}
+                      aria-label="Retour au menu principal"
+                      title="Retour au menu principal"
+                    />
+                    <p className="mb-0">{menuItems[isActive]?.label}</p>
+                  </div>
+                ) : null}
                 {isActive && menuItems[isActive]?.description ? (
                   <p className="menu__item__desc">
                     {menuItems[isActive]?.description}
                   </p>
                 ) : isActive !== null ? (
                   menuItems[isActive]?.childItems.nodes.length > 0 && (
-                    <ul className="menu__items__sub">
+                    <ul className={`menu__items__sub`}>
                       {menuItems[isActive]?.childItems.nodes.map((child) => (
                         <li key={child.url}>
                           <a
