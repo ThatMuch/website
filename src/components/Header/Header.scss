@@ -302,6 +302,7 @@ header.landing-header {
     }
   }
   &__items__desc {
+    display: flex;
     @include breakpoint(mobile) {
       position: absolute;
       height: calc(100vh - (1.5rem * 2 + 62px));
