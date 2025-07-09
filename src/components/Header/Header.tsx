@@ -1,8 +1,10 @@
 import "./Header.scss";
 
+import { FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import React, { use, useEffect, useState } from "react";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import close from "../../images/29-cross-outline.png";
 import close_gif from "../../images/29-cross-outline.gif";
 import comet from "../../images/Comet.svg";
@@ -13,9 +15,9 @@ import { useSiteSeo } from "../../hooks/use-site-seo";
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
-  const [isActive, setIsActive] = useState(0);
+  const [isActive, setIsActive] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [isDescShown, setIsDescShown] = useState(false);
   const handleResize = () => {
     if (window.innerWidth <= 768) {
       setIsMobile(true);
@@ -37,11 +39,19 @@ export default function Header() {
     } else {
       document.body.style.overflow = "auto";
     }
+    return () => {
+      setIsDescShown(false);
+      setIsScrolled(false);
+      setIsActive(null);
+      document.body.style.overflow = "auto";
+    };
   }, [isOpened]);
 
-  const menuItems = useSiteMenu().filter((item) =>
-    item.locations.includes("GATSBY_HEADER_MENU")
+  const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
+    (item) => item.parentId === null
   );
+  console.log(menuItems);
+
   const site = useSiteSeo();
   const { siteUrl } = site;
   return (
@@ -96,32 +106,97 @@ export default function Header() {
             </a>
             <div className="row">
               <div className="col-12 col-sm-4 ">
-                <ul>
-                  {menuItems.map((item, index) => (
-                    <li
-                      key={item.id}
-                      onMouseEnter={() => setIsActive(index)}
-                      className="pr-1"
-                    >
-                      <a
-                        href={item.url}
-                        target={item.target}
-                        onClick={() => setIsOpened(false)}
-                        title={"Lien vers " + item.label}
-                        aria-label={item.label}
+                <ul className="menu__items">
+                  {menuItems.map((item, index) => {
+                    const hasChildren = item.childItems.nodes.length > 0;
+                    return (
+                      <li
+                        key={item.id}
+                        onMouseEnter={() => setIsActive(index)}
+                        className={isActive === index ? " active" : ""}
                       >
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
+                        {hasChildren ? (
+                          <div
+                            className="menu__item"
+                            onClick={() => {
+                              isMobile
+                                ? (setIsDescShown(!isDescShown),
+                                  setIsActive(index))
+                                : setIsActive(index);
+                            }}
+                          >
+                            {item.label}
+                            {hasChildren && (
+                              <FiChevronRight size={42} aria-hidden="true" />
+                            )}
+                          </div>
+                        ) : (
+                          <a
+                            className="menu__item"
+                            href={item.url}
+                            target={item.target}
+                            onClick={() => setIsOpened(false)}
+                            title={"Lien vers " + item.label}
+                            aria-label={item.label}
+                          >
+                            {item.label}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
-              <div className="d-none d-sm-flex col-sm-8  align-items-center">
-                {menuItems[isActive].description && (
+              <div
+                className={`menu__items__desc col-sm-8 ${
+                  isMobile && isDescShown ? "is-open" : ""
+                }`}
+              >
+                {isMobile ? (
+                  <div className="menu__items__desc__back">
+                    <FiChevronLeft
+                      size={42}
+                      onClick={() => {
+                        setIsDescShown(false);
+                        setIsActive(null);
+                      }}
+                      aria-label="Retour au menu principal"
+                      title="Retour au menu principal"
+                    />
+                    <p className="mb-0">{menuItems[isActive]?.label}</p>
+                  </div>
+                ) : null}
+                {isActive && menuItems[isActive]?.description ? (
                   <p className="menu__item__desc">
-                    {menuItems[isActive].description}
+                    {menuItems[isActive]?.description}
                   </p>
-                )}
+                ) : isActive !== null ? (
+                  menuItems[isActive]?.childItems.nodes.length > 0 && (
+                    <ul className={`menu__items__sub`}>
+                      {menuItems[isActive]?.childItems.nodes.map((child) => (
+                        <li key={child.url}>
+                          <a
+                            href={child.url}
+                            target={child.target}
+                            rel="noopener noreferrer"
+                            title={"Lien vers " + child.label}
+                            aria-label={child.label}
+                          >
+                            {child.label}
+                            {child.target === "_blank" ? (
+                              <LuSquareArrowOutUpRight
+                                size={42}
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <FiArrowRight size={42} aria-hidden="true" />
+                            )}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )
+                ) : null}
                 <div className="comets">
                   <LazyLoadImage
                     data-aos="fade-down-left"

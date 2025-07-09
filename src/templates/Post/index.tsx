@@ -11,10 +11,6 @@ import { graphql } from "gatsby";
 const Post = ({ data }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
-  const faqBlocks = blocks.filter(
-    (block) =>
-      block.name === "core/faq" || block.name === "faq-block-for-gutenberg/faq"
-  );
 
   return (
     <Layout type="post">

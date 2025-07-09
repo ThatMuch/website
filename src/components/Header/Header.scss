@@ -140,6 +140,7 @@ header.landing-header {
 
     @include breakpoint(mobile) {
       width: calc(100% + #{$spacing_m} * 2);
+      top: -1rem;
     }
 
     .logo {
@@ -147,22 +148,24 @@ header.landing-header {
       margin-bottom: $space_XL;
     }
 
-    ul {
+    .menu__items {
       list-style: none;
       padding: 0;
-      border-right: 3px solid $neutral-50;
+      border-right: 3px solid $neutral-100;
       height: calc(100vh - calc(#{$space_XL} * 3 + 35px));
-
+      position: relative;
       @include breakpoint(mobile) {
         border-right: none;
       }
 
       li {
         height: calc(100% / 4);
+        width: 100%;
         display: flex;
         position: relative;
         transition-duration: $slow;
-
+        justify-content: space-between;
+        cursor: pointer;
         &:before {
           content: " ";
           position: absolute;
@@ -211,13 +214,48 @@ header.landing-header {
           }
         }
 
+        .menu__item {
+          width: 100%;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 2.5rem;
+          margin: auto 0;
+          padding-right: $spacing-l;
+          color: $neutral-900;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          @include breakpoint(mobile) {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+
+    .menu__items__sub {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      li {
+        width: 100%;
+        height: calc(100% / 4);
+        display: flex;
+        position: relative;
+        transition-duration: $slow;
         a {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
           text-decoration: none;
           font-weight: 700;
           font-size: 2.5rem;
           margin: auto 0;
           color: $neutral-900;
-
+          &:hover {
+            color: $neutral-500;
+          }
           @include breakpoint(mobile) {
             font-size: 2rem;
           }
@@ -263,9 +301,30 @@ header.landing-header {
       }
     }
   }
-
+  &__items__desc {
+    @include breakpoint(mobile) {
+      position: absolute;
+      height: calc(100vh - (1.5rem * 2 + 62px));
+      right: -100%;
+      background-color: $neutral-50;
+      padding: $spacing-m;
+      transition: right 0.3s ease-in-out;
+      &.is-open {
+        right: 0;
+      }
+      &__back {
+        display: flex;
+        align-items: center;
+        gap: $spacing-s;
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+    }
+  }
   &__item__desc {
     font-size: 2rem;
     text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }

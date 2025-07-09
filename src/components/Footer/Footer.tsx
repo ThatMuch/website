@@ -19,10 +19,7 @@ import { useSiteSeo } from "../../hooks/use-site-seo";
 type Props = {};
 
 export default function Footer({}: Props) {
-  const menuItems = useSiteMenu().filter((item) =>
-    item.locations.includes("GATSBY_FOOTER_MENU")
-  );
-
+  const menuItems = useSiteMenu("GATSBY_FOOTER_MENU");
   const site = useSiteSeo();
   const { siteUrl } = site;
   const posts = useSitePosts();

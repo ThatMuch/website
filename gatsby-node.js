@@ -145,24 +145,24 @@ exports.createPages = async ({ graphql, actions }) => {
             id: edge.node.id,
           },
         });
-			break;
-		case edge?.node?.template?.templateName === "Ressources":
-		createPage({
-      path: "/ressources",
-      component: slash(ressourcesTemplate),
-      context: {
-        id: edge.node.id,
-      },
-		});
-			break;
-		case edge.node.template.templateName === "Ressource template page":
-		createPage({
-      path: "/ressources/templates",
-      component: slash(templatesTemplate),
-      context: {
-        id: edge.node.id,
-      },
-		});
+        break;
+      case edge?.node?.template?.templateName === "Ressources":
+        createPage({
+          path: "/ressources",
+          component: slash(ressourcesTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
+      case edge.node.template.templateName === "Ressources/Templates":
+        createPage({
+          path: "/ressources/templates",
+          component: slash(templatesTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
       default:
         createPage({
           path: edge.node.slug,
