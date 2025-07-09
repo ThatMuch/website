@@ -47,10 +47,10 @@ export default function Header() {
     };
   }, [isOpened]);
 
-  const menuItems = useSiteMenu().filter(
-    (item) =>
-      item.locations.includes("GATSBY_HEADER_MENU") && item.parentId === null
+  const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
+    (item) => item.parentId === null
   );
+  console.log(menuItems);
 
   const site = useSiteSeo();
   const { siteUrl } = site;
