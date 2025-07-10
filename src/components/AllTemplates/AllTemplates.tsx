@@ -25,6 +25,7 @@ export default function AllTemplates({
   const postsPerPage: number = 8;
   const totalPages: number = Math.ceil((templates?.length || 0) / postsPerPage);
   const categories: CategoryType[] = useBlogCategories();
+  console.log(categories);
   const paginatedPosts = templates?.slice(
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage
@@ -61,17 +62,20 @@ export default function AllTemplates({
           </button>
 
           {/* Category Buttons */}
-          {categories.map((category) => (
-            <button
-              key={category.slug}
-              className={`AllPosts_list_button ${
-                selectedCategory === category.slug && "active"
-              }`}
-              onClick={() => setSelectedCategory(category.slug)}
-            >
-              {category.name}
-            </button>
-          ))}
+          {categories
+            .filter((category) => category?.templates?.nodes.length > 0)
+            .filter((category) => category.slug !== "all")
+            .map((category) => (
+              <button
+                key={category.slug}
+                className={`AllPosts_list_button ${
+                  selectedCategory === category.slug && "active"
+                }`}
+                onClick={() => setSelectedCategory(category.slug)}
+              >
+                {category.name}
+              </button>
+            ))}
         </div>
       )}
       <div className="PostsGrid">
