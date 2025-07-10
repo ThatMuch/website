@@ -11,10 +11,11 @@ import { graphql } from "gatsby";
 const Post = ({ data }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
+  const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
 
   return (
     <Layout type="post">
-      <main className={post.categories.nodes[0].slug}>
+      <main className={categorySlug}>
         <Seo
           title={post.title}
           description={post.seo.metaDesc}
@@ -25,7 +26,7 @@ const Post = ({ data }) => {
         <PostHeader
           title={post.title}
           author={post.author.node}
-          category={post.categories.nodes[0].slug}
+          category={categorySlug}
           postDate={post.date}
         />
         {blocks.map((block, index) => {
@@ -41,10 +42,7 @@ const Post = ({ data }) => {
               );
           }
         })}
-        <RelatedPosts
-          category={post.categories.nodes[0].slug}
-          currentPostId={post.id}
-        />
+        <RelatedPosts category={categorySlug} currentPostId={post.id} />
       </main>
     </Layout>
   );

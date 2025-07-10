@@ -155,14 +155,15 @@ exports.createPages = async ({ graphql, actions }) => {
           },
         });
         break;
-      case edge.node.template.templateName === "Ressources/Templates":
-        createPage({
-          path: "/ressources/templates",
-          component: slash(templatesTemplate),
-          context: {
-            id: edge.node.id,
-          },
-        });
+		case edge.node.template.templateName === "Ressources/Templates":
+			createPage({
+				path: "/ressources/templates",
+				component: slash(templatesTemplate),
+				context: {
+					id: edge.node.id,
+				},
+			});
+			break;
       default:
         createPage({
           path: edge.node.slug,
