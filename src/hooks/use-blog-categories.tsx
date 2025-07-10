@@ -28,6 +28,11 @@ export const useBlogCategories = () => {
               }
             }
           }
+          templates {
+            nodes {
+              title
+            }
+          }
         }
         totalCount
       }

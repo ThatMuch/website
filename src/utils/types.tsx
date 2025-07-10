@@ -40,4 +40,9 @@ export type CategoryType = {
   name: string;
   slug: string;
   count?: number;
+  templates?: {
+    nodes: {
+      title: string;
+    }[];
+  };
 };
