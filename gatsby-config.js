@@ -12,9 +12,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    defaultTitle: `Thatmuch : Agence web de design et développement front pour les sites WordPress et SaaS.`,
+    defaultTitle: `THATMUCH : Agence web de design et développement front pour les sites WordPress et SaaS.`,
     defaultDescription: `Agence web experte en design et développement front sur WordPress et SaaS. Créons ensemble un site performant, moderne et sur-mesure.`,
-    author: `Thatmuch`,
+    author: `THATMUCH`,
     siteUrl: process.env.SITE_URL, // Replace with your domain
     defaultImage: `/og_image_THATMUCH.png`,
     defaultImageAlt: `THATMUCH Logo`,
@@ -127,7 +127,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/THATMUCH_Logo_Black.png`, // Path to your favicon
+        icon: `src/images/favicon-32x32.png`, // Path to your favicon
       },
     }
   ],
