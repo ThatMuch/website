@@ -1,6 +1,5 @@
 import AllTemplates from "../../components/AllTemplates/AllTemplates";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import HubspotForm from "react-hubspot-form";
 import Layout from "../../components/Layout";
 import React from "react";
 import Seo from "../../components/Seo";

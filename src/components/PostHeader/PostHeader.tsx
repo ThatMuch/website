@@ -1,5 +1,6 @@
 import "./PostHeader.scss";
 
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
@@ -18,6 +19,15 @@ export default function PostHeader({
 }: Props) {
   return (
     <div className={`PostHeader PostHeader--${category.toLowerCase()}`}>
+      <Breadcrumb
+        crumbs={[
+          {
+            pathname: `/blog`,
+            label: "Blog",
+          },
+        ]}
+        currentPage={title}
+      />
       <div>
         <h1 className="PostHeader__title">{title}</h1>
         <div className="PostHeader__meta">
