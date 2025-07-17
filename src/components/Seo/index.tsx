@@ -1,5 +1,3 @@
-import { graphql, useStaticQuery } from "gatsby";
-
 import { Helmet } from "react-helmet";
 import React from "react";
 import { useSiteSeo } from "../../hooks/use-site-seo";
