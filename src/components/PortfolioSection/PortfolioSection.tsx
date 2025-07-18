@@ -67,7 +67,7 @@ export default function PortfolioSection({ section }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Voir le site
+                  Explorer le site
                 </a>
               </div>
 
