@@ -1,13 +1,5 @@
-const adapter = require("gatsby-adapter-netlify").default;
-
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-  adapter: adapter({
-    // Options de configuration de l'adaptateur
-    // excludeDatastoreFromEngineFunction: false, // Par défaut
-    imageCDN: true,
-    excludeDatastoreFromEngineFunction: true,
-  }),
+  path: `.env.${process.env.NODE_ENV}`
 });
 
 module.exports = {
@@ -21,7 +13,6 @@ module.exports = {
     defaultImageWhite: `/THATMUCH_Logo_White.png`,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
@@ -105,8 +96,6 @@ module.exports = {
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-image",
     `gatsby-transformer-remark`,
-    `gatsby-plugin-sharp`,
-    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-plugin-netlify",
