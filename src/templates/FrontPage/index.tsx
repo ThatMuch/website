@@ -4,6 +4,7 @@ import ExpertisesSection from "../../components/ExpertisesSection";
 import FAQHome from "../../components/FAQHome/FAQHome";
 import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
+import Metrics from "../../components/Metrics/Metrics";
 import PortfolioSection from "../../components/PortfolioSection/PortfolioSection";
 import React from "react";
 import Seo from "../../components/Seo";
@@ -45,6 +46,17 @@ const FrontPage = ({ data }) => {
                   title={section.title}
                   description={section.description}
                   questions={section.questions}
+                />
+              </div>
+            );
+          case "HomePageBuilderAboutLayout":
+            return (
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <Metrics
+                  metric={section.metric}
+                  title={section.title}
+                  sousTitre={section.sousTitre}
+                  description={section.description}
                 />
               </div>
             );
