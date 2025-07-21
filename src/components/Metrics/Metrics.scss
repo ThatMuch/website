@@ -8,6 +8,10 @@
     align-items: flex-start;
     gap: $spacing-s;
     align-self: stretch;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
+
     &__item {
       display: flex;
       padding: 1.5rem;
