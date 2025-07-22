@@ -1,6 +1,7 @@
 import "./Metrics.scss";
 
 import React from "react";
+import ScrollFloat from "../ScrollFloat/ScrollFloat";
 import Starfleet from "../../images/Starfleet.webp";
 
 type Metric = {
@@ -25,10 +26,19 @@ export default function Metrics({
   return (
     <div className="Metrics">
       <div className="Metrics__header">
-        <div>
+        <div className="Metrics__header__text">
           <h2 className="h3">{sousTitre}</h2>
           <div className="divider mb-4"></div>
-          <h3 className="h2">{title}</h3>
+          <ScrollFloat
+            animationDuration={1}
+            ease="back.inOut(2)"
+            scrollStart="center bottom+=50%"
+            scrollEnd="bottom bottom-=40%"
+            stagger={0.03}
+            containerClassName="h2"
+          >
+            {title}
+          </ScrollFloat>
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </div>
         <img src={Starfleet} className="img-fluid" alt="Starfleet" />
@@ -48,7 +58,7 @@ export default function Metrics({
             }}
           >
             <span className="Metrics__list__item__number">{item.number}</span>
-            <h4 className="Metrics__list__item__title">{item.titre}</h4>
+            <h3 className="Metrics__list__item__title h4">{item.titre}</h3>
             <div
               className="Metrics__list__item__description"
               dangerouslySetInnerHTML={{ __html: item.description }}

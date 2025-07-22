@@ -6,6 +6,14 @@
   &__header {
     display: flex;
     gap: $spacing-s;
+    align-items: flex-end;
+    justify-content: space-between;
+    &__text {
+      width: 50%;
+      @include breakpoint(mobile) {
+        width: 100%;
+      }
+    }
     @include breakpoint(mobile) {
       flex-direction: column;
     }
@@ -60,7 +68,7 @@
         line-height: normal;
       }
       &__description {
-        color: $neutral-400;
+        color: $neutral-500;
       }
     }
   }

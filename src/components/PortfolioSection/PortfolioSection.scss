@@ -1,12 +1,6 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 .PortfolioSection {
-  &__description {
-    width: 100%;
-    @include breakpoint("laptop") {
-      width: 50%;
-    }
-  }
   &__project {
     position: relative;
     background-color: $neutral-900;

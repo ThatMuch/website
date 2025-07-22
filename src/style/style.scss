@@ -3,6 +3,7 @@
 @use "./mixins" as *;
 @use "./atoms/atoms" as *;
 @use "./organism/TemplateSection" as *;
+@use "./organism/section" as *;
 body {
   font-family: "SpaceMono", sans-serif;
   font-size: 16px;
