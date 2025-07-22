@@ -1,6 +1,7 @@
 import "./Metrics.scss";
 
 import React from "react";
+import Starfleet from "../../images/Starfleet.webp";
 
 type Metric = {
   titre: string;
@@ -24,10 +25,13 @@ export default function Metrics({
   return (
     <div className="Metrics">
       <div className="Metrics__header">
-        <h2 className="h3">{sousTitre}</h2>
-        <div className="divider mb-4"></div>
-        <h3 className="h2">{title}</h3>
-        <div dangerouslySetInnerHTML={{ __html: description }} />
+        <div>
+          <h2 className="h3">{sousTitre}</h2>
+          <div className="divider mb-4"></div>
+          <h3 className="h2">{title}</h3>
+          <div dangerouslySetInnerHTML={{ __html: description }} />
+        </div>
+        <img src={Starfleet} className="img-fluid" alt="Starfleet" />
       </div>
       <div className="Metrics__list">
         {metric.map((item, index) => (

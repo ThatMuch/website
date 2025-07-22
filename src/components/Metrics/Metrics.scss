@@ -3,6 +3,16 @@
 
 .Metrics {
   margin-bottom: $spacing-xl;
+  &__header {
+    display: flex;
+    gap: $spacing-s;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
+    img {
+      height: 242px;
+    }
+  }
   &__list {
     display: flex;
     align-items: flex-start;
