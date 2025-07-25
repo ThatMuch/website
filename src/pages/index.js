@@ -41,25 +41,25 @@ const query = graphql`
             title
             subtitle
           }
-			... on WpHomePageBuilderPortfolioLayout {
-			fieldGroupName
-			title
-			sousTitre
-			description
-			project {
-			  client
-			  description
-			  title
-				url
-				images {
-				  node {
-					altText
-					title
-					mediaItemUrl
-				  }
-				}
-			}
-		  }
+          ... on WpHomePageBuilderPortfolioLayout {
+            fieldGroupName
+            title
+            sousTitre
+            description
+            project {
+              client
+              description
+              title
+              url
+              images {
+                node {
+                  altText
+                  title
+                  mediaItemUrl
+                }
+              }
+            }
+          }
 
           ... on WpHomePageBuilderWhySectionLayout {
             desc
@@ -82,6 +82,15 @@ const query = graphql`
               }
             }
           }
+        }
+        ... on WpHomePageBuilderFeaturesLayout {
+          fieldGroupName
+          title
+          sousTitre
+		  feature {
+		  description
+		  title
+		  }
         }
       }
     }
