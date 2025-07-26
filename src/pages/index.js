@@ -30,6 +30,21 @@ const query = graphql`
           }
         }
         pageBuilder {
+          ... on WpHomePageBuilderFeaturesLayout {
+            fieldGroupName
+            title
+            sousTitre
+            feature {
+              description
+              title
+              number {
+                node {
+                  altText
+                  mediaItemUrl
+                }
+              }
+            }
+          }
           ... on WpHomePageBuilderTestimonialsLayout {
             desc
             fieldGroupName
@@ -82,15 +97,6 @@ const query = graphql`
               }
             }
           }
-        }
-        ... on WpHomePageBuilderFeaturesLayout {
-          fieldGroupName
-          title
-          sousTitre
-		  feature {
-		  description
-		  title
-		  }
         }
       }
     }
