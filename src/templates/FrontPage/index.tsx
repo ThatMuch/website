@@ -2,6 +2,7 @@ import AllPosts from "../../components/AllPosts/AllPosts";
 import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import ExpertisesSection from "../../components/ExpertisesSection";
 import FAQHome from "../../components/FAQHome/FAQHome";
+import Features from "../../components/Features/Features";
 import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
 import Metrics from "../../components/Metrics/Metrics";
@@ -57,6 +58,16 @@ const FrontPage = ({ data }) => {
                   title={section.title}
                   sousTitre={section.sousTitre}
                   description={section.description}
+                />
+              </div>
+            );
+          case "HomePageBuilderFeaturesLayout":
+            return (
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <Features
+                  title={section.title}
+                  subtitle={section.sousTitre}
+                  features={section.feature}
                 />
               </div>
             );

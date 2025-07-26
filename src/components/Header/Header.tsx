@@ -111,7 +111,7 @@ export default function Header() {
                     return (
                       <li
                         key={item.id}
-                        onMouseEnter={() => setIsActive(index)}
+                        onClick={() => setIsActive(index)}
                         className={isActive === index ? " active" : ""}
                       >
                         {hasChildren ? (
