@@ -30,6 +30,21 @@ const query = graphql`
           }
         }
         pageBuilder {
+          ... on WpHomePageBuilderFeaturesLayout {
+            fieldGroupName
+            title
+            sousTitre
+            feature {
+              description
+              title
+              number {
+                node {
+                  altText
+                  mediaItemUrl
+                }
+              }
+            }
+          }
           ... on WpHomePageBuilderTestimonialsLayout {
             desc
             fieldGroupName
@@ -60,6 +75,7 @@ const query = graphql`
               }
             }
           }
+
           ... on WpHomePageBuilderWhySectionLayout {
             desc
             fieldGroupName
@@ -79,26 +95,6 @@ const query = graphql`
                 altText
                 mediaItemUrl
               }
-            }
-          }
-          ... on WpHomePageBuilderAboutLayout {
-            description
-            fieldGroupName
-            sousTitre
-            title
-            metric {
-              description
-              number
-              titre
-            }
-          }
-          ... on WpHomePageBuilderFaqLayout {
-            description
-            fieldGroupName
-            title
-            questions {
-              description
-              title
             }
           }
         }
