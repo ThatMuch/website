@@ -1,0 +1,75 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.Metrics {
+  margin-bottom: $spacing-xl;
+  &__header {
+    display: flex;
+    gap: $spacing-s;
+    align-items: flex-end;
+    justify-content: space-between;
+    &__text {
+      width: 50%;
+      @include breakpoint(mobile) {
+        width: 100%;
+      }
+    }
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
+    img {
+      height: 242px;
+    }
+  }
+  &__list {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-s;
+    align-self: stretch;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
+
+    &__item {
+      display: flex;
+      padding: 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.625rem;
+      flex: 1 0 0;
+      align-self: stretch;
+      border-radius: $radius-m;
+      background-color: $neutral-100;
+      color: $neutral-500;
+      transition: flex $fast ease-in-out;
+      background-image: url("../../images/bg-stars.webp");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-blend-mode: color-dodge;
+
+      &.is-hovered {
+        flex: 2 0 0;
+        background-color: $neutral-900;
+        color: $neutral-100;
+        background-blend-mode: luminosity;
+
+        .Metrics__list__item__number {
+          font-size: $font-size-display;
+        }
+        .Metrics__list__item__description {
+          color: $neutral-200;
+        }
+      }
+
+      &__number {
+        font-family: "Neue Machina";
+        font-size: $font-size-xxxl;
+        font-weight: 700;
+        line-height: normal;
+      }
+      &__description {
+        color: $neutral-500;
+      }
+    }
+  }
+}

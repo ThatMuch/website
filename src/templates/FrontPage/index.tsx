@@ -1,8 +1,11 @@
 import AllPosts from "../../components/AllPosts/AllPosts";
 import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import ExpertisesSection from "../../components/ExpertisesSection";
+import FAQHome from "../../components/FAQHome/FAQHome";
+import Features from "../../components/Features/Features";
 import HeroSection from "../../components/HeroSection";
 import Layout from "../../components/Layout";
+import Metrics from "../../components/Metrics/Metrics";
 import PortfolioSection from "../../components/PortfolioSection/PortfolioSection";
 import React from "react";
 import Seo from "../../components/Seo";
@@ -14,7 +17,7 @@ const FrontPage = ({ data }) => {
       <Seo />
       <HeroSection data={heroSection} />
       {pageBuilder.map((section, index) => {
-        switch (section.fieldGroupName) {
+        switch (section?.fieldGroupName) {
           case "HomePageBuilderTestimonialsLayout":
             return (
               <div key={`${section.fieldGroupName}-${index}`}>
@@ -35,6 +38,37 @@ const FrontPage = ({ data }) => {
             return (
               <div key={`${section.fieldGroupName}-${index}`}>
                 <PortfolioSection section={section} />
+              </div>
+            );
+          case "HomePageBuilderFaqLayout":
+            return (
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <FAQHome
+                  title={section.title}
+                  description={section.description}
+                  questions={section.questions}
+                />
+              </div>
+            );
+          case "HomePageBuilderAboutLayout":
+            return (
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <Metrics
+                  metric={section.metric}
+                  title={section.title}
+                  sousTitre={section.sousTitre}
+                  description={section.description}
+                />
+              </div>
+            );
+          case "HomePageBuilderFeaturesLayout":
+            return (
+              <div key={`${section.fieldGroupName}-${index}`}>
+                <Features
+                  title={section.title}
+                  subtitle={section.sousTitre}
+                  features={section.feature}
+                />
               </div>
             );
           default:

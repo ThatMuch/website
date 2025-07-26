@@ -1,0 +1,28 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.FAQHome {
+  margin-bottom: $spacing-xl;
+  &__question {
+    border-bottom: 1px solid $neutral-50;
+    padding: 12px 0;
+
+    &__title {
+      cursor: pointer;
+      font-family: "SpaceMono";
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.5rem; /* 150% */
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: $neutral-500;
+      transition: color 0.3s ease;
+    }
+  }
+}

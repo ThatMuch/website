@@ -50,7 +50,6 @@ export default function Header() {
   const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
     (item) => item.parentId === null
   );
-  console.log(menuItems);
 
   const site = useSiteSeo();
   const { siteUrl } = site;
@@ -112,7 +111,7 @@ export default function Header() {
                     return (
                       <li
                         key={item.id}
-                        onMouseEnter={() => setIsActive(index)}
+                        onClick={() => setIsActive(index)}
                         className={isActive === index ? " active" : ""}
                       >
                         {hasChildren ? (
