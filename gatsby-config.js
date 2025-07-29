@@ -70,7 +70,7 @@ module.exports = {
         type: {
           MediaItem: {
             createFileNodes: true,
-          },
+          }
         },
         debug: {
           graphql: {
@@ -118,6 +118,6 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/favicon-32x32.png`, // Path to your favicon
       },
-    }
+    },
   ],
 };
