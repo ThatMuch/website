@@ -4,6 +4,12 @@
 @use "./atoms/atoms" as *;
 @use "./organism/TemplateSection" as *;
 @use "./organism/section" as *;
+
+html {
+  scroll-behavior: smooth;
+  position: relative;
+}
+
 body {
   font-family: "SpaceMono", sans-serif;
   font-size: 16px;

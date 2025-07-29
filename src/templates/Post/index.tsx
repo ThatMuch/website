@@ -6,13 +6,31 @@ import PostHeader from "../../components/PostHeader/PostHeader";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
+import TOCBlock from "../../components/TOCBlock/TOCBlock";
 import { graphql } from "gatsby";
 
 const Post = ({ data }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
-
+  console.log(blocks);
+  const renderBlocks = () => {
+    return blocks.map((block, index) => {
+      switch (block.name) {
+        case "faq-block-for-gutenberg/faq":
+          return <FAQ key={index} content={block.saveContent} />;
+        case "tm-multi-block/toc":
+          return <TOCBlock attributes={block.attributes} />;
+        default:
+          return (
+            <div
+              key={index}
+              dangerouslySetInnerHTML={{ __html: block.saveContent }}
+            />
+          );
+      }
+    });
+  };
   return (
     <Layout type="post">
       <main className={categorySlug}>
@@ -29,19 +47,7 @@ const Post = ({ data }) => {
           category={categorySlug}
           postDate={post.date}
         />
-        {blocks.map((block, index) => {
-          switch (block.name) {
-            case "faq-block-for-gutenberg/faq":
-              return <FAQ key={index} content={block.saveContent} />;
-            default:
-              return (
-                <div
-                  key={index}
-                  dangerouslySetInnerHTML={{ __html: block.saveContent }}
-                />
-              );
-          }
-        })}
+        <div className="post__content">{renderBlocks()}</div>
         <RelatedPosts category={categorySlug} currentPostId={post.id} />
       </main>
     </Layout>
@@ -82,6 +88,18 @@ export const pageQuery = graphql`
         ... on WpFaqBlockForGutenbergFaqBlock {
           attributesJSON
           saveContent
+        }
+        ... on WpTmMultiBlockTocBlock {
+          attributes {
+            collapsible
+            includeH6
+            includeH5
+            includeH4
+            includeH3
+            includeH2
+            includeH1
+            title
+          }
         }
         name
         saveContent
