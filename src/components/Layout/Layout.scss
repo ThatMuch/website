@@ -3,7 +3,7 @@
 .Layout {
   padding: 150px 50px 50px 50px;
   position: relative;
-  overflow: hidden;
+  //  overflow: hidden;
   @include breakpoint(mobile) {
     padding: $spacing-s;
     .container {
@@ -16,7 +16,7 @@
     display: block;
     position: absolute;
     top: -125px;
-    right: -100px;
+    right: 50px;
     width: 413px;
     height: 413px;
     z-index: -1;
