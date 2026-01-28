@@ -3,9 +3,6 @@ import AllTemplates from "../../components/AllTemplates/AllTemplates";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Layout from "../../components/Layout";
 import PageHeader from "../../components/PageHeader";
-import PostHeader from "../../components/PostHeader/PostHeader";
-import PropTypes from "prop-types";
-import React from "react";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 

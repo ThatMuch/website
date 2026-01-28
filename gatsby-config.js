@@ -70,6 +70,9 @@ module.exports = {
         type: {
           MediaItem: {
             createFileNodes: true,
+          },
+          CoreVideoBlockDeprecatedV1Attributes: {
+            exclude: true,
           }
         },
         debug: {
@@ -82,13 +85,22 @@ module.exports = {
         schema: {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
-          timeout: 120000,
-          // Decrease the number of items fetched per request (e.g., to 50)
-          perPage: 50,
+          timeout: 300000, // Increased to 5 minutes
+          perPage: 20, // Reduced from 50 to 20 items per request
+          requestConcurrency: 5, // Limit concurrent requests
+          previewRequestConcurrency: 2, // Limit preview requests
         },
         develop: {
           //caches media files outside of Gatsby's default cache an thus allows them to persist through a cache reset.
           hardCacheMediaFiles: true,
+          nodeUpdateInterval: 5000, // Check for updates every 5 seconds
+        },
+        production: {
+          hardCacheMediaFiles: true,
+        },
+        html: {
+          useGatsbyImage: true,
+          createStaticFiles: true,
         },
       },
     },

@@ -18,7 +18,7 @@ export default function TOCBlock({ attributes }: Props) {
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
-  console.log(attributes);
+
   useEffect(() => {
     // Fonction pour générer un ID unique basé sur le texte
     const generateId = (text: string): string => {
@@ -33,7 +33,7 @@ export default function TOCBlock({ attributes }: Props) {
     const extractHeadings = () => {
       // Sélectionner tous les titres mais exclure ceux du footer
       const headings = document.querySelectorAll(
-        ".post__content h1, .post__content h2, .post__content h3, .post__content h4, .post__content h5, .post__content h6"
+        ".post__content h1, .post__content h2, .post__content h3, .post__content h4, .post__content h5, .post__content h6",
       );
       // filter headings based on attributes
       const filteredHeadings = Array.from(headings).filter((heading) => {
@@ -113,7 +113,7 @@ export default function TOCBlock({ attributes }: Props) {
     // Intersection Observer pour mettre en surbrillance le titre actif
     const observeHeadings = () => {
       const headingElements = document.querySelectorAll(
-        ".post__content h1, .post__content h2, .post__content h3, .post__content h4, .post__content h5, .post__content h6"
+        ".post__content h1, .post__content h2, .post__content h3, .post__content h4, .post__content h5, .post__content h6",
       );
 
       const observer = new IntersectionObserver(
@@ -127,7 +127,7 @@ export default function TOCBlock({ attributes }: Props) {
         {
           rootMargin: "-100px 0px -66%",
           threshold: 0,
-        }
+        },
       );
 
       headingElements.forEach((el) => observer.observe(el));

@@ -45,6 +45,15 @@ const query = graphql`
               }
             }
           }
+          ... on WpHomePageBuilderFaqLayout {
+            description
+            fieldGroupName
+            title
+            questions {
+              description
+              title
+            }
+          }
           ... on WpHomePageBuilderTestimonialsLayout {
             desc
             fieldGroupName

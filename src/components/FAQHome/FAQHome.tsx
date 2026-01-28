@@ -16,6 +16,7 @@ type Props = {
 };
 
 export default function FAQHome({ title, description, questions }: Props) {
+  console.log(questions);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const toggleQuestion = (index: number) => {
     if (activeIndex === index) {
