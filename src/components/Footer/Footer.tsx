@@ -39,7 +39,7 @@ export default function Footer({}: Props) {
     {
       name: "Tiktok",
       icon: <FaTiktok size={44} className="RS_Section__icon" title="Tiktok" />,
-      url: "https://www.tiktok.com/@thatmuch_fr",
+      url: "https://www.tiktok.com/@ipeach_tv",
     },
     {
       name: "Linkedin",
@@ -60,7 +60,7 @@ export default function Footer({}: Props) {
       icon: (
         <FaYoutube size={44} className="RS_Section__icon" title="Youtube" />
       ),
-      url: "https://www.youtube.com/@thatmuch_fr",
+      url: "https://www.youtube.com/@ipeach_tv",
     },
     {
       name: "Bluesky",
