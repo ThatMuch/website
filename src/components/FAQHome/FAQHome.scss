@@ -3,6 +3,8 @@
 
 .FAQHome {
   margin-bottom: $spacing-xl;
+  max-width: 800px;
+  margin: 0 auto;
   &__question {
     border-bottom: 1px solid $neutral-50;
     padding: 12px 0;
