@@ -15,10 +15,9 @@ import MenuContent from "./MenuContent"
 
 export default function Header() {
   // Global Store State
-  // Global Store State
   const isMobile = useUIStore(state => state.isMobile)
   const isMenuOpen = useUIStore(state => state.isMenuOpen)
-  // const isScrolled = useUIStore(state => state.isScrolled) // Unused in render, only in effect
+  // isScrolled handled only in effect, no re-render needed
   const setMobile = useUIStore(state => state.setMobile)
   const toggleMenu = useUIStore(state => state.toggleMenu)
   const setScrolled = useUIStore(state => state.setScrolled)

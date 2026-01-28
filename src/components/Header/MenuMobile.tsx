@@ -1,9 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
-import { useUIStore } from '../../store/useUIStore'
-import clsx from 'clsx'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import comet from '../../images/Comet.svg'
 
 interface MenuMobileProps {
   activeItem: any
@@ -11,8 +7,7 @@ interface MenuMobileProps {
 }
 
 export default function MenuMobile({ activeItem, onBack }: MenuMobileProps) {
-  // No store needed here if props handle it.
-  // const activeMenuIndex = useUIStore(state => state.activeMenuIndex)
+
 
   if (!activeItem) return null
 
