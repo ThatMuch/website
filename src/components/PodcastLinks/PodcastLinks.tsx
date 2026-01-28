@@ -27,7 +27,7 @@ const podcastLinks = [
   },
   {
     name: "Youtube",
-    url: "https://www.youtube.com/@thatmuch_fr",
+    url: "https://www.youtube.com/@ipeach_tv",
     image: youtube,
   },
 ];
