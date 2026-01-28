@@ -1,3 +1,4 @@
+import React from "react";
 import AllPosts from "../../components/AllPosts/AllPosts";
 import AllTemplates from "../../components/AllTemplates/AllTemplates";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
