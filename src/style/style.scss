@@ -18,16 +18,20 @@ body {
   color: $text-color-default;
   transition-duration: 1s;
   background: linear-gradient(#fff, $neutral-0) no-repeat fixed;
+
   img,
   iframe {
     max-width: 100%;
   }
+
   img {
     height: auto;
   }
+
   p {
     margin-bottom: $spacing-m;
   }
+
   .bg-dark {
     color: #fff;
     background-color: $neutral-900 !important;
@@ -66,6 +70,7 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
 }
+
 .bg-landing {
   position: relative;
   background-image: url("../images/bg_landing.webp");
@@ -74,6 +79,7 @@ body {
   color: #fff;
   background-color: #281759;
   overflow: hidden;
+
   @include breakpoint(desktop) {
     background-size: cover;
   }
@@ -89,6 +95,7 @@ body {
     background-position: 0 center;
     background-size: contain;
   }
+
   .planet-yellow {
     z-index: 0;
 
@@ -100,6 +107,7 @@ body {
     background-repeat: no-repeat;
     background-position: right center;
     background-size: contain;
+
     @include breakpoint(mobile) {
       width: 200px;
       top: 470px;
@@ -123,6 +131,7 @@ body {
 .rotating {
   animation: rotating 2s linear infinite;
 }
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -138,6 +147,26 @@ body {
 .ml-auto {
   margin-left: auto;
 }
+
 .mr-auto {
   margin-right: auto;
+}
+
+
+figure.wp-block-table {
+  margin: 0 0 1.5em !important;
+  width: 100% !important;
+  overflow-x: auto !important;
+}
+
+figure.wp-block-table table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+figure.wp-block-table th,
+figure.wp-block-table td {
+  border: 1px solid #ddd !important;
+  padding: 8px !important;
+  text-align: left !important;
 }
