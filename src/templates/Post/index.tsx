@@ -37,7 +37,7 @@ const Post = ({ data }) => {
         <Seo
           title={post.title}
           description={post.seo.metaDesc}
-          image={post.featuredImage.node.mediaItemUrl}
+          image={post.featuredImage?.node?.mediaItemUrl}
           type="article"
         />
 
