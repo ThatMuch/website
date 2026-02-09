@@ -131,5 +131,53 @@ module.exports = {
         icon: `src/images/favicon-32x32.png`, // Path to your favicon
       },
     },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title: defaultTitle
+                description: defaultDescription
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allWpPost } }) => {
+              return allWpPost.nodes.map(node => {
+                return {
+                  title: node.title,
+                  description: node.excerpt,
+                  date: node.date,
+                  url: site.siteMetadata.siteUrl + node.uri,
+                  guid: site.siteMetadata.siteUrl + node.uri,
+                  custom_elements: [{ "content:encoded": node.content }],
+                }
+              })
+            },
+            query: `
+              {
+                allWpPost(sort: { date: DESC }) {
+                  nodes {
+                    title
+                    date
+                    excerpt
+                    uri
+                    content
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "THATMUCH RSS Feed",
+          },
+        ],
+      },
+    },
   ],
 };
