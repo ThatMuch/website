@@ -28,11 +28,13 @@ export default function Layout({ type, children }: Props) {
       sparkCount={8}
       duration={400}
     >
+      <Header />
       <main className={`Layout ${type && `Layout--${type}`}`}>
-        <div className="container">
-          <Header />
-          {children}
-        </div>
+        {type === "frontpage" ? (
+          children
+        ) : (
+          <div className="container">{children}</div>
+        )}
       </main>
       <Footer />
     </ClickSpark>

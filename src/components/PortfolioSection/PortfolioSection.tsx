@@ -4,7 +4,6 @@ import React, { Component } from "react";
 
 import EmblaCarousel from "../EmblaCarousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
-import ScrollFloat from "../ScrollFloat/ScrollFloat";
 
 type Props = {
   section: {
@@ -38,16 +37,7 @@ export default function PortfolioSection({ section }: Props) {
       <div className="section__header">
         <h2 className="h3">{title}</h2>
         <div className="divider mb-4"></div>
-        <ScrollFloat
-          animationDuration={1}
-          ease="back.inOut(2)"
-          scrollStart="center bottom+=50%"
-          scrollEnd="bottom bottom-=40%"
-          stagger={0.03}
-          containerClassName="h2 mb-5"
-        >
-          {sousTitre}
-        </ScrollFloat>
+        <h2 className="h2 mb-5">{sousTitre}</h2>
       </div>
 
       <div

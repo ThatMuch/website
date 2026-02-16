@@ -17,7 +17,7 @@ type Props = {
 export default function TOCBlock({ attributes }: Props) {
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>("");
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
 
   useEffect(() => {
     // Fonction pour générer un ID unique basé sur le texte
@@ -38,12 +38,12 @@ export default function TOCBlock({ attributes }: Props) {
       // filter headings based on attributes
       const filteredHeadings = Array.from(headings).filter((heading) => {
         const {
-          includeH1,
-          includeH2,
-          includeH3,
-          includeH4,
-          includeH5,
-          includeH6,
+          includeH1 = false,
+          includeH2 = true,
+          includeH3 = false,
+          includeH4 = false,
+          includeH5 = false,
+          includeH6 = false,
         } = attributes || {};
         switch (heading.tagName) {
           case "H1":

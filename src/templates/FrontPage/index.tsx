@@ -16,6 +16,7 @@ const FrontPage = ({ data }) => {
     <Layout type="frontpage">
       <Seo />
       <HeroSection data={heroSection} />
+      <div className="container">
       {pageBuilder.map((section, index) => {
         switch (section?.fieldGroupName) {
           case "HomePageBuilderTestimonialsLayout":
@@ -78,6 +79,7 @@ const FrontPage = ({ data }) => {
       })}
       <AllPosts title="Le blog de l'équipage" isHome />
       <ContactCTA />
+      </div>
     </Layout>
   );
 };

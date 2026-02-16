@@ -1,7 +1,6 @@
 import "./Features.scss";
 
 import React from "react";
-import ScrollFloat from "../ScrollFloat/ScrollFloat";
 
 type Props = {
   title: string;
@@ -23,16 +22,7 @@ export default function Features({ title, subtitle, features }: Props) {
     <div className="FeaturesSection">
       <h2 className="h3">{subtitle}</h2>
       <div className="divider mb-4"></div>
-      <ScrollFloat
-        animationDuration={1}
-        ease="back.inOut(2)"
-        scrollStart="center bottom+=50%"
-        scrollEnd="bottom bottom-=40%"
-        stagger={0.03}
-        containerClassName="h2"
-      >
-        {title}
-      </ScrollFloat>
+        <h2>{title}</h2>
       <ul className="FeaturesSection__list">
         {features?.map((feature, index) => (
           <li key={index} className="FeaturesSection__list__item">
