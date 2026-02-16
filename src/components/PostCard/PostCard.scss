@@ -6,6 +6,7 @@
     font-size: $font-size-m;
     font-weight: normal;
     font-family: "SpaceMono", sans-serif;
+
     a {
       color: $text-color-default;
       text-decoration: none;
@@ -15,9 +16,32 @@
 
   &__image {
     display: block;
+
     img {
       width: 100%;
       height: auto;
+      animation: image-appear ease-in both;
+      animation-timeline: view();
+      animation-range: 0vh 20vh;
     }
+  }
+
+  // Stagger animation for grid items
+  // Stagger animation for grid items
+  @for $i from 1 through 12 {
+
+    .PostsGrid>div:nth-child(#{$i}) &,
+    .RelatedPosts__grid>div:nth-child(#{$i}) & {
+      &__image img {
+        animation-range: #{$i * 5}vh #{$i * 5 + 20}vh;
+      }
+    }
+  }
+}
+
+@keyframes image-appear {
+  from {
+    opacity: 0;
+    translate: 0 4rem;
   }
 }

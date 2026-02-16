@@ -1,11 +1,14 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
+
 .Layout {
-  padding: 150px 50px 50px 50px;
+  padding: 100px 50px 50px;
   position: relative;
+
   //  overflow: hidden;
   @include breakpoint(mobile) {
     padding: $spacing-s;
+
     .container {
       padding: 0;
     }
@@ -37,14 +40,16 @@
       max-width: 750px;
     }
   }
+
   &--template {
     .container {
       max-width: 860px;
     }
   }
+
   &--frontpage {
-    background-image: url("../../images/Background_Light.webp");
-    background-size: contain;
-    background-repeat: no-repeat;
+    &:before {
+      display: none;
+    }
   }
 }
