@@ -171,7 +171,7 @@ figure.wp-block-table td {
   text-align: left !important;
 }
 
-p,
+p:not(.no-animation),
 h2,
 h3,
 blockquote,

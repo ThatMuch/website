@@ -80,18 +80,31 @@ export default function HeroSection({ data }: Props) {
     </section>
         {logos && (
         <div className="HeroSection__logos">
-          {logos.title && <p className="HeroSection__logos-title">{logos.title}</p>}
+          {logos.title && <p className="HeroSection__logos-title no-animation">{logos.title}</p>}
           <div className="HeroSection__logos__list">
-            {logos.images?.nodes.map((logo, index) => (
-              <div key={index} className="HeroSection__logos__list__logo">
-                <LazyLoadImage
-                  src={logo.mediaItemUrl}
-                  alt={logo.altText || "Logo partenaire"}
-                  effect="blur"
-                  className="HeroSection__logos__list__logo__image"
-                />
-              </div>
-            ))}
+            <div className="HeroSection__logos__track">
+              {logos.images?.nodes.map((logo, index) => (
+                <div key={`original-${index}`} className="HeroSection__logos__list__logo">
+                  <LazyLoadImage
+                    src={logo.mediaItemUrl}
+                    alt={logo.altText || "Logo partenaire"}
+                    effect="blur"
+                    className="HeroSection__logos__list__logo__image"
+                  />
+                </div>
+              ))}
+              {/* Duplicated list for infinite scroll */}
+              {logos.images?.nodes.map((logo, index) => (
+                <div key={`duplicate-${index}`} className="HeroSection__logos__list__logo">
+                  <LazyLoadImage
+                    src={logo.mediaItemUrl}
+                    alt={logo.altText || "Logo partenaire"}
+                    effect="blur"
+                    className="HeroSection__logos__list__logo__image"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
     </div>
   )

@@ -116,6 +116,8 @@
   align-items: center;
   gap: $spacing-m;
   margin-bottom: $space_XXL;
+  width: 100%;
+  overflow: hidden;
 
   &-title {
     font-size: $font-size-m;
@@ -124,34 +126,55 @@
   }
 
   &__list {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent);
+  }
+
+  &__track {
     display: flex;
-    justify-content: center;
+    gap: $spacing-xl;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  &__list__logo {
+    flex-shrink: 0;
+    width: auto;
+    height: 3rem;
+    position: relative;
+    display: flex;
     align-items: center;
-    gap: $spacing-l;
-    align-self: stretch;
-    flex-wrap: wrap;
+    justify-content: center;
 
-    @include breakpoint(mobile) {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: $spacing-m;
+    .lazy-load-image-background {
+      height: 100%;
+      display: block; // Fix potential inline-block issues
     }
 
-    &__logo {
-
-      height: 3rem;
-      position: relative;
-
-      .lazy-load-image-background {
-        height: 100%;
-        display: block; // Fix potential inline-block issues
-      }
-
-      img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
+    img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      max-width: 150px;
     }
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
   }
 }
