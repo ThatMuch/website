@@ -1,58 +1,143 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
+
 .HeroSection {
   width: 100%;
-  max-width: 64rem;
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+  min-height: calc(100vh - 150px);
+  padding: $spacing-xl;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 2.25rem;
+  background: $neutral-900;
+  background-image: url("../../images/hero.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  margin-bottom: $spacing-xl;
+
+  &__header {
+    max-width: 49rem;
+  }
+
   &__title {
-    font-size: $font-size-display;
-    text-align: center;
+    font-size: 4.6875rem;
     margin-bottom: $spacing-xl;
     margin-top: 0;
+
     @include breakpoint(mobile) {
       margin-bottom: $spacing-m;
       font-size: $font-size-xxxl;
     }
   }
 
+  .btn {
+    position: relative;
+    overflow: visible;
+
+    &:before {
+      content: "";
+      background-image: url("../../images/hero_before.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      width: 100%;
+      height: 150%;
+      position: absolute;
+      top: 100%;
+      right: -100%;
+      display: block;
+
+      pointer-events: none;
+    }
+  }
+
   &__desc {
-    font-size: $font-size-xl;
-    text-align: center;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     margin-bottom: $spacing-xl;
+    max-width: 50rem;
+
     @include breakpoint(mobile) {
       font-size: $font-size-l;
       margin-bottom: $spacing-m;
     }
   }
 
-  &__btn {
-    margin-bottom: $spacing-xl;
+  &__stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-xl;
+    text-align: center;
+
     @include breakpoint(mobile) {
-      margin-bottom: $spacing-m;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__stars {
+      display: flex;
+      justify-content: center;
+      height: 48px;
+      gap: $spacing-xs;
+      margin-bottom: $spacing-xs;
+
+    }
+
+    &__title {
+      font-family: "Neue Machina";
+      font-size: 2rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+      margin-bottom: $spacing-xs;
     }
   }
 
-  &__logos {
+}
+
+.HeroSection__logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-m;
+  margin-bottom: $space_XXL;
+
+  &-title {
+    font-size: $font-size-m;
+    color: $text-color-mid;
+    margin: 0;
+  }
+
+  &__list {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: $spacing-l;
     align-self: stretch;
-    margin-bottom: $spacing-xl;
-    //flex-wrap: wrap;
+    flex-wrap: wrap;
+
     @include breakpoint(mobile) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: $spacing-m;
     }
+
     &__logo {
-      width: 100%;
+
       height: 3rem;
       position: relative;
+
       .lazy-load-image-background {
         height: 100%;
+        display: block; // Fix potential inline-block issues
       }
+
       img {
         height: 100%;
         width: 100%;
