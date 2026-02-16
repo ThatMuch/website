@@ -1,10 +1,12 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
+
 .toc-block {
   margin: 2rem 0;
   padding: 1.5rem;
   background-color: $neutral-50;
   border-radius: 8px;
+  z-index: 1;
 
   @media (min-width: 769px) {
     position: sticky;
@@ -19,6 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     &.collapsible {
       cursor: pointer;
     }
@@ -45,6 +48,7 @@
 
   &__item {
     margin: 0;
+
     &--level-1 {
       margin-left: 0;
       font-weight: 600;
@@ -101,6 +105,7 @@
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.2s ease;
+
     &:hover {
       color: $neutral-900;
       background-color: $neutral-100;
