@@ -2,7 +2,6 @@ import "./ExpertisesSection.scss";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import ScrollFloat from "../ScrollFloat/ScrollFloat";
 import { usePostExpertises } from "../../hooks/use-custom-expertises";
 
 type Props = {
@@ -19,19 +18,10 @@ export default function ExpertisesSection({ section }: Props) {
       <div className="section__header">
         <h2 className="h3">{section.subtitle}</h2>
         <div className="divider mb-4"></div>
-        <ScrollFloat
-          animationDuration={1}
-          ease="back.inOut(2)"
-          scrollStart="center bottom+=50%"
-          scrollEnd="bottom bottom-=40%"
-          stagger={0.03}
-          containerClassName="h2"
-        >
-          {section.title}
-        </ScrollFloat>
+        <h2>{section.title}</h2>
       </div>
       <div className="ExpertisesSection__content">
-        {expertises.map((expertise) => (
+        {expertises.map((expertise: any) => (
           <div
             className={`ExpertisesSection__card ${expertise.category}`}
             key={expertise.title}

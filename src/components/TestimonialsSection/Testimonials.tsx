@@ -3,7 +3,6 @@ import "./Testimonials.scss";
 import EmblaCarousel from "../EmblaCarousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import React from "react";
-import ScrollFloat from "../ScrollFloat/ScrollFloat";
 import TestimonialCard from "./TestimonialCard";
 import { useSiteCustomPosts } from "../../hooks/use-custom-testimonial";
 
@@ -37,16 +36,7 @@ export default function Testimonials({ title, description, subtitle }: Props) {
       <div className="Testimonials__header section__header">
         <h2 className="h3">{subtitle}</h2>
         <div className="divider mb-4"></div>
-        <ScrollFloat
-          animationDuration={1}
-          ease="back.inOut(2)"
-          scrollStart="center bottom+=50%"
-          scrollEnd="bottom bottom-=40%"
-          stagger={0.03}
-          containerClassName="h2"
-        >
-          {title}
-        </ScrollFloat>
+          <h2>{title}</h2>
         <div dangerouslySetInnerHTML={{ __html: description }}></div>
       </div>
       <EmblaCarousel
