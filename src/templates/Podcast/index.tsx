@@ -15,7 +15,7 @@ const Podcast = ({ data }) => {
   const { descriptionHeroSection, sousTitre } = detailPagePodcast;
   const { mediaItemUrl, altText } = featuredImage.node;
   const posts = useSitePosts("podcast");
-  console.log(posts);
+
   return (
     <Layout type="podcast">
       <Seo title={title} description={page.seo.metaDesc} />

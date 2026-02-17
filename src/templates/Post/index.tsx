@@ -13,7 +13,7 @@ const Post = ({ data }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
-  console.log(blocks);
+
   const renderBlocks = () => {
     return blocks.map((block, index) => {
       switch (block.name) {
