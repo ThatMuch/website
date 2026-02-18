@@ -1,0 +1,22 @@
+name: Deploy React to Hostinger
+on:
+  repository_dispatch: # C'est le signal de WordPress !
+    types: [cms_update]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+      - name: Deploy via SSH (Hostinger)
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_IP }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASS }}
+          source: "dist/*" # Le dossier build de React
+          target: "/home/customer/www/thatmuch.fr/public_html"
