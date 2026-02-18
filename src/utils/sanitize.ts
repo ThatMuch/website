@@ -1,6 +1,5 @@
 import DOMPurify from 'isomorphic-dompurify';
 
-export const sanitize = (dirty: string | undefined | null): string => {
-  if (!dirty) return '';
-  return DOMPurify.sanitize(dirty);
+export const sanitize = (content: string): string => {
+  return DOMPurify.sanitize(content);
 };
