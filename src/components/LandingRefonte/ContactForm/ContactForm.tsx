@@ -10,6 +10,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import tardis from "../../../images/tardis.webp";
 import { useSubmitContactForm } from "../../../hooks/use-submit-contact-form";
+import { useAddDoc } from "../../../hooks/use-firebase";
+import { useSendContactBrevo } from "../../../hooks/use-brev";
 
 const initialValues = {
   firstName: "",
@@ -64,8 +66,6 @@ export default function ContactForm() {
     submissionDataSchema
   );
   const { sendContact } = useSendContactBrevo([5]);
-  const [isSend, setIsSend] = React.useState(false);
-  const [emailSent, setEmailSent] = React.useState("");
   return (
     <div className="ContactFormRefonte">
       <div className="row">
