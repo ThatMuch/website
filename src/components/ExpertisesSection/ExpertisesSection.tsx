@@ -11,6 +11,18 @@ type Props = {
   };
 };
 
+interface Expertise {
+  title: string
+  category: string
+  slug: string
+  desc: string
+  link_label: string
+  featuredImage: {
+    mediaItemUrl: string
+    altText: string
+  }
+}
+
 export default function ExpertisesSection({ section }: Props) {
   const expertises = usePostExpertises();
   return (
@@ -21,7 +33,7 @@ export default function ExpertisesSection({ section }: Props) {
         <h2>{section.title}</h2>
       </div>
       <div className="ExpertisesSection__content">
-        {expertises.map((expertise: any) => (
+        {expertises.map((expertise: Expertise) => (
           <div
             className={`ExpertisesSection__card ${expertise.category}`}
             key={expertise.title}

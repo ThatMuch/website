@@ -7,8 +7,20 @@ import comet from '../../images/Comet.svg'
 import clsx from 'clsx'
 import MenuMobile from './MenuMobile'
 
+export interface MenuItem {
+  id: string
+  label: string
+  url: string
+  target?: string
+  description?: string
+  parentId?: string | null
+  childItems?: {
+    nodes: MenuItem[]
+  }
+}
+
 interface MenuContentProps {
-  menuItems: any[]
+  menuItems: MenuItem[]
 }
 
 export default function MenuContent({ menuItems }: MenuContentProps) {
@@ -85,12 +97,13 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
 
             {activeItem.childItems?.nodes?.length > 0 && (
               <ul className="menu__items__sub">
-                {activeItem.childItems.nodes.map((child: any) => (
+                {activeItem.childItems.nodes.map((child: MenuItem) => (
                   <li key={child.url}>
                     <a
                       href={child.url}
                       target={child.target}
                       rel="noopener noreferrer"
+                      onClick={() => toggleMenu(false)}
                       title={`Lien vers ${child.label}`}
                       aria-label={child.label}
                     >

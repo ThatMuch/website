@@ -1,17 +1,14 @@
 import React from "react";
 
-type Props = {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
-  onClick?: () => void;
-  className?: string;
-  disabled?: boolean;
-  type?: "button" | "submit" | "link";
-  children?: React.ReactNode;
   url?: string;
   target?: "_blank" | "_self";
   rel?: string;
-  [key: string]: any;
-};
+  href?: string; // Add href for anchor tag compatibility
+}
+// Combine with anchor props if needed, or keep it simple since it renders both
+type Props = ButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export default function Button({
   label,
@@ -25,6 +22,13 @@ export default function Button({
   rel,
   ...rest
 }: Props) {
+  const finalRel =
+    target === "_blank"
+      ? rel
+        ? `${rel} noopener noreferrer`
+        : "noopener noreferrer"
+      : rel;
+
   return (
     <>
       {type === "link" && (
@@ -34,7 +38,7 @@ export default function Button({
           aria-label={label}
           href={url}
           target={target}
-          rel={rel}
+          rel={finalRel}
           role="button"
           {...rest}
         >

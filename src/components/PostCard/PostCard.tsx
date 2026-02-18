@@ -10,7 +10,10 @@ type PostCardProps = {
     name: string;
   };
   url: string;
-  image: any;
+  image: {
+    mediaItemUrl: string
+    altText: string
+  }
 };
 
 export default function PostCard({
