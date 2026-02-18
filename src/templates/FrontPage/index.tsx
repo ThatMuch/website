@@ -42,7 +42,7 @@ const FrontPage = ({ data }) => {
               </div>
             );
           case "HomePageBuilderFaqLayout":
-            console.log("faq");
+
             return (
               <div key={`${section.fieldGroupName}-${index}`}>
                 <FAQHome

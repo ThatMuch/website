@@ -25,7 +25,7 @@ export default function AllTemplates({
   const postsPerPage: number = 8;
   const totalPages: number = Math.ceil((templates?.length || 0) / postsPerPage);
   const categories: CategoryType[] = useBlogCategories();
-  console.log(categories);
+
   const paginatedPosts = templates?.slice(
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage
