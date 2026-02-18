@@ -91,6 +91,7 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
                       href={child.url}
                       target={child.target}
                       rel="noopener noreferrer"
+                      onClick={() => toggleMenu(false)}
                       title={`Lien vers ${child.label}`}
                       aria-label={child.label}
                     >

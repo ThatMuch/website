@@ -46,6 +46,18 @@ export default function Header() {
     }
   }, [setMobile, setScrolled])
 
+  // Lock scroll when menu is open on mobile
+  useEffect(() => {
+    if (isMenuOpen && isMobile) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMenuOpen, isMobile])
+
   const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
     (item: any) => item.parentId === null
   )
