@@ -9,33 +9,30 @@ type Props = {
 
 export default function FAQ({ content,index }: Props) {
 	const faqContainerRef = useRef < HTMLDivElement > (null);
-	useEffect(() => {
-    if (faqContainerRef.current) {
-      // Now that we're in the browser, we can safely query the DOM within this specific container
-      const items = faqContainerRef.current.querySelectorAll(
-        ".wp-block-faq-block-for-gutenberg-faq .question"
-      );
 
-      // Function to handle the click event
-		const toggleAnswer = (event: Event) => {
-			console.log("Toggle answer clicked");
-        // Use Event from DOM for addEventListener
-        const target = event.currentTarget as HTMLDivElement; // Cast to HTMLDivElement
-        const answer = target.nextElementSibling as HTMLDivElement;
-        if (answer) {
-          target.classList.toggle("active");
+	useEffect(() => {
+    const container = faqContainerRef.current;
+    if (container) {
+      // Event delegation: attach listener to the container
+      const handleContainerClick = (event: Event) => {
+        const target = event.target as HTMLElement;
+        const question = target.closest(".question");
+
+        // Ensure the click was on a question and it belongs to our block structure
+        if (question && question.closest(".wp-block-faq-block-for-gutenberg-faq")) {
+          // Find the answer element (next sibling)
+          const answer = question.nextElementSibling as HTMLElement;
+          if (answer) {
+            question.classList.toggle("active");
+          }
         }
       };
 
-      // Add event listeners to each question
-      items.forEach((item) => {
-        item.addEventListener("click", toggleAnswer);
-      });
-      // Cleanup function: remove event listeners when the component unmounts
+      container.addEventListener("click", handleContainerClick);
+
+      // Cleanup function: remove event listener when the component unmounts
       return () => {
-        items.forEach((item) => {
-          item.removeEventListener("click", toggleAnswer);
-        });
+        container.removeEventListener("click", handleContainerClick);
       };
     }
   }, [content]);

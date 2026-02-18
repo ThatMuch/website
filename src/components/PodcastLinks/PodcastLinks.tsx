@@ -36,7 +36,12 @@ export default function PodcastLinks({}: Props) {
   return (
     <div className="PodcastLinks">
       {podcastLinks.map((link) => (
-        <a href={link.url} key={link.name} target="_blank" rel="noreferrer">
+        <a
+          href={link.url}
+          key={link.name}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <LazyLoadImage src={link.image} alt={link.name} />
         </a>
       ))}

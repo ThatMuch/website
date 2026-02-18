@@ -24,11 +24,12 @@ type Props = {
   };
 };
 
+const OPTIONS: EmblaOptionsType = {
+  slidesToScroll: "auto",
+  inViewThreshold: 1,
+};
+
 export default function PortfolioSection({ section }: Props) {
-  const OPTIONS: EmblaOptionsType = {
-    slidesToScroll: "auto",
-    inViewThreshold: 1,
-  };
   const SLIDE_COUNT = section?.project?.length;
   const { title, sousTitre } = section;
 
