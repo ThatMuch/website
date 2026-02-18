@@ -48,5 +48,5 @@ jobs:
           port: 65002
           script: |
             # Commande pour vider le cache si vous utilisez un plugin de cache ou OpenLiteSpeed
-            rm -rf /home/customer/www/thatmuch.fr/public_html/wp-content/cache/*
+            rm -rf /home/u566000124/domains/back.thatmuch.fr/public_html/wp-content/cache/*
             echo "Cache purged successfully!"
