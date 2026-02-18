@@ -10,7 +10,7 @@ import { graphql } from "gatsby";
 
 const Contact = ({ data }) => {
   const page = data.wpPage;
-  console.log(page);
+
   return (
     <Layout>
       <main>

@@ -71,7 +71,7 @@ export default function ContactForm() {
                 };
                 sendContact(submissionData)
                   .then(() => {
-                    console.log("Brevo submission successful");
+
                     // Optionally, you can handle Brevo submission success here
                   })
                   .catch((error) => {
@@ -80,7 +80,7 @@ export default function ContactForm() {
                   });
                 addDocument(submissionData)
                   .then(() => {
-                    console.log("Submission successful");
+
                     resetForm(); // Reset the form after successful submission
                   })
                   .catch((error) => {

@@ -28,8 +28,7 @@ export default function ContactForm({ hubspotForm }: Props) {
           <HubspotForm
             portalId={hubspotForm.portalid}
             formId={hubspotForm.formId}
-            onSubmit={() => console.log("Submit!")}
-            onReady={(form) => console.log("Form ready!")}
+
           />
         </div>
       </div>
