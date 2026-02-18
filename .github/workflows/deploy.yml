@@ -1,0 +1,52 @@
+name: Deploy React to Hostinger
+on:
+  repository_dispatch: # C'est le signal de WordPress !
+    types: [cms_update]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true  # Annule le build précédent si un nouveau est lancé
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+        env:
+          WPGRAPHQL_URL: ${{ secrets.WPGRAPHQL_URL }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          NODE_ENV: production
+          GATSBY_FIREBASE_API_KEY: ${{ secrets.GATSBY_FIREBASE_API_KEY }}
+          GATSBY_FIREBASE_AUTH_DOMAIN: ${{ secrets.GATSBY_FIREBASE_AUTH_DOMAIN }}
+          GATSBY_FIREBASE_PROJECT_ID: ${{ secrets.GATSBY_FIREBASE_PROJECT_ID }}
+          GATSBY_FIREBASE_STORAGE_BUCKET: ${{ secrets.GATSBY_FIREBASE_STORAGE_BUCKET }}
+          GATSBY_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.GATSBY_FIREBASE_MESSAGING_SENDER_ID }}
+          GATSBY_FIREBASE_APP_ID: ${{ secrets.GATSBY_FIREBASE_APP_ID }}
+          GATSBY_FIREBASE_MEASUREMENT_ID: ${{ secrets.GATSBY_FIREBASE_MEASUREMENT_ID }}
+          GATSBY_BREVO_API_KEY: ${{ secrets.GATSBY_BREVO_API_KEY }}
+          GATSBY_BREVO_URL: ${{ secrets.GATSBY_BREVO_URL }}
+          GATSBY_FIREBASE_COLLECTION_SUBMISSIONS: ${{ secrets.GATSBY_FIREBASE_COLLECTION_SUBMISSIONS }}
+      - name: Deploy via SSH (Hostinger)
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_IP }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }} # <-- On utilise la clé ici
+          port: 65002 # Port standard SSH chez Hostinger (vérifiez le vôtre dans le hPanel)
+          source: "public/*"
+          target: "/home/u566000124/domains/thatmuch.fr/public_html"
+          strip_components: 1 # Pour éviter de créer un dossier "dist" sur le serveur
+      - name: Purge Hostinger Cache
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_IP }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: 65002
+          script: |
+            # Commande pour vider le cache si vous utilisez un plugin de cache ou OpenLiteSpeed
+            rm -rf /home/u566000124/domains/back.thatmuch.fr/public_html/wp-content/cache/*
+            echo "Cache purged successfully!"
