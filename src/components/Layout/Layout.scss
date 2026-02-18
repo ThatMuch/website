@@ -4,6 +4,7 @@
 .Layout {
   padding: 100px 50px 50px;
   position: relative;
+  overflow-x: clip;
 
   //  overflow: hidden;
   @include breakpoint(mobile) {

@@ -10,8 +10,19 @@ interface TocItem {
   // Ajout d'un type pour les paramètres optionnels
 }
 
+interface TOCAttributes {
+  title: string
+  collapsible?: boolean
+  includeH1?: boolean
+  includeH2?: boolean
+  includeH3?: boolean
+  includeH4?: boolean
+  includeH5?: boolean
+  includeH6?: boolean
+}
+
 type Props = {
-  attributes?: any;
+  attributes?: TOCAttributes;
 };
 
 export default function TOCBlock({ attributes }: Props) {

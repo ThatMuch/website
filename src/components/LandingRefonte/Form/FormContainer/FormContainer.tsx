@@ -9,11 +9,17 @@ import Button from "../../../UI/Button/Button";
 import FormQuestion from "./FormQuestion/FormQuestion";
 import { useScores } from "../../../../contexts/ScoreContext"; // Adjust path as needed
 
+import { Question } from "./FormQuestion/FormQuestion";
+
+type CategoryData = {
+  questions: Question[];
+}
+
 type Props = {
   currentCategoryIndex: number;
   categories: { name: string; slug: string }[];
   setCurrentCategoryIndex: (index: number) => void;
-  data: any;
+  data: CategoryData[];
   setIsFinished: (isFinished: boolean) => void;
 };
 
@@ -39,7 +45,7 @@ export default function FormContainer({
   }, [currentCategoryIndex]);
 
   // Helper function to calculate score for the current category based on form values
-  const calculateCurrentCategoryScore = (formValues: any) => {
+  const calculateCurrentCategoryScore = (formValues: {[key: string]: string}) => {
     const currentQuestions = currentCategoryData?.questions;
     if (!currentQuestions || !formValues) return 0;
 
@@ -64,7 +70,7 @@ export default function FormContainer({
     }
   };
 
-  const handleNext = (formValues) => {
+  const handleNext = (formValues: {[key: string]: string}) => {
     const currentCategoryformValues = getCurrentCategoryData(formValues);
     const score = calculateCurrentCategoryScore(formValues);
     updateScoreByCategory(currentCategory.slug, score);
@@ -72,7 +78,7 @@ export default function FormContainer({
     setCurrentCategoryIndex(currentCategoryIndex + 1);
   };
 
-  const getCurrentCategoryData = (values) => {
+  const getCurrentCategoryData = (values: {[key: string]: string}) => {
     return Object.keys(values).reduce((acc, key) => {
       if (key.startsWith(currentCategory.slug)) {
         acc[key] = values[key];
@@ -81,7 +87,7 @@ export default function FormContainer({
     }, {});
   };
 
-  const handleSubmit = (formValues) => {
+  const handleSubmit = (formValues: {[key: string]: string}) => {
     const currentCategoryformValues = getCurrentCategoryData(formValues);
     // Ensure validation passes for the last step (Formik handles this by default on submit)
     const score = calculateCurrentCategoryScore(formValues);
@@ -94,14 +100,14 @@ export default function FormContainer({
   };
 
   // Gestion des touches clavier pour l'accessibilité
-  const handleKeyDown = (event, callback) => {
+  const handleKeyDown = (event: React.KeyboardEvent, callback: () => void) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       callback();
     }
   };
 
-  const handleDisableNext = (values, errors) => {
+  const handleDisableNext = (values: {[key: string]: string}, errors: {[key: string]: string}) => {
     // if values of current category are empty disable next button
     const currentQuestions = currentCategoryData?.questions;
     if (!currentQuestions) return true; // No questions, disable
