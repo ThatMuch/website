@@ -1,17 +1,14 @@
 import React from "react";
 
-type Props = {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
-  onClick?: () => void;
-  className?: string;
-  disabled?: boolean;
-  type?: "button" | "submit" | "link";
-  children?: React.ReactNode;
   url?: string;
   target?: "_blank" | "_self";
   rel?: string;
-  [key: string]: any;
-};
+  href?: string; // Add href for anchor tag compatibility
+}
+// Combine with anchor props if needed, or keep it simple since it renders both
+type Props = ButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export default function Button({
   label,

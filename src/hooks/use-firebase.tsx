@@ -9,10 +9,10 @@ import React, { useCallback, useEffect, useState } from "react"; // Import React
 
 import { db } from "../utils/firebase/Firebase";
 
-export function useFetchFirebase(collectionName: string) {
+export function useFetchFirebase<T = DocumentData>(collectionName: string) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
-  const [fetchedDocs, setFetchedDocs] = useState<any[]>([]);
+  const [fetchedDocs, setFetchedDocs] = useState<T[]>([]);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -20,14 +20,14 @@ export function useFetchFirebase(collectionName: string) {
     try {
       const collectionRef = collection(db, collectionName);
       const querySnapshot = await getDocs(collectionRef);
-      const data: any[] = [];
+      const data: T[] = [];
       querySnapshot.forEach((doc) => {
         data.push({
           id: doc.id,
           ...doc.data(),
           isFlagged: doc.data().isFlagged ?? false,
           comments: doc.data().comments ?? [],
-        });
+        } as unknown as T);
       });
       setFetchedDocs(data);
     } catch (e) {
