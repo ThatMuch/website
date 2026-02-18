@@ -2,6 +2,9 @@ name: Deploy React to Hostinger
 on:
   repository_dispatch: # C'est le signal de WordPress !
     types: [cms_update]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true  # Annule le build précédent si un nouveau est lancé
 
 jobs:
   build-and-deploy:
@@ -31,6 +34,19 @@ jobs:
         with:
           host: ${{ secrets.HOSTINGER_IP }}
           username: ${{ secrets.HOSTINGER_USER }}
-          password: ${{ secrets.HOSTINGER_PASS }}
-          source: "dist/*" # Le dossier build de React
+          key: ${{ secrets.HOSTINGER_SSH_KEY }} # <-- On utilise la clé ici
+          port: 65002 # Port standard SSH chez Hostinger (vérifiez le vôtre dans le hPanel)
+          source: "public/*"
           target: "/home/customer/www/thatmuch.fr/public_html"
+          strip_components: 1 # Pour éviter de créer un dossier "dist" sur le serveur
+      - name: Purge Hostinger Cache
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_IP }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: 65002
+          script: |
+            # Commande pour vider le cache si vous utilisez un plugin de cache ou OpenLiteSpeed
+            rm -rf /home/customer/www/thatmuch.fr/public_html/wp-content/cache/*
+            echo "Cache purged successfully!"
