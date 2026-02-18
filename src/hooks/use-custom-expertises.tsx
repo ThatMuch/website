@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
+import { useMemo } from "react";
 
 export const usePostExpertises = () => {
   const data = useStaticQuery(graphql`
@@ -40,22 +41,24 @@ export const usePostExpertises = () => {
     }
   `);
 
-  const expertises = data.allWpExpertise.edges.map((edge) => {
-    const { node } = edge;
-    return {
-      slug: node.slug,
-      title: node.title,
-      featuredImage: node.featuredImage.node,
-      services: node.expertiseContent.service.map((service) => ({
-        desc: service.desc,
-        titre: service.titre,
-        image: service?.image?.node,
-      })),
-      desc: node.expertiseContent.desc_exp,
-      category: node.categories.nodes[0]?.slug,
-      link_label: node.expertiseContent.link_label,
-    };
-  });
+  const expertises = useMemo(() => {
+    return data.allWpExpertise.edges.map((edge) => {
+      const { node } = edge;
+      return {
+        slug: node.slug,
+        title: node.title,
+        featuredImage: node.featuredImage.node,
+        services: node.expertiseContent.service.map((service) => ({
+          desc: service.desc,
+          titre: service.titre,
+          image: service?.image?.node,
+        })),
+        desc: node.expertiseContent.desc_exp,
+        category: node.categories.nodes[0]?.slug,
+        link_label: node.expertiseContent.link_label,
+      };
+    });
+  }, [data]);
 
   return expertises;
 };
