@@ -18,7 +18,7 @@ export default function FAQ({ content,index }: Props) {
 
       // Function to handle the click event
 		const toggleAnswer = (event: Event) => {
-			console.log("Toggle answer clicked");
+
         // Use Event from DOM for addEventListener
         const target = event.currentTarget as HTMLDivElement; // Cast to HTMLDivElement
         const answer = target.nextElementSibling as HTMLDivElement;
