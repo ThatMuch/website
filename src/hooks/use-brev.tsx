@@ -25,9 +25,11 @@ export function useSendContactBrevo(listIds: number[]) {
       updateEnabled: true,
       listIds: listIds,
     };
+    console.log("Brevo API Key present:", !!apikey);
     try {
       const headers: HeadersInit = {
         "Content-Type": "application/json",
+        "accept": "application/json",
       };
       if (apikey) {
         headers["api-key"] = apikey;
@@ -38,15 +40,18 @@ export function useSendContactBrevo(listIds: number[]) {
         body: JSON.stringify(formattedData),
       });
       if (!response.ok) {
-        throw new Error("Failed to send contact");
+        const errorData = await response.json();
+        console.error("Brevo Error Response:", errorData);
+        throw new Error(`Failed to send contact: ${response.status} ${response.statusText}`);
       }
       return await response.json();
     } catch (err) {
+      console.error("Brevo Fetch Error:", err);
       setError(err);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [apikey, listIds]);
 
   return { sendContact, loading, error };
 }
