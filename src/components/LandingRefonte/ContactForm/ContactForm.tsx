@@ -9,9 +9,7 @@ import Button from "../../UI/Button/Button";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import tardis from "../../../images/tardis.webp";
-import { useAddDoc } from "../../../hooks/use-firebase";
-import { useScores } from "../../../contexts/ScoreContext";
-import { useSendContactBrevo } from "../../../hooks/use-brev";
+import { useSubmitContactForm } from "../../../hooks/use-submit-contact-form";
 
 const initialValues = {
   firstName: "",
@@ -35,15 +33,8 @@ const validationSchema = Yup.object().shape({
   ), // Added validation for terms
 });
 export default function ContactForm() {
-  // get the score from the context if needed
-  const { scores } = useScores();
+  const { handleSubmit, isSend, setIsSend, emailSent } = useSubmitContactForm();
 
-  const { addDocument } = useAddDoc(
-    process.env.GATSBY_FIREBASE_COLLECTION_SUBMISSIONS || "submissions"
-  );
-  const { sendContact } = useSendContactBrevo([5]);
-  const [isSend, setIsSend] = React.useState(false);
-  const [emailSent, setEmailSent] = React.useState("");
   return (
     <div className="ContactFormRefonte">
       <div className="row">
@@ -58,45 +49,7 @@ export default function ContactForm() {
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
-              onSubmit={(values, { setSubmitting, resetForm }) => {
-                const cleanValues = {
-                  firstName: values.firstName,
-                  lastName: values.lastName,
-                  email: values.email,
-                  url: values.url,
-                };
-                const submissionData = {
-                  ...cleanValues,
-                  scores: scores, // Include scores from context
-                };
-                sendContact(submissionData)
-                  .then(() => {
-
-                    // Optionally, you can handle Brevo submission success here
-                  })
-                  .catch((error) => {
-                    console.error("Error submitting to Brevo:", error);
-                    // Optionally, you can handle Brevo submission error here
-                  });
-                addDocument(submissionData)
-                  .then(() => {
-
-                    resetForm(); // Reset the form after successful submission
-                  })
-                  .catch((error) => {
-                    console.error(
-                      "Firebase addDocument error:",
-                      error,
-                      "Error details:",
-                      JSON.stringify(error, Object.getOwnPropertyNames(error))
-                    );
-                  })
-                  .finally(() => {
-                    setSubmitting(false); // Set submitting to false after operation
-                  });
-                setEmailSent(values.email); // Set emailSent to the submitted email
-                setIsSend(true); // Set send to true after form submission
-              }}
+              onSubmit={handleSubmit}
             >
               {(
                 { isSubmitting, errors, touched, values } // Added errors and touched for aria-invalid

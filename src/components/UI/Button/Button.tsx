@@ -22,6 +22,13 @@ export default function Button({
   rel,
   ...rest
 }: Props) {
+  const finalRel =
+    target === "_blank"
+      ? rel
+        ? `${rel} noopener noreferrer`
+        : "noopener noreferrer"
+      : rel;
+
   return (
     <>
       {type === "link" && (
@@ -31,7 +38,7 @@ export default function Button({
           aria-label={label}
           href={url}
           target={target}
-          rel={rel}
+          rel={finalRel}
           role="button"
           {...rest}
         >
