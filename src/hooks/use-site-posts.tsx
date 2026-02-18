@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
+import { useMemo } from "react";
 
 export const useSitePosts = (categorySlug?: string) => {
   const data = useStaticQuery(graphql`
@@ -49,15 +50,18 @@ export const useSitePosts = (categorySlug?: string) => {
     }
   `);
 
-  // Map data to have only posts
-  let posts = data.allWpPost.edges.map(({ node }) => node);
+  const posts = useMemo(() => {
+    // Map data to have only posts
+    let allPosts = data.allWpPost.edges.map(({ node }) => node);
 
-  // Filter posts by category if categorySlug is provided
-  if (categorySlug) {
-    posts = posts.filter((post) =>
-      post.categories.nodes.some((category) => category.slug === categorySlug)
-    );
-  }
+    // Filter posts by category if categorySlug is provided
+    if (categorySlug) {
+      allPosts = allPosts.filter((post) =>
+        post.categories.nodes.some((category) => category.slug === categorySlug)
+      );
+    }
+    return allPosts;
+  }, [data, categorySlug]);
 
   return posts;
 };
