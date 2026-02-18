@@ -1,8 +1,10 @@
 import React from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 
+import { MenuItem } from './MenuContent'
+
 interface MenuMobileProps {
-  activeItem: any
+  activeItem: MenuItem
   onBack: () => void
 }
 

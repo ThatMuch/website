@@ -59,7 +59,7 @@ export default function Header() {
   }, [isMenuOpen, isMobile])
 
   const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
-    (item: any) => item.parentId === null
+    (item: { parentId: string | null }) => item.parentId === null
   )
 
   const { siteUrl } = useSiteSeo()
