@@ -3,7 +3,7 @@ import "./style.scss";
 import * as Yup from "yup";
 
 import { Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import Button from "../../../UI/Button/Button";
 import FormQuestion from "./FormQuestion/FormQuestion";
@@ -125,22 +125,25 @@ export default function FormContainer({
   };
 
   // Initialisation des valeurs du formulaire et du schéma de validation
-  const initialValues: {[key: string]: string} = {};
-  const validationSchemaShape: {[key: string]: any} = {};
-
-  data?.forEach((category) => {
-    category.questions?.forEach((q) => {
-      initialValues[q.id] = "";
+  const initialValues = useMemo(() => {
+    const values = {};
+    data?.forEach((category) => {
+      category.questions?.forEach((q) => {
+        values[q.id] = "";
+      });
     });
-  });
+    return values;
+  }, [data]);
 
-  currentCategoryData?.questions?.forEach((q) => {
-    validationSchemaShape[q.id] = Yup.string().required(
-      "Veuillez répondre à cette question"
-    );
-  });
-
-  const validationSchema = Yup.object().shape(validationSchemaShape);
+  const validationSchema = useMemo(() => {
+    const shape = {};
+    currentCategoryData?.questions?.forEach((q) => {
+      shape[q.id] = Yup.string().required(
+        "Veuillez répondre à cette question"
+      );
+    });
+    return Yup.object().shape(shape);
+  }, [currentCategoryData]);
 
   return (
     <div className="FormContainer">
