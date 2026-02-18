@@ -7,6 +7,8 @@ import comet from '../../images/Comet.svg'
 import clsx from 'clsx'
 import MenuMobile from './MenuMobile'
 
+const COMET_DELAYS = [100, 200, 300]
+
 interface MenuContentProps {
   menuItems: any[]
 }
@@ -109,7 +111,7 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
         )}
 
         <div className="comets">
-           {[100, 200, 300].map((delay) => (
+           {COMET_DELAYS.map((delay) => (
              <LazyLoadImage
                key={delay}
                data-aos="fade-down-left"
