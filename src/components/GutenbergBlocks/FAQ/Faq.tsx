@@ -1,6 +1,7 @@
 import "./style.scss"
 
 import React, { useEffect, useRef } from 'react'
+import { sanitize } from "../../../utils/sanitize"
 
 type Props = {
 	content?: string
@@ -44,7 +45,7 @@ export default function FAQ({ content,index }: Props) {
     <div
       ref={faqContainerRef}
       key={index}
-      dangerouslySetInnerHTML={{ __html: content }}
+      dangerouslySetInnerHTML={{ __html: sanitize(content) }}
     />
   );
 }
