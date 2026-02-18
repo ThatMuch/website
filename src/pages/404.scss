@@ -1,0 +1,57 @@
+@use "../style/vars" as *;
+@use "../style/mixins" as *;
+
+.NotFoundPage {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+	align-items: center;
+	justify-content: center;
+	min-height: 60vh;
+	color: $neutral-900;
+	padding: $spacing-l 0;
+
+	h1 {
+		font-size: 10rem;
+		font-weight: 900;
+		margin: 0;
+		line-height: 1;
+		color: $neutral-500;
+
+		@include breakpoint(mobile) {
+			font-size: 5rem;
+		}
+	}
+
+	h2 {
+		font-size: 2rem;
+		margin-bottom: $spacing-m;
+	}
+
+	p {
+		max-width: 600px;
+		margin-bottom: $spacing-l;
+		font-size: 1.2rem;
+	}
+
+	.obiwan-img {
+		max-width: 500px; // Adjust as needed
+		width: 100%;
+		margin-bottom: $spacing-l;
+		animation: float 6s ease-in-out infinite;
+	}
+
+	@keyframes float {
+		0% {
+			transform: translateY(0px);
+		}
+
+		50% {
+			transform: translateY(-20px);
+		}
+
+		100% {
+			transform: translateY(0px);
+		}
+	}
+}
