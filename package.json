@@ -12,7 +12,8 @@
     "start": "NODE_ENV=development gatsby develop",
     "build": "NODE_ENV=production gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "test": "npx tsx --test src/**/*.test.ts"
   },
   "dependencies": {
     "@fullpage/react-fullpage": "^0.1.41",
@@ -63,7 +64,9 @@
     "zustand": "^5.0.10"
   },
   "devDependencies": {
-    "@svgr/cli": "^8.1.0"
+    "@svgr/cli": "^8.1.0",
+    "@types/node": "^25.3.0",
+    "tsx": "^4.21.0"
   },
   "engines": {
     "node": ">=20"
