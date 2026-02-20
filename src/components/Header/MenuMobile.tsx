@@ -4,7 +4,7 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { MenuItem } from './MenuContent'
 
 interface MenuMobileProps {
-  activeItem: MenuItem
+  activeItem: MenuItem | null
   onBack: () => void
 }
 
