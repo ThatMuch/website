@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FiChevronRight, FiArrowRight, FiChevronLeft } from 'react-icons/fi'
 import { LuSquareArrowOutUpRight } from 'react-icons/lu'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { Link } from 'gatsby'
 import { useUIStore } from '../../store/useUIStore'
 import comet from '../../images/Comet.svg'
 import clsx from 'clsx'
@@ -11,6 +12,7 @@ export interface MenuItem {
   id: string
   label: string
   url: string
+  path?: string
   target?: string
   description?: string
   parentId?: string | null
@@ -67,6 +69,17 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
                     {item.label}
                     <FiChevronRight size={42} aria-hidden="true" />
                   </div>
+                ) : item.path && item.path.startsWith('/') ? (
+                  <Link
+                    className="menu__item"
+                    to={item.path}
+                    target={item.target}
+                    onClick={() => toggleMenu(false)}
+                    title={`Lien vers ${item.label}`}
+                    aria-label={item.label}
+                  >
+                    {item.label}
+                  </Link>
                 ) : (
                   <a
                     className="menu__item"
@@ -100,21 +113,38 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
               <ul className="menu__items__sub">
                 {activeItem?.childItems?.nodes?.map((child: MenuItem) => (
                   <li key={child.url}>
-                    <a
-                      href={child.url}
-                      target={child.target}
-                      rel="noopener noreferrer"
-                      onClick={() => toggleMenu(false)}
-                      title={`Lien vers ${child.label}`}
-                      aria-label={child.label}
-                    >
-                      {child.label}
-                      {child.target === '_blank' ? (
-                        <LuSquareArrowOutUpRight size={42} aria-hidden="true" />
-                      ) : (
-                        <FiArrowRight size={42} aria-hidden="true" />
-                      )}
-                    </a>
+                    {child.path && child.path.startsWith('/') ? (
+                      <Link
+                        to={child.path}
+                        target={child.target}
+                        onClick={() => toggleMenu(false)}
+                        title={`Lien vers ${child.label}`}
+                        aria-label={child.label}
+                      >
+                        {child.label}
+                        {child.target === '_blank' ? (
+                          <LuSquareArrowOutUpRight size={42} aria-hidden="true" />
+                        ) : (
+                          <FiArrowRight size={42} aria-hidden="true" />
+                        )}
+                      </Link>
+                    ) : (
+                      <a
+                        href={child.url}
+                        target={child.target}
+                        rel="noopener noreferrer"
+                        onClick={() => toggleMenu(false)}
+                        title={`Lien vers ${child.label}`}
+                        aria-label={child.label}
+                      >
+                        {child.label}
+                        {child.target === '_blank' ? (
+                          <LuSquareArrowOutUpRight size={42} aria-hidden="true" />
+                        ) : (
+                          <FiArrowRight size={42} aria-hidden="true" />
+                        )}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

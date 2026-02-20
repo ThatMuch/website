@@ -11,6 +11,7 @@ import {
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
+import { Link } from "gatsby";
 import logoThatIsWhite from "../../images/THATMUCH_Logo_White.webp";
 import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSitePosts } from "../../hooks/use-site-posts";
@@ -92,20 +93,20 @@ export default function Footer({}: Props) {
       </div>
 
       <div className="Footer">
-        <a
-          href={siteUrl}
+        <Link
+          to="/"
           className="Footer__logo"
           title="Logo de Thatmuch"
           aria-label="Logo Thatmuch"
         >
           <LazyLoadImage src={logoThatIsWhite} alt="Logo Thatmuch en blanc" />
-        </a>
+        </Link>
         <div>
           <h4 className="mb-2">Articles récents</h4>
           <ul>
             {posts?.slice(0, 4).map((post) => (
               <li key={post.id}>
-                <a href={post.link}>{post.title}</a>
+                <Link to={post.uri || post.link}>{post.title}</Link>
               </li>
             ))}
           </ul>
@@ -115,7 +116,11 @@ export default function Footer({}: Props) {
         <p>© {new Date().getFullYear()} THATMUCH - Tous droits réservés</p>
         {menuItems.map((item) => (
           <p key={item.id}>
-            <a href={item.path}>{item.label}</a>
+            {item.path && item.path.startsWith('/') ? (
+              <Link to={item.path}>{item.label}</Link>
+            ) : (
+              <a href={item.url || item.path}>{item.label}</a>
+            )}
           </p>
         ))}
       </div>
