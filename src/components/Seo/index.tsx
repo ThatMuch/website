@@ -41,6 +41,7 @@ const Seo: React.FC<SEOProps> = ({
       <html lang="fr" />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
+      <link rel="canonical" href={seo.url} />
 
       {/* OpenGraph tags */}
       <meta property="og:url" content={seo.url} />
