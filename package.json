@@ -74,5 +74,8 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "optionalDependencies": {
+    "@lmdb/lmdb-linux-x64": "2.5.3"
   }
 }
