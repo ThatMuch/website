@@ -1,3 +1,4 @@
+@use "../../style/animations" as *;
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 
@@ -14,6 +15,7 @@ header.header {
   backdrop-filter: blur(5px);
   border-radius: $radius-l;
   padding: $spacing-s;
+
   @include breakpoint(mobile) {
     width: 100%;
     position: relative;
@@ -21,11 +23,18 @@ header.header {
     margin-bottom: $spacing-m;
     padding: 0;
   }
+
   .logo--header {
     width: 12.5rem;
+
     @include breakpoint(mobile) {
       width: 8rem;
     }
+  }
+
+  .btn {
+    animation: slideFromTop .5s ease-in-out;
+
   }
 }
 
@@ -34,10 +43,12 @@ header.landing-header {
   display: flex;
   justify-content: center;
   align-items: center;
+
   img {
     width: 200px;
   }
 }
+
 .menu {
   display: flex;
 
@@ -48,6 +59,7 @@ header.landing-header {
 
   &__txt {
     font-weight: 700;
+
     @include breakpoint(mobile) {
       display: none;
     }
@@ -137,10 +149,11 @@ header.landing-header {
     background-image: url("../../images/Background-stars.webp");
     background-repeat: no-repeat;
     background-position: 90% 70%;
+    overflow: hidden;
 
     @include breakpoint(mobile) {
-      width: calc(100% + #{$spacing_m} * 2);
-      top: -1rem;
+      left: 0;
+
     }
 
     .logo {
@@ -154,6 +167,7 @@ header.landing-header {
       border-right: 3px solid $neutral-100;
       height: calc(100vh - calc(#{$space_XL} * 3 + 35px));
       position: relative;
+
       @include breakpoint(mobile) {
         border-right: none;
       }
@@ -166,6 +180,7 @@ header.landing-header {
         transition-duration: $slow;
         justify-content: space-between;
         cursor: pointer;
+
         &:before {
           content: " ";
           position: absolute;
@@ -225,6 +240,7 @@ header.landing-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
+
           @include breakpoint(mobile) {
             font-size: 2rem;
           }
@@ -237,12 +253,14 @@ header.landing-header {
       padding: 0;
       width: 100%;
       height: 100%;
+
       li {
         width: 100%;
         height: calc(100% / 4);
         display: flex;
         position: relative;
         transition-duration: $slow;
+
         a {
           display: flex;
           align-items: center;
@@ -253,9 +271,11 @@ header.landing-header {
           font-size: 2.5rem;
           margin: auto 0;
           color: $neutral-900;
+
           &:hover {
             color: $neutral-500;
           }
+
           @include breakpoint(mobile) {
             font-size: 2rem;
           }
@@ -301,8 +321,10 @@ header.landing-header {
       }
     }
   }
+
   &__items__desc {
     display: flex;
+
     @include breakpoint(mobile) {
       flex-direction: column;
       position: absolute;
@@ -311,9 +333,11 @@ header.landing-header {
       background-color: $neutral-50;
       padding: $spacing-m;
       transition: right 0.3s ease-in-out;
+
       &.is-open {
         right: 0;
       }
+
       &__back {
         display: flex;
         align-items: center;
@@ -323,10 +347,13 @@ header.landing-header {
       }
     }
   }
+
   &__item__desc {
     font-size: 2rem;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
   }
+
+
 }

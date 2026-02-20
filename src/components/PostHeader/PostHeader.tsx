@@ -6,7 +6,12 @@ import React from "react";
 
 type Props = {
   title: string;
-  author: any;
+  author: {
+    name: string
+    avatar: {
+      url: string
+    }
+  };
   category: string;
   postDate: string;
 };

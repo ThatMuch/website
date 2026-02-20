@@ -28,8 +28,7 @@ export default function Newsletter({}: Props) {
         <HubspotForm
           portalId="25329660"
           formId="e8578e88-8621-4238-9623-3a4263b0390b"
-          onSubmit={() => console.log("Submit!")}
-          onReady={(form) => console.log("Form ready!")}
+
         />
       </div>
     </div>

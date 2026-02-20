@@ -3,6 +3,7 @@ import "./HeroSection.scss";
 import React from "react";
 import { FaStar } from "react-icons/fa6";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 interface ImageNode {
   mediaItemUrl: string;
@@ -43,7 +44,7 @@ export default function HeroSection({ data }: Props) {
         <h1 className="HeroSection__title">{title}</h1>
         <div
           className="HeroSection__desc"
-          dangerouslySetInnerHTML={{ __html: desc }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(desc) }}
         />
         {boutton && (
            <a

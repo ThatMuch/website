@@ -5,14 +5,25 @@ import React, { useState } from "react";
 import { useHeadings } from "./hooks/useHeadings";
 import { useActiveHeading } from "./hooks/useActiveHeading";
 
+interface TOCAttributes {
+  title: string
+  collapsible?: boolean
+  includeH1?: boolean
+  includeH2?: boolean
+  includeH3?: boolean
+  includeH4?: boolean
+  includeH5?: boolean
+  includeH6?: boolean
+}
+
 type Props = {
-  attributes?: any;
+  attributes?: TOCAttributes;
 };
 
 export default function TOCBlock({ attributes }: Props) {
   const tocItems = useHeadings(attributes);
   const activeId = useActiveHeading(tocItems);
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
   // Fonction pour faire défiler vers un titre
   const scrollToHeading = (id: string) => {
