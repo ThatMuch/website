@@ -12,6 +12,7 @@ import logo from "../../images/THATMUCH_Logo_Black.webp"
 import { StaticImage } from "gatsby-plugin-image"
 import MenuToggle from "./MenuToggle"
 import MenuContent from "./MenuContent"
+import { Link } from "gatsby"
 
 export default function Header() {
   // Global Store State
@@ -81,8 +82,8 @@ export default function Header() {
                  alt="Close Thatmuch"
                />
              </button>
-             <a
-               href={siteUrl}
+             <Link
+               to="/"
                title="Lien vers l'accueil de Thatmuch"
                aria-label="Logo Thatmuch"
             >
@@ -96,14 +97,14 @@ export default function Header() {
         )}
       </div>
 
-      <a
-        href="/"
+      <Link
+        to="/"
         className="landing-header__logo"
         aria-label="Accueil"
         title="Accueil du site THATMUCH"
       >
         <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
-      </a>
+      </Link>
 
       <a
         href="https://meetings-eu1.hubspot.com/mathilde-arconte"

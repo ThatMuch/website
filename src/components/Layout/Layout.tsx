@@ -3,7 +3,6 @@ import "./Layout.scss";
 
 import React, { useEffect } from "react";
 
-
 import ClickSpark from "../ClickSpark/ClickSpark";
 import Footer from "../Footer/Footer";
 import Header from "../Header";
@@ -13,8 +12,6 @@ type Props = {
   children: React.ReactNode;
 };
 export default function Layout({ type, children }: Props) {
-  useEffect(() => {
-  }, []);
   return (
     <ClickSpark
       sparkColor="#1e1244"

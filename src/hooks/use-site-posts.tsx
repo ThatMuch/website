@@ -8,6 +8,7 @@ export const useSitePosts = (categorySlug?: string) => {
         edges {
           node {
             id
+            uri
             link
             title
             categories {
