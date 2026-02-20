@@ -63,37 +63,45 @@ export default function Header() {
         <MenuToggle />
 
         {isMenuOpen && (
-           <div className="menu__wrapper">
-             <button
-               id="btn_close"
-               className="btn_close"
-               onClick={() => toggleMenu(false)}
-               aria-label="Fermer le menu"
-               title="Fermer le menu"
-             >
-               <LazyLoadImage
-                 className="close"
-                 src={close}
-                 alt="Close Thatmuch"
-               />
-               <LazyLoadImage
-                 className="close_hover"
-                 src={close_gif}
-                 alt="Close Thatmuch"
-               />
-             </button>
-             <Link
-               to="/"
-               title="Lien vers l'accueil de Thatmuch"
-               aria-label="Logo Thatmuch"
+          <div className="menu__wrapper" id="menu-container">
+            <button
+              id="btn_close"
+              className="btn_close"
+              onClick={() => toggleMenu(false)}
+              aria-label="Fermer le menu"
+              title="Fermer le menu"
             >
-              <StaticImage loading="eager" src={logo} alt="Thatmuch" className="logo" width={230} />
+              <LazyLoadImage
+                className="close"
+                src={close}
+                alt=""
+                aria-hidden="true"
+              />
+              <LazyLoadImage
+                className="close_hover"
+                src={close_gif}
+                alt=""
+                aria-hidden="true"
+              />
+            </button>
+            <Link
+              to="/"
+              title="Lien vers l'accueil de Thatmuch"
+              aria-label="Logo Thatmuch"
+            >
+              <StaticImage
+                loading="eager"
+                src={logo}
+                alt=""
+                className="logo"
+                width={230}
+                aria-hidden="true"
+              />
+            </Link>
 
-             </Link>
-
-             {/* Main Content Component */}
-             <MenuContent menuItems={menuItems} />
-           </div>
+            {/* Main Content Component */}
+            <MenuContent menuItems={menuItems} />
+          </div>
         )}
       </div>
 
@@ -103,7 +111,7 @@ export default function Header() {
         aria-label="Accueil"
         title="Accueil du site THATMUCH"
       >
-        <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
+        <LazyLoadImage src={logo} alt="" className="logo--header" aria-hidden="true" />
       </Link>
 
       <Link

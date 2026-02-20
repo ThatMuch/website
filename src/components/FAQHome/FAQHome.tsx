@@ -33,15 +33,23 @@ export default function FAQHome({ title, description, questions }: Props) {
       <ul>
         {questions.map((question, index) => (
           <li key={index} className="FAQHome__question">
-            <h3
-              className="d-flex align-items-center justify-content-between FAQHome__question__title"
-              onClick={() => toggleQuestion(index)}
-            >
-              {question.title}
-              {activeIndex === index ? <FiMinusCircle /> : <FiPlusCircle />}
+            <h3>
+              <button
+                type="button"
+                className="d-flex align-items-center justify-content-between FAQHome__question__title w-100 border-0 bg-transparent p-0 text-start"
+                onClick={() => toggleQuestion(index)}
+                aria-expanded={activeIndex === index}
+                aria-controls={`faq-home-answer-${index}`}
+              >
+                {question.title}
+                {activeIndex === index ? <FiMinusCircle /> : <FiPlusCircle />}
+              </button>
             </h3>
             {activeIndex === index && (
-              <div dangerouslySetInnerHTML={{ __html: question.description }} />
+              <div
+                id={`faq-home-answer-${index}`}
+                dangerouslySetInnerHTML={{ __html: question.description }}
+              />
             )}
           </li>
         ))}
