@@ -1,7 +1,10 @@
+@use "../../style/animations" as *;
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 
+
 .Layout {
+  animation: pageTransition 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   padding: 100px 50px 50px;
   position: relative;
   overflow-x: clip;

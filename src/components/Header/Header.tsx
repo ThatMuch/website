@@ -106,8 +106,8 @@ export default function Header() {
         <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
       </Link>
 
-      <a
-        href="https://meetings-eu1.hubspot.com/mathilde-arconte"
+      <Link
+        to="https://meetings-eu1.hubspot.com/mathilde-arconte"
         className="btn btn-primary"
         target="_blank"
         rel="noopener noreferrer"
@@ -115,7 +115,7 @@ export default function Header() {
         aria-label="Programmez un appel"
       >
         {isMobile ? "RDV" : "Programmez un appel"}
-      </a>
+      </Link>
     </header>
   )
 }
