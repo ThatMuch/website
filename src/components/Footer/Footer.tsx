@@ -73,6 +73,7 @@ export default function Footer({}: Props) {
   ];
   return (
     <footer>
+      <h2 className="visually-hidden">Pied de page</h2>
       <div className="RS_Section">
         <h3 className="RS_Section__title">Suivez nous</h3>
         <div className="RS_Section__list">
@@ -86,7 +87,10 @@ export default function Footer({}: Props) {
               title={"Lien vers " + link.name}
               aria-label={link.name}
             >
-              {link.icon}
+              {/* Remove title from icon to avoid redundancy with aria-label on link */}
+              {React.cloneElement(link.icon as React.ReactElement, {
+                title: undefined,
+              })}
             </a>
           ))}
         </div>
@@ -99,10 +103,14 @@ export default function Footer({}: Props) {
           title="Logo de Thatmuch"
           aria-label="Logo Thatmuch"
         >
-          <LazyLoadImage src={logoThatIsWhite} alt="Logo Thatmuch en blanc" />
+          <LazyLoadImage
+            src={logoThatIsWhite}
+            alt=""
+            aria-hidden="true"
+          />
         </Link>
         <div>
-          <h4 className="mb-2">Articles récents</h4>
+          <h3 className="mb-2 h4">Articles récents</h3>
           <ul>
             {posts?.slice(0, 4).map((post) => (
               <li key={post.id}>

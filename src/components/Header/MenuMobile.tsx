@@ -15,13 +15,15 @@ export default function MenuMobile({ activeItem, onBack }: MenuMobileProps) {
 
   return (
     <div className="menu__items__desc__back">
-      <FiChevronLeft
-        size={42}
+      <button
+        type="button"
         onClick={onBack}
+        className="menu__back-btn"
         aria-label="Retour au menu principal"
         title="Retour au menu principal"
-        style={{ cursor: 'pointer' }}
-      />
+      >
+        <FiChevronLeft size={42} />
+      </button>
       <p className="mb-0">{activeItem.label}</p>
     </div>
   )
