@@ -29,6 +29,8 @@ jobs:
           GATSBY_BREVO_API_KEY: ${{ secrets.GATSBY_BREVO_API_KEY }}
           GATSBY_BREVO_URL: ${{ secrets.GATSBY_BREVO_URL }}
           GATSBY_FIREBASE_COLLECTION_SUBMISSIONS: ${{ secrets.GATSBY_FIREBASE_COLLECTION_SUBMISSIONS }}
+      - name: List Output
+        run: ls -al public
       - name: Deploy via SSH (Hostinger)
         uses: appleboy/scp-action@master
         with:
