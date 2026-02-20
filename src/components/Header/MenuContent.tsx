@@ -156,8 +156,6 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
            {COMET_DELAYS.map((delay) => (
              <LazyLoadImage
                key={delay}
-               data-aos="fade-down-left"
-               data-aos-delay={delay}
                src={comet}
                alt="Comet Thatmuch"
              />
