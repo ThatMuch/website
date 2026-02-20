@@ -29,12 +29,10 @@
     "firebase": "^11.9.1",
     "formik": "^2.4.6",
     "gatsby": "^5.13.3",
-    "gatsby-adapter-netlify": "^1.2.0",
     "gatsby-plugin-feed": "^5.16.0",
     "gatsby-plugin-gatsby-cloud": "^5.13.1",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.14.0",
-    "gatsby-plugin-netlify": "^5.1.1",
     "gatsby-plugin-offline": "^6.14.0",
     "gatsby-plugin-react-helmet": "^6.14.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
@@ -46,7 +44,6 @@
     "gatsby-transformer-remark": "^6.14.0",
     "gatsby-transformer-sharp": "^5.13.1",
     "gsap": "^3.13.0",
-    "isomorphic-dompurify": "^2.36.0",
     "node-sass": "^9.0.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
@@ -77,5 +74,9 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "optionalDependencies": {
+    "@lmdb/lmdb-linux-x64": "2.5.3",
+    "@parcel/watcher-linux-x64-glibc": "2.5.6"
   }
 }
