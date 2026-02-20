@@ -1,4 +1,4 @@
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from 'dompurify';
 
 /**
  * Sanitizes an HTML string using DOMPurify.
@@ -7,5 +7,8 @@ import DOMPurify from 'isomorphic-dompurify';
  */
 export const sanitizeHtml = (html: string): string => {
   if (!html) return '';
+  if (typeof window === 'undefined') {
+    return html;
+  }
   return DOMPurify.sanitize(html);
 };
