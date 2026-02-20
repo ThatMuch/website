@@ -12,10 +12,10 @@ const Page = ({ data }) => {
   return (
     <Layout>
       <Seo title={page.title} description={page.seo.metaDesc} />
-      <main>
+      <div className="page-content">
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: page.content }} />
-      </main>
+      </div>
     </Layout>
   );
 };

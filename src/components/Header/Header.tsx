@@ -9,7 +9,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component"
 import close from "../../images/29-cross-outline.png"
 import close_gif from "../../images/29-cross-outline.gif"
 import logo from "../../images/THATMUCH_Logo_Black.webp"
-
+import { StaticImage } from "gatsby-plugin-image"
 import MenuToggle from "./MenuToggle"
 import MenuContent from "./MenuContent"
 
@@ -26,14 +26,6 @@ export default function Header() {
   useEffect(() => {
     const handleResize = () => setMobile(window.innerWidth <= 768)
     const handleScroll = () => {
-      // Logic for scroll state if needed (previously unused but state existed)
-      // Assuming naive implementation or based on previous usage context if any.
-      // Previous code had unused `setIsScrolled(false)` on cleanup but no logic to set it true?
-      // I'll leave it simple or add a scroll listener if strictly required by user intent.
-      // Checking original file: `isScrolled` was declared but seemingly never set to true?
-      // Actually it might be set by some other logic not visible or I missed it in original dump?
-      // Re-reading original dump... No `setIsScrolled(true)` found. Strange.
-      // I'll add a basic listener for robustness.
       setScrolled(window.scrollY > 50)
     }
 
@@ -93,13 +85,9 @@ export default function Header() {
                href={siteUrl}
                title="Lien vers l'accueil de Thatmuch"
                aria-label="Logo Thatmuch"
-             >
-               <LazyLoadImage
-                 src={logo}
-                 alt="Thatmuch"
-                 className="logo"
-                 width="230"
-               />
+            >
+              <StaticImage loading="eager" src={logo} alt="Thatmuch" className="logo" width={230} />
+
              </a>
 
              {/* Main Content Component */}
@@ -124,14 +112,6 @@ export default function Header() {
         rel="noopener noreferrer"
         title="Lien vers la prise de rendez-vous"
         aria-label="Programmez un appel"
-        data-aos="fade-down"
-        data-aos-delay="100"
-        data-aos-duration="1000"
-        data-aos-easing="ease-in-out"
-        data-aos-anchor-placement="top-bottom"
-        data-aos-offset="0"
-        data-aos-once="true"
-        data-aos-anchor="#bento-menu"
       >
         {isMobile ? "RDV" : "Programmez un appel"}
       </a>
