@@ -3,8 +3,19 @@ import "./ServiceList.scss";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
+interface Service {
+  titre: string
+  desc: string
+  image?: {
+    node: {
+      mediaItemUrl: string
+      altText: string
+    }
+  }
+}
+
 type Props = {
-  services: any[];
+  services: Service[];
   category?: string;
 };
 

@@ -10,15 +10,15 @@ import { graphql } from "gatsby";
 
 const Contact = ({ data }) => {
   const page = data.wpPage;
-  console.log(page);
+
   return (
     <Layout>
-      <main>
+      <div className="contact-content">
         <ContactForm hubspotForm={page.hubspotForm} />
         {page.content && (
           <div dangerouslySetInnerHTML={{ __html: page.content }} />
         )}
-      </main>
+      </div>
     </Layout>
   );
 };

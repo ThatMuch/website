@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState, useMemo } from "react";
 import { animated, useSprings } from "@react-spring/web";
 
 interface SplitTextProps {
@@ -28,8 +28,8 @@ const SplitText: React.FC<SplitTextProps> = ({
   onLetterAnimationComplete,
   textType = "p",
 }) => {
-  const words = text.split(" ").map((word) => word.split(""));
-  const letters = words.flat();
+  const words = useMemo(() => text.split(" ").map((word) => word.split("")), [text]);
+  const letters = useMemo(() => words.flat(), [words]);
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
   const animatedCount = useRef(0);
@@ -56,10 +56,10 @@ const SplitText: React.FC<SplitTextProps> = ({
 
   const springs = useSprings(
     letters.length,
-    letters.map((_, i) => ({
+    useMemo(() => letters.map((_, i) => ({
       from: animationFrom,
       to: inView
-        ? async (next: (props: any) => Promise<void>) => {
+        ? async (next: (props: object) => Promise<void>) => {
             await next(animationTo);
             animatedCount.current += 1;
             if (
@@ -72,7 +72,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         : animationFrom,
       delay: i * delay,
       config: { easing },
-    }))
+    })), [letters, inView, animationFrom, animationTo, delay, easing, onLetterAnimationComplete])
   );
 
   const renderAnimation = words.map((word, wordIndex) => (

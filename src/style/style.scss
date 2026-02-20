@@ -1,3 +1,4 @@
+@use "./animations" as *;
 @use "./vars" as *;
 @use "./fonts" as *;
 @use "./mixins" as *;
@@ -118,15 +119,7 @@ body {
 
 // Animations
 
-@keyframes rotating {
-  from {
-    transform: rotate(0deg);
-  }
 
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .rotating {
   animation: rotating 2s linear infinite;
@@ -195,12 +188,5 @@ hr {
   hr,
   img {
     animation: none;
-  }
-}
-
-@keyframes text-appear {
-  from {
-    opacity: 0;
-    translate: 0 3rem;
   }
 }

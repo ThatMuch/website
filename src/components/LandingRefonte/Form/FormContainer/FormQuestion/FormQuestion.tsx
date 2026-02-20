@@ -3,10 +3,24 @@ import "./style.scss";
 import { Field } from "formik";
 import React from "react";
 
+import { FormikErrors, FormikTouched } from "formik";
+
+export interface QuestionOption {
+  text: string;
+  score: number;
+}
+
+export interface Question {
+  id: string;
+  question: string;
+  description?: string;
+  options: QuestionOption[];
+}
+
 type Props = {
-  item: any;
-  errors: any;
-  touched: any;
+  item: Question;
+  errors: FormikErrors<{[key: string]: string}>;
+  touched: FormikTouched<{[key: string]: boolean}>;
   showErrors?: boolean;
 };
 
@@ -20,7 +34,7 @@ const FormQuestion = ({ item, errors, touched, showErrors }: Props) => {
     }
   };
 
-  const optionIsChecked = (option: any) => {
+  const optionIsChecked = (option: QuestionOption) => {
     const inputId = `option-${item.id}-${options.indexOf(option)}`;
     const inputElement = document.getElementById(inputId) as HTMLInputElement;
     return inputElement?.checked || false;
@@ -42,7 +56,7 @@ const FormQuestion = ({ item, errors, touched, showErrors }: Props) => {
           aria-labelledby={`legend-${id}`}
           aria-required="true"
         >
-          {options?.map((option: any, index: number) => {
+          {options?.map((option: QuestionOption, index: number) => {
             const inputId = `option-${item.id}-${index}`;
             return (
               <div key={index}>

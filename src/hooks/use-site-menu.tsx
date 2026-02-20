@@ -20,6 +20,7 @@ export const useSiteMenu = (location?: string) => {
                 parentId
                 childItems {
                   nodes {
+                    path
                     url
                     label
                     target
