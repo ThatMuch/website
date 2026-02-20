@@ -103,7 +103,7 @@ export default function Header() {
         aria-label="Accueil"
         title="Accueil du site THATMUCH"
       >
-        <LazyLoadImage src={logo} alt="Thatmuch" className="logo--header" />
+        <StaticImage loading="eager" src={logo} alt="Thatmuch" className="logo--header" width={230} />
       </Link>
 
       <Link
