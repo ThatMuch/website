@@ -89,7 +89,7 @@ export default function Header() {
             >
               <StaticImage loading="eager" src={logo} alt="Thatmuch" className="logo" width={230} />
 
-             </a>
+             </Link>
 
              {/* Main Content Component */}
              <MenuContent menuItems={menuItems} />
