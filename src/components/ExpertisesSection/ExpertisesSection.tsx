@@ -3,6 +3,7 @@ import "./ExpertisesSection.scss";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import { usePostExpertises } from "../../hooks/use-custom-expertises";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 type Props = {
   section: {
@@ -47,7 +48,7 @@ export default function ExpertisesSection({ section }: Props) {
                 />
               </div>
               <h3 className="h2">{expertise.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: expertise.desc }} />
+              <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(expertise.desc) }} />
             </div>
 
             <a

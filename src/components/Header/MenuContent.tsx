@@ -18,6 +18,7 @@ export interface MenuItem {
     nodes: MenuItem[]
   }
 }
+const COMET_DELAYS = [100, 200, 300]
 
 interface MenuContentProps {
   menuItems: MenuItem[]
@@ -52,7 +53,7 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
       <div className="col-12 col-sm-4">
         <ul className="menu__items">
           {menuItems.map((item, index) => {
-            const hasChildren = item.childItems?.nodes?.length > 0
+            const hasChildren = (item?.childItems?.nodes?.length ?? 0) > 0
             const isActive = activeMenuIndex === index
 
             return (
@@ -95,9 +96,9 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
               <p className="menu__item__desc">{activeItem.description}</p>
             )}
 
-            {activeItem.childItems?.nodes?.length > 0 && (
+            {(activeItem?.childItems?.nodes?.length ?? 0) > 0 && (
               <ul className="menu__items__sub">
-                {activeItem.childItems.nodes.map((child: MenuItem) => (
+                {activeItem?.childItems?.nodes?.map((child: MenuItem) => (
                   <li key={child.url}>
                     <a
                       href={child.url}
@@ -122,7 +123,7 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
         )}
 
         <div className="comets">
-           {[100, 200, 300].map((delay) => (
+           {COMET_DELAYS.map((delay) => (
              <LazyLoadImage
                key={delay}
                data-aos="fade-down-left"
