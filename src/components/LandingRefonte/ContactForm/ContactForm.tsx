@@ -10,6 +10,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import tardis from "../../../images/tardis.webp";
 import { useSubmitContactForm } from "../../../hooks/use-submit-contact-form";
+import { useAddDoc } from "../../../hooks/use-firebase";
+import { useSendContactBrevo } from "../../../hooks/use-brev";
 
 const initialValues = {
   firstName: "",
@@ -32,9 +34,38 @@ const validationSchema = Yup.object().shape({
     "Vous devez accepter les conditions d'utilisation"
   ), // Added validation for terms
 });
+
+const scoresSchema = Yup.object().shape({
+  globalScore: Yup.number().required(),
+  scoresByCategory: Yup.object().test(
+    "is-category-scores",
+    "Invalid category scores",
+    (value) => {
+      if (!value || typeof value !== "object") return false;
+      return Object.values(value).every((val) => typeof val === "number");
+    }
+  ),
+  answersByCategory: Yup.object().optional(),
+});
+
+const submissionDataSchema = Yup.object().shape({
+  firstName: Yup.string().required("Votre prénom est requis"),
+  lastName: Yup.string().required("Votre nom est requis"),
+  email: Yup.string().email("Email invalide").required("Email est requis"),
+  url: Yup.string()
+    .required("URL du site web est requise")
+    .url("URL invalide"),
+  scores: scoresSchema.required(),
+});
+
 export default function ContactForm() {
   const { handleSubmit, isSend, setIsSend, emailSent } = useSubmitContactForm();
 
+  const { addDocument } = useAddDoc(
+    process.env.GATSBY_FIREBASE_COLLECTION_SUBMISSIONS || "submissions",
+    submissionDataSchema
+  );
+  const { sendContact } = useSendContactBrevo([5]);
   return (
     <div className="ContactFormRefonte">
       <div className="row">

@@ -6,6 +6,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from "react"; // Import React hooks
+import * as Yup from "yup";
 
 import { db } from "../utils/firebase/Firebase";
 
@@ -49,7 +50,10 @@ export function useFetchFirebase<T = DocumentData>(collectionName: string) {
   };
 }
 
-export function useAddDoc(collectionName: string) {
+export function useAddDoc(
+  collectionName: string,
+  validationSchema?: Yup.AnySchema
+) {
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const [documentId, setDocumentId] = useState<string | null>(null);
@@ -58,10 +62,26 @@ export function useAddDoc(collectionName: string) {
     setIsAdding(true);
     setError(null);
     setDocumentId(null);
+
+    let validData = newData;
+    if (validationSchema) {
+      try {
+        validData = await validationSchema.validate(newData, {
+          strict: true,
+          stripUnknown: true,
+        });
+      } catch (validationError) {
+        console.error("Validation Error:", validationError);
+        setError(validationError as Error);
+        setIsAdding(false);
+        throw validationError;
+      }
+    }
+
     const collectionRef = collection(db, collectionName);
     try {
       const docRef = await addDoc(collectionRef, {
-        ...newData,
+        ...validData,
         createdAt: serverTimestamp(),
       });
       setDocumentId(docRef.id);
