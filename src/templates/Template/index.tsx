@@ -11,7 +11,7 @@ export default function Template({ data }) {
   return (
     <Layout type="template">
       <Seo title={page.title} description={page.seo.metaDesc} />
-      <main>
+      <div className="template-content">
         <Breadcrumb
           crumbs={[
             {
@@ -39,7 +39,7 @@ export default function Template({ data }) {
           />
         )}
         <AllTemplates title="Les derniers templates" />
-      </main>
+      </div>
     </Layout>
   );
 }
