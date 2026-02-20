@@ -13,12 +13,12 @@ const Contact = ({ data }) => {
 
   return (
     <Layout>
-      <main>
+      <div className="contact-content">
         <ContactForm hubspotForm={page.hubspotForm} />
         {page.content && (
           <div dangerouslySetInnerHTML={{ __html: page.content }} />
         )}
-      </main>
+      </div>
     </Layout>
   );
 };
