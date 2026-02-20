@@ -8,7 +8,6 @@ import { useSiteSeo } from "../../hooks/use-site-seo"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 import close from "../../images/29-cross-outline.png"
 import close_gif from "../../images/29-cross-outline.gif"
-import logo from "../../images/THATMUCH_Logo_Black.webp"
 import { StaticImage } from "gatsby-plugin-image"
 import MenuToggle from "./MenuToggle"
 import MenuContent from "./MenuContent"
@@ -87,7 +86,7 @@ export default function Header() {
                title="Lien vers l'accueil de Thatmuch"
                aria-label="Logo Thatmuch"
             >
-              <StaticImage loading="eager" src={logo} alt="Thatmuch" className="logo" width={230} />
+              <StaticImage loading="eager" src="../../images/THATMUCH_Logo_Black.webp" alt="Thatmuch" className="logo" width={230} />
 
              </Link>
 
@@ -103,7 +102,7 @@ export default function Header() {
         aria-label="Accueil"
         title="Accueil du site THATMUCH"
       >
-        <StaticImage loading="eager" src={logo} alt="Thatmuch" className="logo--header" width={230} />
+        <StaticImage loading="eager" src="../../images/THATMUCH_Logo_Black.webp" alt="Thatmuch" className="logo--header" width={230} />
       </Link>
 
       <Link
