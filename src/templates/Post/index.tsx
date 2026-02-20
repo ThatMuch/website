@@ -33,7 +33,7 @@ const Post = ({ data }) => {
   };
   return (
     <Layout type="post">
-      <main className={categorySlug}>
+      <div className={categorySlug}>
         <Seo
           title={post.title}
           description={post.seo.metaDesc}
@@ -49,7 +49,7 @@ const Post = ({ data }) => {
         />
         <div className="post__content">{renderBlocks()}</div>
         <RelatedPosts category={categorySlug} currentPostId={post.id} />
-      </main>
+      </div>
     </Layout>
   );
 };
