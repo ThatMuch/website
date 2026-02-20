@@ -33,7 +33,7 @@ const Post = ({ data }) => {
   };
   return (
     <Layout type="post">
-      <main className={categorySlug}>
+      <div className={categorySlug}>
         <Seo
           title={post.title}
           description={post.seo.metaDesc}
@@ -49,12 +49,62 @@ const Post = ({ data }) => {
         />
         <div className="post__content">{renderBlocks()}</div>
         <RelatedPosts category={categorySlug} currentPostId={post.id} />
-      </main>
+      </div>
     </Layout>
   );
 };
 
 export default Post;
+
+export const Head = ({ data }) => {
+  const blocks = data?.wpPost?.blocks || [];
+
+  const faqBlocks = blocks.filter(
+    (block) => block.name === "faq-block-for-gutenberg/faq"
+  );
+
+  let faqSchema = null;
+
+  if (faqBlocks.length > 0) {
+    const mainEntity = faqBlocks
+      .map((block) => {
+        try {
+          const attributes = JSON.parse(block.attributesJSON || "{}");
+          if (attributes.question && attributes.answer) {
+            return {
+              "@type": "Question",
+              name: attributes.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: attributes.answer,
+              },
+            };
+          }
+        } catch (e) {
+          console.error("Error parsing FAQ block attributes", e);
+        }
+        return null;
+      })
+      .filter(Boolean);
+
+    if (mainEntity.length > 0) {
+      faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity,
+      };
+    }
+  }
+
+  if (!faqSchema) return null;
+
+  return (
+    <script type="application/ld+json">
+      {JSON.stringify(faqSchema)}
+    </script>
+  );
+};
+
 export const pageQuery = graphql`
   query ($id: String!) {
     wpPost(id: { eq: $id }) {

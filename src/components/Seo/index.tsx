@@ -35,7 +35,11 @@ const Seo: React.FC<SEOProps> = ({
   };
 
   return (
-    <Helmet title={seo.title}>
+    <Helmet
+      title={title}
+      titleTemplate="%s | THATMUCH"
+      defaultTitle={defaultTitle}
+    >
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <html lang="fr" />

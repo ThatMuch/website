@@ -12,7 +12,7 @@ export default function Expertise({ data }) {
   return (
     <Layout>
       <Seo title={page.title} description={page.seo.metaDesc} />
-      <main>
+      <div className="expertise-content">
         <PageHeader
           title={page.title}
           description={page.seo.metaDesc}
@@ -29,7 +29,7 @@ export default function Expertise({ data }) {
           title="Nos articles sur le sujet"
           isHome
         />
-      </main>
+      </div>
     </Layout>
   );
 }
