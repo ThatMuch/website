@@ -1,3 +1,4 @@
+@use "../../style/animations" as *;
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 
@@ -29,6 +30,11 @@ header.header {
     @include breakpoint(mobile) {
       width: 8rem;
     }
+  }
+
+  .btn {
+    animation: slideFromTop .5s ease-in-out;
+
   }
 }
 
@@ -348,4 +354,6 @@ header.landing-header {
     margin-top: auto;
     margin-bottom: auto;
   }
+
+
 }

@@ -23,7 +23,7 @@ type Props = {
 export default function TOCBlock({ attributes }: Props) {
   const tocItems = useHeadings(attributes);
   const activeId = useActiveHeading(tocItems);
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
   // Fonction pour faire défiler vers un titre
   const scrollToHeading = (id: string) => {
