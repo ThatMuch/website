@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/style.scss";
-import "aos/dist/aos.css";
 
 import FrontPage from "../templates/FrontPage";
 import React from "react";
