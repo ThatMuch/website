@@ -1,5 +1,6 @@
 import "./PostCard.scss";
 
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
@@ -11,9 +12,14 @@ type PostCardProps = {
   };
   url: string;
   image: {
-    mediaItemUrl: string
-    altText: string
-  }
+    mediaItemUrl: string;
+    altText: string;
+    localFile?: {
+      childImageSharp?: {
+        gatsbyImageData: IGatsbyImageData;
+      };
+    };
+  };
 };
 
 export default function PostCard({
@@ -22,6 +28,8 @@ export default function PostCard({
   url,
   image,
 }: PostCardProps) {
+  const gatsbyImageData = image?.localFile?.childImageSharp?.gatsbyImageData;
+
   return (
     <article className="PostCard">
       <a
@@ -29,13 +37,21 @@ export default function PostCard({
         className="PostCard__image"
         title={"Image de l'article " + title}
       >
-        {image?.mediaItemUrl && (
-          <LazyLoadImage
-            src={image.mediaItemUrl}
-            alt={image.altText}
-            effect="blur"
+        {gatsbyImageData ? (
+          <GatsbyImage
+            image={gatsbyImageData}
+            alt={image?.altText || title}
             className="mb-4"
           />
+        ) : (
+          image?.mediaItemUrl && (
+            <LazyLoadImage
+              src={image.mediaItemUrl}
+              alt={image?.altText || title}
+              effect="blur"
+              className="mb-4"
+            />
+          )
         )}
       </a>
 

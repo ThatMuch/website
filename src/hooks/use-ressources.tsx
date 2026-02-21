@@ -16,6 +16,11 @@ export const useRessources = (categorySlug?: string) => {
                 altText
                 mediaItemUrl
                 title
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                  }
+                }
               }
             }
             categories {

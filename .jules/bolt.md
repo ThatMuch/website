@@ -1,0 +1,3 @@
+## 2025-02-23 - Image Optimization Strategy
+**Learning:** Migrating to `gatsby-plugin-image` in a legacy codebase doesn't have to be all-or-nothing. By updating the data hooks (`useSitePosts`, `useRessources`) to fetch `gatsbyImageData` via `localFile`, I could enable `GatsbyImage` for `PostCard` while keeping the `LazyLoadImage` fallback for safety.
+**Action:** When optimizing images in Gatsby with WordPress source, always check if `createFileNodes` is enabled and leverage `localFile` field. Also, be mindful of CSS animations targeting `img` tags directly; `GatsbyImage` wraps images, so selectors need adjustment (e.g., targeting `.gatsby-image-wrapper`).
