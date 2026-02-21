@@ -1,3 +1,5 @@
+import { IGatsbyImageData } from "gatsby-plugin-image";
+
 export type PostType = {
   id: string;
   title: string;
@@ -7,6 +9,11 @@ export type PostType = {
     node: {
       mediaItemUrl: string;
       altText: string;
+      localFile?: {
+        childImageSharp?: {
+          gatsbyImageData: IGatsbyImageData;
+        };
+      };
     };
   };
   categories: {

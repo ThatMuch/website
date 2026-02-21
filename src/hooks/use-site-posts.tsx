@@ -23,6 +23,11 @@ export const useSitePosts = (categorySlug?: string) => {
               node {
                 altText
                 mediaItemUrl
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                  }
+                }
               }
             }
             seo {
