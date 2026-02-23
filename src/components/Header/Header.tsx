@@ -24,17 +24,55 @@ export default function Header() {
 
   // Initialization & Resize Logic
   useEffect(() => {
-    const handleResize = () => setMobile(window.innerWidth <= 768)
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+    let resizeTicking = false
+    let scrollTicking = false
+    let resizeRafId = 0
+    let scrollRafId = 0
+    let lastIsMobile = window.innerWidth <= 768
+    let lastIsScrolled = window.scrollY > 50
+
+    const handleResize = () => {
+      if (!resizeTicking) {
+        resizeRafId = window.requestAnimationFrame(() => {
+          const isNowMobile = window.innerWidth <= 768
+          // Optimization: Check against last known state to avoid redundant updates
+          if (lastIsMobile !== isNowMobile) {
+            setMobile(isNowMobile)
+            lastIsMobile = isNowMobile
+          }
+          resizeTicking = false
+        })
+        resizeTicking = true
+      }
     }
 
-    handleResize() // init
+    const handleScroll = () => {
+      if (!scrollTicking) {
+        scrollRafId = window.requestAnimationFrame(() => {
+          const isNowScrolled = window.scrollY > 50
+          // Optimization: Check against last known state to avoid redundant updates
+          if (lastIsScrolled !== isNowScrolled) {
+            setScrolled(isNowScrolled)
+            lastIsScrolled = isNowScrolled
+          }
+          scrollTicking = false
+        })
+        scrollTicking = true
+      }
+    }
+
+    // Initial check
+    setMobile(lastIsMobile)
+    setScrolled(lastIsScrolled)
+
     window.addEventListener("resize", handleResize)
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
     return () => {
       window.removeEventListener("resize", handleResize)
       window.removeEventListener("scroll", handleScroll)
+      window.cancelAnimationFrame(resizeRafId)
+      window.cancelAnimationFrame(scrollRafId)
     }
   }, [setMobile, setScrolled])
 
