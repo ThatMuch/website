@@ -16,7 +16,6 @@
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
-    "@fullpage/react-fullpage": "^0.1.41",
     "@react-spring/web": "^9.7.5",
     "@types/react-helmet": "^6.1.11",
     "@wordpress/base-styles": "^6.2.0",
