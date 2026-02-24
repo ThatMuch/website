@@ -50,7 +50,7 @@ const Post = ({ data }) => {
 
           if (wrapperDiv && wrapperDiv.children) {
             const textNode = wrapperDiv.children.find(
-              (child) => child instanceof Text || child.type === "text"
+              (child) => child instanceof Text
             ) as Text | undefined;
 
             if (textNode && textNode.data) {
