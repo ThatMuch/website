@@ -6,6 +6,7 @@ import PostHeader from "../../components/PostHeader/PostHeader";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
+import SpotifyEmbed from "../../components/SpotifyEmbed/SpotifyEmbed";
 import TOCBlock from "../../components/TOCBlock/TOCBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed/YoutubeEmbed";
 import { graphql } from "gatsby";
@@ -34,26 +35,30 @@ const Post = ({ data }) => {
         domNode instanceof Element &&
         domNode.name === "figure" &&
         domNode.attribs &&
-        domNode.attribs.class &&
-        (domNode.attribs.class.includes("wp-block-embed-youtube") ||
-          domNode.attribs.class.includes("is-provider-youtube"))
+        domNode.attribs.class
       ) {
-        const wrapperDiv = domNode.children.find(
-          (child) =>
-            child instanceof Element &&
-            child.name === "div" &&
-            child.attribs?.class?.includes("wp-block-embed__wrapper")
-        ) as Element | undefined;
+        const isYoutube = domNode.attribs.class.includes("wp-block-embed-youtube") || domNode.attribs.class.includes("is-provider-youtube");
+        const isSpotify = domNode.attribs.class.includes("wp-block-embed-spotify") || domNode.attribs.class.includes("is-provider-spotify");
 
-        if (wrapperDiv && wrapperDiv.children) {
-          const textNode = wrapperDiv.children.find(
-            (child) => child instanceof Text || child.type === "text"
-          ) as Text | undefined;
+        if (isYoutube || isSpotify) {
+          const wrapperDiv = domNode.children.find(
+            (child) =>
+              child instanceof Element &&
+              child.name === "div" &&
+              child.attribs?.class?.includes("wp-block-embed__wrapper")
+          ) as Element | undefined;
 
-          if (textNode && textNode.data) {
-            const url = textNode.data.trim();
-            if (url) {
-              return <YoutubeEmbed url={url} />;
+          if (wrapperDiv && wrapperDiv.children) {
+            const textNode = wrapperDiv.children.find(
+              (child) => child instanceof Text || child.type === "text"
+            ) as Text | undefined;
+
+            if (textNode && textNode.data) {
+              const url = textNode.data.trim();
+              if (url) {
+                if (isYoutube) return <YoutubeEmbed url={url} />;
+                if (isSpotify) return <SpotifyEmbed url={url} />;
+              }
             }
           }
         }
