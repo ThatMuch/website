@@ -16,7 +16,6 @@
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
-    "@fullpage/react-fullpage": "^0.1.41",
     "@react-spring/web": "^9.7.5",
     "@types/react-helmet": "^6.1.11",
     "@wordpress/base-styles": "^6.2.0",
@@ -26,7 +25,6 @@
     "dotenv": "^16.4.7",
     "embla-carousel": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
-    "firebase": "^11.9.1",
     "formik": "^2.4.6",
     "gatsby": "^5.13.3",
     "gatsby-plugin-feed": "^5.16.0",
