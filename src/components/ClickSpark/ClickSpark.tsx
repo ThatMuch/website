@@ -30,7 +30,8 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
-  const startTimeRef = useRef<number | null>(null);
+  const isAnimatingRef = useRef(false);
+  const startAnimationRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -90,9 +91,6 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     let animationId: number;
 
     const draw = (timestamp: number) => {
-      if (!startTimeRef.current) {
-        startTimeRef.current = timestamp;
-      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       sparksRef.current = sparksRef.current.filter((spark) => {
@@ -122,13 +120,30 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      if (sparksRef.current.length > 0) {
+        animationId = requestAnimationFrame(draw);
+      } else {
+        isAnimatingRef.current = false;
+      }
     };
 
-    animationId = requestAnimationFrame(draw);
+    // Store trigger for external calls
+    startAnimationRef.current = () => {
+      if (!isAnimatingRef.current) {
+        isAnimatingRef.current = true;
+        animationId = requestAnimationFrame(draw);
+      }
+    };
+
+    // If there are lingering sparks from previous render/effect cycle, resume animation
+    if (sparksRef.current.length > 0 && !isAnimatingRef.current) {
+        isAnimatingRef.current = true;
+        animationId = requestAnimationFrame(draw);
+    }
 
     return () => {
       cancelAnimationFrame(animationId);
+      isAnimatingRef.current = false;
     };
   }, [
     sparkColor,
@@ -156,6 +171,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     }));
 
     sparksRef.current.push(...newSparks);
+    startAnimationRef.current();
   };
 
   return (
