@@ -32,7 +32,7 @@ export default function RelatedPosts({
             <PostCard
               title={post?.title}
               category={post?.categories?.nodes[0]}
-              url={post?.link}
+              url={post?.uri || post?.link}
               image={post?.featuredImage?.node}
             />
           </div>
