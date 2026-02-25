@@ -27,6 +27,7 @@ export type PostType = {
     };
   };
   link: string;
+  uri: string;
   seo?: {
     metaDesc: string;
     metaKeywords: string;
