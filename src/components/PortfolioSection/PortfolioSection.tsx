@@ -1,7 +1,7 @@
 import "./PortfolioSection.scss";
 
-import React, { Component } from "react";
-
+import React from "react";
+import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 import EmblaCarousel from "../EmblaCarousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 
@@ -16,6 +16,11 @@ type Props = {
       images: {
         node: {
           mediaItemUrl: string;
+          localFile?: {
+            childImageSharp: {
+              gatsbyImageData: IGatsbyImageData;
+            };
+          };
         };
       };
       title: string;
@@ -52,37 +57,51 @@ export default function PortfolioSection({ section }: Props) {
           slidesToScroll={SLIDE_COUNT}
           showDots={false}
         >
-          {section?.project?.map((project, index) => (
-            <div className="PortfolioSection__project embla__slide" key={index}>
-              <div className="PortfolioSection__project__content">
-                <h3 className="h3">{project.client}</h3>
-                <div className="divider mb-4"></div>
-                <h4 className="PortfolioSection__project__title h2">
-                  {project.title}
-                </h4>
-                <div
-                  className="PortfolioSection__project__description"
-                  dangerouslySetInnerHTML={{ __html: project.description }}
-                />
+          {section?.project?.map((project, index) => {
+            const image = getImage(project.images.node.localFile || null);
+            return (
+              <div
+                className="PortfolioSection__project embla__slide"
+                key={index}
+              >
+                <div className="PortfolioSection__project__content">
+                  <h3 className="h3">{project.client}</h3>
+                  <div className="divider mb-4"></div>
+                  <h4 className="PortfolioSection__project__title h2">
+                    {project.title}
+                  </h4>
+                  <div
+                    className="PortfolioSection__project__description"
+                    dangerouslySetInnerHTML={{ __html: project.description }}
+                  />
 
-                <a
-                  href={`${project.url}`}
-                  className="btn btn-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Explorer le site
-                </a>
+                  <a
+                    href={`${project.url}`}
+                    className="btn btn-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Explorer le site
+                  </a>
+                </div>
+
+                {image ? (
+                  <GatsbyImage
+                    image={image}
+                    alt={`${project.title}`}
+                    className="PortfolioSection__project__image"
+                  />
+                ) : (
+                  <img
+                    src={`${project.images.node.mediaItemUrl}`}
+                    alt={`${project.title}`}
+                    className="PortfolioSection__project__image"
+                    loading="lazy"
+                  />
+                )}
               </div>
-
-              <img
-                src={`${project.images.node.mediaItemUrl}`}
-                alt={`${project.title}`}
-                className="PortfolioSection__project__image"
-                loading="lazy"
-              />
-            </div>
-          ))}
+            );
+          })}
         </EmblaCarousel>
       </div>
     </div>
