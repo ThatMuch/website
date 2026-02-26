@@ -17,7 +17,6 @@ export const useSitePosts = (categorySlug?: string) => {
                 name
               }
             }
-            content
             date(formatString: "dd/MM/YYYY")
             featuredImage {
               node {
@@ -31,19 +30,6 @@ export const useSitePosts = (categorySlug?: string) => {
               title
               twitterDescription
               twitterTitle
-            }
-            blocks {
-              ... on WpFaqBlockForGutenbergFaqBlock {
-                attributesJSON
-                saveContent
-              }
-              name
-              saveContent
-              innerBlocks {
-                name
-                saveContent
-                attributesJSON
-              }
             }
           }
         }
