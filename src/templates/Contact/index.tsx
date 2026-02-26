@@ -7,6 +7,7 @@ import Layout from "../../components/Layout";
 import React from "react";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 const Contact = ({ data }) => {
   const page = data.wpPage;
@@ -16,7 +17,9 @@ const Contact = ({ data }) => {
       <div className="contact-content">
         <ContactForm hubspotForm={page.hubspotForm} />
         {page.content && (
-          <div dangerouslySetInnerHTML={{ __html: page.content }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(page.content) }}
+          />
         )}
       </div>
     </Layout>
