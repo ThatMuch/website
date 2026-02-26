@@ -79,6 +79,15 @@ const query = graphql`
                   altText
                   title
                   mediaItemUrl
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(
+                        width: 600
+                        placeholder: BLURRED
+                        formats: [AUTO, WEBP, AVIF]
+                      )
+                    }
+                  }
                 }
               }
             }
