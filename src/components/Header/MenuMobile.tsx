@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 
-import { MenuItem } from './MenuContent'
+import { MenuItem } from './types'
 
 interface MenuMobileProps {
   activeItem: MenuItem | null

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { FiChevronRight, FiArrowRight, FiChevronLeft } from 'react-icons/fi'
+import React, { useState, useCallback } from 'react'
+import { FiArrowRight } from 'react-icons/fi'
 import { LuSquareArrowOutUpRight } from 'react-icons/lu'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Link } from 'gatsby'
@@ -7,19 +7,9 @@ import { useUIStore } from '../../store/useUIStore'
 import comet from '../../images/Comet.svg'
 import clsx from 'clsx'
 import MenuMobile from './MenuMobile'
+import MenuListItem from './MenuListItem'
+import { MenuItem } from './types'
 
-export interface MenuItem {
-  id: string
-  label: string
-  url: string
-  path?: string
-  target?: string
-  description?: string
-  parentId?: string | null
-  childItems?: {
-    nodes: MenuItem[]
-  }
-}
 const COMET_DELAYS = [100, 200, 300]
 
 interface MenuContentProps {
@@ -38,17 +28,17 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
 
   const activeItem = activeMenuIndex !== null ? menuItems[activeMenuIndex] : null
 
-  const handleItemClick = (index: number, hasChildren: boolean) => {
+  const handleItemClick = useCallback((index: number, hasChildren: boolean) => {
     setActiveMenuIndex(index)
     if (isMobile && hasChildren) {
       setIsDescShown(true)
     }
-  }
+  }, [isMobile, setActiveMenuIndex, setIsDescShown])
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     setIsDescShown(false)
     setActiveMenuIndex(null)
-  }
+  }, [setActiveMenuIndex, setIsDescShown])
 
   return (
     <div className="row">
@@ -59,40 +49,15 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
             const isActive = activeMenuIndex === index
 
             return (
-              <li
+              <MenuListItem
                 key={item.id}
-                onClick={() => handleItemClick(index, hasChildren)}
-                className={clsx(isActive && 'active')}
-              >
-                {hasChildren ? (
-                  <div className="menu__item" role="button" tabIndex={0}>
-                    {item.label}
-                    <FiChevronRight size={42} aria-hidden="true" />
-                  </div>
-                ) : item.path && item.path.startsWith('/') ? (
-                  <Link
-                    className="menu__item"
-                    to={item.path}
-                    target={item.target}
-                    onClick={() => toggleMenu(false)}
-                    title={`Lien vers ${item.label}`}
-                    aria-label={item.label}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <a
-                    className="menu__item"
-                    href={item.url}
-                    target={item.target}
-                    onClick={() => toggleMenu(false)}
-                    title={`Lien vers ${item.label}`}
-                    aria-label={item.label}
-                  >
-                    {item.label}
-                  </a>
-                )}
-              </li>
+                item={item}
+                index={index}
+                isActive={isActive}
+                hasChildren={hasChildren}
+                onItemClick={handleItemClick}
+                toggleMenu={toggleMenu}
+              />
             )
           })}
         </ul>
