@@ -5,6 +5,7 @@ import React from "react";
 import Seo from "../../components/Seo";
 import TemplateForm from "../../components/TemplateForm";
 import { graphql } from "gatsby";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 export default function Template({ data }) {
   const page = data.wpTemplate;
@@ -29,7 +30,9 @@ export default function Template({ data }) {
         <div className="divider mb-4"></div>
         <h1>{page.title}</h1>
         {page.content && (
-          <div dangerouslySetInnerHTML={{ __html: page.content }}></div>
+          <div
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(page.content) }}
+          ></div>
         )}
         {page.hubspotForm.formId && (
           <TemplateForm
