@@ -1,6 +1,7 @@
 import "./TestimonialCard.scss";
 
 import React from "react";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 type TestimonialCardProps = {
   testimonial: {
@@ -25,7 +26,7 @@ export default function TestimonialCard({
           <span key={index}>⭐</span>
         ))}
       </div>
-      <div dangerouslySetInnerHTML={{ __html: citation }} />
+      <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(citation) }} />
       <div className="TestimonialCard__author">
         <strong className="TestimonialCard__name">{nom}</strong>
         <p className="TestimonialCard__role">{role}</p>
