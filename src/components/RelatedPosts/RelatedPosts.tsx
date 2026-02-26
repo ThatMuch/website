@@ -16,11 +16,9 @@ export default function RelatedPosts({
   currentPostId,
   title = "Articles similaires",
 }: Props) {
-  const posts = useSitePosts(category);
-  posts.splice(
-    posts.findIndex((post: PostType) => post.id === currentPostId),
-    1
-  );
+  const allPosts = useSitePosts(category);
+  const posts = allPosts.filter((post: PostType) => post.id !== currentPostId);
+
   if (posts.length === 0) return null;
   return (
     <div className="RelatedPosts">
