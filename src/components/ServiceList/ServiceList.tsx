@@ -2,6 +2,7 @@ import "./ServiceList.scss";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 interface Service {
   titre: string
@@ -34,7 +35,7 @@ export default function ServiceList({ services, category }: Props) {
               />
             )}
             <h3>{service.titre}</h3>
-            <div dangerouslySetInnerHTML={{ __html: service.desc }} />
+            <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(service.desc) }} />
           </div>
         ))}
       </div>
