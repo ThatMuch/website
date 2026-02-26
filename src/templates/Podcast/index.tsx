@@ -7,6 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import PodcastLinks from "../../components/PodcastLinks";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
+import { sanitizeHtml } from "../../utils/sanitize";
 import { useSitePosts } from "../../hooks/use-site-posts";
 
 const Podcast = ({ data }) => {
@@ -24,7 +25,7 @@ const Podcast = ({ data }) => {
           <h2 className="h3">{sousTitre}</h2>
           <div className="divider mb-4"></div>
           <h1>{title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: descriptionHeroSection }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(descriptionHeroSection) }} />
         </div>
         <div className="col-md-6 order-1 order-md-2">
           <LazyLoadImage src={mediaItemUrl} alt={altText} className="mb-4" />
