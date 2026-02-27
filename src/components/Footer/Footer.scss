@@ -31,7 +31,7 @@ footer {
   position: relative;
   z-index: 2;
   background-color: $neutral-900;
-  padding: $spacing-l $spacing-l $spacing-m $spacing-l;
+  padding: $spacing-l $spacing-l $spacing-s $spacing-l;
 }
 
 .Footer {
@@ -39,16 +39,24 @@ footer {
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 0rem 6.5rem;
+  gap: 0rem 2rem;
   align-self: stretch;
   flex-wrap: wrap;
   width: 100vw;
   position: relative;
 
-
+  &__contact {
+    min-width: 400px;
+  }
 
   a:not(.btn) {
     color: $neutral-100;
+    // ellipsis on maximum 2 lines
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__logo {
@@ -62,7 +70,7 @@ footer {
     display: flex;
     justify-content: center;
     background-color: $neutral-900;
-    color: $neutral-200;
+    color: rgba($color: #fff, $alpha: 0.25);
     gap: $spacing-xs;
     padding-top: $spacing-l;
     border-top: 1px solid $neutral-800;
@@ -74,11 +82,11 @@ footer {
     }
 
     a:not(.btn) {
-      color: $neutral-200;
+      color: rgba($color: #fff, $alpha: 0.25);
     }
 
     a:hover:not(.btn) {
-      color: $neutral-100;
+      color: rgba($color: #fff, $alpha: 0.5);
     }
   }
 }
@@ -87,7 +95,6 @@ footer {
   display: flex;
   align-items: center;
   gap: $spacing-m;
-  justify-content: center;
   flex-wrap: wrap;
   margin: 0 auto 1.5rem;
 

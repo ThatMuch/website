@@ -75,7 +75,7 @@ export default function Footer({}: Props) {
     <div className="Footer-wrapper">
     <footer>
         <div className="Footer">
-          <div>
+          <div className="Footer__contact">
         <Link
           to="/"
           className="Footer__logo"
@@ -106,7 +106,8 @@ export default function Footer({}: Props) {
               </span>
             </Link>
           </div>
-          <div>
+          <div className="row">
+          <div className="col-12 col-sm-4">
             <h4>Expertises</h4>
             <ul>
                 <li key="dev">
@@ -117,7 +118,7 @@ export default function Footer({}: Props) {
                 </li>
             </ul>
           </div>
-        <div>
+          <div className="col-12 col-sm-4">
           <h4 className="mb-2">Articles récents</h4>
           <ul>
             {posts?.slice(0, 4).map((post) => (
@@ -127,19 +128,16 @@ export default function Footer({}: Props) {
             ))}
           </ul>
           </div>
+          </div>
 
         </div>
 
       <div className="Footer__credits">
         <p>© {new Date().getFullYear()} THATMUCH - Tous droits réservés</p>
         {menuItems.map((item) => (
-          <p key={item.id}>
-            {item.path && item.path.startsWith('/') ? (
-              <Link to={item.path}>{item.label}</Link>
-            ) : (
-              <a href={item.url || item.path}>{item.label}</a>
-            )}
-          </p>
+
+              <Link key={item.id} to={item.path}>{item.label}</Link>
+
         ))}
       </div>
     </footer>
