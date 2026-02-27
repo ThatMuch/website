@@ -1,10 +1,14 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
-.Footer {
+
+footer {
   background-color: $neutral-900;
+  padding: $spacing-l $spacing-l $spacing-m $spacing-l;
+}
+
+.Footer {
   color: #fff;
   display: flex;
-  padding: $spacing-l;
   align-items: flex-start;
   align-content: flex-start;
   gap: 0rem 6.5rem;
@@ -12,6 +16,7 @@
   flex-wrap: wrap;
   width: 100vw;
   position: relative;
+
   &:after {
     content: "";
     display: block;
@@ -24,60 +29,87 @@
     background-image: url("../../images/bg_icon_2.svg");
     background-repeat: no-repeat;
     background-size: contain;
+
     @include breakpoint(mobile) {
       top: -200px;
       width: 200px;
       height: 200px;
     }
   }
-  a {
+
+  a:not(.btn) {
     color: $neutral-100;
   }
+
   &__logo {
+
     img {
-      width: 10rem;
+      width: 15rem;
+      margin-bottom: $spacing-l;
     }
   }
+
   &__credits {
     display: flex;
     justify-content: center;
     background-color: $neutral-900;
     color: $neutral-200;
     gap: $spacing-xs;
-    padding: $spacing-l;
+    padding-top: $spacing-l;
+    border-top: 1px solid $neutral-800;
+
     @include breakpoint(mobile) {
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
-    a {
+
+    a:not(.btn) {
       color: $neutral-200;
     }
-    a:hover {
+
+    a:hover:not(.btn) {
       color: $neutral-100;
     }
   }
 }
-.RS_Section {
-  margin-bottom: $spacing-xl;
-  &__title {
-    text-align: center;
-    margin-bottom: $spacing-m;
-  }
 
-  &__list {
-    display: flex;
-    align-items: center;
-    gap: $spacing-m;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
-  }
 
-  &__icon {
-    color: $neutral-400;
+.Footer__socials {
+  display: flex;
+  align-items: center;
+  gap: $spacing-m;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto 1.5rem;
+
+
+
+  &__item__icon {
+    color: $neutral-200;
+    transition: color $fast ease-in-out;
+
     &:hover {
-      color: $neutral-900;
+      color: $neutral-400;
     }
+  }
+}
+
+.footer-parallax {
+  //  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  background-color: $neutral-900;
+  background-image: url("../../images/Background_Dark.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 1.5rem;
+
+  img {
+    display: block;
+    height: 150px;
+    margin: 0 auto;
   }
 }
