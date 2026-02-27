@@ -3,6 +3,7 @@ import "./FAQHome.scss";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 
 import React from "react";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 type Questions = {
   title: string;
@@ -29,7 +30,7 @@ export default function FAQHome({ title, description, questions }: Props) {
     <div className="FAQHome">
       <h2>{title}</h2>
       <div className="divider mb-4"></div>
-      <div dangerouslySetInnerHTML={{ __html: description }} />
+      <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} />
       <ul>
         {questions.map((question, index) => (
           <li key={index} className="FAQHome__question">
@@ -41,7 +42,7 @@ export default function FAQHome({ title, description, questions }: Props) {
               {activeIndex === index ? <FiMinusCircle /> : <FiPlusCircle />}
             </h3>
             {activeIndex === index && (
-              <div dangerouslySetInnerHTML={{ __html: question.description }} />
+              <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(question.description) }} />
             )}
           </li>
         ))}

@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 import EmblaCarousel from "../EmblaCarousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 type Props = {
   section: {
@@ -43,7 +44,7 @@ export default function PortfolioSection({ section }: Props) {
 
       <div
         className="PortfolioSection__description"
-        dangerouslySetInnerHTML={{ __html: section.description }}
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(section.description) }}
       />
 
       <div className="overflow-hidden w-100 px-2">
@@ -62,7 +63,7 @@ export default function PortfolioSection({ section }: Props) {
                 </h4>
                 <div
                   className="PortfolioSection__project__description"
-                  dangerouslySetInnerHTML={{ __html: project.description }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(project.description) }}
                 />
 
                 <a

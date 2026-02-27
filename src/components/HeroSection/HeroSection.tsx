@@ -45,7 +45,14 @@ export default function HeroSection({ data }: Props) {
         <div
           className="HeroSection__desc"
           dangerouslySetInnerHTML={{ __html: sanitizeHtml(desc) }}
-        />
+          />
+          <div className="HeroSection__btn">
+            <a href="https://audit-refonte.thatmuch.fr/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <div className="btn__overlay"></div>
+              <div className="btn__content">
+                Evaluez votre site web
+              </div>
+            </a>
         {boutton && (
            <a
             href={boutton.url}
@@ -54,10 +61,14 @@ export default function HeroSection({ data }: Props) {
             className="btn btn-dev"
             aria-label={boutton.title}
             title={`Lien dans la hero section vers ${boutton.title}`}
-          >
+            >
+              <div className="btn__overlay"></div>
+              <div className="btn__content">
             {boutton.title}
+              </div>
           </a>
-        )}
+            )}
+            </div>
         </div>
         <div className="HeroSection__stats">
           <div>

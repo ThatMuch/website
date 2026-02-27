@@ -1,7 +1,8 @@
 import "./PostCard.scss";
 
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "gatsby";
 import React from "react";
+import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 
 type PostCardProps = {
   title: string;
@@ -11,9 +12,14 @@ type PostCardProps = {
   };
   url: string;
   image: {
-    mediaItemUrl: string
-    altText: string
-  }
+    mediaItemUrl: string;
+    altText: string;
+    localFile?: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData;
+      };
+    };
+  };
 };
 
 export default function PostCard({
@@ -22,28 +28,36 @@ export default function PostCard({
   url,
   image,
 }: PostCardProps) {
+
+  const renderImage = () => {
+    if (image?.mediaItemUrl) {
+      return (
+        <img
+          src={image.mediaItemUrl}
+          alt={image.altText || ""}
+          loading="lazy"
+          className="mb-4"
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <article className="PostCard">
-      <a
-        href={url}
-        className="PostCard__image"
-        title={"Image de l'article " + title}
-      >
-        {image?.mediaItemUrl && (
-          <LazyLoadImage
-            src={image.mediaItemUrl}
-            alt={image.altText}
-            effect="blur"
-            className="mb-4"
-          />
-        )}
-      </a>
+        <Link
+          to={url}
+          className="PostCard__image"
+          title={"Image de l'article " + title}
+        >
+          {renderImage()}
+        </Link>
 
       <span className={`tag tag--${category?.slug}`}>{category?.name}</span>
       <h3 className="PostCard__title mt-4">
-        <a href={url} title={"Lien vers l'article " + title}>
-          {title}
-        </a>
+          <Link to={url} title={"Lien vers l'article " + title}>
+            {title}
+          </Link>
       </h3>
     </article>
   );
