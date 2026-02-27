@@ -106,6 +106,17 @@ export default function Footer({}: Props) {
               </span>
             </Link>
           </div>
+          <div>
+            <h4>Expertises</h4>
+            <ul>
+                <li key="dev">
+                  <Link to="/expertise/developpement-front-end">Développement web</Link>
+                </li>
+                <li key="uxui">
+                  <Link to="/expertise/ux-ui-design">UX/UI</Link>
+                </li>
+            </ul>
+          </div>
         <div>
           <h4 className="mb-2">Articles récents</h4>
           <ul>
@@ -115,7 +126,8 @@ export default function Footer({}: Props) {
               </li>
             ))}
           </ul>
-        </div>
+          </div>
+
         </div>
 
       <div className="Footer__credits">
