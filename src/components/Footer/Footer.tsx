@@ -23,7 +23,6 @@ type Props = {};
 export default function Footer({}: Props) {
   const menuItems = useSiteMenu("GATSBY_FOOTER_MENU");
   const site = useSiteSeo();
-  const { siteUrl } = site;
   const posts = useSitePosts();
   type SocialLinksType = {
     name: string;
@@ -73,7 +72,7 @@ export default function Footer({}: Props) {
     },
   ];
   return (
-    <>
+    <div className="Footer-wrapper">
     <footer>
         <div className="Footer">
           <div>
@@ -100,7 +99,12 @@ export default function Footer({}: Props) {
             </a>
           ))}
             </div>
-            <Link to="/contact" className="btn btn-dev">Nous contacter</Link>
+            <Link to="/contact" className="btn btn-dev">
+              <div className="btn__overlay"></div>
+              <span className="btn__content">
+                Nous contacter
+              </span>
+            </Link>
           </div>
         <div>
           <h4 className="mb-2">Articles récents</h4>
@@ -130,6 +134,6 @@ export default function Footer({}: Props) {
       <div className="footer-parallax">
         <LazyLoadImage src={logoThatIsWhiteParallax} alt="Logo Thatmuch en blanc" />
     </div>
-    </>
+    </div>
   );
 }
