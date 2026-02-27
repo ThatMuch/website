@@ -17,26 +17,21 @@ export default function Header() {
   // Global Store State
   const isMobile = useUIStore(state => state.isMobile)
   const isMenuOpen = useUIStore(state => state.isMenuOpen)
-  // isScrolled handled only in effect, no re-render needed
   const setMobile = useUIStore(state => state.setMobile)
   const toggleMenu = useUIStore(state => state.toggleMenu)
-  const setScrolled = useUIStore(state => state.setScrolled)
 
   // Initialization & Resize Logic
   useEffect(() => {
     const handleResize = () => setMobile(window.innerWidth <= 768)
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
+
 
     handleResize() // init
     window.addEventListener("resize", handleResize)
-    window.addEventListener("scroll", handleScroll)
+
     return () => {
       window.removeEventListener("resize", handleResize)
-      window.removeEventListener("scroll", handleScroll)
     }
-  }, [setMobile, setScrolled])
+  }, [setMobile])
 
   // Lock scroll when menu is open on mobile
   useEffect(() => {
@@ -53,8 +48,6 @@ export default function Header() {
   const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
     (item: { parentId: string | null }) => item.parentId === null
   )
-
-  const { siteUrl } = useSiteSeo()
 
   return (
     <header className="header">
