@@ -28,7 +28,6 @@ export default function PostCard({
   url,
   image,
 }: PostCardProps) {
-  const isInternal = url.startsWith("/");
   const gatsbyImage = image?.localFile ? getImage(image.localFile) : null;
 
   const renderImage = () => {
@@ -47,7 +46,6 @@ export default function PostCard({
 
   return (
     <article className="PostCard">
-      {isInternal ? (
         <Link
           to={url}
           className="PostCard__image"
@@ -55,27 +53,12 @@ export default function PostCard({
         >
           {renderImage()}
         </Link>
-      ) : (
-        <a
-          href={url}
-          className="PostCard__image"
-          title={"Image de l'article " + title}
-        >
-          {renderImage()}
-        </a>
-      )}
 
       <span className={`tag tag--${category?.slug}`}>{category?.name}</span>
       <h3 className="PostCard__title mt-4">
-        {isInternal ? (
           <Link to={url} title={"Lien vers l'article " + title}>
             {title}
           </Link>
-        ) : (
-          <a href={url} title={"Lien vers l'article " + title}>
-            {title}
-          </a>
-        )}
       </h3>
     </article>
   );
