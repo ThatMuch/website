@@ -98,8 +98,8 @@ export default function Header() {
         <StaticImage loading="eager" src="../../images/LogoTHATMUCH.webp" alt="THATMUCH" className="logo--header" width={230} />
       </Link>
 
-      <Link
-        to="https://meetings-eu1.hubspot.com/mathilde-arconte"
+      <a
+        href="https://meetings-eu1.hubspot.com/mathilde-arconte"
         className="btn btn-primary"
         target="_blank"
         rel="noopener noreferrer"
@@ -107,7 +107,7 @@ export default function Header() {
         aria-label="Programmez un appel"
       >
         {isMobile ? "RDV" : "Programmez un appel"}
-      </Link>
+      </a>
     </header>
   )
 }

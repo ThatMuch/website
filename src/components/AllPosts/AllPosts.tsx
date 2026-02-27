@@ -123,7 +123,6 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
           <Link
             to="/blog"
             className="btn btn-primary"
-            onClick={() => setCurrentPage(1)}
             aria-label="Voir tous les articles"
             title="Lien vers tous les articles du blog"
           >
