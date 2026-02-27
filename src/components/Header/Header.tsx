@@ -99,14 +99,17 @@ export default function Header() {
       </Link>
 
       <a
-        href="https://meetings-eu1.hubspot.com/mathilde-arconte"
+        href="https://audit-refonte.thatmuch.fr/"
         className="btn btn-primary"
         target="_blank"
         rel="noopener noreferrer"
-        title="Lien vers la prise de rendez-vous"
-        aria-label="Programmez un appel"
+        title="Lien vers l'audit de votre site web"
+        aria-label="Evaluez votre site web"
       >
-        {isMobile ? "RDV" : "Programmez un appel"}
+        <div className="btn__overlay"></div>
+        <div className="btn__content">
+          {isMobile ? "Audit" : "Evaluez votre site web"}
+        </div>
       </a>
     </header>
   )
