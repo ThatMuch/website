@@ -86,7 +86,7 @@ export default function Header() {
                title="Lien vers l'accueil de Thatmuch"
                aria-label="Logo Thatmuch"
             >
-              <StaticImage loading="eager" src="../../images/THATMUCH_Logo_Black.webp" alt="Thatmuch" className="logo" width={230} />
+              <StaticImage loading="eager" src="../../images/LogoTHATMUCH.webp" alt="THATMUCH" className="logo" width={230} />
 
              </Link>
 
@@ -102,7 +102,7 @@ export default function Header() {
         aria-label="Accueil"
         title="Accueil du site THATMUCH"
       >
-        <StaticImage loading="eager" src="../../images/THATMUCH_Logo_Black.webp" alt="Thatmuch" className="logo--header" width={230} />
+        <StaticImage loading="eager" src="../../images/LogoTHATMUCH.webp" alt="THATMUCH" className="logo--header" width={230} />
       </Link>
 
       <Link
