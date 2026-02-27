@@ -1,6 +1,5 @@
 import "./PostCard.scss";
 
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "gatsby";
 import React from "react";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
@@ -33,21 +32,12 @@ export default function PostCard({
   const gatsbyImage = image?.localFile ? getImage(image.localFile) : null;
 
   const renderImage = () => {
-    if (gatsbyImage) {
-      return (
-        <GatsbyImage
-          image={gatsbyImage}
-          alt={image.altText || ""}
-          className="mb-4"
-        />
-      );
-    }
     if (image?.mediaItemUrl) {
       return (
-        <LazyLoadImage
+        <img
           src={image.mediaItemUrl}
           alt={image.altText || ""}
-          effect="blur"
+          loading="lazy"
           className="mb-4"
         />
       );
