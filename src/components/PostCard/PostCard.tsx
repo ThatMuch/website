@@ -28,7 +28,6 @@ export default function PostCard({
   url,
   image,
 }: PostCardProps) {
-  const gatsbyImage = image?.localFile ? getImage(image.localFile) : null;
 
   const renderImage = () => {
     if (image?.mediaItemUrl) {
