@@ -27,9 +27,9 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
-	const templates = await graphql(`
-	query GET_TEMPLATES {
-	      allWpTemplate {
+  const templates = await graphql(`
+    query GET_TEMPLATES {
+      allWpTemplate {
         edges {
           node {
             content
@@ -52,14 +52,15 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-    }`);
+    }
+  `);
 
-	const expertises = await graphql(`
-	query GET_EXPERTISES {
+  const expertises = await graphql(`
+    query GET_EXPERTISES {
       allWpExpertise {
         edges {
           node {
-		  id
+            id
             slug
             title
             featuredImage {
@@ -87,7 +88,8 @@ exports.createPages = async ({ graphql, actions }) => {
           hasNextPage
         }
       }
-    }`);
+    }
+  `);
 
   const pages = await graphql(`
     query GET_PAGES {
@@ -114,12 +116,16 @@ exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve(`./src/templates/Blog/index.tsx`);
   const contactTemplete = path.resolve(`./src/templates/Contact/index.tsx`);
   const podcastTemplate = path.resolve(`./src/templates/Podcast/index.tsx`);
-	const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
-	const ressourcesTemplate = path.resolve(`./src/templates/Ressources/index.tsx`);
-	const templateTemplate = path.resolve(`./src/templates/Template/index.tsx`);
-	const templatesTemplate = path.resolve(`./src/templates/Templates/index.tsx`);
+  const expertiseTemplate = path.resolve(`./src/templates/Expertise/index.tsx`);
+  const ressourcesTemplate = path.resolve(
+    `./src/templates/Ressources/index.tsx`
+  );
+  const templateTemplate = path.resolve(`./src/templates/Template/index.tsx`);
+  const templatesTemplate = path.resolve(`./src/templates/Templates/index.tsx`);
   pages.data.allWpPage.edges.forEach((edge) => {
     switch (true) {
+      case edge.node.isFrontPage:
+        break;
       case edge.node.slug === "blog":
         createPage({
           path: "/blog",
@@ -156,15 +162,15 @@ exports.createPages = async ({ graphql, actions }) => {
           },
         });
         break;
-		case edge.node.template.templateName === "Ressources/Templates":
-			createPage({
-				path: "/ressources/templates",
-				component: slash(templatesTemplate),
-				context: {
-					id: edge.node.id,
-				},
-			});
-			break;
+      case edge.node.template.templateName === "Ressources/Templates":
+        createPage({
+          path: "/ressources/templates",
+          component: slash(templatesTemplate),
+          context: {
+            id: edge.node.id,
+          },
+        });
+        break;
       default:
         createPage({
           path: edge.node.slug,
@@ -191,7 +197,7 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-	templates.data.allWpTemplate.edges.forEach((edge) => {
+  templates.data.allWpTemplate.edges.forEach((edge) => {
     createPage({
       // `path` will be the url for the page
       path: `/ressources/templates/${edge.node.slug}`,
@@ -205,18 +211,17 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-	expertises.data.allWpExpertise.edges.forEach((edge) => {
-		createPage({
-			// `path` will be the url for the page
-			path :`/expertise/${edge.node.slug}`,
-			// specify the component template of your choice
-			component : slash(expertiseTemplate),
-			// In the ^template's GraphQL query, 'id' will be available
-			// as a GraphQL variable to query for this posts's data.
-			context : {
-				id : edge.node.id,
-			},
-		});
-	}
-	);
+  expertises.data.allWpExpertise.edges.forEach((edge) => {
+    createPage({
+      // `path` will be the url for the page
+      path: `/expertise/${edge.node.slug}`,
+      // specify the component template of your choice
+      component: slash(expertiseTemplate),
+      // In the ^template's GraphQL query, 'id' will be available
+      // as a GraphQL variable to query for this posts's data.
+      context: {
+        id: edge.node.id,
+      },
+    });
+  });
 };
