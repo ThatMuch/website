@@ -13,6 +13,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import { Link } from "gatsby";
 import logoThatIsWhite from "../../images/THATMUCH_Logo_White.webp";
+import logoThatIsWhiteParallax from "../../images/LogoTHATMUCHWhite.webp";
 import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSitePosts } from "../../hooks/use-site-posts";
 import { useSiteSeo } from "../../hooks/use-site-seo";
@@ -33,66 +34,49 @@ export default function Footer({}: Props) {
     {
       name: "Instagram",
       icon: (
-        <FaInstagram size={44} className="RS_Section__icon" title="Instagram" />
+        <FaInstagram size={30} className="Footer__socials__item__icon" title="Instagram" />
       ),
       url: "https://www.instagram.com/thatmuch/",
     },
     {
       name: "Tiktok",
-      icon: <FaTiktok size={44} className="RS_Section__icon" title="Tiktok" />,
+      icon: <FaTiktok size={30} className="Footer__socials__item__icon" title="Tiktok" />,
       url: "https://www.tiktok.com/@ipeach_tv",
     },
     {
       name: "Linkedin",
       icon: (
-        <FaLinkedin size={44} className="RS_Section__icon" title="Linkedin" />
+        <FaLinkedin size={30} className="Footer__socials__item__icon" title="Linkedin" />
       ),
       url: "https://www.linkedin.com/company/thatmuch/",
     },
     {
       name: "Spotify",
       icon: (
-        <FaSpotify size={44} className="RS_Section__icon" title="Spotify" />
+        <FaSpotify size={30} className="Footer__socials__item__icon" title="Spotify" />
       ),
       url: "https://open.spotify.com/show/5WyDmb1QFI1BmryUE0f8Y4?si=90bf60ef53f34909",
     },
     {
       name: "Youtube",
       icon: (
-        <FaYoutube size={44} className="RS_Section__icon" title="Youtube" />
+        <FaYoutube size={30} className="Footer__socials__item__icon" title="Youtube" />
       ),
       url: "https://www.youtube.com/@ipeach_tv",
     },
     {
       name: "Bluesky",
       icon: (
-        <FaBluesky size={44} className="RS_Section__icon" title="Bluesky" />
+        <FaBluesky size={30} className="Footer__socials__item__icon" title="Bluesky" />
       ),
       url: "https://bsky.app/profile/thatmuch.fr",
     },
   ];
   return (
+    <>
     <footer>
-      <div className="RS_Section">
-        <h3 className="RS_Section__title">Suivez nous</h3>
-        <div className="RS_Section__list">
-          {socialLinks.map((link: SocialLinksType) => (
-            <a
-              key={link.name + "-00"}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="RS_Section__item"
-              title={"Lien vers " + link.name}
-              aria-label={link.name}
-            >
-              {link.icon}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <div className="Footer">
+        <div className="Footer">
+          <div>
         <Link
           to="/"
           className="Footer__logo"
@@ -100,7 +84,24 @@ export default function Footer({}: Props) {
           aria-label="Logo Thatmuch"
         >
           <LazyLoadImage src={logoThatIsWhite} alt="Logo Thatmuch en blanc" />
-        </Link>
+            </Link>
+            <div className="Footer__socials">
+  {socialLinks.map((link: SocialLinksType) => (
+            <a
+              key={link.name + "-00"}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="Footer__socials__item"
+              title={"Lien vers " + link.name}
+              aria-label={link.name}
+            >
+              {link.icon}
+            </a>
+          ))}
+            </div>
+            <Link to="/contact" className="btn btn-dev">Nous contacter</Link>
+          </div>
         <div>
           <h4 className="mb-2">Articles récents</h4>
           <ul>
@@ -111,7 +112,8 @@ export default function Footer({}: Props) {
             ))}
           </ul>
         </div>
-      </div>
+        </div>
+
       <div className="Footer__credits">
         <p>© {new Date().getFullYear()} THATMUCH - Tous droits réservés</p>
         {menuItems.map((item) => (
@@ -125,5 +127,9 @@ export default function Footer({}: Props) {
         ))}
       </div>
     </footer>
+      <div className="footer-parallax">
+        <LazyLoadImage src={logoThatIsWhiteParallax} alt="Logo Thatmuch en blanc" />
+    </div>
+    </>
   );
 }
