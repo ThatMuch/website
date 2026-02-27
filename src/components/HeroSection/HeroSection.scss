@@ -24,11 +24,11 @@
   }
 
   &__header {
-    max-width: 49rem;
+    max-width: 80%;
   }
 
   &__title {
-    font-size: 4.6875rem;
+    font-size: 6rem;
     margin-bottom: $spacing-xl;
     margin-top: 0;
 
@@ -38,9 +38,12 @@
     }
   }
 
-  .btn {
+  &__btn {
     position: relative;
-    overflow: visible;
+    width: fit-content;
+    display: flex;
+    gap: 1rem;
+
 
     &:before {
       content: "";
@@ -48,11 +51,11 @@
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
-      width: 100%;
+      width: 300px;
       height: 150%;
       position: absolute;
       top: 100%;
-      right: -100%;
+      right: -300px;
       display: block;
       pointer-events: none;
     }
@@ -63,6 +66,7 @@
       }
     }
   }
+
 
   &__desc {
     font-size: 1.25rem;
