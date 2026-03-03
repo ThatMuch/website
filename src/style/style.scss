@@ -168,13 +168,15 @@ hr {
   /* animation-timing-function: ease-in; standard should be linear */
   /* animation-fill-mode: both; keeps animated values forwards and backwards */
   animation: text-appear ease-in both;
-  animation-timeline: view();
+  /* Trick to avoid cssnano/autoprefixer breaking the modern view() value in production */
+  animation-timeline: #{"view()"};
   /* applies animation state relative to viewport */
   animation-range: 0vh 20vh;
   /* set 0% and 100% positions */
 }
 
-@prefers-reduced-motion {
+@media (prefers-reduced-motion: reduce) {
+
   p,
   h2,
   h3,
