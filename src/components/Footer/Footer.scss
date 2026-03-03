@@ -30,7 +30,7 @@
 footer {
   position: relative;
   z-index: 2;
-  background-color: $neutral-900;
+  background-color: #08021e;
   padding: $spacing-l $spacing-l $spacing-s $spacing-l;
 }
 
@@ -69,7 +69,6 @@ footer {
   &__credits {
     display: flex;
     justify-content: center;
-    background-color: $neutral-900;
     color: rgba($color: #fff, $alpha: 0.25);
     gap: $spacing-xs;
     padding-top: $spacing-l;
