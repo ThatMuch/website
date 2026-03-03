@@ -104,7 +104,14 @@ module.exports = {
         },
       },
     },
-    "gatsby-plugin-sass",
+    {
+      resolve: "gatsby-plugin-sass",
+      options: {
+        sassOptions: {
+          silenceDeprecations: ["legacy-js-api"],
+        },
+      },
+    },
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-image",
     `gatsby-transformer-remark`,
