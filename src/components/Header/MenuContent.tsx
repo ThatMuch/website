@@ -59,22 +59,26 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
             const isActive = activeMenuIndex === index
 
             return (
-              <li
-                key={item.id}
-                onClick={() => handleItemClick(index, hasChildren)}
-                className={clsx(isActive && 'active')}
-              >
+              <li key={item.id} className={clsx(isActive && 'active')}>
                 {hasChildren ? (
-                  <div className="menu__item" role="button" tabIndex={0}>
+                  <button
+                    type="button"
+                    className="menu__item"
+                    onClick={() => handleItemClick(index, hasChildren)}
+                    aria-expanded={isActive}
+                  >
                     {item.label}
                     <FiChevronRight size={42} aria-hidden="true" />
-                  </div>
+                  </button>
                 ) : item.path && item.path.startsWith('/') ? (
                   <Link
                     className="menu__item"
                     to={item.path}
                     target={item.target}
-                    onClick={() => toggleMenu(false)}
+                    onClick={() => {
+                      handleItemClick(index, hasChildren)
+                      toggleMenu(false)
+                    }}
                     title={`Lien vers ${item.label}`}
                     aria-label={item.label}
                   >
@@ -85,7 +89,10 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
                     className="menu__item"
                     href={item.url}
                     target={item.target}
-                    onClick={() => toggleMenu(false)}
+                    onClick={() => {
+                      handleItemClick(index, hasChildren)
+                      toggleMenu(false)
+                    }}
                     title={`Lien vers ${item.label}`}
                     aria-label={item.label}
                   >
@@ -98,10 +105,13 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
         </ul>
       </div>
 
-      <div className={clsx('menu__items__desc col-sm-8', isMobile && isDescShown && 'is-open')}>
-        {isMobile && (
-          <MenuMobile activeItem={activeItem} onBack={handleBack} />
+      <div
+        className={clsx(
+          'menu__items__desc col-sm-8',
+          isMobile && isDescShown && 'is-open'
         )}
+      >
+        {isMobile && <MenuMobile activeItem={activeItem} onBack={handleBack} />}
 
         {activeItem && (
           <>
@@ -123,7 +133,10 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
                       >
                         {child.label}
                         {child.target === '_blank' ? (
-                          <LuSquareArrowOutUpRight size={42} aria-hidden="true" />
+                          <LuSquareArrowOutUpRight
+                            size={42}
+                            aria-hidden="true"
+                          />
                         ) : (
                           <FiArrowRight size={42} aria-hidden="true" />
                         )}
@@ -139,7 +152,10 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
                       >
                         {child.label}
                         {child.target === '_blank' ? (
-                          <LuSquareArrowOutUpRight size={42} aria-hidden="true" />
+                          <LuSquareArrowOutUpRight
+                            size={42}
+                            aria-hidden="true"
+                          />
                         ) : (
                           <FiArrowRight size={42} aria-hidden="true" />
                         )}
@@ -153,13 +169,9 @@ export default function MenuContent({ menuItems }: MenuContentProps) {
         )}
 
         <div className="comets">
-           {COMET_DELAYS.map((delay) => (
-             <LazyLoadImage
-               key={delay}
-               src={comet}
-               alt="Comet Thatmuch"
-             />
-           ))}
+          {COMET_DELAYS.map(delay => (
+            <LazyLoadImage key={delay} src={comet} alt="" aria-hidden="true" />
+          ))}
         </div>
       </div>
     </div>

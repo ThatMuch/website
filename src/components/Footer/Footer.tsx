@@ -74,6 +74,7 @@ export default function Footer({}: Props) {
   return (
     <div className="Footer-wrapper">
     <footer>
+       <h2 className="visually-hidden">Pied de page</h2>
         <div className="Footer">
           <div className="Footer__contact">
         <Link
@@ -95,7 +96,10 @@ export default function Footer({}: Props) {
               title={"Lien vers " + link.name}
               aria-label={link.name}
             >
-              {link.icon}
+              {/* Remove title from icon to avoid redundancy with aria-label on link */}
+              {React.cloneElement(link.icon as React.ReactElement, {
+                title: undefined,
+              })}
             </a>
           ))}
             </div>
