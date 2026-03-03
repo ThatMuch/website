@@ -99,7 +99,7 @@ export default function Footer({}: Props) {
             </a>
           ))}
             </div>
-            <Link to="/contact" className="btn btn-dev">
+            <Link to="/contact" className="btn btn-primary">
               <div className="btn__overlay"></div>
               <span className="btn__content">
                 Nous contacter
