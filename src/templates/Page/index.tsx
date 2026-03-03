@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 import React from "react";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 const Page = ({ data }) => {
   const page = data.wpPage;
@@ -14,7 +15,7 @@ const Page = ({ data }) => {
       <Seo title={page.title} description={page.seo.metaDesc} />
       <div className="page-content">
         <h1>{page.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.content }} />
+        <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(page.content) }} />
       </div>
     </Layout>
   );

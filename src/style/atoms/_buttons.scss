@@ -13,6 +13,7 @@ button {
   text-transform: inherit;
   letter-spacing: inherit;
 }
+
 .btn {
   border: none;
   display: inline-flex;
@@ -27,10 +28,12 @@ button {
   overflow: hidden;
   color: #fff;
   transition: all 0.3s ease-in-out;
+
   .btn-icon {
     margin-left: 0;
     transition: all 0.3s ease-in-out;
   }
+
   &:hover {
     .btn-icon {
       margin-left: 0.5rem;
@@ -40,6 +43,7 @@ button {
   &:focus-visible {
     outline: 3px solid;
   }
+
   &__content {
     z-index: 5;
     grid-column-gap: 0.5rem;
@@ -49,9 +53,9 @@ button {
     display: flex;
     position: relative;
   }
+
   &__overlay {
-    transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg)
-      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     transform-style: preserve-3d;
     border-radius: 100%;
     width: 1rem;
@@ -68,18 +72,19 @@ button {
   }
 
   &:hover &__overlay {
-    transform: translate3d(0px, 0px, 0px) scale3d(20, 20, 1) rotateX(0deg)
-      rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    transform: translate3d(0px, 0px, 0px) scale3d(20, 20, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     transform-style: preserve-3d;
   }
 
   &-primary {
-    background-color: $neutral-900;
-    border-color: $neutral-900;
+    background-color: $neutral-600;
+    border-color: $neutral-600;
+
     &:hover {
       background-color: $neutral-500;
       text-decoration: none;
     }
+
     &:disabled {
       background: $status-disabled;
     }
@@ -88,10 +93,12 @@ button {
   &-secondary {
     background-color: transparent;
     color: $status-info;
+
     &:hover {
       background-color: $status-info;
       color: $text-color-default;
     }
+
     &:disabled {
       background: $status-disabled;
       color: $status-disabled-dark;
@@ -101,18 +108,26 @@ button {
   &-white {
     background-color: $neutral-0;
     color: $text-color-default;
+
     &:hover {
       background-color: transparent;
       text-decoration: none;
     }
+
     &:disabled {
       background: $status-disabled;
       color: $status-disabled-dark;
     }
   }
+
   &-dev {
     color: $text-color-default;
     background-color: $dev-500;
+
+    .btn__overlay {
+      background-color: $dev-200;
+    }
+
     &:hover {
       color: $text-color-default;
       background-color: $dev-500;
@@ -124,10 +139,12 @@ button {
       border-color: $status-disabled;
       color: $status-disabled-dark;
     }
+
     &.btn-outlined {
       background-color: transparent;
       border: 2px solid $dev-500;
       color: $dev-500;
+
       &:hover {
         background-color: $dev-500;
         color: $text-color-default;
@@ -139,11 +156,13 @@ button {
   &-success {
     color: $text-color-default;
     background-color: $project-500;
+
     &:hover {
       color: $text-color-default;
       background-color: $project-500;
       text-decoration: none;
     }
+
     &:disabled {
       background: $status-disabled;
       color: $status-disabled-dark;
@@ -153,11 +172,13 @@ button {
   &-design {
     color: $text-color-default;
     background-color: $design-500;
+
     &:hover {
       color: $text-color-default;
       background-color: $design-500;
       text-decoration: none;
     }
+
     &:disabled {
       background: $status-disabled;
       color: $status-disabled-dark;

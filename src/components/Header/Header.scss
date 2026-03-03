@@ -9,7 +9,7 @@ header.header {
   width: calc(100% - 2 * $spacing-m);
   position: fixed;
   left: $spacing-m;
-  top: 0;
+  top: 1rem;
   z-index: 1000;
   background-color: rgba($neutral-0, 0.2);
   backdrop-filter: blur(5px);

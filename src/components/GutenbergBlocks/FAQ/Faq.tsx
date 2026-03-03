@@ -1,6 +1,6 @@
 import "./style.scss"
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useMemo } from 'react'
 import { sanitizeHtml } from "../../../utils/sanitize"
 
 type Props = {
@@ -11,7 +11,11 @@ type Props = {
 export default function FAQ({ content, index }: Props) {
   const faqContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const sanitizedContent = useMemo(() => {
+    return { __html: sanitizeHtml(content || "") };
+  }, [content]);
+
+	useEffect(() => {
     const container = faqContainerRef.current;
     if (container) {
       // Enhance accessibility for questions
@@ -70,7 +74,7 @@ export default function FAQ({ content, index }: Props) {
     <div
       ref={faqContainerRef}
       key={index}
-      dangerouslySetInnerHTML={{ __html: sanitizeHtml(content || "") }}
+      dangerouslySetInnerHTML={sanitizedContent}
     />
   );
 }

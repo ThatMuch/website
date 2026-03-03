@@ -3,13 +3,13 @@ import { create } from 'zustand'
 interface UIState {
 	isMobile: boolean
 	isMenuOpen: boolean
-	isScrolled: boolean
+
 	activeMenuIndex: number | null
 
 	// Actions
 	setMobile: (isMobile: boolean) => void
 	toggleMenu: (isOpen?: boolean) => void
-	setScrolled: (isScrolled: boolean) => void
+
 	setActiveMenuIndex: (index: number | null) => void
 
 	// Helper to handle body scroll lock
@@ -19,7 +19,7 @@ interface UIState {
 export const useUIStore = create<UIState>((set, get) => ({
 	isMobile: false,
 	isMenuOpen: false,
-	isScrolled: false,
+
 	activeMenuIndex: null,
 
 	setMobile: (isMobile) => set({ isMobile }),
@@ -29,8 +29,6 @@ export const useUIStore = create<UIState>((set, get) => ({
 		get()._updateBodyScroll(newState)
 		set({ isMenuOpen: newState })
 	},
-
-	setScrolled: (isScrolled) => set({ isScrolled }),
 
 	setActiveMenuIndex: (index) => set({ activeMenuIndex: index }),
 

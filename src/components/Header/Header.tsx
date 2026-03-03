@@ -8,7 +8,6 @@ import { useSiteSeo } from "../../hooks/use-site-seo"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 import close from "../../images/29-cross-outline.png"
 import close_gif from "../../images/29-cross-outline.gif"
-import logo from "../../images/THATMUCH_Logo_Black.webp"
 import { StaticImage } from "gatsby-plugin-image"
 import MenuToggle from "./MenuToggle"
 import MenuContent from "./MenuContent"
@@ -18,26 +17,21 @@ export default function Header() {
   // Global Store State
   const isMobile = useUIStore(state => state.isMobile)
   const isMenuOpen = useUIStore(state => state.isMenuOpen)
-  // isScrolled handled only in effect, no re-render needed
   const setMobile = useUIStore(state => state.setMobile)
   const toggleMenu = useUIStore(state => state.toggleMenu)
-  const setScrolled = useUIStore(state => state.setScrolled)
 
   // Initialization & Resize Logic
   useEffect(() => {
     const handleResize = () => setMobile(window.innerWidth <= 768)
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
+
 
     handleResize() // init
     window.addEventListener("resize", handleResize)
-    window.addEventListener("scroll", handleScroll)
+
     return () => {
       window.removeEventListener("resize", handleResize)
-      window.removeEventListener("scroll", handleScroll)
     }
-  }, [setMobile, setScrolled])
+  }, [setMobile])
 
   // Lock scroll when menu is open on mobile
   useEffect(() => {
@@ -54,8 +48,6 @@ export default function Header() {
   const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
     (item: { parentId: string | null }) => item.parentId === null
   )
-
-  const { siteUrl } = useSiteSeo()
 
   return (
     <header className="header">
@@ -91,13 +83,14 @@ export default function Header() {
             >
               <StaticImage
                 loading="eager"
-                src={logo}
+                src="../../images/LogoTHATMUCH.webp"
                 alt=""
                 className="logo"
                 width={230}
                 aria-hidden="true"
               />
             </Link>
+             
 
             {/* Main Content Component */}
             <MenuContent menuItems={menuItems} />
@@ -111,19 +104,22 @@ export default function Header() {
         aria-label="Accueil"
         title="Accueil du site THATMUCH"
       >
-        <LazyLoadImage src={logo} alt="" className="logo--header" aria-hidden="true" />
+        <StaticImage loading="eager" src="../../images/LogoTHATMUCH.webp" alt="THATMUCH" className="logo--header" width={230} />
       </Link>
 
-      <Link
-        to="https://meetings-eu1.hubspot.com/mathilde-arconte"
+      <a
+        href="https://audit-refonte.thatmuch.fr/"
         className="btn btn-primary"
         target="_blank"
         rel="noopener noreferrer"
-        title="Lien vers la prise de rendez-vous"
-        aria-label="Programmez un appel"
+        title="Lien vers l'audit de votre site web"
+        aria-label="Evaluez votre site web"
       >
-        {isMobile ? "RDV" : "Programmez un appel"}
-      </Link>
+        <div className="btn__overlay"></div>
+        <div className="btn__content">
+          {isMobile ? "Audit" : "Evaluez votre site web"}
+        </div>
+      </a>
     </header>
   )
 }

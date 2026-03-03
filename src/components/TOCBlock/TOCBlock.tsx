@@ -46,12 +46,12 @@ export default function TOCBlock({ attributes }: Props) {
       <div className="toc-block__container">
         <div
           className={`toc-block__header ${
-            attributes.collapsible ? "collapsible" : ""
+            attributes?.collapsible ? "collapsible" : ""
           }`}
-          onClick={() => attributes.collapsible && setIsCollapsed(!isCollapsed)}
+          onClick={() => attributes?.collapsible && setIsCollapsed(!isCollapsed)}
         >
-          <h2 className="toc-block__title h3">{attributes.title}</h2>
-          {attributes.collapsible && (
+          <h2 className="toc-block__title h3">{attributes?.title}</h2>
+          {attributes?.collapsible && (
             <button className="toc-block__collapsible-button">
               {isCollapsed ? <FiChevronDown /> : <FiChevronUp />}
             </button>

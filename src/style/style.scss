@@ -7,7 +7,6 @@
 @use "./organism/section" as *;
 
 html {
-  scroll-behavior: smooth;
   position: relative;
 }
 
@@ -17,7 +16,6 @@ body {
   line-height: 1.8;
   box-sizing: border-box;
   color: $text-color-default;
-  transition-duration: 1s;
   background: linear-gradient(#fff, $neutral-0) no-repeat fixed;
 
   img,
@@ -119,8 +117,6 @@ body {
 
 // Animations
 
-
-
 .rotating {
   animation: rotating 2s linear infinite;
 }
@@ -144,7 +140,6 @@ body {
 .mr-auto {
   margin-right: auto;
 }
-
 
 figure.wp-block-table {
   margin: 0 0 1.5em !important;
@@ -173,13 +168,14 @@ hr {
   /* animation-timing-function: ease-in; standard should be linear */
   /* animation-fill-mode: both; keeps animated values forwards and backwards */
   animation: text-appear ease-in both;
-  animation-timeline: view();
+  /* Trick to avoid cssnano/autoprefixer breaking the modern view() value in production */
+  animation-timeline: #{"view()"};
   /* applies animation state relative to viewport */
   animation-range: 0vh 20vh;
   /* set 0% and 100% positions */
 }
 
-@prefers-reduced-motion {
+@media (prefers-reduced-motion: reduce) {
 
   p,
   h2,
