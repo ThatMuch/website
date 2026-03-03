@@ -19,10 +19,10 @@ export default function ContactForm({ hubspotForm }: Props) {
     <div className="ContactForm">
       <div className="row">
         <div className="col-md-6 position-relative">
-          <h2 className="h3">{hubspotForm.sousTitre}</h2>
+          <p className="h3 fw-bold">{hubspotForm.sousTitre}</p>
           <div className="divider mb-4"></div>
           <h1>{hubspotForm.titre}</h1>
-          <LazyLoadImage src={tardis} alt="Tardis" />
+          <LazyLoadImage src={tardis} alt="" aria-hidden="true" />
         </div>
         <div className="col-md-6">
           <HubspotForm

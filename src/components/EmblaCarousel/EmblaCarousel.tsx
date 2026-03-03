@@ -32,10 +32,27 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
 
+  const count = React.Children.count(children);
+
   return (
-    <section className="embla">
+    <section
+      className="embla"
+      aria-roledescription="carousel"
+      aria-label="Carousel"
+    >
       <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">{children}</div>
+        <div className="embla__container">
+          {React.Children.map(children, (child, index) => {
+            if (React.isValidElement(child)) {
+              return React.cloneElement(child as React.ReactElement, {
+                role: "group",
+                "aria-roledescription": "slide",
+                "aria-label": `${index + 1} sur ${count}`,
+              });
+            }
+            return child;
+          })}
+        </div>
       </div>
 
       <div className={`embla__controls ${showDots ? "show-dots" : ""}`}>
@@ -53,6 +70,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 className={"embla__dot".concat(
                   index === selectedIndex ? " embla__dot--selected" : ""
                 )}
+                aria-label={`Aller à la diapositive ${index + 1}`}
+                aria-pressed={index === selectedIndex}
               />
             ))}
           </div>
