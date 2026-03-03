@@ -7,6 +7,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 	  type WpBlockAttributesObject {
 		foobar: String
 	  }
+    type SaswpCollectionBlock {
+      saveContent: String
+      clientId: String
+    }
 	`;
   createTypes(typeDefs);
 };
