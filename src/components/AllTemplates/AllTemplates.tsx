@@ -1,5 +1,6 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import React, { useState } from "react";
+import { Link } from "gatsby";
 
 import { CategoryType } from "../../utils/types";
 import PostCard from "../PostCard/PostCard";
@@ -124,15 +125,15 @@ export default function AllTemplates({
       )}
       {isHome && (
         <div className="AllPosts__btn">
-          <a
-            href="/ressources/templates/"
+          <Link
+            to="/ressources/templates/"
             className="btn btn-primary"
             onClick={() => setCurrentPage(1)}
             aria-label="Voir tous les templates"
             title="Lien vers tous les templates gratuits"
           >
             Voir tous les templates
-          </a>
+          </Link>
         </div>
       )}
     </div>

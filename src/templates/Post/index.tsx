@@ -6,13 +6,65 @@ import PostHeader from "../../components/PostHeader/PostHeader";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
+import SpotifyEmbed from "../../components/SpotifyEmbed/SpotifyEmbed";
 import TOCBlock from "../../components/TOCBlock/TOCBlock";
+import YoutubeEmbed from "../../components/YoutubeEmbed/YoutubeEmbed";
 import { graphql } from "gatsby";
+import parse, { DOMNode, Element, Text } from "html-react-parser";
 
 const Post = ({ data }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
+
+  const parseOptions = {
+    replace: (domNode: DOMNode) => {
+      // Keep support for standard iframes
+      if (
+        domNode instanceof Element &&
+        domNode.name === "iframe" &&
+        domNode.attribs &&
+        domNode.attribs.src &&
+        domNode.attribs.src.includes("youtube.com")
+      ) {
+        return <YoutubeEmbed url={domNode.attribs.src} />;
+      }
+
+      // Support for Gutenberg oEmbed <figure> block
+      if (
+        domNode instanceof Element &&
+        domNode.name === "figure" &&
+        domNode.attribs &&
+        domNode.attribs.class
+      ) {
+        const isYoutube = domNode.attribs.class.includes("wp-block-embed-youtube") || domNode.attribs.class.includes("is-provider-youtube");
+        const isSpotify = domNode.attribs.class.includes("wp-block-embed-spotify") || domNode.attribs.class.includes("is-provider-spotify");
+
+        if (isYoutube || isSpotify) {
+          const wrapperDiv = domNode.children.find(
+            (child) =>
+              child instanceof Element &&
+              child.name === "div" &&
+              child.attribs?.class?.includes("wp-block-embed__wrapper")
+          ) as Element | undefined;
+
+          if (wrapperDiv && wrapperDiv.children) {
+            const textNode = wrapperDiv.children.find(
+              (child) => child instanceof Text
+            ) as Text | undefined;
+
+            if (textNode && textNode.data) {
+              const url = textNode.data.trim();
+              if (url) {
+                if (isYoutube) return <YoutubeEmbed url={url} />;
+                if (isSpotify) return <SpotifyEmbed url={url} />;
+              }
+            }
+          }
+        }
+      }
+    },
+  };
 
   const renderBlocks = () => {
     return blocks.map((block, index) => {
@@ -21,12 +73,16 @@ const Post = ({ data }) => {
           return <FAQ key={index} content={block.saveContent} />;
         case "tm-multi-block/toc":
           return <TOCBlock attributes={block.attributes} />;
+        case "core/embed":
+          // WordPress oEmbed block (YouTube)
+          return <div key={index}>{parse(block.saveContent, parseOptions)}</div>;
         default:
           return (
             <div
               key={index}
-              dangerouslySetInnerHTML={{ __html: block.saveContent }}
-            />
+            >
+              {parse(block.saveContent, parseOptions)}
+            </div>
           );
       }
     });

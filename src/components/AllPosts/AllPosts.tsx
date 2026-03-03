@@ -3,6 +3,7 @@ import "./AllPosts.scss";
 import { CategoryType, PostType } from "../../utils/types";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import React, { useState } from "react";
+import { Link } from "gatsby";
 
 import PostCard from "../PostCard/PostCard";
 import { useBlogCategories } from "../../hooks/use-blog-categories";
@@ -79,7 +80,7 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
                 <PostCard
                   title={post.title}
                   category={post?.categories?.nodes[0]}
-                  url={post.link}
+                  url={post.uri || post.link}
                   image={post.featuredImage?.node}
                 />
               </div>
@@ -89,7 +90,7 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
                 <PostCard
                   title={post.title}
                   category={post?.categories?.nodes[0]}
-                  url={post.link}
+                  url={post.uri || post.link}
                   image={post.featuredImage?.node}
                 />
               </div>
@@ -119,15 +120,14 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
       )}
       {isHome && (
         <div className="AllPosts__btn">
-          <a
-            href="/blog"
+          <Link
+            to="/blog"
             className="btn btn-primary"
-            onClick={() => setCurrentPage(1)}
             aria-label="Voir tous les articles"
             title="Lien vers tous les articles du blog"
           >
             Voir tous les articles
-          </a>
+          </Link>
         </div>
       )}
     </div>
