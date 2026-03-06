@@ -81,5 +81,14 @@
   "optionalDependencies": {
     "@lmdb/lmdb-linux-x64": "2.5.3",
     "@parcel/watcher-linux-x64-glibc": "2.5.6"
+  },
+  "overrides": {
+    "react-autosize-textarea": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
+    "styled-jsx": {
+      "react": "^18.2.0"
+    }
   }
 }
