@@ -169,7 +169,8 @@ hr {
   /* animation-fill-mode: both; keeps animated values forwards and backwards */
   animation: text-appear ease-in both;
   /* Trick to avoid cssnano/autoprefixer breaking the modern view() value in production */
-  animation-timeline: #{"view()"};
+  --timeline: view();
+  animation-timeline: var(--timeline);
   /* applies animation state relative to viewport */
   animation-range: 0vh 20vh;
   /* set 0% and 100% positions */
