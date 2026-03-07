@@ -1,6 +1,7 @@
 img.animate {
 	animation: image-appear ease-in both;
-	animation-timeline: view();
+	--img-timeline: view();
+	animation-timeline: var(--img-timeline);
 	animation-range: 0vh 20vh;
 }
 
