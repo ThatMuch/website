@@ -167,10 +167,11 @@ hr {
   /* animation-name: text-appear; @keyframes defined below */
   /* animation-timing-function: ease-in; standard should be linear */
   /* animation-fill-mode: both; keeps animated values forwards and backwards */
-  animation: text-appear ease-in both;
-  /* Trick to avoid cssnano/autoprefixer breaking the modern view() value in production */
-  --timeline: view();
-  animation-timeline: var(--timeline);
+  animation-name: text-appear;
+  animation-timing-function: ease-in;
+  animation-fill-mode: both;
+  /* Keep animation-timeline separate from the animation shorthand to prevent cssnano from overriding it */
+  animation-timeline: view();
   /* applies animation state relative to viewport */
   animation-range: 0vh 20vh;
   /* set 0% and 100% positions */
