@@ -184,4 +184,15 @@ button {
       color: $status-disabled-dark;
     }
   }
+
+  &-link {
+    color: $text-color-default;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+
+    &:hover {
+      text-decoration: none;
+      color: $text-color-link;
+    }
+  }
 }
