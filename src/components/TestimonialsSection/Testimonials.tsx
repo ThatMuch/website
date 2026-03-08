@@ -17,20 +17,11 @@ export default function Testimonials({ title, description, subtitle }: Props) {
   const data = useSiteCustomPosts();
   const testimonials = data.allWpTestimonial?.edges;
   const SLIDE_COUNT = testimonials?.length;
-  // transform testimonials to an array of objects with the same structure as the one used in the TestimonialCard component
-  const transformedTestimonials = testimonials?.map(({ node }) => {
-    const { title, testimonialContent } = node;
-    const { nom, role, citation, stars } = testimonialContent;
-    return {
-      title,
-      testimonialContent: {
-        nom,
-        role,
-        citation,
-        stars,
-      },
-    };
-  });
+
+  // ⚡ Bolt Optimization: Removed unused transformedTestimonials mapping.
+  // This array mapping was unused and re-computed on every render, wasting
+  // computation time and memory allocation for the entire testimonials array.
+
   return (
     <div className="Testimonials">
       <div className="Testimonials__header section__header">
