@@ -21,10 +21,6 @@
     @include breakpoint(mobile) {
       flex-direction: column;
     }
-
-    img {
-      height: 242px;
-    }
   }
 
   &__list {

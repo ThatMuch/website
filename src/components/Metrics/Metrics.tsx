@@ -1,7 +1,7 @@
 import "./Metrics.scss";
 
+import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
-import Starfleet from "../../images/Starfleet.webp";
 
 type Metric = {
   titre: string;
@@ -78,7 +78,14 @@ export default function Metrics({
           <h2>{title}</h2>
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </div>
-        <img src={Starfleet} className="img-fluid" alt="Starfleet" />
+        <StaticImage
+          src="../../images/Starfleet.webp"
+          className="img-fluid"
+          alt="Starfleet"
+          height={242}
+          placeholder="blurred"
+          layout="constrained"
+        />
       </div>
       <div className="Metrics__list">
         {metric.map((item, index) => (
