@@ -1,0 +1,3 @@
+## 2026-03-11 - Array filtering inside functional components triggers O(N) operations on each render
+**Learning:** Array operations like `.filter()` or `.map()` assigned to constants inside a functional component body run synchronously on every single re-render, creating new array references and potentially causing child components to re-render unnecessarily.
+**Action:** Extract expensive list operations outside the component if they don't depend on props/state, or wrap them in `useMemo` to cache the result between renders when the source data hasn't changed. Also combine with `React.memo` on list item components to prevent rendering waterfalls.
