@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ProjectCard, { ProjectType } from "../ProjectCard/ProjectCard";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 type Props = {
   section: {
@@ -11,11 +12,12 @@ type Props = {
 };
 
 export default function PortfolioSection({ section }: Props) {
-  const { title, sousTitre, project = [] } = section || {};
+  const { title, sousTitre, description, project = [] } = section || {};
 
+  // ⚡ Bolt Optimization: Memoize array filtering to prevent O(N) recalculations on every render.
   // Séparation en fonction de l'index : impaire (1, 3, 5...) et paire (0, 2, 4...)
-  const oddProjects = project.filter((_, index) => index % 2 !== 0);
-  const evenProjects = project.filter((_, index) => index % 2 === 0);
+  const oddProjects = useMemo(() => project.filter((_, index) => index % 2 !== 0), [project]);
+  const evenProjects = useMemo(() => project.filter((_, index) => index % 2 === 0), [project]);
 
   return (
     <div className="PortfolioSection">
