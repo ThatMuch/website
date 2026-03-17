@@ -1,0 +1,3 @@
+## 2024-05-18 - [Optimize FAQHome Component Re-renders]
+**Learning:** `DOMPurify.sanitize` (`sanitizeHtml`) is an expensive operation (~0.8ms per call) in React components. When rendering static content in interactive lists, lazily evaluate it or use `React.useMemo` to prevent heavy recalculations on every state-triggered re-render.
+**Action:** Always wrap expensive static string manipulation like `sanitizeHtml` with `useMemo` when rendering static descriptions, and extract conditionally rendered list elements into `React.memo` components, lazily evaluating expensive operations inside conditional rendering (`isActive && sanitizeHtml(...)`).
