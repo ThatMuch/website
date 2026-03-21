@@ -2,13 +2,15 @@ import "./FAQHome.scss";
 
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import { sanitizeHtml } from "../../utils/sanitize";
 
-type Questions = {
+type Question = {
   title: string;
   description: string;
-}[];
+};
+
+type Questions = Question[];
 
 type Props = {
   title: string;
@@ -16,43 +18,75 @@ type Props = {
   questions: Questions;
 };
 
-export default function FAQHome({ title, description, questions }: Props) {
+// ⚡ Bolt Optimization: Extracted FAQItem and wrapped in React.memo.
+// This prevents all items in the FAQ list from re-rendering when the user
+// expands/collapses a single item, saving unnecessary expensive DOM updates.
+const FAQItem = React.memo(({
+  question,
+  index,
+  isActive,
+  toggleQuestion
+}: {
+  question: Question;
+  index: number;
+  isActive: boolean;
+  toggleQuestion: (index: number) => void;
+}) => {
+  return (
+    <li className="FAQHome__question">
+      <h3>
+        <button
+          type="button"
+          className="d-flex align-items-center justify-content-between FAQHome__question__title w-100 border-0 bg-transparent p-0 text-start"
+          onClick={() => toggleQuestion(index)}
+          aria-expanded={isActive}
+          aria-controls={`faq-home-answer-${index}`}
+        >
+          {question.title}
+          {isActive ? <FiMinusCircle /> : <FiPlusCircle />}
+        </button>
+      </h3>
+      {isActive && (
+        <div
+          id={`faq-home-answer-${index}`}
+          // ⚡ Bolt Optimization: sanitizeHtml is kept lazy inside conditional rendering
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(question.description) }}
+        />
+      )}
+    </li>
+  );
+});
 
+export default function FAQHome({ title, description, questions }: Props) {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
-  const toggleQuestion = (index: number) => {
-    if (activeIndex === index) {
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
-  };
+
+  // ⚡ Bolt Optimization: Memoize the toggle function to prevent re-creating it
+  // on every render, ensuring FAQItem's React.memo correctly bails out.
+  const toggleQuestion = useCallback((index: number) => {
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  }, []);
+
+  // ⚡ Bolt Optimization: Memoize the sanitized description string
+  // DOMPurify is computationally expensive. Running it only when description
+  // changes prevents main thread blocking on state changes (accordion toggling).
+  const sanitizedDescription = useMemo(() => {
+    return { __html: sanitizeHtml(description) };
+  }, [description]);
+
   return (
     <div className="FAQHome">
       <h2>{title}</h2>
       <div className="divider mb-4"></div>
-      <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }} />
+      <div dangerouslySetInnerHTML={sanitizedDescription} />
       <ul>
         {questions.map((question, index) => (
-          <li key={index} className="FAQHome__question">
-            <h3>
-              <button
-                type="button"
-                className="d-flex align-items-center justify-content-between FAQHome__question__title w-100 border-0 bg-transparent p-0 text-start"
-                onClick={() => toggleQuestion(index)}
-                aria-expanded={activeIndex === index}
-                aria-controls={`faq-home-answer-${index}`}
-              >
-                {question.title}
-                {activeIndex === index ? <FiMinusCircle /> : <FiPlusCircle />}
-              </button>
-            </h3>
-            {activeIndex === index && (
-              <div
-                id={`faq-home-answer-${index}`}
-                dangerouslySetInnerHTML={{ __html: sanitizeHtml(question.description) }}
-              />
-            )}
-          </li>
+          <FAQItem
+            key={index}
+            question={question}
+            index={index}
+            isActive={activeIndex === index}
+            toggleQuestion={toggleQuestion}
+          />
         ))}
       </ul>
     </div>
