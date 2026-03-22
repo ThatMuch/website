@@ -1,0 +1,3 @@
+## 2024-05-19 - Removed unnecessary variable calculation in Testimonials mapping
+**Learning:** Found a case in `Testimonials` component where a `transformedTestimonials` array was being computed using `testimonials?.map(...)` inside the component body but was never actually used during rendering. This resulted in wasted computation per render because the `map` method inside the JSX actually iterated over `testimonials` directly.
+**Action:** When inspecting list map operations, double check that mapped or transformed variables are actually passed into rendering. Eliminating unused mapping operations prevents unnecessary iteration.
