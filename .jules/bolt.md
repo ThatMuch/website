@@ -1,0 +1,3 @@
+## 2024-03-25 - Extracted FAQItem and useMemo for sanitizeHtml
+**Learning:** Extracting list items into a `React.memo` component and passing memoized callbacks via `React.useCallback` prevents performance bottlenecks caused by re-rendering the entire list when only one item changes. Furthermore, avoiding eagerly executing expensive operations like `sanitizeHtml` inside `useMemo` when rendering static content in interactive lists, and maintaining lazy evaluation (e.g., `isActive && sanitizeHtml(...)`), prevents initial load performance regressions.
+**Action:** When optimizing React list components with conditionally rendered expensive operations, always extract items to `React.memo`, memoize callbacks, and maintain lazy evaluation instead of eager execution.
