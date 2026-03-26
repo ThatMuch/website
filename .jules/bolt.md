@@ -1,0 +1,3 @@
+## 2024-05-27 - [Optimization of `FAQHome` Component]
+**Learning:** `DOMPurify.sanitize` (`sanitizeHtml`) is an expensive operation in React components (~0.8ms per call). In list components with accordion-style toggling (like `FAQHome`), recalculating the sanitized string for all items during state changes causes noticeable lag.
+**Action:** When implementing interactive list items with potentially unsafe HTML content, extract the list item into a `React.memo` component, wrap toggle handlers in `React.useCallback`, use `React.useMemo` to cache static top-level HTML descriptions, and lazily evaluate `sanitizeHtml` inside the list item so it's only executed when the item is visible.

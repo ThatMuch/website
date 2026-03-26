@@ -1,5 +1,6 @@
 import React from "react";
 import ProjectCard, { ProjectType } from "../ProjectCard/ProjectCard";
+import { sanitizeHtml } from "../../utils/sanitize";
 
 type Props = {
   section: {
@@ -26,6 +27,9 @@ export default function PortfolioSection({ section }: Props) {
             <h2 className="h3">{title}</h2>
             <div className="divider mb-4"></div>
             <h2 className="h2 mb-5">{sousTitre}</h2>
+            {section.description && (
+              <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(section.description) }} />
+            )}
           </div>
           {oddProjects.map((p) => (
             <ProjectCard key={p.title || p.client} project={p} />
