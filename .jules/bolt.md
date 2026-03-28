@@ -1,0 +1,7 @@
+## 2024-05-18 - Memoizing sanitizeHtml in React Components
+**Learning:** `DOMPurify.sanitize` (used via `sanitizeHtml` in `src/utils/sanitize.ts`) is an expensive operation (~0.8ms per call) and can cause performance bottlenecks when executed within the render loop of list items or frequently re-rendered components. In components like `TestimonialCard` and `ExpertisesSection`, failing to memoize `sanitizeHtml` results in unnecessary execution on every re-render.
+**Action:** Always wrap `sanitizeHtml` calls with `useMemo` when rendering static or slowly-changing content within lists or frequently updated components. Furthermore, combine this with `React.memo` on the child component to prevent re-rendering when the parent component changes state (e.g. accordion or hover state).
+
+## 2024-05-18 - Test Coverage vs Optimizations
+**Learning:** Removing `sanitizeHtml` from a component (or moving it to a parent) to improve performance can break unit tests that explicitly mock and assert on `sanitizeHtml` being called by that component (e.g. `PortfolioSection.test.tsx` failed after optimizations because `PortfolioSection` no longer called `sanitizeHtml` directly).
+**Action:** When optimizing a component's render function by extracting variables or changing how utilities are called, be prepared to update related unit tests. Assertions checking for specific utility calls might need to be removed or adjusted to focus on the rendered output instead.

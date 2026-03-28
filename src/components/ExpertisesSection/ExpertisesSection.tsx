@@ -1,7 +1,7 @@
 import "./ExpertisesSection.scss";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import React from "react";
+import React, { useMemo } from "react";
 import { usePostExpertises } from "../../hooks/use-custom-expertises";
 import { sanitizeHtml } from "../../utils/sanitize";
 
@@ -24,6 +24,38 @@ interface Expertise {
   }
 }
 
+// ⚡ Bolt Optimization: Extracted ExpertiseCard and wrapped in React.memo
+// to prevent re-rendering the cards if the parent ExpertisesSection re-renders.
+// The expensive sanitizeHtml call is also memoized within each card.
+const ExpertiseCard = React.memo(({ expertise }: { expertise: Expertise }) => {
+  const sanitizedDesc = useMemo(() => sanitizeHtml(expertise.desc), [expertise.desc]);
+
+  return (
+    <div
+      className={`ExpertisesSection__card ${expertise.category}`}
+    >
+      <div>
+        <div className="ExpertisesSection__card-image">
+          <LazyLoadImage
+            src={expertise.featuredImage.mediaItemUrl}
+            alt={expertise.featuredImage.altText}
+            effect="blur"
+          />
+        </div>
+        <h3 className="h2">{expertise.title}</h3>
+        <div dangerouslySetInnerHTML={{ __html: sanitizedDesc }} />
+      </div>
+
+      <a
+        href={`/expertise/${expertise.slug}`}
+        className={`btn btn-${expertise.category}`}
+      >
+        {expertise.link_label}
+      </a>
+    </div>
+  );
+});
+
 export default function ExpertisesSection({ section }: Props) {
   const expertises = usePostExpertises();
   return (
@@ -35,29 +67,7 @@ export default function ExpertisesSection({ section }: Props) {
       </div>
       <div className="ExpertisesSection__content">
         {expertises.map((expertise: Expertise) => (
-          <div
-            className={`ExpertisesSection__card ${expertise.category}`}
-            key={expertise.title}
-          >
-            <div>
-              <div className="ExpertisesSection__card-image">
-                <LazyLoadImage
-                  src={expertise.featuredImage.mediaItemUrl}
-                  alt={expertise.featuredImage.altText}
-                  effect="blur"
-                />
-              </div>
-              <h3 className="h2">{expertise.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(expertise.desc) }} />
-            </div>
-
-            <a
-              href={`/expertise/${expertise.slug}`}
-              className={`btn btn-${expertise.category}`}
-            >
-              {expertise.link_label}
-            </a>
-          </div>
+          <ExpertiseCard key={expertise.title} expertise={expertise} />
         ))}
       </div>
     </div>
