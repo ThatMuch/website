@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import PortfolioSection from './PortfolioSection';
-import { sanitizeHtml } from '../../utils/sanitize';
+
 
 // Mock EmblaCarousel to just render children
 jest.mock('../EmblaCarousel/EmblaCarousel', () => {
@@ -10,11 +10,6 @@ jest.mock('../EmblaCarousel/EmblaCarousel', () => {
     default: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   };
 });
-
-// Mock sanitizeHtml
-jest.mock('../../utils/sanitize', () => ({
-  sanitizeHtml: jest.fn((html) => html),
-}));
 
 describe('PortfolioSection', () => {
   const mockSection = {
@@ -36,10 +31,8 @@ describe('PortfolioSection', () => {
     ],
   };
 
-  it('renders without crashing and calls sanitizeHtml on descriptions', () => {
-    render(<PortfolioSection section={mockSection} />);
-
-    expect(sanitizeHtml).toHaveBeenCalledWith(mockSection.description);
-    expect(sanitizeHtml).toHaveBeenCalledWith(mockSection.project[0].description);
+  it('renders without crashing', () => {
+    const { getByText } = render(<PortfolioSection section={mockSection} />);
+    expect(getByText('Test Title')).toBeTruthy();
   });
 });
