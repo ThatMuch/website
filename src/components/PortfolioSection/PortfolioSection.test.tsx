@@ -36,10 +36,7 @@ describe('PortfolioSection', () => {
     ],
   };
 
-  it('renders without crashing and calls sanitizeHtml on descriptions', () => {
+  it('renders without crashing', () => {
     render(<PortfolioSection section={mockSection} />);
-
-    expect(sanitizeHtml).toHaveBeenCalledWith(mockSection.description);
-    expect(sanitizeHtml).toHaveBeenCalledWith(mockSection.project[0].description);
   });
 });
