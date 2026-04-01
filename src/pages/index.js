@@ -40,6 +40,15 @@ const query = graphql`
                 node {
                   altText
                   mediaItemUrl
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(
+                        width: 100
+                        placeholder: BLURRED
+                        formats: [AUTO, WEBP, AVIF]
+                      )
+                    }
+                  }
                 }
               }
             }
