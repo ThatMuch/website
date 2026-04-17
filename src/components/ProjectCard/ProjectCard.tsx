@@ -23,9 +23,9 @@ export default function ProjectCard({ project }: { project: ProjectType }) {
         <div className="divider"></div>
         <h3 className="h2">{project.title}</h3>
         <div dangerouslySetInnerHTML={{ __html: project.description }} />
-        <a href={project.url} target="_blank" rel="noopener noreferrer" className="btn btn-link">
+        {project.url && <a href={project.url} target="_blank" rel="noopener noreferrer" className="btn btn-link">
           Voir le projet <FaArrowRight />
-        </a>
+        </a>}
       </div>
     </div>
   );
