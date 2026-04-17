@@ -76,7 +76,9 @@ export default function Footer({}: Props) {
     <footer>
        <h2 className="visually-hidden">Pied de page</h2>
         <div className="Footer">
-          <div className="Footer__contact">
+
+          <div className="row">
+              <div className="Footer__contact col-12 col-sm-4">
         <Link
           to="/"
           className="Footer__logo"
@@ -110,8 +112,7 @@ export default function Footer({}: Props) {
               </span>
             </Link>
           </div>
-          <div className="row">
-          <div className="col-12 col-sm-4">
+          <div className="col-12 col-sm-3">
             <h4>Expertises</h4>
             <ul>
                 <li key="dev">
@@ -122,7 +123,7 @@ export default function Footer({}: Props) {
                 </li>
             </ul>
           </div>
-          <div className="col-12 col-sm-4">
+          <div className="col-12 col-sm-3">
           <h4 className="mb-2">Articles récents</h4>
           <ul>
             {posts?.slice(0, 4).map((post) => (
@@ -133,7 +134,6 @@ export default function Footer({}: Props) {
           </ul>
           </div>
           </div>
-
         </div>
 
       <div className="Footer__credits">
