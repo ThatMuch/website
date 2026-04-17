@@ -1,0 +1,9 @@
+.social-media-embed-wrapper {
+	blockquote {
+		background: transparent;
+
+		&:before {
+			display: none;
+		}
+	}
+}

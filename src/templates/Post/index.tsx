@@ -6,6 +6,7 @@ import PostHeader from "../../components/PostHeader/PostHeader";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
+import SocialMediaEmbed from "../../components/SocialMediaEmbed/SocialMediaEmbed";
 import SpotifyEmbed from "../../components/SpotifyEmbed/SpotifyEmbed";
 import TOCBlock from "../../components/TOCBlock/TOCBlock";
 import YoutubeEmbed from "../../components/YoutubeEmbed/YoutubeEmbed";
@@ -20,6 +21,7 @@ const Post = ({ data }) => {
   const parseOptions = {
     replace: (domNode: DOMNode) => {
       // Keep support for standard iframes
+
       if (
         domNode instanceof Element &&
         domNode.name === "iframe" &&
@@ -28,7 +30,51 @@ const Post = ({ data }) => {
         domNode.attribs.src.includes("youtube.com")
       ) {
         return <YoutubeEmbed url={domNode.attribs.src} />;
+      } else if (
+        domNode instanceof Element &&
+        domNode.name === "iframe" &&
+        domNode.attribs &&
+        domNode.attribs.src &&
+        domNode.attribs.src.includes("spotify.com")
+      ) {
+        return <SpotifyEmbed url={domNode.attribs.src} />;
+      } else if (
+        domNode instanceof Element &&
+        domNode.name === "iframe" &&
+        domNode.attribs &&
+        domNode.attribs.src &&
+        domNode.attribs.src.includes("instagram.com")
+      ) {
+        return <SocialMediaEmbed url={domNode.attribs.src} />;
       }
+         else if (
+        domNode instanceof Element &&
+        domNode.name === "iframe" &&
+        domNode.attribs &&
+        domNode.attribs.src &&
+        domNode.attribs.src.includes("tiktok.com")
+      ) {
+        console.log(domNode.attribs.src);
+        return <SocialMediaEmbed url={domNode.attribs.src} />;
+      }
+      else if (
+        domNode instanceof Element &&
+        domNode.name === "iframe" &&
+        domNode.attribs &&
+        domNode.attribs.src &&
+        domNode.attribs.src.includes("tiktok.com")
+      ) {
+        return <SocialMediaEmbed url={domNode.attribs.src} />;
+      } else if (
+        domNode instanceof Element &&
+        domNode.name === "iframe" &&
+        domNode.attribs &&
+        domNode.attribs.src &&
+        domNode.attribs.src.includes("x.com")
+      ) {
+        return <SocialMediaEmbed url={domNode.attribs.src} />;
+      }
+
 
       // Support for Gutenberg oEmbed <figure> block
       if (
@@ -39,8 +85,11 @@ const Post = ({ data }) => {
       ) {
         const isYoutube = domNode.attribs.class.includes("wp-block-embed-youtube") || domNode.attribs.class.includes("is-provider-youtube");
         const isSpotify = domNode.attribs.class.includes("wp-block-embed-spotify") || domNode.attribs.class.includes("is-provider-spotify");
+        const isInstagram = domNode.attribs.class.includes("wp-block-embed-instagram") || domNode.attribs.class.includes("is-provider-instagram");
+        const isTiktok = domNode.attribs.class.includes("wp-block-embed-tiktok") || domNode.attribs.class.includes("is-provider-tiktok");
+        const isX = domNode.attribs.class.includes("wp-block-embed-x") || domNode.attribs.class.includes("is-provider-x");
 
-        if (isYoutube || isSpotify) {
+        if (isYoutube || isSpotify || isInstagram || isTiktok || isX) {
           const wrapperDiv = domNode.children.find(
             (child) =>
               child instanceof Element &&
@@ -58,6 +107,9 @@ const Post = ({ data }) => {
               if (url) {
                 if (isYoutube) return <YoutubeEmbed url={url} />;
                 if (isSpotify) return <SpotifyEmbed url={url} />;
+                if (isInstagram) return <SocialMediaEmbed url={url} />;
+                if (isTiktok) return <SocialMediaEmbed url={url} />;
+                if (isX) return <SocialMediaEmbed url={url} />;
               }
             }
           }
