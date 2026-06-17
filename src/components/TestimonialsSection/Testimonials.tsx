@@ -36,8 +36,7 @@ export default function Testimonials({ title, description, subtitle }: Props) {
       <div className="Testimonials__header section__header">
         <h2 className="h3">{subtitle}</h2>
         <div className="divider mb-4"></div>
-          <h2>{title}</h2>
-        <div dangerouslySetInnerHTML={{ __html: description }}></div>
+        <h2>{title}</h2>
       </div>
       <EmblaCarousel
         options={OPTIONS}
