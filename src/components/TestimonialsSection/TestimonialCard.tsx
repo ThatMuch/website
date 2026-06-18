@@ -2,11 +2,12 @@ import "./TestimonialCard.scss";
 
 import { FaStar } from "react-icons/fa";
 import React from "react";
+import googleIcon from "../../images/google-icon.svg";
 import { sanitizeHtml } from "../../utils/sanitize";
 
 type TestimonialCardProps = {
   testimonial: {
-    title: string;
+    source?: "wordpress" | "google";
     testimonialContent: {
       nom: string;
       role: string;
@@ -17,11 +18,18 @@ type TestimonialCardProps = {
 };
 
 export default function TestimonialCard({
-  testimonial: { testimonialContent },
+  testimonial: { source, testimonialContent },
 }: TestimonialCardProps) {
   const { nom, role, citation, stars } = testimonialContent;
   return (
     <div className="TestimonialCard">
+      {source === "google" && (
+        <img
+          className="tmw-tcard__google-icon"
+          src={googleIcon}
+          alt="Avis Google"
+        />
+      )}
       <div className="tmw-tcard__stars">
         {Array.from({ length: stars }, (_, index) => (
           <FaStar key={index} color="#FDB900" />

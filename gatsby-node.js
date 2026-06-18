@@ -1,4 +1,5 @@
 const path = require(`path`);
+const crypto = require(`crypto`);
 const { slash } = require(`gatsby-core-utils`);
 
 exports.createSchemaCustomization = ({ actions }) => {
@@ -11,8 +12,80 @@ exports.createSchemaCustomization = ({ actions }) => {
       saveContent: String
       clientId: String
     }
+    type GoogleReview implements Node {
+      authorName: String
+      profilePhotoUrl: String
+      rating: Int
+      text: String
+      relativeTimeDescription: String
+      time: Int
+    }
 	`;
   createTypes(typeDefs);
+};
+
+// Fetches Google reviews for THATMUCH at build time via the Places API
+// (Place Details, "reviews" field) and exposes them as GoogleReview nodes,
+// queryable alongside the WordPress testimonials.
+exports.sourceNodes = async ({ actions, createNodeId, reporter }) => {
+  const { createNode } = actions;
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+  const placeId = process.env.GOOGLE_PLACE_ID;
+
+  if (!apiKey || !placeId) {
+    reporter.warn(
+      "GOOGLE_PLACES_API_KEY or GOOGLE_PLACE_ID is not set, skipping Google reviews import."
+    );
+    return;
+  }
+
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}`;
+
+  let response;
+  try {
+    response = await fetch(url);
+  } catch (error) {
+    reporter.warn(`Failed to fetch Google reviews: ${error.message}`);
+    return;
+  }
+
+  const { result, status, error_message } = await response.json();
+
+  if (status !== "OK") {
+    reporter.warn(
+      `Google Places API returned status "${status}"${
+        error_message ? `: ${error_message}` : ""
+      }`
+    );
+    return;
+  }
+
+  const reviews = result?.reviews ?? [];
+
+  reviews.forEach((review) => {
+    const nodeContent = {
+      authorName: review.author_name,
+      profilePhotoUrl: review.profile_photo_url,
+      rating: review.rating,
+      text: review.text,
+      relativeTimeDescription: review.relative_time_description,
+      time: review.time,
+    };
+
+    createNode({
+      ...nodeContent,
+      id: createNodeId(`google-review-${review.time}-${review.author_name}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: "GoogleReview",
+        contentDigest: crypto
+          .createHash("md5")
+          .update(JSON.stringify(nodeContent))
+          .digest("hex"),
+      },
+    });
+  });
 };
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
