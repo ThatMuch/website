@@ -16,6 +16,16 @@ export const useSiteCustomPosts = () => {
           }
         }
       }
+      allGoogleReview {
+        edges {
+          node {
+            id
+            authorName
+            text
+            rating
+          }
+        }
+      }
     }
   `);
   return data;

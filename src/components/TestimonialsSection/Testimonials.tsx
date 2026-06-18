@@ -15,14 +15,16 @@ type Props = {
 export default function Testimonials({ title, description, subtitle }: Props) {
   const OPTIONS: EmblaOptionsType = { slidesToScroll: "auto" };
   const data = useSiteCustomPosts();
-  const testimonials = data.allWpTestimonial?.edges;
-  const SLIDE_COUNT = testimonials?.length;
-  // transform testimonials to an array of objects with the same structure as the one used in the TestimonialCard component
-  const transformedTestimonials = testimonials?.map(({ node }) => {
+  const wpTestimonials = data.allWpTestimonial?.edges ?? [];
+  const googleReviews = data.allGoogleReview?.edges ?? [];
+
+  // transform WordPress testimonials to a common shape, shared with Google reviews
+  const transformedWpTestimonials = wpTestimonials.map(({ node }) => {
     const { title, testimonialContent } = node;
     const { nom, role, citation, stars } = testimonialContent;
     return {
-      title,
+      id: title,
+      source: "wordpress" as const,
       testimonialContent: {
         nom,
         role,
@@ -31,6 +33,25 @@ export default function Testimonials({ title, description, subtitle }: Props) {
       },
     };
   });
+
+  // transform Google reviews to the same shape as WordPress testimonials
+  const transformedGoogleReviews = googleReviews.map(({ node }) => {
+    const { id, authorName, text, rating } = node;
+    return {
+      id,
+      source: "google" as const,
+      testimonialContent: {
+        nom: authorName,
+        role: "Avis Google",
+        citation: text,
+        stars: rating,
+      },
+    };
+  });
+
+  const testimonials = [...transformedWpTestimonials, ...transformedGoogleReviews];
+  const SLIDE_COUNT = testimonials.length;
+
   return (
     <div className="Testimonials">
       <div className="Testimonials__header section__header">
@@ -43,9 +64,9 @@ export default function Testimonials({ title, description, subtitle }: Props) {
         slidesToScroll={SLIDE_COUNT}
         showDots={false}
       >
-        {testimonials.map(({ node: testimonial }, index) => (
-          <div className="embla__slide" key={index}>
-            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+        {testimonials.map((testimonial) => (
+          <div className="embla__slide" key={testimonial.id}>
+            <TestimonialCard testimonial={testimonial} />
           </div>
         ))}
       </EmblaCarousel>

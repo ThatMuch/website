@@ -1,6 +1,7 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 .TestimonialCard {
+  position: relative;
   background: #fff;
   border: 1px solid $neutral-50;
   border-radius: $radius-m;
@@ -10,6 +11,13 @@
   flex-direction: column;
   gap: 14px;
   height: 100%;
+  .tmw-tcard__google-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 22px;
+    height: 22px;
+  }
   .tmw-tcard__stars {
     display: flex;
     gap: 4px;
