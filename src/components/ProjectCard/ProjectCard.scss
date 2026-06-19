@@ -1,0 +1,23 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.ProjectCard {
+  margin-bottom: 100px;
+  //animation appear
+  animation-name: slideFromBottom;
+  animation-timing-function: ease-in;
+  animation-fill-mode: both;
+  animation-timeline: view();
+  animation-range: 0vh 50vh;
+  &__image {
+    margin-bottom: $spacing-m;
+  }
+  &__content {
+    p,
+    h2,
+    h3,
+    span {
+      animation: none;
+    }
+  }
+}

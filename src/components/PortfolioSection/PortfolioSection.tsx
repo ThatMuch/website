@@ -1,5 +1,8 @@
-import React from "react";
+import "./PorfolioSection.scss";
+
 import ProjectCard, { ProjectType } from "../ProjectCard/ProjectCard";
+
+import React from "react";
 
 type Props = {
   section: {
@@ -19,9 +22,9 @@ export default function PortfolioSection({ section }: Props) {
 
   return (
     <div className="PortfolioSection">
-      <div className="row">
+      <div className="row justify-content-between">
         {/* Colonne 1 : Index impairs */}
-        <div className="col-sm-6">
+        <div className="col-sm-5">
           <div className="section__header">
             <h2 className="h3">{title}</h2>
             <div className="divider mb-4"></div>
@@ -33,7 +36,7 @@ export default function PortfolioSection({ section }: Props) {
         </div>
 
         {/* Colonne 2 : Index pairs */}
-        <div className="col-sm-6">
+        <div className="col-sm-5">
           {evenProjects.map((p) => (
             <ProjectCard key={p.title || p.client} project={p} />
           ))}

@@ -1,5 +1,8 @@
+import "./ProjectCard.scss";
+
+import { FaArrowRight } from "react-icons/fa";
 import React from "react";
-import {FaArrowRight} from "react-icons/fa";
+
 export type ProjectType = {
   client: string;
   url: string;
@@ -14,18 +17,28 @@ export type ProjectType = {
 
 export default function ProjectCard({ project }: { project: ProjectType }) {
   return (
-    <div className="PortfolioSection__project mb-5">
-      <div className="PortfolioSection__project__image">
+    <div className="ProjectCard">
+      <div className="ProjectCard__image">
         <img src={project.images.node.mediaItemUrl} alt={project.title} />
       </div>
-      <div className="PortfolioSection__project__content">
+      <div className="ProjectCard__content ">
         <h2 className="h4">{project.client}</h2>
         <div className="divider"></div>
-        <h3 className="h2">{project.title}</h3>
-        <div dangerouslySetInnerHTML={{ __html: project.description }} />
-        {project.url && <a href={project.url} target="_blank" rel="noopener noreferrer" className="btn btn-link">
-          Voir le projet <FaArrowRight />
-        </a>}
+        <h3 className="h2 ">{project.title}</h3>
+        <div
+          dangerouslySetInnerHTML={{ __html: project.description }}
+          className="ProjectCard__content__description"
+        />
+        {project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-link"
+          >
+            Voir le projet <FaArrowRight />
+          </a>
+        )}
       </div>
     </div>
   );
