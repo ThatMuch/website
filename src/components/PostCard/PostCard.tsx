@@ -1,11 +1,13 @@
 import "./PostCard.scss";
 
+import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
+
 import { Link } from "gatsby";
 import React from "react";
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 
 type PostCardProps = {
   title: string;
+  date: string;
   category: {
     slug: string;
     name: string;
@@ -27,8 +29,8 @@ export default function PostCard({
   category,
   url,
   image,
+  date,
 }: PostCardProps) {
-
   const renderImage = () => {
     if (image?.mediaItemUrl) {
       return (
@@ -45,19 +47,23 @@ export default function PostCard({
 
   return (
     <article className="PostCard">
-        <Link
-          to={url}
-          className="PostCard__image"
-          title={"Image de l'article " + title}
-        >
-          {renderImage()}
-        </Link>
+      <Link
+        to={url}
+        className="PostCard__image"
+        title={"Image de l'article " + title}
+      >
+        {renderImage()}
+      </Link>
 
-      <span className={`tag tag--${category?.slug}`}>{category?.name}</span>
-      <h3 className="PostCard__title mt-4">
-          <Link to={url} title={"Lien vers l'article " + title}>
-            {title}
-          </Link>
+      <div className="PostCard__meta">
+        <span className={`tag tag--${category?.slug}`}>{category?.name}</span>
+        <span className="PostCard__date">{date}</span>
+      </div>
+
+      <h3 className="PostCard__title">
+        <Link to={url} title={"Lien vers l'article " + title}>
+          {title}
+        </Link>
       </h3>
     </article>
   );

@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
+
 import { useMemo } from "react";
 
 export const useSitePosts = (categorySlug?: string) => {
@@ -18,7 +19,7 @@ export const useSitePosts = (categorySlug?: string) => {
               }
             }
             content
-            date(formatString: "dd/MM/YYYY")
+            date(formatString: "DD/MM/YYYY")
             featuredImage {
               node {
                 altText
@@ -67,7 +68,9 @@ export const useSitePosts = (categorySlug?: string) => {
     // Filter posts by category if categorySlug is provided
     if (categorySlug) {
       allPosts = allPosts.filter((post) =>
-        post.categories.nodes.some((category) => category.slug === categorySlug)
+        post.categories.nodes.some(
+          (category) => category.slug === categorySlug,
+        ),
       );
     }
     return allPosts;

@@ -82,6 +82,7 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
                   category={post?.categories?.nodes[0]}
                   url={post.uri || post.link}
                   image={post.featuredImage?.node}
+                  date={post.date}
                 />
               </div>
             ))
@@ -92,6 +93,7 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
                   category={post?.categories?.nodes[0]}
                   url={post.uri || post.link}
                   image={post.featuredImage?.node}
+                  date={post.date}
                 />
               </div>
             ))}
