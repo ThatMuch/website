@@ -26,6 +26,11 @@ export const useSiteCustomPosts = () => {
           }
         }
       }
+      googlePlaceRating {
+        rating
+        userRatingsTotal
+        url
+      }
     }
   `);
   return data;

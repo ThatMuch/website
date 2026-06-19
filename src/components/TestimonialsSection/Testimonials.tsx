@@ -2,6 +2,7 @@ import "./Testimonials.scss";
 
 import EmblaCarousel from "../EmblaCarousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
+import { FaStar } from "react-icons/fa";
 import React from "react";
 import TestimonialCard from "./TestimonialCard";
 import { useSiteCustomPosts } from "../../hooks/use-custom-testimonial";
@@ -17,6 +18,7 @@ export default function Testimonials({ title, description, subtitle }: Props) {
   const data = useSiteCustomPosts();
   const wpTestimonials = data.allWpTestimonial?.edges ?? [];
   const googleReviews = data.allGoogleReview?.edges ?? [];
+  const googlePlaceRating = data.googlePlaceRating;
 
   // transform WordPress testimonials to a common shape, shared with Google reviews
   const transformedWpTestimonials = wpTestimonials.map(({ node }) => {
@@ -63,6 +65,31 @@ export default function Testimonials({ title, description, subtitle }: Props) {
           <div className="divider mb-4"></div>
           <h2>{title}</h2>
         </div>
+        {googlePlaceRating?.rating && (
+          <div className="Testimonials__rating">
+            <span className="Testimonials__rating-score">
+              {googlePlaceRating.rating.toFixed(1)}
+            </span>
+            <div className="Testimonials__rating-stars">
+              {Array.from(
+                { length: Math.round(googlePlaceRating.rating) },
+                (_, index) => (
+                  <FaStar key={index} color="#FDB900" />
+                ),
+              )}
+            </div>
+            {googlePlaceRating.url && (
+              <a
+                className="Testimonials__rating-link"
+                href={googlePlaceRating.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Voir tous les avis
+              </a>
+            )}
+          </div>
+        )}
       </div>
       <EmblaCarousel
         options={OPTIONS}

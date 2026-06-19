@@ -20,6 +20,11 @@ exports.createSchemaCustomization = ({ actions }) => {
       relativeTimeDescription: String
       time: Int
     }
+    type GooglePlaceRating implements Node {
+      rating: Float
+      userRatingsTotal: Int
+      url: String
+    }
 	`;
   createTypes(typeDefs);
 };
@@ -39,7 +44,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter }) => {
     return;
   }
 
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&reviews_no_translations=true&key=${apiKey}`;
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews,rating,user_ratings_total,url&reviews_no_translations=true&key=${apiKey}`;
 
   let response;
   try {
@@ -85,6 +90,26 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter }) => {
           .digest("hex"),
       },
     });
+  });
+
+  const ratingNodeContent = {
+    rating: result?.rating ?? null,
+    userRatingsTotal: result?.user_ratings_total ?? null,
+    url: result?.url ?? null,
+  };
+
+  createNode({
+    ...ratingNodeContent,
+    id: createNodeId(`google-place-rating-${placeId}`),
+    parent: null,
+    children: [],
+    internal: {
+      type: "GooglePlaceRating",
+      contentDigest: crypto
+        .createHash("md5")
+        .update(JSON.stringify(ratingNodeContent))
+        .digest("hex"),
+    },
   });
 };
 exports.createPages = async ({ graphql, actions }) => {
