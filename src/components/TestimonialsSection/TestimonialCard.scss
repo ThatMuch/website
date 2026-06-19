@@ -9,7 +9,7 @@
   padding: 26px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 24px;
   height: 100%;
   .tmw-tcard__google-icon {
     position: absolute;
@@ -26,6 +26,17 @@
     font-size: 18px;
     line-height: 1.6;
     margin: 0;
+    // max lines 5
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    animation: none;
+    p,
+    span {
+      margin: 0;
+      animation: none;
+    }
   }
   .tmw-tcard__initials {
     width: 38px;

@@ -1,10 +1,4 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 .Testimonials {
-  &__header {
-    text-align: center;
-    .divider {
-      margin: 0 auto;
-    }
-  }
 }

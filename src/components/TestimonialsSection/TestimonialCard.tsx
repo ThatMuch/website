@@ -2,6 +2,7 @@ import "./TestimonialCard.scss";
 
 import { FaStar } from "react-icons/fa";
 import React from "react";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 import googleIcon from "../../images/google-icon.svg";
 import { sanitizeHtml } from "../../utils/sanitize";
 
@@ -34,9 +35,10 @@ export default function TestimonialCard({
         {Array.from({ length: stars }, (_, index) => (
           <FaStar key={index} color="#FDB900" />
         ))}
+        {source === "google" && <RiVerifiedBadgeFill color="#4789F4" />}
       </div>
-      <p
-        className="tmw-tcard__quote"
+      <div
+        className="tmw-tcard__quote no-animation"
         dangerouslySetInnerHTML={{ __html: sanitizeHtml(citation) }}
       />
       <div className="tmw-tcard__by">

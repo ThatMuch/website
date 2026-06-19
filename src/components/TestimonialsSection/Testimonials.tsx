@@ -49,15 +49,20 @@ export default function Testimonials({ title, description, subtitle }: Props) {
     };
   });
 
-  const testimonials = [...transformedWpTestimonials, ...transformedGoogleReviews];
+  const testimonials = [
+    ...transformedGoogleReviews,
+    ...transformedWpTestimonials,
+  ];
   const SLIDE_COUNT = testimonials.length;
 
   return (
     <div className="Testimonials">
       <div className="Testimonials__header section__header">
-        <h2 className="h3">{subtitle}</h2>
-        <div className="divider mb-4"></div>
-        <h2>{title}</h2>
+        <div>
+          <h2 className="h3">{subtitle}</h2>
+          <div className="divider mb-4"></div>
+          <h2>{title}</h2>
+        </div>
       </div>
       <EmblaCarousel
         options={OPTIONS}
