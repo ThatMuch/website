@@ -39,7 +39,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter }) => {
     return;
   }
 
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}`;
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&reviews_no_translations=true&key=${apiKey}`;
 
   let response;
   try {
@@ -60,7 +60,7 @@ exports.sourceNodes = async ({ actions, createNodeId, reporter }) => {
     return;
   }
 
-  const reviews = result?.reviews ?? [];
+  const reviews = (result?.reviews ?? []).sort((a, b) => b.time - a.time);
 
   reviews.forEach((review) => {
     const nodeContent = {

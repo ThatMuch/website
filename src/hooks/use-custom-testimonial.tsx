@@ -16,7 +16,7 @@ export const useSiteCustomPosts = () => {
           }
         }
       }
-      allGoogleReview {
+      allGoogleReview(sort: { time: DESC }) {
         edges {
           node {
             id
