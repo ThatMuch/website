@@ -1,4 +1,29 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 .Testimonials {
+  &__header.section__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  &__rating {
+    text-align: center;
+  }
+  &__rating-stars {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  &__rating-score {
+    font-weight: 700;
+    font-size: 3rem;
+  }
+  &__rating-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-color-link;
+    text-decoration: underline;
+  }
 }

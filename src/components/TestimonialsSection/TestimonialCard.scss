@@ -2,7 +2,7 @@
 @use "../../style/mixins" as *;
 .TestimonialCard {
   position: relative;
-  background: #fff;
+  background: $background-dark;
   border: 1px solid $neutral-50;
   border-radius: $radius-m;
   box-shadow: $shadow-md;
@@ -15,8 +15,8 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 22px;
-    height: 22px;
+    width: 32px;
+    height: 32px;
   }
   .tmw-tcard__stars {
     display: flex;
@@ -26,6 +26,7 @@
     font-size: 18px;
     line-height: 1.6;
     margin: 0;
+    color: $text-color-light;
     // max lines 5
     display: -webkit-box;
     -webkit-line-clamp: 5;
@@ -59,11 +60,12 @@
   }
 
   .tmw-tcard__name {
+    color: $neutral-200;
     font-weight: 700;
     font-size: 14px;
   }
   .tmw-tcard__role {
     font-size: 13px;
-    color: $text-color-mid;
+    color: $neutral-300;
   }
 }
