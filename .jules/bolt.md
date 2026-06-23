@@ -1,0 +1,3 @@
+## 2024-03-10 - Expensive DOMPurify React rendering
+**Learning:** `DOMPurify.sanitize` (`sanitizeHtml`) is an expensive operation in React components (~0.8ms per call). When rendering static content in interactive lists like FAQ accordions, eagerly executing it or executing it without memoization causes severe performance bottlenecks during state-triggered re-renders.
+**Action:** Lazily evaluate `sanitizeHtml` (e.g., `isActive && sanitizeHtml(...)`) or use `React.useMemo` to prevent heavy recalculations on every re-render. Also, extract interactive list items to `React.memo` components and pass memoized callbacks.
