@@ -1,0 +1,3 @@
+## 2023-10-27 - [FAQHome Component React.memo & SanitizeHtml Optimization]
+**Learning:** `DOMPurify.sanitize` (`sanitizeHtml`) is an expensive operation in React components (~0.8ms). When rendered within interactive lists (like accordions), eagerly evaluating it causes significant overhead. Furthermore, large lists interacting with local state (like toggles) trigger a re-render for the whole list.
+**Action:** Extract the list item into a `React.memo` component, keeping expensive computations lazily evaluated (e.g. `isActive && sanitizeHtml(...)`) and using `useMemo` for main descriptions. Use `useCallback` for parent event handlers to maintain stable references.
