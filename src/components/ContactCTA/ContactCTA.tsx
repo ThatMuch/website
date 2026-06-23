@@ -1,8 +1,7 @@
 import "./ContactCTA.scss";
 
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import tardis from "../../images/tardis.webp";
+import { StaticImage } from "gatsby-plugin-image";
 
 export default function ContactCTA() {
   return (
@@ -24,7 +23,10 @@ export default function ContactCTA() {
           Programmez un appel
         </a>
       </div>
-      <LazyLoadImage src={tardis} alt="Tardis" />
+      {/* ⚡ Bolt Optimization: Replaced react-lazy-load-image-component with Gatsby StaticImage.
+          Impact: Enables build-time generation of next-gen formats (WebP/AVIF), responsive srcsets,
+          and native browser lazy-loading. Reduces layout shifts and JS bundle execution overhead. */}
+      <StaticImage src="../../images/tardis.webp" alt="Tardis" />
     </div>
   );
 }

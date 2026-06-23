@@ -1,9 +1,8 @@
 import "./ContactForm.scss";
 
 import HubspotForm from "react-hubspot-form";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import tardis from "../../images/tardis.webp";
+import { StaticImage } from "gatsby-plugin-image";
 
 type Props = {
   hubspotForm: {
@@ -22,7 +21,10 @@ export default function ContactForm({ hubspotForm }: Props) {
           <p className="h3 fw-bold">{hubspotForm.sousTitre}</p>
           <div className="divider mb-4"></div>
           <h1>{hubspotForm.titre}</h1>
-          <LazyLoadImage src={tardis} alt="" aria-hidden="true" />
+          {/* ⚡ Bolt Optimization: Replaced react-lazy-load-image-component with Gatsby StaticImage.
+              Impact: Generates highly optimized formats natively, uses browser lazy-loading,
+              and prevents cumulative layout shifts via automatic dimensions calculation. */}
+          <StaticImage src="../../images/tardis.webp" alt="" aria-hidden="true" />
         </div>
         <div className="col-md-6">
           <HubspotForm
