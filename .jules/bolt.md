@@ -1,0 +1,3 @@
+## 2024-05-21 - Optimize FAQHome sanitizeHtml
+**Learning:** `DOMPurify.sanitize` (`sanitizeHtml`) is an expensive operation in this codebase (~0.8ms per call). When placed inside an interactive list component that re-renders on every state change (like an accordion), it can cause significant performance degradation.
+**Action:** When working with interactive lists rendering static content parsed via `sanitizeHtml`, wrap list items in `React.memo` with memoized callbacks (`React.useCallback`) and lazily evaluate the `sanitizeHtml` call (e.g., `isActive && sanitizeHtml(...)`) or memoize it at the section level (`React.useMemo`) to prevent unnecessary heavy DOM operations during state updates.
