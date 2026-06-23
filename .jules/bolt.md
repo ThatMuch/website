@@ -1,0 +1,3 @@
+## 2024-05-24 - React Component Memoization with DOMPurify
+**Learning:** `DOMPurify.sanitize` (`sanitizeHtml` in this codebase) is an expensive operation (~0.8ms per call). When placed inside interactive lists (like togglable FAQ accordions), state changes in the parent component trigger full re-evaluations for every list item if not properly memoized.
+**Action:** Always extract interactive list items into a `React.memo` component, use `React.useCallback` for event handlers passed as props, and ensure expensive static operations (like sanitizing a main description) are cached with `React.useMemo`. Keep conditionally rendered expensive operations lazily evaluated inside the child component.
