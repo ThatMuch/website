@@ -1,0 +1,3 @@
+## 2026-03-24 - Optimize interactive list rendering with React.memo
+**Learning:** In interactive lists with expensive rendering or data parsing per item (like DOMPurify `sanitizeHtml`), updating the state of a single list item (e.g. toggling accordion) causes the parent to re-render, forcing all children to re-render and re-calculate expensive operations.
+**Action:** Extract list items to a separate component wrapped in `React.memo`, memoize callback functions passed to items with `React.useCallback`, and lazily evaluate expensive child functions. Also memoize static or prop-dependent expensive functions in the parent component using `React.useMemo`.
