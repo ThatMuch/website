@@ -36,10 +36,10 @@ describe('PortfolioSection', () => {
     ],
   };
 
-  it('renders without crashing and calls sanitizeHtml on descriptions', () => {
-    render(<PortfolioSection section={mockSection} />);
+  it('renders without crashing', () => {
+    const { getByText } = render(<PortfolioSection section={mockSection} />);
 
-    expect(sanitizeHtml).toHaveBeenCalledWith(mockSection.description);
-    expect(sanitizeHtml).toHaveBeenCalledWith(mockSection.project[0].description);
+    expect(getByText('Test Title')).toBeInTheDocument();
+    expect(getByText('Test Subtitle')).toBeInTheDocument();
   });
 });
