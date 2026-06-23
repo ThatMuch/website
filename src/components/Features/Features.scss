@@ -37,7 +37,8 @@
         border-radius: 100%;
         border: 10.667px solid $dev-50;
         background: $dev-100;
-        img {
+        img,
+        .gatsby-image-wrapper {
           width: 2rem;
           aspect-ratio: 1;
         }
