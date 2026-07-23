@@ -186,12 +186,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-google-tagmanager",
+      resolve: `gatsby-plugin-partytown`,
       options: {
-        id: "GTM-W2WV9WGR",
-        includeInDevelopment: false,
-        defaultDataLayer: { platform: "gatsby" },
-        enableWebVitalsTracking: true,
+        debug: false,
+        forward: [`dataLayer.push`],
       },
     },
   ],
