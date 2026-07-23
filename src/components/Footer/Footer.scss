@@ -1,6 +1,8 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
-
+footer {
+  width: 100vw;
+}
 .Footer-wrapper {
   display: grid;
   grid-template-rows: 1fr;

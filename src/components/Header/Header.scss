@@ -9,19 +9,16 @@ header.header {
   width: calc(100% - 2 * $spacing-m);
   position: fixed;
   left: $spacing-m;
-  top: 1rem;
   z-index: 1000;
   background-color: rgba($neutral-0, 0.2);
   backdrop-filter: blur(5px);
   border-radius: $radius-l;
-  padding: $spacing-s;
+  padding: $spacing-s $spacing-s 0 $spacing-s;
 
   @include breakpoint(mobile) {
     width: 100%;
     position: relative;
     left: inherit;
-    margin-bottom: $spacing-m;
-    padding: 0;
   }
 
   .logo--header {
@@ -33,8 +30,7 @@ header.header {
   }
 
   .btn {
-    animation: slideFromTop .5s ease-in-out;
-
+    animation: slideFromTop 0.5s ease-in-out;
   }
 }
 
@@ -153,7 +149,6 @@ header.landing-header {
 
     @include breakpoint(mobile) {
       left: 0;
-
     }
 
     .logo {
@@ -354,6 +349,4 @@ header.landing-header {
     margin-top: auto;
     margin-bottom: auto;
   }
-
-
 }
