@@ -6,9 +6,19 @@ const assetUrl = (mod) => (mod && mod.default) || mod;
 const neueMachinaUltrabold = assetUrl(require("./src/fonts/NeueMachina-Ultrabold.woff2"));
 // police de base du <body>, utilisée notamment dans le texte du hero
 const spaceMonoRegular = assetUrl(require("./src/fonts/SpaceMono-Regular.woff2"));
+// image de fond du hero (posée en CSS background-image), élément LCP
+const heroImage = assetUrl(require("./src/images/hero.webp"));
 
 exports.onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
+    <link
+      rel="preload"
+      href={heroImage}
+      as="image"
+      type="image/webp"
+      fetchpriority="high"
+      key="preload-hero-image"
+    />,
     <link
       rel="preload"
       href={neueMachinaUltrabold}
