@@ -32,6 +32,16 @@ export default function PostCard({
   date,
 }: PostCardProps) {
   const renderImage = () => {
+    const gatsbyImage = image?.localFile?.childImageSharp?.gatsbyImageData
+      ? getImage(image.localFile.childImageSharp.gatsbyImageData)
+      : null;
+
+    if (gatsbyImage) {
+      return (
+        <GatsbyImage image={gatsbyImage} alt={image.altText || ""} className="mb-4" />
+      );
+    }
+
     if (image?.mediaItemUrl) {
       return (
         <img
