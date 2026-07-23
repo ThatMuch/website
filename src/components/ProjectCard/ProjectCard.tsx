@@ -1,5 +1,7 @@
 import "./ProjectCard.scss";
 
+import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
+
 import { FaArrowRight } from "react-icons/fa";
 import React from "react";
 
@@ -9,6 +11,12 @@ export type ProjectType = {
   images: {
     node: {
       mediaItemUrl: string;
+      altText?: string;
+      localFile?: {
+        childImageSharp: {
+          gatsbyImageData: IGatsbyImageData;
+        };
+      };
     };
   };
   title: string;
@@ -16,10 +24,19 @@ export type ProjectType = {
 };
 
 export default function ProjectCard({ project }: { project: ProjectType }) {
+  const image = project.images.node;
+  const gatsbyImage = image.localFile?.childImageSharp?.gatsbyImageData
+    ? getImage(image.localFile.childImageSharp.gatsbyImageData)
+    : null;
+
   return (
     <div className="ProjectCard">
       <div className="ProjectCard__image">
-        <img src={project.images.node.mediaItemUrl} alt={project.title} />
+        {gatsbyImage ? (
+          <GatsbyImage image={gatsbyImage} alt={image.altText || project.title} />
+        ) : (
+          <img src={image.mediaItemUrl} alt={image.altText || project.title} />
+        )}
       </div>
       <div className="ProjectCard__content ">
         <h2 className="h4">{project.client}</h2>
