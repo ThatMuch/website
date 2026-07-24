@@ -11,10 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install and Build
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Gatsby site
         run: |
-          npm install
-          npm run build
+          for attempt in 1 2 3; do
+            if npm run build; then
+              exit 0
+            fi
+
+            if [ "$attempt" -eq 3 ]; then
+              echo "Build failed after ${attempt} attempts."
+              exit 1
+            fi
+
+            echo "Build attempt ${attempt} failed. Waiting 30 seconds before retrying..."
+            sleep 30
+          done
         env:
           WPGRAPHQL_URL: ${{ secrets.WPGRAPHQL_URL }}
           SITE_URL: ${{ secrets.SITE_URL }}
