@@ -20,3 +20,10 @@ node_modules/
 .thumbs
 .tmp
 public/
+
+# Build artifacts
+public.zip
+
+# SSH deploy keys (never commit private keys)
+deploy_key
+deploy_key.pub

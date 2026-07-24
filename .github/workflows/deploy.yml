@@ -4,7 +4,7 @@ on:
     types: [cms_update]
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true  # Annule le build précédent si un nouveau est lancé
+  cancel-in-progress: true # Annule le build précédent si un nouveau est lancé
 
 jobs:
   build-and-deploy:
@@ -36,7 +36,7 @@ jobs:
         with:
           host: ${{ secrets.HOSTINGER_IP }}
           username: ${{ secrets.HOSTINGER_USER }}
-          key: ${{ secrets.HOSTINGER_SSH_KEY }} # <-- On utilise la clé ici
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: 65002 # Port standard SSH chez Hostinger (vérifiez le vôtre dans le hPanel)
           source: "public/*"
           target: "/home/u566000124/domains/thatmuch.fr/public_html"
