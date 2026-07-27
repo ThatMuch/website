@@ -1,12 +1,13 @@
 import { PageProps, graphql } from "gatsby";
+
 import AllPosts from "../../components/AllPosts/AllPosts";
 import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import Layout from "../../components/Layout";
 import PageHeader from "../../components/PageHeader";
 import React from "react";
 import Seo from "../../components/Seo";
-import ThatmuchBlocks from "../../components/GutenbergBlocks/ThatmuchBlocks";
 import type { ThatmuchBlock } from "../../components/GutenbergBlocks/types";
+import ThatmuchBlocks from "../../components/GutenbergBlocks/ThatmuchBlocks";
 
 interface ExpertiseData {
   wpExpertise: {
@@ -47,9 +48,8 @@ export default function Expertise({ data }: PageProps<ExpertiseData>) {
         />
 
         <ThatmuchBlocks blocks={page.thatmuchBlocks} />
-        <ContactCTA />
         <AllPosts
-          category={page.categories.nodes[0].slug}
+          category={page.categories.nodes[0]?.slug}
           title="Nos articles sur le sujet"
           isHome
         />

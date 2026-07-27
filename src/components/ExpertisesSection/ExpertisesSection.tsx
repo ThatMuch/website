@@ -18,7 +18,7 @@ interface Expertise {
   slug: string
   desc: string
   link_label: string
-  featuredImage: {
+  featuredImage?: {
     mediaItemUrl: string
     altText: string
   }
@@ -40,13 +40,15 @@ export default function ExpertisesSection({ section }: Props) {
             key={expertise.title}
           >
             <div>
-              <div className="ExpertisesSection__card-image">
-                <LazyLoadImage
-                  src={expertise.featuredImage.mediaItemUrl}
-                  alt={expertise.featuredImage.altText}
-                  effect="blur"
-                />
-              </div>
+              {expertise.featuredImage && (
+                <div className="ExpertisesSection__card-image">
+                  <LazyLoadImage
+                    src={expertise.featuredImage.mediaItemUrl}
+                    alt={expertise.featuredImage.altText}
+                    effect="blur"
+                  />
+                </div>
+              )}
               <h3 className="h2">{expertise.title}</h3>
               <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(expertise.desc) }} />
             </div>

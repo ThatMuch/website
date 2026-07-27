@@ -1,12 +1,12 @@
-import React from "react"
-import type { ThatmuchBlock } from "./types"
-import Probleme from "./Probleme/Probleme"
-import FaitesLeTest from "./FaitesLeTest/FaitesLeTest"
-import Promesse from "./Promesse/Promesse"
+import CTABlock from "./CTABlock/CTABlock";
+import Probleme from "./Probleme/Probleme";
+import Promesse from "./Promesse/Promesse";
+import React from "react";
+import type { ThatmuchBlock } from "./types";
 
 type Props = {
-  blocks?: ThatmuchBlock[] | null
-}
+  blocks?: ThatmuchBlock[] | null;
+};
 
 /**
  * Rend la liste des blocs THATMUCH d'une page, dans l'ordre défini en back.
@@ -16,20 +16,20 @@ type Props = {
  * `name`, ce qui évite une table de correspondance à maintenir en double.
  */
 export default function ThatmuchBlocks({ blocks }: Props) {
-  if (!blocks?.length) return null
+  if (!blocks?.length) return null;
 
   return (
     <>
       {blocks.map((block, i) => {
-        const key = `${block.name}-${block.order ?? i}`
+        const key = `${block.name}-${block.order ?? i}`;
 
-        if (block.probleme) return <Probleme key={key} bloc={block.probleme} />
+        if (block.probleme) return <Probleme key={key} bloc={block.probleme} />;
         if (block.faites_le_test)
-          return <FaitesLeTest key={key} bloc={block.faites_le_test} />
-        if (block.promesse) return <Promesse key={key} bloc={block.promesse} />
+          return <CTABlock key={key} bloc={block.faites_le_test} />;
+        if (block.promesse) return <Promesse key={key} bloc={block.promesse} />;
 
-        return null
+        return null;
       })}
     </>
-  )
+  );
 }

@@ -36,7 +36,7 @@ export const usePostExpertises = () => {
       return {
         slug: node.slug,
         title: node.title,
-        featuredImage: node.featuredImage.node,
+        featuredImage: node.featuredImage?.node,
         desc: node.seo.metaDesc,
         category: node.categories.nodes[0]?.slug,
         link_label: "Découvrir",

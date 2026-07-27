@@ -35,7 +35,7 @@ export interface BlocProbleme {
 
 /* ── Bloc « Faites le test » ─────────────────────────────────────────── */
 
-export interface BlocFaitesLeTest {
+export interface CTABlock {
   kicker?: string
   titre: string
   texte?: string
