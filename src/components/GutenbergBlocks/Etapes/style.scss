@@ -1,0 +1,79 @@
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
+@use "../shared" as *;
+
+.tm-etapes {
+  @include tm-section;
+
+  &__kicker {
+    @include tm-kicker;
+  }
+
+  &__titre {
+    @include tm-h2;
+
+    padding-top: 16px;
+  }
+
+  &__intro {
+    margin: 0;
+    padding-top: 24px;
+    max-width: 759px;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-l;
+    line-height: 36px;
+    color: $neutral-900;
+  }
+
+  &__liste {
+    margin: 0;
+    padding: 56px 0 0;
+    list-style: none;
+  }
+
+  &__etape {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    padding: 24px 0 25px;
+    border-bottom: 1px solid $neutral-50;
+
+    // Le Figma ne pose pas de filet sous la dernière étape.
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+
+  // Chiffre en Neue Machina Regular — c'est le seul endroit de la page où le
+  // display n'est pas en Ultrabold.
+  &__numero {
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 400;
+    font-size: $font-size-xxl * 0.875; // 28px
+    line-height: 50.4px;
+    color: $neutral-200;
+  }
+
+  &__etape-titre {
+    margin: 0;
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 700;
+    font-size: $font-size-l;
+    line-height: 23px;
+    color: $neutral-900;
+  }
+
+  &__etape-texte {
+    margin: 0;
+    padding-top: 8px;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-m;
+    line-height: 28.8px;
+    color: $neutral-900;
+  }
+}

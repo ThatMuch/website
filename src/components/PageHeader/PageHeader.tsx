@@ -1,5 +1,6 @@
 import "./PageHeader.scss";
 
+import Button from "../UI/Button/Button";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 import SplitText from "../SplitText/SplitText";
@@ -43,21 +44,18 @@ export default function PageHeader({ title, description, image, cta }: Props) {
           rootMargin="-50px"
         />
         {cta && (
-          <a
-            href={cta.url}
+          <Button
+            type="link"
+            label={cta.title}
+            url={cta.url}
             target={cta.target}
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-            title={cta.title}
+            className="btn-primary"
           >
-            <div className="btn__overlay"></div>
-            <div className="btn__content">
-              <span>{cta.title}</span>
-              <span className="tm-test__bouton-icone" aria-hidden="true">
-                &rarr;
-              </span>
-            </div>
-          </a>
+            <span>{cta.title}</span>
+            <span className="tm-test__bouton-icone" aria-hidden="true">
+              &rarr;
+            </span>
+          </Button>
         )}
       </div>
       {image && (

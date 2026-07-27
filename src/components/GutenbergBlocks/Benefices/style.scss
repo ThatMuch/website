@@ -1,0 +1,85 @@
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
+@use "../shared" as *;
+
+.tm-benefices {
+  @include tm-starfield;
+
+  max-width: 1134px;
+  margin-inline: auto;
+  padding: 56px clamp(24px, 5vw, 56px);
+  border-radius: $radius-l;
+  text-align: center;
+
+  @media screen and (max-width: 900px) {
+    border-radius: 32px;
+  }
+
+  &__kicker {
+    @include tm-kicker($neutral-0);
+  }
+
+  // .divider est aligné à gauche par défaut ; ici l'en-tête est centré.
+  &__divider {
+    margin-inline: auto;
+  }
+
+  &__titre {
+    margin: 16px 0 0;
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, $font-size-xxl);
+    line-height: 1.15;
+    color: $neutral-0;
+  }
+
+  &__cartes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    padding-top: 32px;
+    text-align: left;
+
+    @media screen and (max-width: 900px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media screen and (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Cartes translucides posées sur le starfield.
+  &__carte {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: $radius-m;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  &__planete {
+    width: 101px;
+    height: 99px;
+    margin-bottom: 16px;
+  }
+
+  &__carte-titre {
+    margin: 16px 0 0;
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 700;
+    font-size: $font-size-m;
+    line-height: 18.4px;
+    color: $text-color-light;
+  }
+
+  &__carte-texte {
+    margin: 8px 0 0;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-s;
+    line-height: 25.2px;
+    color: $neutral-100;
+  }
+}

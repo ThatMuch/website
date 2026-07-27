@@ -1,7 +1,11 @@
+import Benefices from "./Benefices/Benefices";
 import CTABlock from "./CTABlock/CTABlock";
+import Etapes from "./Etapes/Etapes";
+import Pourquoi from "./Pourquoi/Pourquoi";
 import Probleme from "./Probleme/Probleme";
 import Promesse from "./Promesse/Promesse";
 import React from "react";
+import Stats from "./Stats/Stats";
 import type { ThatmuchBlock } from "./types";
 
 type Props = {
@@ -27,6 +31,11 @@ export default function ThatmuchBlocks({ blocks }: Props) {
         if (block.faites_le_test)
           return <CTABlock key={key} bloc={block.faites_le_test} />;
         if (block.promesse) return <Promesse key={key} bloc={block.promesse} />;
+        if (block.etapes) return <Etapes key={key} bloc={block.etapes} />;
+        if (block.benefices)
+          return <Benefices key={key} bloc={block.benefices} />;
+        if (block.pourquoi) return <Pourquoi key={key} bloc={block.pourquoi} />;
+        if (block.stats) return <Stats key={key} bloc={block.stats} />;
 
         return null;
       })}

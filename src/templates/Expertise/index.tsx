@@ -89,6 +89,48 @@ export const pageQuery = graphql`
       thatmuchBlocks {
         name
         order
+        stats {
+          stats {
+            valeur
+            libelle
+            couleur
+          }
+        }
+        pourquoi {
+          intro
+          kicker
+          titre
+          cartes {
+            texte
+            titre
+          }
+        }
+        etapes {
+          intro
+          kicker
+          titre
+          etapes {
+            texte
+            titre
+          }
+        }
+        benefices {
+          cartes {
+            planete {
+              alt
+              height
+              id
+              url
+              width
+            }
+            scope
+            tag_label
+            texte
+            titre
+          }
+          kicker
+          titre
+        }
         probleme {
           kicker
           titre

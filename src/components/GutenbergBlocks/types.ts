@@ -61,6 +61,64 @@ export interface BlocPromesse {
   cartes: PromesseCarte[]
 }
 
+/* ── Bloc « La méthode » ─────────────────────────────────────────────── */
+
+export interface Etape {
+  titre: string
+  texte: string
+}
+
+export interface BlocEtapes {
+  kicker?: string
+  titre: string
+  intro?: string
+  /** Ordonnées : la numérotation 01, 02… est calculée à l'affichage. */
+  etapes: Etape[]
+}
+
+/* ── Bloc « Ce que vous gagnez » ─────────────────────────────────────── */
+
+export interface BeneficeCarte {
+  scope: Scope
+  tag_label: string
+  planete?: BlockImage | null
+  titre: string
+  texte: string
+}
+
+export interface BlocBenefices {
+  kicker?: string
+  titre: string
+  cartes: BeneficeCarte[]
+}
+
+/* ── Bloc « Pourquoi THATMUCH » ──────────────────────────────────────── */
+
+export interface PourquoiCarte {
+  titre: string
+  texte: string
+}
+
+export interface BlocPourquoi {
+  kicker?: string
+  titre: string
+  intro?: string
+  cartes: PourquoiCarte[]
+}
+
+/* ── Bloc « Chiffres clés » ──────────────────────────────────────────── */
+
+export interface Stat {
+  valeur: string
+  libelle: string
+  /** Pôle donnant la couleur du chiffre. */
+  couleur: Scope
+}
+
+export interface BlocStats {
+  stats: Stat[]
+}
+
 /* ── Enveloppe ───────────────────────────────────────────────────────── */
 
 export interface ThatmuchBlock {
@@ -69,4 +127,8 @@ export interface ThatmuchBlock {
   probleme?: BlocProbleme | null
   faites_le_test?: CTABlock | null
   promesse?: BlocPromesse | null
+  etapes?: BlocEtapes | null
+  benefices?: BlocBenefices | null
+  pourquoi?: BlocPourquoi | null
+  stats?: BlocStats | null
 }
