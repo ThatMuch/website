@@ -14,6 +14,15 @@ interface ExpertiseData {
     title: string;
     slug: string;
     thatmuchBlocks: ThatmuchBlock[];
+    descriptionExpertise?: {
+      titre: string;
+      description: string;
+      cta: {
+        target: string;
+        title: string;
+        url: string;
+      };
+    };
     featuredImage?: {
       node: {
         altText: string;
@@ -37,13 +46,18 @@ interface ExpertiseData {
 export default function Expertise({ data }: PageProps<ExpertiseData>) {
   const page = data.wpExpertise;
 
+  console.log(page);
+
   return (
     <Layout>
       <Seo title={page.title} description={page.seo.metaDesc} />
       <div className="expertise-content">
         <PageHeader
           title={page.title}
-          description={page.seo.metaDesc}
+          description={
+            page.descriptionExpertise?.description ?? page.seo.metaDesc
+          }
+          cta={page.descriptionExpertise?.cta}
           image={page.featuredImage}
         />
 
@@ -63,6 +77,15 @@ export const pageQuery = graphql`
     wpExpertise(id: { eq: $id }) {
       title
       slug
+      descriptionExpertise {
+        titre
+        description
+        cta {
+          target
+          title
+          url
+        }
+      }
       thatmuchBlocks {
         name
         order

@@ -5,10 +5,6 @@
 .tm-probleme {
   @include tm-section;
 
-  &__inner {
-    @include tm-container;
-  }
-
   &__kicker {
     @include tm-kicker;
   }

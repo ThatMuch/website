@@ -13,9 +13,10 @@ type Props = {
       altText: string;
     };
   };
+  cta?: { title: string; url: string; target: string };
 };
 
-export default function PageHeader({ title, description, image }: Props) {
+export default function PageHeader({ title, description, image, cta }: Props) {
   return (
     <div className={`PageHeader mb-4 ${image ? "PageHeader--withImage" : ""}`}>
       <div>
@@ -41,6 +42,23 @@ export default function PageHeader({ title, description, image }: Props) {
           threshold={0.2}
           rootMargin="-50px"
         />
+        {cta && (
+          <a
+            href={cta.url}
+            target={cta.target}
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            title={cta.title}
+          >
+            <div className="btn__overlay"></div>
+            <div className="btn__content">
+              <span>{cta.title}</span>
+              <span className="tm-test__bouton-icone" aria-hidden="true">
+                &rarr;
+              </span>
+            </div>
+          </a>
+        )}
       </div>
       {image && (
         <div>

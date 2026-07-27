@@ -44,6 +44,7 @@ export interface CTABlock {
   illustration?: BlockImage | null
 }
 
+
 /* ── Bloc « Notre définition » ───────────────────────────────────────── */
 
 export interface PromesseCarte {
@@ -66,6 +67,6 @@ export interface ThatmuchBlock {
   name: string
   order: number
   probleme?: BlocProbleme | null
-  faites_le_test?: BlocFaitesLeTest | null
+  faites_le_test?: CTABlock | null
   promesse?: BlocPromesse | null
 }
