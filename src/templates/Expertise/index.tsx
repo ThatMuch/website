@@ -1,3 +1,4 @@
+import { PageProps, graphql } from "gatsby";
 import AllPosts from "../../components/AllPosts/AllPosts";
 import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import Layout from "../../components/Layout";
@@ -5,8 +6,47 @@ import PageHeader from "../../components/PageHeader";
 import React from "react";
 import Seo from "../../components/Seo";
 import ServiceList from "../../components/ServiceList";
-import { graphql } from "gatsby";
-export default function Expertise({ data }) {
+
+interface Service {
+  titre: string;
+  desc: string;
+  image?: {
+    node: {
+      altText: string;
+      mediaItemUrl: string;
+    };
+  };
+}
+
+interface ExpertiseData {
+  wpExpertise: {
+    title: string;
+    slug: string;
+    expertiseContent: {
+      desc_exp?: string;
+      service: Service[];
+    };
+    featuredImage?: {
+      node: {
+        altText: string;
+        mediaItemUrl: string;
+      };
+    };
+    categories: {
+      nodes: Array<{
+        name: string;
+        slug: string;
+      }>;
+    };
+    seo: {
+      metaDesc: string;
+      metaKeywords?: string;
+      title?: string;
+    };
+  };
+}
+
+export default function Expertise({ data }: PageProps<ExpertiseData>) {
   const page = data.wpExpertise;
 
   return (
