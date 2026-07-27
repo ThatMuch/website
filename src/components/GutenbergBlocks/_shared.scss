@@ -1,0 +1,85 @@
+// Socle commun aux blocs THATMUCH.
+//
+// Attention au décalage de nommage entre Figma et le repo : le token
+// « Font/Size/L » de Figma vaut 24px, soit $font-size-xl ici. On raisonne
+// toujours sur la VALEUR relevée dans le design, jamais sur le nom.
+
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+// Largeur de contenu — 1024px, conforme à --container-max du design system.
+@mixin tm-container($max: 1024px) {
+  max-width: $max;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+// Rythme vertical des sections marketing (--space-section / -sm).
+@mixin tm-section {
+  padding-block: 100px;
+
+  @media screen and (max-width: 767px) {
+    padding-block: 50px;
+  }
+}
+
+// Kicker : Neue Machina Ultrabold 24px / 36px.
+@mixin tm-kicker($color: $neutral-900) {
+  margin: 0;
+  font-family: "NeueMachina", sans-serif;
+  font-weight: 700;
+  font-size: $font-size-xl;
+  line-height: 36px;
+  color: $color;
+}
+
+// Titre de section : Neue Machina Ultrabold 32px / 36.8px.
+@mixin tm-h2($color: $neutral-900) {
+  margin: 0;
+  font-family: "NeueMachina", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, $font-size-xxl);
+  line-height: 1.15;
+  color: $color;
+}
+
+// Divider arc-en-ciel : 71.333 × 4, cyan → vert → jaune → magenta.
+// $gradient_rainbow suit déjà cet ordre en paliers de 25 %.
+@mixin tm-rainbow-divider {
+  display: block;
+  width: 71.333px;
+  height: 4px;
+  background: $gradient_rainbow;
+}
+
+// Tag coloré par pôle. Couleurs relevées 1:1 dans le Figma.
+@mixin tm-tag {
+  display: inline-block;
+  padding: 4px;
+  border-radius: 2px;
+  font-family: "SpaceMono", monospace;
+  font-weight: 700;
+  font-size: $font-size-s;
+  letter-spacing: 0.5px;
+  line-height: 1;
+
+  &--com {
+    background: $com-600;
+    color: $text-color-light;
+  }
+
+  &--design {
+    background: $status-warning;
+    color: $status-warning-dark;
+  }
+
+  &--dev {
+    background: $dev-300;
+    color: $status-info-dark;
+  }
+
+  &--project {
+    background: $status-success;
+    color: $status-success-dark;
+  }
+}

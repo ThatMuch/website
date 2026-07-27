@@ -164,26 +164,6 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             id
             slug
-            title
-            featuredImage {
-              node {
-                altText
-                mediaItemUrl
-              }
-            }
-            expertiseContent {
-              service {
-                desc
-                titre
-                image {
-                  node {
-                    altText
-                    mediaItemUrl
-                  }
-                }
-              }
-              desc_exp
-            }
           }
         }
         pageInfo {

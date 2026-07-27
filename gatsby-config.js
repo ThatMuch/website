@@ -73,6 +73,9 @@ module.exports = {
           },
           CoreVideoBlockDeprecatedV1Attributes: {
             exclude: true,
+          },
+          Comment: {
+            limit: 0,
           }
         },
         debug: {
@@ -87,7 +90,7 @@ module.exports = {
           typePrefix: `Wp`,
           timeout: 300000, // Increased to 5 minutes
           perPage: 20, // Reduced from 50 to 20 items per request
-          requestConcurrency: 5, // Limit concurrent requests
+          requestConcurrency: 2, // Lowered to avoid tripping Hostinger's hcdn bot protection
           previewRequestConcurrency: 2, // Limit preview requests
         },
         develop: {

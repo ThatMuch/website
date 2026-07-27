@@ -1,0 +1,35 @@
+import React from "react"
+import type { ThatmuchBlock } from "./types"
+import Probleme from "./Probleme/Probleme"
+import FaitesLeTest from "./FaitesLeTest/FaitesLeTest"
+import Promesse from "./Promesse/Promesse"
+
+type Props = {
+  blocks?: ThatmuchBlock[] | null
+}
+
+/**
+ * Rend la liste des blocs THATMUCH d'une page, dans l'ordre défini en back.
+ *
+ * Le résolveur GraphQL garantit qu'un seul champ de contenu est non-nul par
+ * bloc — on peut donc dispatcher sur la présence du champ plutôt que sur
+ * `name`, ce qui évite une table de correspondance à maintenir en double.
+ */
+export default function ThatmuchBlocks({ blocks }: Props) {
+  if (!blocks?.length) return null
+
+  return (
+    <>
+      {blocks.map((block, i) => {
+        const key = `${block.name}-${block.order ?? i}`
+
+        if (block.probleme) return <Probleme key={key} bloc={block.probleme} />
+        if (block.faites_le_test)
+          return <FaitesLeTest key={key} bloc={block.faites_le_test} />
+        if (block.promesse) return <Promesse key={key} bloc={block.promesse} />
+
+        return null
+      })}
+    </>
+  )
+}

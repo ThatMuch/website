@@ -5,27 +5,14 @@ import Layout from "../../components/Layout";
 import PageHeader from "../../components/PageHeader";
 import React from "react";
 import Seo from "../../components/Seo";
-import ServiceList from "../../components/ServiceList";
-
-interface Service {
-  titre: string;
-  desc: string;
-  image?: {
-    node: {
-      altText: string;
-      mediaItemUrl: string;
-    };
-  };
-}
+import ThatmuchBlocks from "../../components/GutenbergBlocks/ThatmuchBlocks";
+import type { ThatmuchBlock } from "../../components/GutenbergBlocks/types";
 
 interface ExpertiseData {
   wpExpertise: {
     title: string;
     slug: string;
-    expertiseContent: {
-      desc_exp?: string;
-      service: Service[];
-    };
+    thatmuchBlocks: ThatmuchBlock[];
     featuredImage?: {
       node: {
         altText: string;
@@ -59,10 +46,7 @@ export default function Expertise({ data }: PageProps<ExpertiseData>) {
           image={page.featuredImage}
         />
 
-        <ServiceList
-          services={page.expertiseContent.service}
-          category={page.categories.nodes[0].slug}
-        />
+        <ThatmuchBlocks blocks={page.thatmuchBlocks} />
         <ContactCTA />
         <AllPosts
           category={page.categories.nodes[0].slug}
@@ -79,16 +63,48 @@ export const pageQuery = graphql`
     wpExpertise(id: { eq: $id }) {
       title
       slug
-      expertiseContent {
-        desc_exp
-        service {
-          desc
+      thatmuchBlocks {
+        name
+        order
+        probleme {
+          kicker
           titre
-          image {
-            node {
-              altText
-              mediaItemUrl
+          intro
+          cartes {
+            scope
+            tag_label
+            titre
+            texte
+          }
+        }
+        faites_le_test {
+          kicker
+          titre
+          texte
+          bouton_label
+          bouton_url
+          illustration {
+            id
+            url
+            alt
+            width
+            height
+          }
+        }
+        promesse {
+          kicker
+          titre
+          contenu
+          cartes {
+            icone {
+              id
+              url
+              alt
+              width
+              height
             }
+            titre
+            texte
           }
         }
       }
