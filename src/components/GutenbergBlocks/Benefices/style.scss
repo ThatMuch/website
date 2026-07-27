@@ -3,7 +3,11 @@
 @use "../shared" as *;
 
 .tm-benefices {
-  @include tm-starfield;
+  background-color: $neutral-900;
+  background-image: url("../../../images/Background_Dark.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 
   max-width: 1134px;
   margin-inline: auto;
