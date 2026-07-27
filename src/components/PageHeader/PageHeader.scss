@@ -13,15 +13,30 @@
       width: 100%;
     }
   }
+  &__title {
+    @include breakpoint(mobile) {
+      text-align: center !important;
+    }
+  }
   &__desc {
     font-size: $font-size-xl;
     @include breakpoint(mobile) {
       font-size: $font-size-l;
+      text-align: center !important;
+    }
+  }
+  &__btn {
+    @include breakpoint(mobile) {
+      margin: auto;
+      display: table;
     }
   }
   &__img {
     display: block;
     max-width: 300px;
     margin: auto;
+    @include breakpoint(mobile) {
+      margin-top: 50px;
+    }
   }
 }

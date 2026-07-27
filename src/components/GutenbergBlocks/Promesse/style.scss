@@ -83,6 +83,9 @@
     border-radius: $radius-m;
     background: #fff;
     box-shadow: $shadow-md;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
   }
 
   &__carte-icone {

@@ -24,7 +24,7 @@ export default function PageHeader({ title, description, image, cta }: Props) {
         <SplitText
           textType="h1"
           text={title}
-          className="display--1 mb-4"
+          className="display--1 mb-4 PageHeader__title"
           delay={20}
           animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
           animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
@@ -49,7 +49,7 @@ export default function PageHeader({ title, description, image, cta }: Props) {
             label={cta.title}
             url={cta.url}
             target={cta.target}
-            className="btn-primary"
+            className="btn-primary PageHeader__btn"
           >
             <span>{cta.title}</span>
             <span className="tm-test__bouton-icone" aria-hidden="true">
