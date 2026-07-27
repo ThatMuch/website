@@ -1,0 +1,43 @@
+/* THATMUCH — Webfonts
+   Display: Neue Machina (geometric, ultrabold). Body & UI: Space Mono (monospace).
+   Files live in /assets/fonts. Paths are relative to this CSS file. */
+
+@font-face {
+  font-family: "Neue Machina";
+  src: url("../assets/fonts/NeueMachina-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Machina";
+  src: url("../assets/fonts/NeueMachina-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Machina";
+  src: url("../assets/fonts/NeueMachina-Ultrabold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("../assets/fonts/SpaceMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("../assets/fonts/SpaceMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

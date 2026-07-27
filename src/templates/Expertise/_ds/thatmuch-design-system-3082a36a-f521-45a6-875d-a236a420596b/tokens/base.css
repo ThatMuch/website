@@ -1,0 +1,69 @@
+/* THATMUCH — Base element styling
+   Opinionated defaults so any page linking styles.css inherits the brand voice.
+   Mirrors production style.scss / _headings.scss. */
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-m);
+  line-height: var(--lh-body);
+  color: var(--text-default);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-heading);
+  margin: 0 0 var(--space-m);
+}
+
+h1, .h1 { font-size: var(--h1); }
+h2, .h2 { font-size: var(--h2); }
+h3, .h3 { font-size: var(--h3); }
+h4, .h4 { font-size: var(--h4); }
+h5, .h5 { font-size: var(--h5); }
+h6, .h6 { font-size: var(--h6); }
+
+.display--1 { font-family: var(--font-display); font-weight: 700; font-size: var(--display-1); line-height: 1.05; }
+.display--2 { font-family: var(--font-display); font-weight: 700; font-size: var(--display-2); line-height: 1.05; }
+.display--3 { font-family: var(--font-display); font-weight: 700; font-size: var(--display-3); line-height: 1.05; }
+
+p { margin: 0 0 var(--space-m); }
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 0.25rem; }
+
+code, pre, kbd, samp { font-family: var(--font-mono); }
+
+.uppercase { text-transform: uppercase; }
+
+/* Dark cosmic section helper */
+.bg-dark {
+  color: #fff;
+  background-color: var(--neutral-900);
+}
+.bg-space {
+  color: #fff;
+  background: var(--gradient-space);
+}
+
+/* Utility brand fills */
+.bg-cyan { background-color: var(--tm-cyan); }
+.bg-yellow { background-color: var(--tm-yellow); }
+.bg-green { background-color: var(--tm-green); }
+.bg-magenta { background-color: var(--tm-magenta); }
+
+/* Rainbow text/accent helpers */
+.text-rainbow {
+  background: var(--gradient-rainbow-smooth);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rotating { animation: tm-rotating 2s linear infinite; }
+@keyframes tm-rotating { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes tm-text-appear { from { opacity: 0; translate: 0 3rem; } }

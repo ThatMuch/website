@@ -1,53 +1,53 @@
-import "./Header.scss"
+import "./Header.scss";
 
-import React, { useEffect } from "react"
-import { useUIStore } from "../../store/useUIStore"
-import { useSiteMenu } from "../../hooks/use-site-menu"
-import { useSiteSeo } from "../../hooks/use-site-seo"
+import React, { useEffect } from "react";
 
-import { LazyLoadImage } from "react-lazy-load-image-component"
-import close from "../../images/29-cross-outline.png"
-import close_gif from "../../images/29-cross-outline.gif"
-import { StaticImage } from "gatsby-plugin-image"
-import MenuToggle from "./MenuToggle"
-import MenuContent from "./MenuContent"
-import { Link } from "gatsby"
+import Button from "../UI/Button/Button";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "gatsby";
+import MenuContent from "./MenuContent";
+import MenuToggle from "./MenuToggle";
+import { StaticImage } from "gatsby-plugin-image";
+import close from "../../images/29-cross-outline.png";
+import close_gif from "../../images/29-cross-outline.gif";
+import { useSiteMenu } from "../../hooks/use-site-menu";
+import { useSiteSeo } from "../../hooks/use-site-seo";
+import { useUIStore } from "../../store/useUIStore";
 
 export default function Header() {
   // Global Store State
-  const isMobile = useUIStore(state => state.isMobile)
-  const isMenuOpen = useUIStore(state => state.isMenuOpen)
-  const setMobile = useUIStore(state => state.setMobile)
-  const toggleMenu = useUIStore(state => state.toggleMenu)
+  const isMobile = useUIStore((state) => state.isMobile);
+  const isMenuOpen = useUIStore((state) => state.isMenuOpen);
+  const setMobile = useUIStore((state) => state.setMobile);
+  const toggleMenu = useUIStore((state) => state.toggleMenu);
 
   // Initialization & Resize Logic
   useEffect(() => {
-    const handleResize = () => setMobile(window.innerWidth <= 768)
+    const handleResize = () => setMobile(window.innerWidth <= 768);
 
-
-    handleResize() // init
-    window.addEventListener("resize", handleResize)
+    handleResize(); // init
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [setMobile])
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setMobile]);
 
   // Lock scroll when menu is open on mobile
   useEffect(() => {
     if (isMenuOpen && isMobile) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [isMenuOpen, isMobile])
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen, isMobile]);
 
   const menuItems = useSiteMenu("GATSBY_HEADER_MENU").filter(
-    (item: { parentId: string | null }) => item.parentId === null
-  )
+    (item: { parentId: string | null }) => item.parentId === null,
+  );
 
   return (
     <header className="header">
@@ -90,7 +90,6 @@ export default function Header() {
                 aria-hidden="true"
               />
             </Link>
-             
 
             {/* Main Content Component */}
             <MenuContent menuItems={menuItems} />
@@ -104,22 +103,24 @@ export default function Header() {
         aria-label="Accueil"
         title="Accueil du site THATMUCH"
       >
-        <StaticImage loading="eager" src="../../images/LogoTHATMUCH.webp" alt="THATMUCH" className="logo--header" width={230} />
+        <StaticImage
+          loading="eager"
+          src="../../images/LogoTHATMUCH.webp"
+          alt="THATMUCH"
+          className="logo--header"
+          width={230}
+        />
       </Link>
-
-      <a
-        href="https://audit-refonte.thatmuch.fr/"
-        className="btn btn-primary"
+      <Button
+        type="link"
+        label={isMobile ? "Audit" : "Evaluez votre site web"}
+        url="https://audit-refonte.thatmuch.fr/"
         target="_blank"
         rel="noopener noreferrer"
-        title="Lien vers l'audit de votre site web"
-        aria-label="Evaluez votre site web"
+        className="btn-primary"
       >
-        <div className="btn__overlay"></div>
-        <div className="btn__content">
-          {isMobile ? "Audit" : "Evaluez votre site web"}
-        </div>
-      </a>
+        {isMobile ? "Audit" : "Evaluez votre site web"}
+      </Button>
     </header>
-  )
+  );
 }
