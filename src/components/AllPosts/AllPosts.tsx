@@ -3,8 +3,8 @@ import "./AllPosts.scss";
 import { CategoryType, PostType } from "../../utils/types";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import React, { useState } from "react";
-import { Link } from "gatsby";
 
+import { Link } from "gatsby";
 import PostCard from "../PostCard/PostCard";
 import { useBlogCategories } from "../../hooks/use-blog-categories";
 import { useSitePosts } from "../../hooks/use-site-posts";
@@ -13,19 +13,42 @@ type Props = {
   title?: string;
   filter?: boolean;
   category?: string;
+  parentCategory?: string;
   isHome?: boolean;
+  posts?: PostType[];
 };
 
-export default function AllPosts({ title, filter, category, isHome }: Props) {
+export default function AllPosts({
+  title,
+  filter,
+  category,
+  parentCategory,
+  isHome,
+  posts: customPosts,
+}: Props) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const posts = useSitePosts(category ? category : selectedCategory);
+  const baseCategory = category || parentCategory;
+  const fetchedPosts = useSitePosts(selectedCategory || baseCategory);
+
+  const posts = React.useMemo(() => {
+    const rawPosts = customPosts ?? fetchedPosts;
+    if (customPosts && selectedCategory) {
+      return rawPosts.filter((post) =>
+        post.categories?.nodes?.some(
+          (cat) => cat.slug === selectedCategory,
+        ),
+      );
+    }
+    return rawPosts;
+  }, [customPosts, fetchedPosts, selectedCategory]);
+
   const postsPerPage: number = 8;
   const totalPages: number = Math.ceil((posts?.length || 0) / postsPerPage);
-  const categories: CategoryType[] = useBlogCategories();
+  const categories: CategoryType[] = useBlogCategories(parentCategory);
   const paginatedPosts = posts?.slice(
     (currentPage - 1) * postsPerPage,
-    currentPage * postsPerPage
+    currentPage * postsPerPage,
   );
   const renderPageNumbers = (): React.ReactNode => {
     const pageNumbers: React.ReactNode[] = [];
@@ -35,7 +58,7 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
       pageNumbers.push(
         <button key={i} onClick={() => setCurrentPage(i)} className={className}>
           {i}
-        </button>
+        </button>,
       );
     }
     return pageNumbers;
@@ -49,7 +72,7 @@ export default function AllPosts({ title, filter, category, isHome }: Props) {
           <div className="divider mb-4"></div>
         </>
       )}
-      {filter && (
+      {(filter || (parentCategory && categories.length > 0)) && (
         <div className="AllPosts_list">
           {/* All Posts Button */}
           <button
