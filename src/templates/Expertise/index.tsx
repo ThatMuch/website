@@ -50,8 +50,6 @@ interface ExpertiseData {
 export default function Expertise({ data }: PageProps<ExpertiseData>) {
   const page = data.wpExpertise;
 
-  console.log(page.blocks);
-
   return (
     <Layout>
       <Seo title={page.title} description={page.seo.metaDesc} />
@@ -84,6 +82,7 @@ export const pageQuery = graphql`
       descriptionExpertise {
         titre
         description
+        icon
         cta {
           target
           title

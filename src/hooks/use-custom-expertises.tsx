@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
+
 import { useMemo } from "react";
 
 export const usePostExpertises = () => {
@@ -14,6 +15,11 @@ export const usePostExpertises = () => {
                 name
                 slug
               }
+            }
+            descriptionExpertise {
+              titre
+              description
+              icon
             }
             featuredImage {
               node {
@@ -40,6 +46,7 @@ export const usePostExpertises = () => {
         desc: node.seo.metaDesc,
         category: node.categories.nodes[0]?.slug,
         link_label: "Découvrir",
+        descriptionExpertise: node.descriptionExpertise,
       };
     });
   }, [data]);

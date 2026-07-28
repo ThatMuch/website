@@ -57,5 +57,16 @@ exports.onRenderBody = ({ setHeadComponents }) => {
       crossOrigin="anonymous"
       key="preconnect-cookiebot"
     />,
+    <link
+      rel="preconnect"
+      href="https://kit.fontawesome.com"
+      crossOrigin="anonymous"
+      key="preconnect-fontawesome"
+    />,
+    <script
+      src="https://kit.fontawesome.com/555987a337.js"
+      crossOrigin="anonymous"
+      key="font-awesome-kit"
+    />,
   ]);
 };

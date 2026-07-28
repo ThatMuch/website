@@ -178,7 +178,6 @@ hr {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   p,
   h2,
   h3,
@@ -187,4 +186,12 @@ hr {
   img {
     animation: none;
   }
+}
+
+.kicker {
+  margin: 0;
+  font-family: "NeueMachina", sans-serif;
+  font-weight: 700;
+  font-size: $font-size-xl;
+  line-height: 36px;
 }

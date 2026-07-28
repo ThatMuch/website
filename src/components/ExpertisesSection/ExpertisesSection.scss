@@ -2,31 +2,98 @@
 @use "../../style/mixins" as *;
 .ExpertisesSection {
   margin-bottom: $spacing-xl;
+  background-color: $neutral-900;
+  background-image: url("../../images/Background_Dark.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+  padding: $spacing-xl;
+  color: #fff;
+  text-align: center;
+  .divider {
+    margin: 0.5rem auto;
+  }
   &__content {
-    display: flex;
+    display: grid;
     gap: $spacing-m;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     @include breakpoint(mobile) {
       flex-direction: column;
     }
   }
   &__card {
-    border-radius: $radius-m;
-    padding: $spacing-m;
+    text-align: left;
+    border-radius: 1.5rem;
+    border: 2px solid #4d4073;
+    background: rgba(237, 234, 246, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
+    padding: $spacing-m;
     flex-direction: column;
-    justify-content: space-between;
     align-items: flex-start;
-    align-self: stretch;
-    &.design {
-      background-color: $design-50;
+    gap: $spacing-m;
+    justify-self: stretch;
+    &-header {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
     }
-    &.dev {
-      background-color: $dev-50;
+    &-icon {
+      display: flex;
+      padding: 0.386rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.30881rem;
+
+      height: 42px;
+      width: 42px;
+      svg {
+        color: $project-400;
+      }
+      &-com {
+        border: 1px solid $com-400;
+        background: rgba($com-400, 0.1);
+        svg {
+          color: $com-400;
+        }
+      }
+      &-design {
+        border: 1px solid $design-400;
+        background: rgba($design-400, 0.1);
+        svg {
+          color: $design-400;
+        }
+      }
+      &-dev {
+        border: 1px solid $dev-400;
+        background: rgba($dev-400, 0.1);
+        svg {
+          color: $dev-400;
+        }
+      }
+      &-project {
+        border: 1px solid $project-400;
+        background: rgba($project-400, 0.1);
+        svg {
+          color: $project-400;
+        }
+      }
+    }
+    &-title {
+      margin: 0;
     }
     &-image {
       img {
         width: 200px;
       }
+    }
+    &-desc {
+      margin-bottom: 1.5rem;
     }
   }
 }
