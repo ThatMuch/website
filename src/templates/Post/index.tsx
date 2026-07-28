@@ -1,177 +1,18 @@
-import "../../components/GutenbergBlocks/FAQ/style.scss"; // Import Gutenberg styles
-
-import FAQ from "../../components/GutenbergBlocks/FAQ/Faq";
 import Layout from "../../components/Layout";
+import PostContent from "../../components/PostContent";
 import PostHeader from "../../components/PostHeader/PostHeader";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
-import SocialMediaEmbed from "../../components/SocialMediaEmbed/SocialMediaEmbed";
-import SpotifyEmbed from "../../components/SpotifyEmbed/SpotifyEmbed";
-import TOCBlock from "../../components/TOCBlock/TOCBlock";
-import YoutubeEmbed from "../../components/YoutubeEmbed/YoutubeEmbed";
 import { graphql } from "gatsby";
-import parse, { DOMNode, Element, Text } from "html-react-parser";
 
 const Post = ({ data }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
 
-  const parseOptions = {
-    replace: (domNode: DOMNode) => {
-      // TOC block nested inside another block (e.g. a Group block) isn't
-      // caught by the top-level switch in renderBlocks(), so it falls
-      // through to raw saveContent here — intercept it and mount the real
-      // component instead of leaving WordPress's static placeholder markup.
-      if (
-        domNode instanceof Element &&
-        domNode.name === "div" &&
-        domNode.attribs &&
-        domNode.attribs.class &&
-        domNode.attribs.class.includes("wp-block-tm-multi-block-toc")
-      ) {
-        const scriptNode = domNode.children.find(
-          (child) => child instanceof Element && child.name === "script"
-        ) as Element | undefined;
-
-        let attributes: any = {};
-        const textNode = scriptNode?.children.find(
-          (child) => child instanceof Text
-        ) as Text | undefined;
-
-        if (textNode?.data) {
-          try {
-            attributes = JSON.parse(textNode.data);
-          } catch (e) {
-            console.error("Error parsing TOC block attributes", e);
-          }
-        }
-
-        return <TOCBlock attributes={attributes} />;
-      }
-
-      // Keep support for standard iframes
-
-      if (
-        domNode instanceof Element &&
-        domNode.name === "iframe" &&
-        domNode.attribs &&
-        domNode.attribs.src &&
-        domNode.attribs.src.includes("youtube.com")
-      ) {
-        return <YoutubeEmbed url={domNode.attribs.src} />;
-      } else if (
-        domNode instanceof Element &&
-        domNode.name === "iframe" &&
-        domNode.attribs &&
-        domNode.attribs.src &&
-        domNode.attribs.src.includes("spotify.com")
-      ) {
-        return <SpotifyEmbed url={domNode.attribs.src} />;
-      } else if (
-        domNode instanceof Element &&
-        domNode.name === "iframe" &&
-        domNode.attribs &&
-        domNode.attribs.src &&
-        domNode.attribs.src.includes("instagram.com")
-      ) {
-        return <SocialMediaEmbed url={domNode.attribs.src} />;
-      }
-         else if (
-        domNode instanceof Element &&
-        domNode.name === "iframe" &&
-        domNode.attribs &&
-        domNode.attribs.src &&
-        domNode.attribs.src.includes("tiktok.com")
-      ) {
-        console.log(domNode.attribs.src);
-        return <SocialMediaEmbed url={domNode.attribs.src} />;
-      }
-      else if (
-        domNode instanceof Element &&
-        domNode.name === "iframe" &&
-        domNode.attribs &&
-        domNode.attribs.src &&
-        domNode.attribs.src.includes("tiktok.com")
-      ) {
-        return <SocialMediaEmbed url={domNode.attribs.src} />;
-      } else if (
-        domNode instanceof Element &&
-        domNode.name === "iframe" &&
-        domNode.attribs &&
-        domNode.attribs.src &&
-        domNode.attribs.src.includes("x.com")
-      ) {
-        return <SocialMediaEmbed url={domNode.attribs.src} />;
-      }
-
-
-      // Support for Gutenberg oEmbed <figure> block
-      if (
-        domNode instanceof Element &&
-        domNode.name === "figure" &&
-        domNode.attribs &&
-        domNode.attribs.class
-      ) {
-        const isYoutube = domNode.attribs.class.includes("wp-block-embed-youtube") || domNode.attribs.class.includes("is-provider-youtube");
-        const isSpotify = domNode.attribs.class.includes("wp-block-embed-spotify") || domNode.attribs.class.includes("is-provider-spotify");
-        const isInstagram = domNode.attribs.class.includes("wp-block-embed-instagram") || domNode.attribs.class.includes("is-provider-instagram");
-        const isTiktok = domNode.attribs.class.includes("wp-block-embed-tiktok") || domNode.attribs.class.includes("is-provider-tiktok");
-        const isX = domNode.attribs.class.includes("wp-block-embed-x") || domNode.attribs.class.includes("is-provider-x");
-
-        if (isYoutube || isSpotify || isInstagram || isTiktok || isX) {
-          const wrapperDiv = domNode.children.find(
-            (child) =>
-              child instanceof Element &&
-              child.name === "div" &&
-              child.attribs?.class?.includes("wp-block-embed__wrapper")
-          ) as Element | undefined;
-
-          if (wrapperDiv && wrapperDiv.children) {
-            const textNode = wrapperDiv.children.find(
-              (child) => child instanceof Text
-            ) as Text | undefined;
-
-            if (textNode && textNode.data) {
-              const url = textNode.data.trim();
-              if (url) {
-                if (isYoutube) return <YoutubeEmbed url={url} />;
-                if (isSpotify) return <SpotifyEmbed url={url} />;
-                if (isInstagram) return <SocialMediaEmbed url={url} />;
-                if (isTiktok) return <SocialMediaEmbed url={url} />;
-                if (isX) return <SocialMediaEmbed url={url} />;
-              }
-            }
-          }
-        }
-      }
-    },
-  };
-
-  const renderBlocks = () => {
-    return blocks.map((block, index) => {
-      switch (block.name) {
-        case "faq-block-for-gutenberg/faq":
-          return <FAQ key={index} content={block.saveContent} />;
-        case "tm-multi-block/toc":
-          return <TOCBlock attributes={block.attributes} />;
-        case "core/embed":
-          // WordPress oEmbed block (YouTube)
-          return <div key={index}>{parse(block.saveContent, parseOptions)}</div>;
-        default:
-          return (
-            <div
-              key={index}
-            >
-              {parse(block.saveContent, parseOptions)}
-            </div>
-          );
-      }
-    });
-  };
   return (
-    <Layout type="post">
+    <Layout type="post" shareTitle={post.title}>
       <div className={categorySlug}>
         <Seo
           title={post.title}
@@ -186,7 +27,7 @@ const Post = ({ data }) => {
           category={categorySlug}
           postDate={post.date}
         />
-        <div className="post__content">{renderBlocks()}</div>
+        <PostContent blocks={blocks} />
         <RelatedPosts category={categorySlug} currentPostId={post.id} />
       </div>
     </Layout>
@@ -199,7 +40,7 @@ export const Head = ({ data }) => {
   const blocks = data?.wpPost?.blocks || [];
 
   const faqBlocks = blocks.filter(
-    (block) => block.name === "faq-block-for-gutenberg/faq"
+    (block) => block.name === "faq-block-for-gutenberg/faq",
   );
 
   let faqSchema = null;
@@ -238,9 +79,7 @@ export const Head = ({ data }) => {
   if (!faqSchema) return null;
 
   return (
-    <script type="application/ld+json">
-      {JSON.stringify(faqSchema)}
-    </script>
+    <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
   );
 };
 

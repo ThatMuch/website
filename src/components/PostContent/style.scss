@@ -1,0 +1,18 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.PostContent {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: $spacing-m;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__sidebar {
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+}

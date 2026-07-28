@@ -1,0 +1,64 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.ShareButtons {
+  position: fixed;
+  right: $spacing-m;
+  bottom: $spacing-m;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  pointer-events: none;
+
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: $neutral-900;
+    color: $text-color-light;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size-m;
+    box-shadow: $shadow-md;
+    transition: background 0.2s ease, transform 0.2s ease;
+    opacity: 0.2;
+    &:hover,
+    &:focus-visible {
+      background: $neutral-500;
+      transform: scale(1.08);
+      color: $text-color-light;
+      opacity: 1;
+    }
+
+    &--copied {
+      background: $project-600;
+    }
+  }
+
+  @include breakpoint(mobile) {
+    right: $spacing-s;
+    bottom: $spacing-s;
+    gap: $spacing-xxs;
+
+    &__item {
+      width: 38px;
+      height: 38px;
+      font-size: $font-size-s;
+    }
+  }
+}
