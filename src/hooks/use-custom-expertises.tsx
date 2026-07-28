@@ -19,6 +19,7 @@ export const usePostExpertises = () => {
             descriptionExpertise {
               titre
               description
+              icon
             }
             featuredImage {
               node {

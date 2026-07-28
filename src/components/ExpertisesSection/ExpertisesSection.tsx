@@ -26,11 +26,13 @@ interface Expertise {
   descriptionExpertise: {
     titre: string;
     description: string;
+    icon?: string;
   };
 }
 
 export default function ExpertisesSection({ section }: Props) {
   const expertises = usePostExpertises();
+  console.log(expertises);
   return (
     <div className="ExpertisesSection">
       <div className="section__header">
@@ -45,7 +47,15 @@ export default function ExpertisesSection({ section }: Props) {
             key={expertise.title}
           >
             <div>
-              <h3>{expertise.descriptionExpertise?.titre}</h3>
+              <div className="flex">
+                <div
+                  className="ExpertisesSection__card-icon"
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtml(expertise.descriptionExpertise?.icon),
+                  }}
+                />
+                <h3>{expertise.descriptionExpertise?.titre}</h3>
+              </div>
               <div
                 className="ExpertisesSection__card-desc"
                 dangerouslySetInnerHTML={{

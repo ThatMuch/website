@@ -82,6 +82,7 @@ export const pageQuery = graphql`
       descriptionExpertise {
         titre
         description
+        icon
         cta {
           target
           title
