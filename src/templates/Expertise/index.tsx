@@ -40,13 +40,17 @@ interface ExpertiseData {
       metaKeywords?: string;
       title?: string;
     };
+    blocks: {
+      name: string;
+      saveContent: string;
+    }[];
   };
 }
 
 export default function Expertise({ data }: PageProps<ExpertiseData>) {
   const page = data.wpExpertise;
 
-  console.log(page);
+  console.log(page.blocks);
 
   return (
     <Layout>
@@ -94,6 +98,14 @@ export const pageQuery = graphql`
             valeur
             libelle
             couleur
+          }
+        }
+        faq {
+          kicker
+          titre
+          questions {
+            question
+            reponse
           }
         }
         pourquoi {
@@ -189,6 +201,12 @@ export const pageQuery = graphql`
         metaDesc
         metaKeywords
         title
+      }
+      blocks {
+        ... on WpFaqBlockForGutenbergFaqBlock {
+          attributesJSON
+          saveContent
+        }
       }
     }
   }

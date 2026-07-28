@@ -119,6 +119,20 @@ export interface BlocStats {
   stats: Stat[]
 }
 
+/* ── Bloc « FAQ » ────────────────────────────────────────────────────── */
+
+export interface FaqItem {
+  question: string
+  /** HTML issu du champ wysiwyg — à assainir avant injection. */
+  reponse?: string
+}
+
+export interface BlocFaq {
+  kicker?: string
+  titre: string
+  questions: FaqItem[]
+}
+
 /* ── Enveloppe ───────────────────────────────────────────────────────── */
 
 export interface ThatmuchBlock {
@@ -131,4 +145,5 @@ export interface ThatmuchBlock {
   benefices?: BlocBenefices | null
   pourquoi?: BlocPourquoi | null
   stats?: BlocStats | null
+  faq?: BlocFaq | null
 }

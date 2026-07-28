@@ -1,0 +1,125 @@
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
+@use "../shared" as *;
+
+.tm-faq {
+  @include tm-section;
+  @include tm-container;
+
+  &__entete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; // kicker → divider
+    margin-bottom: 56px;
+    text-align: center;
+  }
+
+  &__kicker {
+    @include tm-kicker;
+  }
+
+  // .divider est aligné à gauche par défaut ; l'en-tête est centré ici.
+  &__divider {
+    margin-inline: auto;
+  }
+
+  // Titre au même corps que « Faites le test ! » : 45px dans le Figma,
+  // nettement plus grand que le h2 des autres sections.
+  &__titre {
+    margin: 12px 0 0; // complète le gap de 8px pour atteindre les 20px du Figma
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 45px);
+    line-height: 1.5;
+    color: $neutral-900;
+  }
+
+  &__liste {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 752px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  // Le filet sépare les questions : présent partout sauf avant la première.
+  &__item {
+    &:not(:first-child) {
+      padding-top: 32px;
+      border-top: 1px solid $neutral-50;
+    }
+  }
+
+  &__question {
+    margin: 0;
+  }
+
+  &__bouton {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    font-family: "SpaceMono", monospace;
+    font-weight: 700;
+    font-size: $font-size-m;
+    line-height: 24px;
+    color: $neutral-900;
+
+    svg {
+      flex: none;
+      width: 24px;
+      height: 24px;
+      margin-top: 2px;
+      color: $neutral-500;
+      transition: color $fast;
+    }
+
+    &:hover svg,
+    &:focus-visible svg {
+      color: $neutral-900;
+    }
+  }
+
+  &__reponse {
+    margin-top: 8px;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-m;
+    line-height: 24px;
+    color: $neutral-900;
+
+    // La réponse s'aligne sur la question, sans passer sous l'icône.
+    padding-right: 48px;
+
+    p {
+      margin: 0 0 12px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-position: from-font;
+
+      &:hover,
+      &:focus-visible {
+        color: $text-color-link;
+      }
+    }
+
+    @include breakpoint(mobile) {
+      padding-right: 0;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import Benefices from "./Benefices/Benefices";
 import CTABlock from "./CTABlock/CTABlock";
 import Etapes from "./Etapes/Etapes";
+import FaqBlock from "./FaqBlock/FaqBlock";
 import Pourquoi from "./Pourquoi/Pourquoi";
 import Probleme from "./Probleme/Probleme";
 import Promesse from "./Promesse/Promesse";
@@ -36,6 +37,7 @@ export default function ThatmuchBlocks({ blocks }: Props) {
           return <Benefices key={key} bloc={block.benefices} />;
         if (block.pourquoi) return <Pourquoi key={key} bloc={block.pourquoi} />;
         if (block.stats) return <Stats key={key} bloc={block.stats} />;
+        if (block.faq) return <FaqBlock key={key} bloc={block.faq} />;
 
         return null;
       })}
