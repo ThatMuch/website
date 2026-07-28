@@ -20,6 +20,37 @@ const Post = ({ data }) => {
 
   const parseOptions = {
     replace: (domNode: DOMNode) => {
+      // TOC block nested inside another block (e.g. a Group block) isn't
+      // caught by the top-level switch in renderBlocks(), so it falls
+      // through to raw saveContent here — intercept it and mount the real
+      // component instead of leaving WordPress's static placeholder markup.
+      if (
+        domNode instanceof Element &&
+        domNode.name === "div" &&
+        domNode.attribs &&
+        domNode.attribs.class &&
+        domNode.attribs.class.includes("wp-block-tm-multi-block-toc")
+      ) {
+        const scriptNode = domNode.children.find(
+          (child) => child instanceof Element && child.name === "script"
+        ) as Element | undefined;
+
+        let attributes: any = {};
+        const textNode = scriptNode?.children.find(
+          (child) => child instanceof Text
+        ) as Text | undefined;
+
+        if (textNode?.data) {
+          try {
+            attributes = JSON.parse(textNode.data);
+          } catch (e) {
+            console.error("Error parsing TOC block attributes", e);
+          }
+        }
+
+        return <TOCBlock attributes={attributes} />;
+      }
+
       // Keep support for standard iframes
 
       if (
