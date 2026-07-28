@@ -48,6 +48,7 @@ export type CategoryType = {
   name: string;
   slug: string;
   count?: number;
+  parentId?: string | null;
   templates?: {
     nodes: {
       title: string;

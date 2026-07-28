@@ -9,6 +9,7 @@ export const useBlogCategories = () => {
           slug
           count
           link
+          parentId
           posts {
             nodes {
               id
@@ -38,5 +39,7 @@ export const useBlogCategories = () => {
       }
     }
   `);
-  return data.allWpCategory.nodes;
+  return data.allWpCategory.nodes.filter(
+    (category: { parentId: string | null }) => !category.parentId
+  );
 };
