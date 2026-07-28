@@ -47,14 +47,18 @@ export default function ExpertisesSection({ section }: Props) {
             key={expertise.title}
           >
             <div>
-              <div className="flex">
+              <div className="ExpertisesSection__card-header">
                 <div
-                  className="ExpertisesSection__card-icon"
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizeHtml(expertise.descriptionExpertise?.icon),
-                  }}
-                />
-                <h3>{expertise.descriptionExpertise?.titre}</h3>
+                  className={`ExpertisesSection__card-icon ExpertisesSection__card-icon-${expertise.category}`}
+                >
+                  <i
+                    className={expertise.descriptionExpertise?.icon}
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="ExpertisesSection__card-title">
+                  {expertise.descriptionExpertise?.titre}
+                </h3>
               </div>
               <div
                 className="ExpertisesSection__card-desc"
