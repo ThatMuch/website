@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
+
 import { useMemo } from "react";
 
 export const usePostExpertises = () => {
@@ -15,25 +16,19 @@ export const usePostExpertises = () => {
                 slug
               }
             }
+            descriptionExpertise {
+              titre
+              description
+              icon
+            }
             featuredImage {
               node {
                 altText
                 mediaItemUrl
               }
             }
-            expertiseContent {
-              service {
-                desc
-                titre
-                image {
-                  node {
-                    altText
-                    mediaItemUrl
-                  }
-                }
-              }
-              link_label
-              desc_exp
+            seo {
+              metaDesc
             }
           }
         }
@@ -47,15 +42,11 @@ export const usePostExpertises = () => {
       return {
         slug: node.slug,
         title: node.title,
-        featuredImage: node.featuredImage.node,
-        services: node.expertiseContent.service.map((service) => ({
-          desc: service.desc,
-          titre: service.titre,
-          image: service?.image?.node,
-        })),
-        desc: node.expertiseContent.desc_exp,
+        featuredImage: node.featuredImage?.node,
+        desc: node.seo.metaDesc,
         category: node.categories.nodes[0]?.slug,
-        link_label: node.expertiseContent.link_label,
+        link_label: "Découvrir",
+        descriptionExpertise: node.descriptionExpertise,
       };
     });
   }, [data]);

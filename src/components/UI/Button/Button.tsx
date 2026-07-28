@@ -3,7 +3,7 @@ import React from "react";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   url?: string;
-  target?: "_blank" | "_self";
+  target?: "_blank" | "_self" | string;
   rel?: string;
   href?: string; // Add href for anchor tag compatibility
 }
@@ -39,7 +39,8 @@ export default function Button({
           href={url}
           target={target}
           rel={finalRel}
-          role="button"
+          role="link"
+          title={label}
           {...rest}
         >
           <div className="btn__content"> {children}</div>
@@ -54,6 +55,7 @@ export default function Button({
           aria-label={label}
           role="button"
           type="submit"
+          title={label}
           {...rest}
         >
           <div className="btn__content"> {children}</div>
@@ -68,6 +70,7 @@ export default function Button({
           type="button"
           aria-label={label}
           role="button"
+          title={label}
           {...rest}
         >
           <div className="btn__content"> {children}</div>

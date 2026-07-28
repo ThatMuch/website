@@ -1,0 +1,87 @@
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
+@use "../shared" as *;
+
+// Fond « espace » du design system : nuée d'étoiles en radial-gradients
+// posée sur l'indigo profond relevé dans le Figma (#190e3d).
+$tm-space: #190e3d;
+
+.tm-test {
+  // Le bandeau est plus large que le container standard (1024) : le Figma le
+  // pose à 1134. L'illustration est plus haute que le bandeau et déborde —
+  // c'est overflow: hidden qui la rogne, comme dans le design.
+  position: relative;
+  overflow: hidden;
+  max-width: 1134px;
+  min-height: 399px;
+  margin-inline: auto;
+  padding: 56px 59px;
+  margin-bottom: 100px;
+  color: $neutral-0;
+  background-color: $neutral-900;
+  background-image: url("../../../images/Background_Dark.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+
+  // Le rayon de 100px est disproportionné sur mobile, et l'illustration
+  // repasse dans le flux sous le texte.
+  @media screen and (max-width: 900px) {
+    min-height: 0;
+    padding: 40px 24px;
+    border-radius: 32px;
+  }
+
+  &__contenu {
+    position: relative;
+    z-index: 1;
+    max-width: 497px;
+  }
+
+  &__kicker {
+    @include tm-kicker($neutral-0);
+  }
+
+  // Rythme vertical relevé au pixel dans le Figma :
+  // kicker →8→ divider →16→ titre →24→ texte →24→ bouton.
+  &__divider {
+    @include tm-rainbow-divider;
+
+    margin-top: 8px;
+  }
+
+  &__titre {
+    margin: 16px 0 0;
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 45px);
+    line-height: 1.5;
+    color: #f4f2f6;
+  }
+
+  &__texte {
+    margin: 1.5rem 0 1.5rem;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-m;
+    line-height: 24px;
+    color: $neutral-0;
+  }
+  // Ancrée en haut à droite et volontairement plus haute que le bandeau :
+  // le débordement bas est rogné, conformément au Figma.
+  &__illustration {
+    position: absolute;
+    top: 49px;
+    right: 46px;
+    z-index: 1;
+    display: block;
+    width: 342px;
+    height: auto;
+
+    @media screen and (max-width: 900px) {
+      position: static;
+      width: 220px;
+      margin: 32px auto 0;
+    }
+  }
+}

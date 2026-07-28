@@ -1,12 +1,53 @@
+import { PageProps, graphql } from "gatsby";
+
 import AllPosts from "../../components/AllPosts/AllPosts";
 import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import Layout from "../../components/Layout";
 import PageHeader from "../../components/PageHeader";
 import React from "react";
 import Seo from "../../components/Seo";
-import ServiceList from "../../components/ServiceList";
-import { graphql } from "gatsby";
-export default function Expertise({ data }) {
+import type { ThatmuchBlock } from "../../components/GutenbergBlocks/types";
+import ThatmuchBlocks from "../../components/GutenbergBlocks/ThatmuchBlocks";
+
+interface ExpertiseData {
+  wpExpertise: {
+    title: string;
+    slug: string;
+    thatmuchBlocks: ThatmuchBlock[];
+    descriptionExpertise?: {
+      titre: string;
+      description: string;
+      cta: {
+        target: string;
+        title: string;
+        url: string;
+      };
+    };
+    featuredImage?: {
+      node: {
+        altText: string;
+        mediaItemUrl: string;
+      };
+    };
+    categories: {
+      nodes: Array<{
+        name: string;
+        slug: string;
+      }>;
+    };
+    seo: {
+      metaDesc: string;
+      metaKeywords?: string;
+      title?: string;
+    };
+    blocks: {
+      name: string;
+      saveContent: string;
+    }[];
+  };
+}
+
+export default function Expertise({ data }: PageProps<ExpertiseData>) {
   const page = data.wpExpertise;
 
   return (
@@ -15,17 +56,16 @@ export default function Expertise({ data }) {
       <div className="expertise-content">
         <PageHeader
           title={page.title}
-          description={page.seo.metaDesc}
+          description={
+            page.descriptionExpertise?.description ?? page.seo.metaDesc
+          }
+          cta={page.descriptionExpertise?.cta}
           image={page.featuredImage}
         />
 
-        <ServiceList
-          services={page.expertiseContent.service}
-          category={page.categories.nodes[0].slug}
-        />
-        <ContactCTA />
+        <ThatmuchBlocks blocks={page.thatmuchBlocks} />
         <AllPosts
-          category={page.categories.nodes[0].slug}
+          category={page.categories.nodes[0]?.slug}
           title="Nos articles sur le sujet"
           isHome
         />
@@ -39,16 +79,108 @@ export const pageQuery = graphql`
     wpExpertise(id: { eq: $id }) {
       title
       slug
-      expertiseContent {
-        desc_exp
-        service {
-          desc
+      descriptionExpertise {
+        titre
+        description
+        icon
+        cta {
+          target
+          title
+          url
+        }
+      }
+      thatmuchBlocks {
+        name
+        order
+        stats {
+          stats {
+            valeur
+            libelle
+            couleur
+          }
+        }
+        faq {
+          kicker
           titre
-          image {
-            node {
-              altText
-              mediaItemUrl
+          questions {
+            question
+            reponse
+          }
+        }
+        pourquoi {
+          intro
+          kicker
+          titre
+          cartes {
+            texte
+            titre
+          }
+        }
+        etapes {
+          intro
+          kicker
+          titre
+          etapes {
+            texte
+            titre
+          }
+        }
+        benefices {
+          cartes {
+            planete {
+              alt
+              height
+              id
+              url
+              width
             }
+            scope
+            tag_label
+            texte
+            titre
+          }
+          kicker
+          titre
+        }
+        probleme {
+          kicker
+          titre
+          intro
+          cartes {
+            scope
+            tag_label
+            titre
+            texte
+          }
+        }
+        faites_le_test {
+          kicker
+          titre
+          texte
+          bouton_label
+          bouton_url
+          illustration {
+            id
+            url
+            alt
+            width
+            height
+          }
+        }
+        promesse {
+          kicker
+          titre
+          contenu
+          cartes {
+            icone {
+              id
+              url
+              alt
+              width
+              height
+            }
+            titre
+            texte
           }
         }
       }
@@ -68,6 +200,12 @@ export const pageQuery = graphql`
         metaDesc
         metaKeywords
         title
+      }
+      blocks {
+        ... on WpFaqBlockForGutenbergFaqBlock {
+          attributesJSON
+          saveContent
+        }
       }
     }
   }

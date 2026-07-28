@@ -1,0 +1,114 @@
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
+@use "../shared" as *;
+
+.tm-promesse {
+  @include tm-section;
+  background-color: $neutral-50;
+  background-image: url("../../../images/Background_Light.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+  background-blend-mode: multiply;
+  padding: 56px 59px;
+  // Le Figma élargit cette section à 1072px, contre 1024px ailleurs.
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 24px;
+
+    @media screen and (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  &__kicker {
+    @include tm-kicker;
+  }
+
+  &__divider {
+    @include tm-rainbow-divider;
+  }
+
+  &__titre {
+    @include tm-h2;
+
+    padding-top: 16px;
+    max-width: 496px;
+  }
+
+  &__contenu {
+    padding-top: 24px;
+    max-width: 496px;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-m;
+    line-height: 28.8px;
+    color: $neutral-900;
+
+    p {
+      margin: 0 0 28.8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-position: from-font;
+
+      &:hover,
+      &:focus-visible {
+        color: $text-color-link;
+      }
+    }
+  }
+
+  &__cartes {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__carte {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid $neutral-50;
+    border-radius: $radius-m;
+    background: #fff;
+    box-shadow: $shadow-md;
+    @include breakpoint(mobile) {
+      flex-direction: column;
+    }
+  }
+
+  &__carte-icone {
+    flex: none;
+    width: 34.492px;
+    height: 34.492px;
+  }
+
+  &__carte-titre {
+    margin: 0;
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 700;
+    font-size: $font-size-m;
+    line-height: 18.4px;
+    color: $neutral-900;
+  }
+
+  &__carte-texte {
+    margin: 0;
+    padding-top: 4px;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-s;
+    line-height: 25.2px;
+    color: $neutral-900;
+  }
+}

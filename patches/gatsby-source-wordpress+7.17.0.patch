@@ -1,0 +1,35 @@
+diff --git a/node_modules/gatsby-source-wordpress/dist/steps/source-nodes/create-nodes/process-node.js b/node_modules/gatsby-source-wordpress/dist/steps/source-nodes/create-nodes/process-node.js
+index 7f073e9..38f730f 100644
+--- a/node_modules/gatsby-source-wordpress/dist/steps/source-nodes/create-nodes/process-node.js
++++ b/node_modules/gatsby-source-wordpress/dist/steps/source-nodes/create-nodes/process-node.js
+@@ -281,14 +281,12 @@ const getCheerioElementsFromMatches = ({
+   imgTagMatches,
+   wpUrl
+ }) => imgTagMatches.map(getCheerioElementFromMatch(wpUrl)).filter(({
+-  cheerioImg: {
+-    attribs
+-  }
++  cheerioImg
+ }) => {
+-  if (!attribs.src) {
++  if (!cheerioImg || !cheerioImg.attribs || !cheerioImg.attribs.src) {
+     return false;
+   }
+-  return (0, _validUrl.isWebUri)(encodeURI(attribs.src));
++  return (0, _validUrl.isWebUri)(encodeURI(cheerioImg.attribs.src));
+ });
+ const getLargestSizeFromSizesAttribute = sizesString => {
+   const sizesStringsArray = sizesString.split(`,`);
+diff --git a/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js b/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js
+index 828e3c3..5139222 100644
+--- a/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js
++++ b/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js
+@@ -29,7 +29,7 @@ const moduleHelpers = {
+   }
+ };
+ exports.moduleHelpers = moduleHelpers;
+-const errorIs500ish = e => e.message.includes(`Request failed with status code 50`) && (e.message.includes(`502`) || e.message.includes(`503`) || e.message.includes(`500`) || e.message.includes(`504`));
++const errorIs500ish = e => e.message.includes(`Request failed with status code 50`) && (e.message.includes(`502`) || e.message.includes(`503`) || e.message.includes(`500`) || e.message.includes(`504`)) || e.message.includes(`Request failed with status code 403`);
+ const handleErrorOptions = async ({
+   variables,
+   query,

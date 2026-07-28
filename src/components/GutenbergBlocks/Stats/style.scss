@@ -1,0 +1,71 @@
+@use "../../../style/vars" as *;
+@use "../../../style/mixins" as *;
+@use "../shared" as *;
+
+.tm-stats {
+  // Dégradé propre à ce bandeau (Gradient/Custom dans le Figma) : plus sombre
+  // en haut que le starfield des autres sections.
+  max-width: 1134px;
+  margin-inline: auto;
+  margin-bottom: 100px;
+  padding-block: 48px;
+  border-radius: 36px;
+  background: linear-gradient(
+    to bottom,
+    #110a2b 38.678%,
+    $neutral-900 66.823%,
+    $neutral-800 100%
+  );
+
+  &__grille {
+    @include tm-container(1072px);
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 0;
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__carte {
+    padding: 24px;
+    border-radius: $radius-m;
+    background: rgba(198, 189, 226, 0.1);
+  }
+
+  &__valeur {
+    margin: 0;
+    font-family: "NeueMachina", sans-serif;
+    font-weight: 700;
+    font-size: $font-size-xxxl; // 48px
+    line-height: 1;
+
+    &--dev {
+      color: $dev-300;
+    }
+
+    &--project {
+      color: $project-400;
+    }
+
+    &--design {
+      color: $design-400;
+    }
+
+    &--com {
+      color: $com-300;
+    }
+  }
+
+  &__libelle {
+    margin: 8px 0 0;
+    font-family: "SpaceMono", monospace;
+    font-size: $font-size-s;
+    line-height: 21px;
+    color: $neutral-0;
+    opacity: 0.85;
+  }
+}
