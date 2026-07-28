@@ -1,9 +1,10 @@
 import "./ExpertisesSection.scss";
 
+import Button from "../UI/Button/Button";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
-import { usePostExpertises } from "../../hooks/use-custom-expertises";
 import { sanitizeHtml } from "../../utils/sanitize";
+import { usePostExpertises } from "../../hooks/use-custom-expertises";
 
 type Props = {
   section: {
@@ -13,15 +14,19 @@ type Props = {
 };
 
 interface Expertise {
-  title: string
-  category: string
-  slug: string
-  desc: string
-  link_label: string
+  title: string;
+  category: string;
+  slug: string;
+  desc: string;
+  link_label: string;
   featuredImage?: {
-    mediaItemUrl: string
-    altText: string
-  }
+    mediaItemUrl: string;
+    altText: string;
+  };
+  descriptionExpertise: {
+    titre: string;
+    description: string;
+  };
 }
 
 export default function ExpertisesSection({ section }: Props) {
@@ -29,36 +34,34 @@ export default function ExpertisesSection({ section }: Props) {
   return (
     <div className="ExpertisesSection">
       <div className="section__header">
-        <h2 className="h3">{section.subtitle}</h2>
-        <div className="divider mb-4"></div>
+        <p className="kicker">{section.subtitle}</p>
+        <div className="divider mb-4" aria-hidden="true"></div>
         <h2>{section.title}</h2>
       </div>
       <div className="ExpertisesSection__content">
-        {expertises.map((expertise: Expertise) => (
+        {expertises.slice(0, 4).map((expertise: Expertise) => (
           <div
             className={`ExpertisesSection__card ${expertise.category}`}
             key={expertise.title}
           >
             <div>
-              {expertise.featuredImage && (
-                <div className="ExpertisesSection__card-image">
-                  <LazyLoadImage
-                    src={expertise.featuredImage.mediaItemUrl}
-                    alt={expertise.featuredImage.altText}
-                    effect="blur"
-                  />
-                </div>
-              )}
-              <h3 className="h2">{expertise.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(expertise.desc) }} />
+              <h3>{expertise.descriptionExpertise?.titre}</h3>
+              <div
+                className="ExpertisesSection__card-desc"
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeHtml(expertise.desc),
+                }}
+              />
             </div>
-
-            <a
-              href={`/expertise/${expertise.slug}`}
-              className={`btn btn-${expertise.category}`}
+            <Button
+              type="link"
+              label={expertise.link_label}
+              target="_self"
+              className={`btn-link btn-light`}
+              url={`/expertise/${expertise.slug}`}
             >
               {expertise.link_label}
-            </a>
+            </Button>
           </div>
         ))}
       </div>

@@ -2,31 +2,47 @@
 @use "../../style/mixins" as *;
 .ExpertisesSection {
   margin-bottom: $spacing-xl;
+  background-color: $neutral-900;
+  background-image: url("../../images/Background_Dark.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+  padding: $spacing-xl;
+  color: #fff;
+  text-align: center;
+  .divider {
+    margin: 0.5rem auto;
+  }
   &__content {
-    display: flex;
+    display: grid;
     gap: $spacing-m;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     @include breakpoint(mobile) {
       flex-direction: column;
     }
   }
   &__card {
-    border-radius: $radius-m;
-    padding: $spacing-m;
+    text-align: left;
+    border-radius: 1.5rem;
+    border: 2px solid #4d4073;
+    background: rgba(237, 234, 246, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
+    padding: $spacing-m;
     flex-direction: column;
-    justify-content: space-between;
     align-items: flex-start;
-    align-self: stretch;
-    &.design {
-      background-color: $design-50;
-    }
-    &.dev {
-      background-color: $dev-50;
-    }
+    gap: $spacing-m;
+    justify-self: stretch;
     &-image {
       img {
         width: 200px;
       }
+    }
+    &-desc {
+      margin-bottom: 1.5rem;
     }
   }
 }
