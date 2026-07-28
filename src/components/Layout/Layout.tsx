@@ -6,12 +6,14 @@ import React, { useEffect, useRef, useState } from "react";
 import ClickSpark from "../ClickSpark/ClickSpark";
 import Footer from "../Footer/Footer";
 import Header from "../Header";
+import ShareButtons from "../ShareButtons/ShareButtons";
 
 type Props = {
   type?: string;
+  shareTitle?: string;
   children: React.ReactNode;
 };
-export default function Layout({ type, children }: Props) {
+export default function Layout({ type, shareTitle, children }: Props) {
   const footerRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const [footerReached, setFooterReached] = useState(false);
@@ -82,6 +84,9 @@ export default function Layout({ type, children }: Props) {
           <div className="container">{children}</div>
         )}
       </main>
+      {type === "post" && (
+        <ShareButtons title={shareTitle || ""} hidden={footerReached} />
+      )}
       <div ref={footerRef}>
         <Footer />
       </div>

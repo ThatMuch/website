@@ -177,7 +177,7 @@ const Post = ({ data }) => {
     });
   };
   return (
-    <Layout type="post">
+    <Layout type="post" shareTitle={post.title}>
       <div className={categorySlug}>
         <Seo
           title={post.title}
