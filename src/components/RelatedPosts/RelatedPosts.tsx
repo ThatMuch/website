@@ -19,7 +19,7 @@ export default function RelatedPosts({
   const posts = useSitePosts(category);
   posts.splice(
     posts.findIndex((post: PostType) => post.id === currentPostId),
-    1
+    1,
   );
   if (posts.length === 0) return null;
   return (
@@ -27,7 +27,7 @@ export default function RelatedPosts({
       <h3 className="RelatedPosts__title">{title}</h3>
       <div className="divider mb-4"></div>
       <div className="RelatedPosts__grid">
-        {posts?.slice(0, 3).map((post: PostType, index) => (
+        {posts?.slice(0, 4).map((post: PostType, index) => (
           <div key={index}>
             <PostCard
               title={post?.title}
