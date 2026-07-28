@@ -13,7 +13,7 @@ header.header {
   background-color: rgba($neutral-0, 0.2);
   backdrop-filter: blur(5px);
   border-radius: $radius-l;
-  padding: $spacing-s $spacing-s 0 $spacing-s;
+  padding: $spacing-s;
 
   @include breakpoint(mobile) {
     width: 100%;
