@@ -48,7 +48,8 @@ export type CategoryType = {
   name: string;
   slug: string;
   count?: number;
-  parentId?: string | null;
+  categoryId?: number | null;
+  parentDatabaseId?: number | null;
   templates?: {
     nodes: {
       title: string;

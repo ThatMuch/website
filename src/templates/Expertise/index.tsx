@@ -1,13 +1,13 @@
 import { PageProps, graphql } from "gatsby";
+import React, { useMemo } from "react";
 
 import AllPosts from "../../components/AllPosts/AllPosts";
-import ContactCTA from "../../components/ContactCTA/ContactCTA";
 import Layout from "../../components/Layout";
 import PageHeader from "../../components/PageHeader";
-import React from "react";
 import Seo from "../../components/Seo";
 import type { ThatmuchBlock } from "../../components/GutenbergBlocks/types";
 import ThatmuchBlocks from "../../components/GutenbergBlocks/ThatmuchBlocks";
+import { useSitePosts } from "../../hooks/use-site-posts";
 
 interface ExpertiseData {
   wpExpertise: {
@@ -49,6 +49,33 @@ interface ExpertiseData {
 
 export default function Expertise({ data }: PageProps<ExpertiseData>) {
   const page = data.wpExpertise;
+  const allSitePosts = useSitePosts();
+
+  const posts = useMemo(() => {
+    const categories = page.categories?.nodes ?? [];
+    if (categories.length === 0) return [];
+
+    const childSlugs = new Set(
+      categories.slice(1).map((cat) => cat.slug).filter(Boolean)
+    );
+    const parentSlug = categories[0]?.slug;
+
+    let matchedPosts: typeof allSitePosts = [];
+
+    if (childSlugs.size > 0) {
+      matchedPosts = allSitePosts.filter((post) =>
+        post.categories?.nodes?.some((cat) => childSlugs.has(cat.slug))
+      );
+    }
+
+    if (matchedPosts.length === 0 && parentSlug) {
+      matchedPosts = allSitePosts.filter((post) =>
+        post.categories?.nodes?.some((cat) => cat.slug === parentSlug)
+      );
+    }
+
+    return matchedPosts.slice(0, 4);
+  }, [allSitePosts, page.categories]);
 
   return (
     <Layout>
@@ -64,11 +91,7 @@ export default function Expertise({ data }: PageProps<ExpertiseData>) {
         />
 
         <ThatmuchBlocks blocks={page.thatmuchBlocks} />
-        <AllPosts
-          category={page.categories.nodes[0]?.slug}
-          title="Nos articles sur le sujet"
-          isHome
-        />
+        <AllPosts posts={posts} title="Nos articles sur le sujet" isHome />
       </div>
     </Layout>
   );

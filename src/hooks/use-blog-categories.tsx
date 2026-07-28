@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-export const useBlogCategories = () => {
+export const useBlogCategories = (parentSlug?: string) => {
   const data = useStaticQuery(graphql`
     query GET_CATEGORIES {
       allWpCategory(filter: { name: { nin: ["Uncategorized"] } }) {
@@ -9,7 +9,8 @@ export const useBlogCategories = () => {
           slug
           count
           link
-          parentId
+          categoryId
+          parentDatabaseId
           posts {
             nodes {
               id
@@ -39,7 +40,22 @@ export const useBlogCategories = () => {
       }
     }
   `);
-  return data.allWpCategory.nodes.filter(
-    (category: { parentId: string | null }) => !category.parentId
+  const categories = data.allWpCategory.nodes;
+
+  if (parentSlug) {
+    const parent = categories.find(
+      (category: { slug: string }) => category.slug === parentSlug
+    );
+    return parent
+      ? categories.filter(
+          (category: { parentDatabaseId: number | null }) =>
+            category.parentDatabaseId === parent.categoryId
+        )
+      : [];
+  }
+
+  return categories.filter(
+    (category: { parentDatabaseId: number | null }) =>
+      !category.parentDatabaseId
   );
 };
