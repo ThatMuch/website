@@ -11,15 +11,15 @@
   left: 0;
   bottom: 0;
   z-index: 1000;
-  background: $gradient_rainbow;
+  background-image: $gradient_rainbow;
+  background-attachment: fixed;
+  background-size: 100vw 10px;
   display: block;
   width: 100vw;
   height: 10px;
-  transform-origin: left;
   animation: fill linear;
   animation-duration: auto;
   animation-timeline: scroll(root);
-  animation-range-end: var(--bar-range-end, 100%);
   opacity: 1;
   transition: opacity 0.3s ease;
 

@@ -40,7 +40,8 @@ export default function Layout({ type, children }: Props) {
 
     const updateRange = () => {
       const footerTop = footerEl.getBoundingClientRect().top + window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll <= 0) return;
 
       const rangeEnd = footerTop - window.innerHeight;
