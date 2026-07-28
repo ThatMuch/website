@@ -5,3 +5,26 @@
   width: 96px;
   background: $gradient_rainbow;
 }
+
+.bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: $gradient_rainbow;
+  display: block;
+  width: 100vw;
+  height: 10px;
+  transform-origin: left;
+  animation: fill linear;
+  animation-duration: auto;
+  animation-timeline: scroll(root);
+  animation-range-end: var(--bar-range-end, 100%);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
