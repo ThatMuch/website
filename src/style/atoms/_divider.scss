@@ -17,8 +17,10 @@
   display: block;
   width: 100vw;
   height: 10px;
-  animation: fill linear;
+  animation-name: fill;
+  animation-timing-function: linear;
   animation-duration: auto;
+  /* Keep animation-timeline separate from the animation shorthand to prevent cssnano from overriding it */
   animation-timeline: scroll(root);
   opacity: 1;
   transition: opacity 0.3s ease;
