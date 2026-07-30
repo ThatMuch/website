@@ -18,12 +18,18 @@ export default function PostTOC() {
 
   const scrollToHeading = (id: string) => {
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+    if (!element) return;
+
+    // scrollIntoView lands the heading right under the fixed header, out of
+    // view — offset by the header's real height (+ a little breathing room)
+    // instead of a hardcoded value, since it varies with content/breakpoint.
+    const headerHeight =
+      document.querySelector("header.header")?.getBoundingClientRect().height ??
+      0;
+    const top =
+      element.getBoundingClientRect().top + window.scrollY - headerHeight - 30;
+
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   if (tocItems.length === 0) {
