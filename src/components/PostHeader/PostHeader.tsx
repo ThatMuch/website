@@ -14,6 +14,9 @@ type Props = {
   };
   category: string;
   postDate: string;
+  dateISO: string;
+  dateModified?: string;
+  dateModifiedISO?: string;
 };
 
 export default function PostHeader({
@@ -21,6 +24,9 @@ export default function PostHeader({
   author,
   category,
   postDate,
+  dateISO,
+  dateModified,
+  dateModifiedISO,
 }: Props) {
   return (
     <div className={`PostHeader PostHeader--${category.toLowerCase()}`}>
@@ -43,7 +49,16 @@ export default function PostHeader({
           />
           <div className="PostHeader__author">
             <p>{author.name} </p>
-            <p>{postDate} </p>
+            <p>
+              <time dateTime={dateISO}>{postDate}</time>
+              {dateModified && dateModifiedISO && (
+                <>
+                  {" "}
+                  — mis à jour le{" "}
+                  <time dateTime={dateModifiedISO}>{dateModified}</time>
+                </>
+              )}
+            </p>
           </div>
         </div>
       </div>

@@ -20,6 +20,13 @@ const Post = ({ data, location = {} as { pathname?: string } }) => {
   const { siteUrl } = useSiteSeo();
   const authorId = `${siteUrl}/#/schema/person/${post.author.node.slug}`;
   const authorLinkedIn = withProtocol(post.author.node.seo?.social?.linkedIn);
+  // Only surface "mis à jour le" when it's a real edit made after publication.
+  // For scheduled posts, modifiedGmt can predate date (last saved as a draft
+  // before the scheduled publish time) — a plain string/date inequality would
+  // wrongly read that as an update.
+  const wasUpdated =
+    post.date !== post.dateModifiedDisplay &&
+    new Date(post.dateModifiedISO) > new Date(post.dateISO);
 
   return (
     <Layout type="post" shareTitle={post.title}>
@@ -58,6 +65,9 @@ const Post = ({ data, location = {} as { pathname?: string } }) => {
           author={post.author.node}
           category={categorySlug}
           postDate={post.date}
+          dateISO={post.dateISO}
+          dateModified={wasUpdated ? post.dateModifiedDisplay : undefined}
+          dateModifiedISO={wasUpdated ? post.dateModifiedISO : undefined}
         />
         <PostContent blocks={blocks} />
         <RelatedPosts category={categorySlug} currentPostId={post.id} />
@@ -132,6 +142,7 @@ export const pageQuery = graphql`
       }
       date(formatString: "DD/MM/YYYY")
       dateISO: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+      dateModifiedDisplay: modifiedGmt(formatString: "DD/MM/YYYY")
       dateModifiedISO: modifiedGmt(formatString: "YYYY-MM-DDTHH:mm:ssZ")
       author {
         node {
