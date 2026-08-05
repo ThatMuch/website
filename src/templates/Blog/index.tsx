@@ -6,6 +6,7 @@ import Newsletter from "../../components/Newsletter";
 import PageHeader from "../../components/PageHeader";
 import React from "react";
 import Seo from "../../components/Seo";
+import { useSiteSeo } from "../../hooks/use-site-seo";
 
 interface BlogPageProps extends PageProps {
   data: {
@@ -25,6 +26,7 @@ interface BlogPageProps extends PageProps {
 
 const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
   const page = data.wpPage;
+  const { siteUrl } = useSiteSeo();
   return (
     <Layout type="blog">
       <Seo
@@ -33,6 +35,13 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
         image={page?.featuredImage?.node?.mediaItemUrl}
         pathname="/blog"
         currentPage={page.title}
+        schema={{
+          "@type": "CollectionPage",
+          name: page.title,
+          description: page.seo.metaDesc,
+          url: `${siteUrl}/blog`,
+          isPartOf: { "@id": `${siteUrl}/#website` },
+        }}
       />
       <PageHeader title={page.title} description={page.seo.metaDesc} />
       <AllPosts filter />
