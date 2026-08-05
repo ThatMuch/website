@@ -28,6 +28,34 @@ const Post = ({ data, location = {} as { pathname?: string } }) => {
     post.date !== post.dateModifiedDisplay &&
     new Date(post.dateModifiedISO) > new Date(post.dateISO);
 
+  // Podcast episodes are plain WpPost entries in the "podcast" category —
+  // give them PodcastEpisode + partOfSeries instead of a generic BlogPosting
+  // so they're correctly linked to the PodcastSeries node on /ipeach/.
+  const isPodcastEpisode = categorySlug === "podcast";
+  const articleSchema = isPodcastEpisode
+    ? {
+        "@type": "PodcastEpisode",
+        name: post.title,
+        url: `${siteUrl}${location.pathname || ""}`,
+        image: post.featuredImage?.node?.mediaItemUrl
+          ? [post.featuredImage.node.mediaItemUrl]
+          : undefined,
+        datePublished: post.dateISO,
+        dateModified: post.dateModifiedISO || post.dateISO,
+        author: { "@id": authorId },
+        partOfSeries: { "@id": `${siteUrl}/ipeach/#podcastseries` },
+      }
+    : {
+        "@type": "BlogPosting",
+        headline: post.title,
+        image: post.featuredImage?.node?.mediaItemUrl
+          ? [post.featuredImage.node.mediaItemUrl]
+          : undefined,
+        datePublished: post.dateISO,
+        dateModified: post.dateModifiedISO || post.dateISO,
+        author: { "@id": authorId },
+      };
+
   return (
     <Layout type="post" shareTitle={post.title}>
       <div className={categorySlug}>
@@ -47,16 +75,7 @@ const Post = ({ data, location = {} as { pathname?: string } }) => {
               image: post.author.node.avatar?.url,
               sameAs: authorLinkedIn ? [authorLinkedIn] : undefined,
             },
-            {
-              "@type": "BlogPosting",
-              headline: post.title,
-              image: post.featuredImage?.node?.mediaItemUrl
-                ? [post.featuredImage.node.mediaItemUrl]
-                : undefined,
-              datePublished: post.dateISO,
-              dateModified: post.dateModifiedISO || post.dateISO,
-              author: { "@id": authorId },
-            },
+            articleSchema,
           ]}
         />
 

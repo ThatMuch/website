@@ -28,6 +28,7 @@ const Podcast = ({ data }) => {
         currentPage={title}
         schema={{
           "@type": "PodcastSeries",
+          "@id": `${siteUrl}/ipeach/#podcastseries`,
           name: title,
           description: page.seo.metaDesc,
           image: mediaItemUrl,
