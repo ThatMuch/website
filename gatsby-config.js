@@ -62,6 +62,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-robots-txt`,
+	  `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     {
       resolve: "gatsby-source-wordpress",

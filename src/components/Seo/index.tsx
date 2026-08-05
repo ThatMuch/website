@@ -64,7 +64,7 @@ const Seo: React.FC<SEOProps> = ({
     url: siteUrl,
     logo: {
       "@type": "ImageObject",
-      url: `${siteUrl}/icon-512x512.png`,
+      url: `${siteUrl}/icons/icon-512x512.png`,
     },
     sameAs: SOCIAL_LINKS,
   };
