@@ -9,6 +9,7 @@ import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { sanitizeHtml } from "../../utils/sanitize";
 import { useSitePosts } from "../../hooks/use-site-posts";
+import { useSiteSeo } from "../../hooks/use-site-seo";
 
 const Podcast = ({ data }) => {
   const page = data.wpPage;
@@ -16,10 +17,29 @@ const Podcast = ({ data }) => {
   const { descriptionHeroSection, sousTitre } = detailPagePodcast;
   const { mediaItemUrl, altText } = featuredImage.node;
   const posts = useSitePosts("podcast");
+  const { siteUrl } = useSiteSeo();
 
   return (
     <Layout type="podcast">
-      <Seo title={title} description={page.seo.metaDesc} />
+      <Seo
+        title={title}
+        description={page.seo.metaDesc}
+        pathname="/ipeach"
+        currentPage={title}
+        schema={{
+          "@type": "PodcastSeries",
+          name: title,
+          description: page.seo.metaDesc,
+          image: mediaItemUrl,
+          url: `${siteUrl}/ipeach`,
+          sameAs: [
+            "https://open.spotify.com/show/5WyDmb1QFI1BmryUE0f8Y4",
+            "https://podcasts.apple.com/fr/podcast/ipeach/id1771820680?l=fr",
+            "https://music.amazon.com/podcasts/b9f41f0c-4082-463b-8f95-bfbf38ea47ba/ipeach",
+            "https://www.youtube.com/@ipeach_tv",
+          ],
+        }}
+      />
       <div className="row mb-5">
         <div className="col-md-6 order-2 order-md-1">
           <h2 className="h3">{sousTitre}</h2>

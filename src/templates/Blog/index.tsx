@@ -31,6 +31,8 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
         title={page.title}
         description={page.seo.metaDesc}
         image={page?.featuredImage?.node?.mediaItemUrl}
+        pathname="/blog"
+        currentPage={page.title}
       />
       <PageHeader title={page.title} description={page.seo.metaDesc} />
       <AllPosts filter />

@@ -5,11 +5,14 @@ import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
+import { useSiteSeo } from "../../hooks/use-site-seo";
 
-const Post = ({ data }) => {
+const Post = ({ data, location = {} as { pathname?: string } }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
+  const { siteUrl } = useSiteSeo();
+  const authorId = `${siteUrl}/#/schema/person/${post.author.node.slug}`;
 
   return (
     <Layout type="post" shareTitle={post.title}>
@@ -19,6 +22,27 @@ const Post = ({ data }) => {
           description={post.seo.metaDesc}
           image={post.featuredImage?.node?.mediaItemUrl}
           type="article"
+          pathname={location.pathname}
+          breadcrumbs={[{ pathname: "/blog", label: "Blog" }]}
+          currentPage={post.title}
+          schema={[
+            {
+              "@type": "Person",
+              "@id": authorId,
+              name: post.author.node.name,
+              image: post.author.node.avatar?.url,
+            },
+            {
+              "@type": "BlogPosting",
+              headline: post.title,
+              image: post.featuredImage?.node?.mediaItemUrl
+                ? [post.featuredImage.node.mediaItemUrl]
+                : undefined,
+              datePublished: post.dateISO,
+              dateModified: post.dateModifiedISO || post.dateISO,
+              author: { "@id": authorId },
+            },
+          ]}
         />
 
         <PostHeader
@@ -99,9 +123,12 @@ export const pageQuery = graphql`
         title
       }
       date(formatString: "DD/MM/YYYY")
+      dateISO: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+      dateModifiedISO: modifiedGmt(formatString: "YYYY-MM-DDTHH:mm:ssZ")
       author {
         node {
           name
+          slug
           avatar {
             url
           }
