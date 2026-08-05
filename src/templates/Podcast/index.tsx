@@ -19,7 +19,12 @@ const Podcast = ({ data }) => {
 
   return (
     <Layout type="podcast">
-      <Seo title={title} description={page.seo.metaDesc} />
+      <Seo
+        title={title}
+        description={page.seo.metaDesc}
+        pathname="/ipeach"
+        currentPage={title}
+      />
       <div className="row mb-5">
         <div className="col-md-6 order-2 order-md-1">
           <h2 className="h3">{sousTitre}</h2>

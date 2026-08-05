@@ -11,7 +11,16 @@ export default function Template({ data }) {
   const page = data.wpTemplate;
   return (
     <Layout type="template">
-      <Seo title={page.title} description={page.seo.metaDesc} />
+      <Seo
+        title={page.title}
+        description={page.seo.metaDesc}
+        pathname={`/ressources/templates/${page.slug}`}
+        breadcrumbs={[
+          { pathname: `/ressources`, label: "Ressources" },
+          { pathname: `/ressources/templates`, label: "Templates" },
+        ]}
+        currentPage={page.title}
+      />
       <div className="template-content">
         <Breadcrumb
           crumbs={[

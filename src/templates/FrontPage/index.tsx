@@ -14,7 +14,7 @@ const FrontPage = ({ data }) => {
   const { heroSection, pageBuilder } = data;
   return (
     <Layout type="frontpage">
-      <Seo />
+      <Seo pathname="/" />
       <HeroSection data={heroSection} />
       <div className="container">
       {pageBuilder.map((section, index) => {

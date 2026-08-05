@@ -6,7 +6,7 @@ import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 
-const Post = ({ data }) => {
+const Post = ({ data, location = {} as { pathname?: string } }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
@@ -19,6 +19,22 @@ const Post = ({ data }) => {
           description={post.seo.metaDesc}
           image={post.featuredImage?.node?.mediaItemUrl}
           type="article"
+          pathname={location.pathname}
+          breadcrumbs={[{ pathname: "/blog", label: "Blog" }]}
+          currentPage={post.title}
+          schema={{
+            "@type": "BlogPosting",
+            headline: post.title,
+            image: post.featuredImage?.node?.mediaItemUrl
+              ? [post.featuredImage.node.mediaItemUrl]
+              : undefined,
+            datePublished: post.dateISO,
+            dateModified: post.dateModifiedISO || post.dateISO,
+            author: {
+              "@type": "Person",
+              name: post.author.node.name,
+            },
+          }}
         />
 
         <PostHeader
@@ -99,6 +115,8 @@ export const pageQuery = graphql`
         title
       }
       date(formatString: "DD/MM/YYYY")
+      dateISO: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
+      dateModifiedISO: modifiedGmt(formatString: "YYYY-MM-DDTHH:mm:ssZ")
       author {
         node {
           name

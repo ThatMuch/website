@@ -16,6 +16,8 @@ const Ressources = ({ data }) => {
         title={page?.title}
         description={page?.seo.metaDesc}
         image={page?.featuredImage?.node?.mediaItemUrl}
+        pathname="/ressources"
+        currentPage={page?.title}
       />
       <Breadcrumb currentPage={page.title} />
       <PageHeader title={page.title} description={page.seo.metaDesc} />

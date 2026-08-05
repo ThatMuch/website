@@ -79,7 +79,12 @@ export default function Expertise({ data }: PageProps<ExpertiseData>) {
 
   return (
     <Layout>
-      <Seo title={page.title} description={page.seo.metaDesc} />
+      <Seo
+        title={page.title}
+        description={page.seo.metaDesc}
+        pathname={`/expertise/${page.slug}`}
+        currentPage={page.title}
+      />
       <div className="expertise-content">
         <PageHeader
           title={page.title}

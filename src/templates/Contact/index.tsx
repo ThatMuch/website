@@ -9,11 +9,17 @@ import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { sanitizeHtml } from "../../utils/sanitize";
 
-const Contact = ({ data }) => {
+const Contact = ({ data, location = {} as { pathname?: string } }) => {
   const page = data.wpPage;
 
   return (
     <Layout>
+      <Seo
+        title={page.title}
+        description={page.seo?.metaDesc}
+        pathname={location.pathname}
+        currentPage={page.title}
+      />
       <div className="contact-content">
         <ContactForm hubspotForm={page.hubspotForm} />
         {page.content && (
@@ -33,6 +39,11 @@ export const pageQuery = graphql`
         portalid
         sousTitre
         titre
+      }
+      seo {
+        metaDesc
+        metaKeywords
+        title
       }
     }
   }

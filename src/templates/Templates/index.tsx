@@ -25,7 +25,13 @@ export default function Templates({ data }: Props) {
   const page = data?.wpPage;
   return (
     <Layout>
-      <Seo title={page.seo.title} description={page.seo.metaDesc} />
+      <Seo
+        title={page.seo.title}
+        description={page.seo.metaDesc}
+        pathname="/ressources/templates"
+        breadcrumbs={[{ pathname: `/ressources`, label: "Ressources" }]}
+        currentPage={page.title}
+      />
       <Breadcrumb
         crumbs={[{ pathname: `/ressources`, label: "Ressources" }]}
         currentPage={page.title}
