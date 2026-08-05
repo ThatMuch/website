@@ -28,7 +28,16 @@ jest.mock('gatsby', () => {
         })
     ),
     StaticQuery: jest.fn(),
-    useStaticQuery: jest.fn(),
+    useStaticQuery: jest.fn().mockReturnValue({
+      site: {
+        siteMetadata: {
+          defaultTitle: 'THATMUCH',
+          defaultDescription: 'Default description',
+          siteUrl: 'https://thatmuch.fr',
+          defaultImage: '/og_image_THATMUCH.png',
+        },
+      },
+    }),
   };
 });
 

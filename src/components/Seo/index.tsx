@@ -102,14 +102,24 @@ const Seo: React.FC<SEOProps> = ({
     });
   }
 
+  const ARTICLE_TYPES = ["Article", "BlogPosting", "NewsArticle"];
   const extraSchemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   extraSchemas.forEach((node) => {
-    graph.push({
-      publisher: { "@id": organizationId },
-      mainEntityOfPage: { "@type": "WebPage", "@id": seo.url },
-      url: seo.url,
-      ...node,
-    });
+    const nodeType = (node as Record<string, unknown>)["@type"];
+    const isArticle = Array.isArray(nodeType)
+      ? nodeType.some((t) => ARTICLE_TYPES.includes(t as string))
+      : ARTICLE_TYPES.includes(nodeType as string);
+
+    graph.push(
+      isArticle
+        ? {
+            publisher: { "@id": organizationId },
+            mainEntityOfPage: { "@type": "WebPage", "@id": seo.url },
+            url: seo.url,
+            ...node,
+          }
+        : node,
+    );
   });
 
   const jsonLd = {
