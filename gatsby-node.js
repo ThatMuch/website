@@ -1,4 +1,5 @@
 const path = require(`path`);
+const fs = require(`fs`);
 const crypto = require(`crypto`);
 const { slash } = require(`gatsby-core-utils`);
 
@@ -306,4 +307,86 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
+};
+
+// Generates a curated /llms.txt (see llmstxt.org) pointing AI crawlers to the
+// site's key sections instead of leaving them to guess from raw HTML. This is
+// an emerging, non-standardized convention — low cost, unconfirmed payoff —
+// so it stays a short, hand-picked map rather than a full content dump (the
+// sitemap and RSS feed already cover the exhaustive listing).
+exports.onPostBuild = async ({ graphql, reporter }) => {
+  const result = await graphql(`
+    query GET_LLMS_TXT_DATA {
+      site {
+        siteMetadata {
+          defaultDescription
+          siteUrl
+        }
+      }
+      allWpExpertise(sort: { title: ASC }) {
+        nodes {
+          title
+          slug
+        }
+      }
+      allWpPost(sort: { date: DESC }, limit: 10) {
+        nodes {
+          title
+          uri
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    reporter.warn(`Failed to build llms.txt: ${result.errors}`);
+    return;
+  }
+
+  const { site, allWpExpertise, allWpPost } = result.data;
+  const { defaultDescription, siteUrl } = site.siteMetadata;
+
+  const lines = [
+    `# THATMUCH`,
+    ``,
+    `> ${defaultDescription}`,
+    ``,
+    `THATMUCH est une agence web française spécialisée en design et développement front-end sur WordPress et SaaS.`,
+    ``,
+    `## Pages clés`,
+    ``,
+    `- [Accueil](${siteUrl}/): présentation de l'agence et de ses services`,
+    `- [Blog](${siteUrl}/blog/): articles sur le développement web, le design et le SEO`,
+    `- [iPeach, le podcast THATMUCH](${siteUrl}/ipeach/): épisodes du podcast`,
+    `- [Ressources & templates](${siteUrl}/ressources/templates/): templates téléchargeables`,
+    `- [Contact](${siteUrl}/contact/): prendre contact avec l'agence`,
+    ``,
+  ];
+
+  if (allWpExpertise.nodes.length > 0) {
+    lines.push(`## Expertises`, ``);
+    allWpExpertise.nodes.forEach((node) => {
+      lines.push(`- [${node.title}](${siteUrl}/expertise/${node.slug}/)`);
+    });
+    lines.push(``);
+  }
+
+  if (allWpPost.nodes.length > 0) {
+    lines.push(`## Articles récents`, ``);
+    allWpPost.nodes.forEach((node) => {
+      lines.push(`- [${node.title}](${siteUrl}${node.uri})`);
+    });
+    lines.push(``);
+  }
+
+  lines.push(
+    `## Optional`,
+    ``,
+    `- [Sitemap](${siteUrl}/sitemap-index.xml): index complet des pages`,
+    `- [Flux RSS](${siteUrl}/rss.xml): tous les articles du blog`,
+    ``,
+  );
+
+  fs.writeFileSync(path.join(`public`, `llms.txt`), lines.join(`\n`));
+  reporter.info(`Wrote llms.txt`);
 };
