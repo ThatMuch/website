@@ -7,12 +7,19 @@ import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { useSiteSeo } from "../../hooks/use-site-seo";
 
+// Yoast stores social profile URLs as free text; some are missing a protocol
+// (e.g. "www.linkedin.com/in/...") which would make them invalid absolute
+// URLs in JSON-LD.
+const withProtocol = (url?: string | null) =>
+  url && !/^https?:\/\//i.test(url) ? `https://${url}` : url;
+
 const Post = ({ data, location = {} as { pathname?: string } }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
   const { siteUrl } = useSiteSeo();
   const authorId = `${siteUrl}/#/schema/person/${post.author.node.slug}`;
+  const authorLinkedIn = withProtocol(post.author.node.seo?.social?.linkedIn);
 
   return (
     <Layout type="post" shareTitle={post.title}>
@@ -31,6 +38,7 @@ const Post = ({ data, location = {} as { pathname?: string } }) => {
               "@id": authorId,
               name: post.author.node.name,
               image: post.author.node.avatar?.url,
+              sameAs: authorLinkedIn ? [authorLinkedIn] : undefined,
             },
             {
               "@type": "BlogPosting",
@@ -131,6 +139,11 @@ export const pageQuery = graphql`
           slug
           avatar {
             url
+          }
+          seo {
+            social {
+              linkedIn
+            }
           }
         }
       }
