@@ -16,6 +16,12 @@ interface SEOProps {
   breadcrumbs?: Crumb[];
   currentPage?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  aggregateRating?: {
+    ratingValue: number;
+    ratingCount: number;
+    bestRating?: number;
+    worstRating?: number;
+  };
 }
 
 // Social profiles surfaced in the footer, mirrored here for the Organization schema's sameAs.
@@ -37,6 +43,7 @@ const Seo: React.FC<SEOProps> = ({
   breadcrumbs = [],
   currentPage,
   schema,
+  aggregateRating,
 }) => {
   const site = useSiteSeo();
 
@@ -64,9 +71,20 @@ const Seo: React.FC<SEOProps> = ({
     url: siteUrl,
     logo: {
       "@type": "ImageObject",
-      url: `${siteUrl}/icon-512x512.png`,
+      url: `${siteUrl}/icons/icon-512x512.png`,
     },
     sameAs: SOCIAL_LINKS,
+    ...(aggregateRating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: aggregateRating.ratingValue,
+            ratingCount: aggregateRating.ratingCount,
+            bestRating: aggregateRating.bestRating ?? 5,
+            worstRating: aggregateRating.worstRating ?? 1,
+          },
+        }
+      : {}),
   };
 
   const websiteSchema = {

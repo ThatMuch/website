@@ -10,11 +10,44 @@ import PortfolioSection from "../../components/PortfolioSection/PortfolioSection
 import React from "react";
 import Seo from "../../components/Seo";
 import Testimonials from "../../components/TestimonialsSection";
+import { useSiteCustomPosts } from "../../hooks/use-custom-testimonial";
+import { useSiteSeo } from "../../hooks/use-site-seo";
+
 const FrontPage = ({ data }) => {
   const { heroSection, pageBuilder } = data;
+  const { siteUrl } = useSiteSeo();
+  const { allGoogleReview, googlePlaceRating } = useSiteCustomPosts();
+
+  // Seuls les avis Google (tiers vérifié) sont balisés en Review : les
+  // témoignages saisis dans WordPress sont sélectionnés par l'agence et ne
+  // répondent pas aux critères de Google sur les avis indépendants.
+  const reviewSchemas = (allGoogleReview?.edges ?? []).map(({ node }) => ({
+    "@type": "Review",
+    itemReviewed: { "@id": `${siteUrl}/#organization` },
+    author: { "@type": "Person", name: node.authorName },
+    reviewBody: node.text,
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: node.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  }));
+
   return (
     <Layout type="frontpage">
-      <Seo pathname="/" />
+      <Seo
+        pathname="/"
+        schema={reviewSchemas}
+        aggregateRating={
+          googlePlaceRating?.rating
+            ? {
+                ratingValue: googlePlaceRating.rating,
+                ratingCount: googlePlaceRating.userRatingsTotal,
+              }
+            : undefined
+        }
+      />
       <HeroSection data={heroSection} />
       <div className="container">
       {pageBuilder.map((section, index) => {
