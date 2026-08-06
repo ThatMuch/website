@@ -8,6 +8,7 @@ import Seo from "../../components/Seo";
 import type { ThatmuchBlock } from "../../components/GutenbergBlocks/types";
 import ThatmuchBlocks from "../../components/GutenbergBlocks/ThatmuchBlocks";
 import { useSitePosts } from "../../hooks/use-site-posts";
+import { useSiteSeo } from "../../hooks/use-site-seo";
 
 interface ExpertiseData {
   wpExpertise: {
@@ -50,6 +51,7 @@ interface ExpertiseData {
 export default function Expertise({ data }: PageProps<ExpertiseData>) {
   const page = data.wpExpertise;
   const allSitePosts = useSitePosts();
+  const { siteUrl } = useSiteSeo();
 
   const posts = useMemo(() => {
     const categories = page.categories?.nodes ?? [];
@@ -79,7 +81,23 @@ export default function Expertise({ data }: PageProps<ExpertiseData>) {
 
   return (
     <Layout>
-      <Seo title={page.title} description={page.seo.metaDesc} />
+      <Seo
+        title={page.title}
+        description={page.seo.metaDesc}
+        pathname={`/expertise/${page.slug}`}
+        currentPage={page.title}
+        schema={{
+          "@type": "Service",
+          name: page.title,
+          description:
+            page.descriptionExpertise?.description ?? page.seo.metaDesc,
+          serviceType: page.categories?.nodes?.[0]?.name,
+          image: page.featuredImage?.node?.mediaItemUrl,
+          url: `${siteUrl}/expertise/${page.slug}`,
+          provider: { "@id": `${siteUrl}/#organization` },
+          areaServed: "FR",
+        }}
+      />
       <div className="expertise-content">
         <PageHeader
           title={page.title}

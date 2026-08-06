@@ -9,7 +9,11 @@ const spaceMonoRegular = assetUrl(require("./src/fonts/SpaceMono-Regular.woff2")
 // image de fond du hero (posée en CSS background-image), élément LCP
 const heroImage = assetUrl(require("./src/images/hero.webp"));
 
-exports.onRenderBody = ({ setHeadComponents }) => {
+exports.onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
+  // Filet de sécurité indépendant de react-helmet : garantit lang="fr" même
+  // si Helmet échoue à s'hydrater côté client (cf. SCHEMA-02).
+  setHtmlAttributes({ lang: "fr" });
+
   setHeadComponents([
     <link
       rel="preload"

@@ -23,7 +23,7 @@ module.exports = {
               path
             }
           }
-          allWpContentNode(filter: {nodeType: {in: ["Post", "Page"]}}) {
+          allWpContentNode(filter: {nodeType: {in: ["Post", "Page", "Expertise", "Template"]}}) {
             nodes {
               ... on WpPost {
                 uri
@@ -32,6 +32,15 @@ module.exports = {
               ... on WpPage {
                 uri
                 modifiedGmt
+              }
+              ... on WpExpertise {
+                uri
+                modifiedGmt
+              }
+              ... on WpTemplate {
+                uri
+                modifiedGmt
+                slug
               }
             }
           }
@@ -42,15 +51,37 @@ module.exports = {
           allSitePage: { nodes: allPages },
           allWpContentNode: { nodes: allWpNodes },
         }) => {
+          // Gatsby's page.path is always trailing-slash-normalized, but
+          // WPGraphQL's uri field isn't guaranteed to be — normalize both
+          // sides before joining, or lastmod silently fails to match.
+          const withTrailingSlash = (uri) =>
+            uri.endsWith("/") ? uri : `${uri}/`;
+
           const wpNodeMap = allWpNodes.reduce((acc, node) => {
-            const { uri } = node;
-            acc[uri] = node;
+            if (!node.uri) return acc;
+            acc[withTrailingSlash(node.uri)] = node;
+
+            return acc;
+          }, {});
+
+          // Individual templates are served at /ressources/templates/{slug}/,
+          // a frontend-only path that doesn't match their native WPGraphQL
+          // uri — fall back to a slug match for that one content type.
+          const templateBySlug = allWpNodes.reduce((acc, node) => {
+            if (node.slug) acc[node.slug] = node;
 
             return acc;
           }, {});
 
           return allPages.map((page) => {
-            return { ...page, ...wpNodeMap[page.path] };
+            const templateSlugMatch = page.path.match(
+              /^\/ressources\/templates\/([^/]+)\/$/,
+            );
+            const fallback = templateSlugMatch
+              ? templateBySlug[templateSlugMatch[1]]
+              : undefined;
+
+            return { ...page, ...(wpNodeMap[page.path] || fallback) };
           });
         },
         serialize: ({ path, modifiedGmt }) => {
@@ -62,6 +93,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-robots-txt`,
+	  `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
     {
       resolve: "gatsby-source-wordpress",

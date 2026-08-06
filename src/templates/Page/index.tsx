@@ -7,12 +7,17 @@ import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
 import { sanitizeHtml } from "../../utils/sanitize";
 
-const Page = ({ data }) => {
+const Page = ({ data, location = {} as { pathname?: string } }) => {
   const page = data.wpPage;
 
   return (
     <Layout>
-      <Seo title={page.title} description={page.seo.metaDesc} />
+      <Seo
+        title={page.title}
+        description={page.seo.metaDesc}
+        pathname={location.pathname}
+        currentPage={page.title}
+      />
       <div className="page-content">
         <h1>{page.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(page.content) }} />

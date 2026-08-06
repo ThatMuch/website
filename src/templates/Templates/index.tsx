@@ -5,6 +5,7 @@ import PageHeader from "../../components/PageHeader";
 import React from "react";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
+import { useSiteSeo } from "../../hooks/use-site-seo";
 
 type Props = {
   data: {
@@ -23,9 +24,23 @@ type Props = {
 
 export default function Templates({ data }: Props) {
   const page = data?.wpPage;
+  const { siteUrl } = useSiteSeo();
   return (
     <Layout>
-      <Seo title={page.seo.title} description={page.seo.metaDesc} />
+      <Seo
+        title={page.seo.title}
+        description={page.seo.metaDesc}
+        pathname="/ressources/templates"
+        breadcrumbs={[{ pathname: `/ressources`, label: "Ressources" }]}
+        currentPage={page.title}
+        schema={{
+          "@type": "CollectionPage",
+          name: page.title,
+          description: page.seo.metaDesc,
+          url: `${siteUrl}/ressources/templates`,
+          isPartOf: { "@id": `${siteUrl}/#website` },
+        }}
+      />
       <Breadcrumb
         crumbs={[{ pathname: `/ressources`, label: "Ressources" }]}
         currentPage={page.title}

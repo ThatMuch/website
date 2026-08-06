@@ -6,9 +6,11 @@ import Layout from "../../components/Layout";
 import PageHeader from "../../components/PageHeader";
 import Seo from "../../components/Seo";
 import { graphql } from "gatsby";
+import { useSiteSeo } from "../../hooks/use-site-seo";
 
 const Ressources = ({ data }) => {
   const page = data?.wpPage;
+  const { siteUrl } = useSiteSeo();
 
   return (
     <Layout>
@@ -16,6 +18,15 @@ const Ressources = ({ data }) => {
         title={page?.title}
         description={page?.seo.metaDesc}
         image={page?.featuredImage?.node?.mediaItemUrl}
+        pathname="/ressources"
+        currentPage={page?.title}
+        schema={{
+          "@type": "CollectionPage",
+          name: page?.title,
+          description: page?.seo.metaDesc,
+          url: `${siteUrl}/ressources`,
+          isPartOf: { "@id": `${siteUrl}/#website` },
+        }}
       />
       <Breadcrumb currentPage={page.title} />
       <PageHeader title={page.title} description={page.seo.metaDesc} />
