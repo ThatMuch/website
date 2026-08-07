@@ -14,16 +14,26 @@ import React from "react";
 import { Link } from "gatsby";
 import logoThatIsWhite from "../../images/THATMUCH_Logo_White.webp";
 import logoThatIsWhiteParallax from "../../images/LogoTHATMUCHWhite.webp";
+import { usePostExpertises } from "../../hooks/use-custom-expertises";
 import { useSiteMenu } from "../../hooks/use-site-menu";
 import { useSitePosts } from "../../hooks/use-site-posts";
 import { useSiteSeo } from "../../hooks/use-site-seo";
 
 type Props = {};
 
+type Expertise = {
+  title: string;
+  slug: string;
+  descriptionExpertise?: {
+    titre: string;
+  };
+};
+
 export default function Footer({}: Props) {
   const menuItems = useSiteMenu("GATSBY_FOOTER_MENU");
   const site = useSiteSeo();
   const posts = useSitePosts();
+  const expertises = usePostExpertises();
   type SocialLinksType = {
     name: string;
     icon: React.ReactNode;
@@ -115,12 +125,13 @@ export default function Footer({}: Props) {
           <div className="col-12 col-sm-3">
             <h4>Expertises</h4>
             <ul>
-                <li key="dev">
-                  <Link to="/expertise/developpement-front-end">Développement web</Link>
+              {expertises.map((expertise: Expertise) => (
+                <li key={expertise.slug}>
+                  <Link to={`/expertise/${expertise.slug}`}>
+                    {expertise.descriptionExpertise?.titre || expertise.title}
+                  </Link>
                 </li>
-                <li key="uxui">
-                  <Link to="/expertise/ux-ui-design">UX/UI</Link>
-                </li>
+              ))}
             </ul>
           </div>
           <div className="col-12 col-sm-3">
