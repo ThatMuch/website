@@ -35,15 +35,13 @@ export default function AllPosts({
     const rawPosts = customPosts ?? fetchedPosts;
     if (customPosts && selectedCategory) {
       return rawPosts.filter((post) =>
-        post.categories?.nodes?.some(
-          (cat) => cat.slug === selectedCategory,
-        ),
+        post.categories?.nodes?.some((cat) => cat.slug === selectedCategory),
       );
     }
     return rawPosts;
   }, [customPosts, fetchedPosts, selectedCategory]);
 
-  const postsPerPage: number = 8;
+  const postsPerPage: number = 9;
   const totalPages: number = Math.ceil((posts?.length || 0) / postsPerPage);
   const categories: CategoryType[] = useBlogCategories(parentCategory);
   const paginatedPosts = posts?.slice(
@@ -96,7 +94,14 @@ export default function AllPosts({
           ))}
         </div>
       )}
-      <div className="PostsGrid">
+      <div
+        className={`PostsGrid ${
+          (!isHome ? paginatedPosts?.length : Math.min(posts?.length || 0, 4)) <
+          3
+            ? "PostsGrid--few"
+            : ""
+        }`}
+      >
         {!isHome
           ? paginatedPosts?.map((post, index) => (
               <div key={index}>
@@ -109,7 +114,7 @@ export default function AllPosts({
                 />
               </div>
             ))
-          : posts?.slice(0, 4).map((post, index) => (
+          : posts?.slice(0, 3).map((post, index) => (
               <div key={index}>
                 <PostCard
                   title={post.title}
