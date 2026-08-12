@@ -201,6 +201,8 @@ export const pageQuery = graphql`
         }
         name
         saveContent
+        isDynamic
+        dynamicContent
         innerBlocks {
           name
           saveContent
