@@ -314,6 +314,9 @@ header.landing-header {
       img:not(:nth-child(2)) {
         width: 100px;
       }
+      @include breakpoint(mobile) {
+        display: none;
+      }
     }
   }
 

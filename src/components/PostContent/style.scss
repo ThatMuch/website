@@ -15,4 +15,20 @@
       display: none;
     }
   }
+
+  .post__content {
+    // Grid items default to min-width: auto, so wide content (e.g. WP
+    // tables) can force the track past the viewport instead of shrinking
+    // to it; the Layout wrapper then clips that overflow instead of
+    // scrolling, cutting text off on the right on mobile.
+    min-width: 0;
+    @media (max-width: 900px) {
+      overflow-x: auto;
+    }
+  }
+  table {
+    @include breakpoint(mobile) {
+      min-width: 700px;
+    }
+  }
 }
