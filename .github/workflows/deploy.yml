@@ -47,6 +47,8 @@ jobs:
           GATSBY_BREVO_API_KEY: ${{ secrets.GATSBY_BREVO_API_KEY }}
           GATSBY_BREVO_URL: ${{ secrets.GATSBY_BREVO_URL }}
           GATSBY_FIREBASE_COLLECTION_SUBMISSIONS: ${{ secrets.GATSBY_FIREBASE_COLLECTION_SUBMISSIONS }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
       - name: List Output
         run: ls -al public
       - name: Deploy via SSH (Hostinger)
