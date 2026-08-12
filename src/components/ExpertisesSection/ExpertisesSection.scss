@@ -1,7 +1,7 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 .ExpertisesSection {
-  margin-bottom: $spacing-xl;
+  margin-bottom: $spacing-xxl;
   background-color: $neutral-900;
   background-image: url("../../images/Background_Dark.webp");
   background-repeat: no-repeat;
@@ -11,6 +11,10 @@
   padding: $spacing-xl;
   color: #fff;
   text-align: center;
+  @include breakpoint(mobile) {
+    border-radius: 2.25rem;
+    padding: $spacing-m;
+  }
   .divider {
     margin: 0.5rem auto;
   }
@@ -21,6 +25,7 @@
     grid-template-rows: repeat(2, 1fr);
     @include breakpoint(mobile) {
       flex-direction: column;
+      display: flex;
     }
   }
   &__card {
