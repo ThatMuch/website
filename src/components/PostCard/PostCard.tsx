@@ -38,7 +38,11 @@ export default function PostCard({
 
     if (gatsbyImage) {
       return (
-        <GatsbyImage image={gatsbyImage} alt={image.altText || ""} className="mb-4" />
+        <GatsbyImage
+          image={gatsbyImage}
+          alt={image.altText || ""}
+          className="PostCard__image__gatsbyImage"
+        />
       );
     }
 
