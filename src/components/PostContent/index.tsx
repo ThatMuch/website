@@ -150,8 +150,15 @@ export default function PostContent({ blocks }: Props) {
             <div key={index}>{parse(block.saveContent, parseOptions)}</div>
           );
         default:
+          // Dynamic blocks (e.g. ACF blocks with a render_callback) have no
+          // saveContent — their markup is only available via dynamicContent.
           return (
-            <div key={index}>{parse(block.saveContent, parseOptions)}</div>
+            <div key={index}>
+              {parse(
+                block.isDynamic ? block.dynamicContent : block.saveContent,
+                parseOptions,
+              )}
+            </div>
           );
       }
     });
