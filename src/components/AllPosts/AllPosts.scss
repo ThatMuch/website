@@ -44,7 +44,7 @@
   grid-template-columns: repeat(auto-fit, minmax(242px, 1fr));
   margin-bottom: $spacing-xl;
   @include breakpoint(laptop) {
-    grid-template-columns: repeat(auto-fit, max(300px));
+    grid-template-columns: repeat(auto-fit, 1fr);
   }
 }
 
