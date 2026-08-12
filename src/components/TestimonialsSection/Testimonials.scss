@@ -1,6 +1,7 @@
 @use "../../style/vars" as *;
 @use "../../style/mixins" as *;
 .Testimonials {
+  margin-bottom: $spacing-xxl;
   &__header.section__header {
     display: flex;
     align-items: flex-end;
