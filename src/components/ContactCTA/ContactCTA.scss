@@ -13,6 +13,13 @@
   overflow: hidden;
   position: relative;
   margin-bottom: $spacing-xl;
+
+  // background-attachment: fixed decouples the image from the card's own
+  // scroll, giving a parallax feel. Skipped on mobile: iOS Safari support
+  // is unreliable and the effect is barely visible on short viewports anyway.
+  @include breakpoint(tablet) {
+    background-attachment: fixed;
+  }
   h1,
   h2,
   h3,

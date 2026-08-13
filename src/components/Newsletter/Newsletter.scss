@@ -7,6 +7,15 @@
   background: $neutral-900;
   color: #fff;
   width: 100%;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: #fff;
+  }
   @include breakpoint(mobile) {
     padding: $spacing-m;
     border-radius: $radius-m;
