@@ -168,6 +168,9 @@ export default function PostContent({ blocks, categories }: Props) {
   return (
     <div className="PostContent">
       <div className="post__content">{renderBlocks()}</div>
+      <div className="PostContent__mobileCta">
+        <PostCTA categories={categories} />
+      </div>
       <div className="PostContent__sidebar">
         <PostCTA categories={categories} />
         <PostTOC />

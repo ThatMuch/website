@@ -16,6 +16,14 @@
     }
   }
 
+  &__mobileCta {
+    display: none;
+
+    @media (max-width: 900px) {
+      display: block;
+    }
+  }
+
   .post__content {
     // Grid items default to min-width: auto, so wide content (e.g. WP
     // tables) can force the track past the viewport instead of shrinking
