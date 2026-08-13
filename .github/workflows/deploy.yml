@@ -2,6 +2,7 @@ name: Deploy React to Hostinger
 on:
   repository_dispatch: # C'est le signal de WordPress !
     types: [cms_update]
+  workflow_dispatch: # Permet de redeployer a la main depuis l'onglet Actions
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true # Annule le build précédent si un nouveau est lancé

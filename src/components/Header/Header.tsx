@@ -114,7 +114,7 @@ export default function Header() {
       <Button
         type="link"
         label={isMobile ? "Audit" : "Evaluez votre site web"}
-        url="https://audit-refonte.thatmuch.fr/"
+        url="/audit-refonte/"
         target="_blank"
         rel="noopener noreferrer"
         className="btn-primary"

@@ -47,7 +47,7 @@ export default function HeroSection({ data }: Props) {
           dangerouslySetInnerHTML={{ __html: sanitizeHtml(desc) }}
           />
           <div className="HeroSection__btn">
-            <a href="https://audit-refonte.thatmuch.fr/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+            <a href="/audit-refonte/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
               <div className="btn__overlay"></div>
               <div className="btn__content">
                 Evaluez votre site web

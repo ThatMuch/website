@@ -94,6 +94,10 @@ module.exports = {
     },
     `gatsby-plugin-robots-txt`,
 	  `gatsby-plugin-react-helmet`,
+    // NB: pas de configuration a ajouter pour /audit-refonte/. La NavigationRoute
+    // de ce plugin (sw-append.js) retombe sur fetch() des qu'un chemin n'a pas
+    // d'entree "resources:" en IndexedDB, ce qui est le cas de l'outil d'audit :
+    // il est servi directement par Apache, sans interception.
     `gatsby-plugin-offline`,
     {
       resolve: "gatsby-source-wordpress",
