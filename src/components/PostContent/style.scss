@@ -3,8 +3,8 @@
 
 .PostContent {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: $spacing-m;
+  grid-template-columns: 1fr 400px;
+  gap: $spacing-xl;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
@@ -30,5 +30,11 @@
     @include breakpoint(mobile) {
       min-width: 700px;
     }
+  }
+
+  img {
+    max-width: 600px;
+    margin: $spacing-xl auto;
+    display: block;
   }
 }

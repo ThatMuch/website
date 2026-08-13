@@ -7,7 +7,14 @@ footer {
   display: grid;
   grid-template-rows: 1fr;
   position: relative;
-
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
   &:after {
     content: "";
     display: block;

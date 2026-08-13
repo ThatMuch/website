@@ -16,6 +16,7 @@ const withProtocol = (url?: string | null) =>
 const Post = ({ data, location = {} as { pathname?: string } }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
+  const categories = post.categories?.nodes || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
   const { siteUrl } = useSiteSeo();
   const authorId = `${siteUrl}/#/schema/person/${post.author.node.slug}`;
@@ -88,7 +89,7 @@ const Post = ({ data, location = {} as { pathname?: string } }) => {
           dateModified={wasUpdated ? post.dateModifiedDisplay : undefined}
           dateModifiedISO={wasUpdated ? post.dateModifiedISO : undefined}
         />
-        <PostContent blocks={blocks} />
+        <PostContent blocks={blocks} categories={categories} />
         <RelatedPosts category={categorySlug} currentPostId={post.id} />
       </div>
     </Layout>

@@ -120,7 +120,8 @@ $shadow-md: 0 8px 24px rgba(30, 18, 68, 0.12);
 $shadow-lg: 0 24px 60px rgba(30, 18, 68, 0.22);
 
 /* Text */
-$text-color-default: $neutral-900;
+$text-color-default: $neutral-700;
+$text-color-heading: $neutral-900;
 $text-color-light: $neutral-0;
 $text-color-link: $neutral-400;
 $text-color-mid: $neutral-600;
@@ -130,7 +131,7 @@ $text-color-mid: $neutral-600;
 /* Radius */
 $radius-s: 0.25rem;
 $radius-m: 0.5rem;
-$radius-l: 6.25rem;
+$radius-l: 2rem;
 
 $size-xs: 0.5rem;
 $size-s: 1rem;

@@ -29,6 +29,7 @@
     aspect-ratio: 16/9;
     overflow: hidden;
     margin-bottom: $spacing-s;
+    border-radius: $radius-l;
     img,
     &__gatsbyImage {
       width: 100%;
