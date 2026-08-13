@@ -3,8 +3,8 @@
 
 .PostContent {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: $spacing-m;
+  grid-template-columns: 1fr 400px;
+  gap: $spacing-xl;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
@@ -16,12 +16,21 @@
     }
   }
 
+  &__mobileCta {
+    display: none;
+
+    @media (max-width: 900px) {
+      display: block;
+    }
+  }
+
   .post__content {
     // Grid items default to min-width: auto, so wide content (e.g. WP
     // tables) can force the track past the viewport instead of shrinking
     // to it; the Layout wrapper then clips that overflow instead of
     // scrolling, cutting text off on the right on mobile.
     min-width: 0;
+    line-height: 2.5;
     @media (max-width: 900px) {
       overflow-x: auto;
     }
@@ -29,6 +38,15 @@
   table {
     @include breakpoint(mobile) {
       min-width: 700px;
+    }
+  }
+
+  img {
+    max-width: 600px;
+    margin: $spacing-xl auto;
+    display: block;
+    @include breakpoint(mobile) {
+      max-width: 100%;
     }
   }
 }

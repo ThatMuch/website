@@ -15,10 +15,6 @@
   border-radius: $radius-l;
   text-align: center;
 
-  @media screen and (max-width: 900px) {
-    border-radius: 32px;
-  }
-
   &__kicker {
     @include tm-kicker($neutral-0);
   }

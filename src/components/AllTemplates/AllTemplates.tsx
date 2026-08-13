@@ -1,8 +1,10 @@
+import "./AllTemplates.scss";
+
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import React, { useState } from "react";
-import { Link } from "gatsby";
 
 import { CategoryType } from "../../utils/types";
+import { Link } from "gatsby";
 import PostCard from "../PostCard/PostCard";
 import { useBlogCategories } from "../../hooks/use-blog-categories";
 import { useRessources } from "../../hooks/use-ressources";
@@ -29,7 +31,7 @@ export default function AllTemplates({
 
   const paginatedPosts = templates?.slice(
     (currentPage - 1) * postsPerPage,
-    currentPage * postsPerPage
+    currentPage * postsPerPage,
   );
   const renderPageNumbers = (): React.ReactNode => {
     const pageNumbers: React.ReactNode[] = [];
@@ -39,7 +41,7 @@ export default function AllTemplates({
       pageNumbers.push(
         <button key={i} onClick={() => setCurrentPage(i)} className={className}>
           {i}
-        </button>
+        </button>,
       );
     }
     return pageNumbers;

@@ -1,3 +1,11 @@
+@use "../../style/vars" as *;
+
 .AllTemplates {
   margin-bottom: $spacing-xl;
+  .PostsGrid {
+    grid-template-columns: repeat(3, minmax(auto, 300px));
+  }
+  .PostCard__image {
+    aspect-ratio: 9/12;
+  }
 }

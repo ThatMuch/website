@@ -4,6 +4,7 @@ import "./style.scss";
 import parse, { DOMNode, Element, Text } from "html-react-parser";
 
 import FAQ from "../../components/GutenbergBlocks/FAQ/Faq";
+import PostCTA from "../PostCTA";
 import PostTOC from "../../components/PostTOC";
 import React from "react";
 import SocialMediaEmbed from "../../components/SocialMediaEmbed/SocialMediaEmbed";
@@ -12,9 +13,10 @@ import YoutubeEmbed from "../../components/YoutubeEmbed/YoutubeEmbed";
 
 type Props = {
   blocks: Array<any>;
+  categories: Array<{ slug: string }>;
 };
 
-export default function PostContent({ blocks }: Props) {
+export default function PostContent({ blocks, categories }: Props) {
   const parseOptions = {
     replace: (domNode: DOMNode) => {
       // The TOC is now a fixed sidebar (PostTOC) generated from the post's
@@ -165,10 +167,14 @@ export default function PostContent({ blocks }: Props) {
   };
   return (
     <div className="PostContent">
+      <div className="post__content">{renderBlocks()}</div>
+      <div className="PostContent__mobileCta">
+        <PostCTA categories={categories} />
+      </div>
       <div className="PostContent__sidebar">
+        <PostCTA categories={categories} />
         <PostTOC />
       </div>
-      <div className="post__content">{renderBlocks()}</div>
     </div>
   );
 }
