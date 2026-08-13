@@ -22,6 +22,7 @@
     // to it; the Layout wrapper then clips that overflow instead of
     // scrolling, cutting text off on the right on mobile.
     min-width: 0;
+    line-height: 2.5;
     @media (max-width: 900px) {
       overflow-x: auto;
     }
