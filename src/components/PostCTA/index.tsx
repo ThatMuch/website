@@ -51,7 +51,7 @@ export default function PostCTA({ categories }: Props) {
       links: [
         {
           label: "Faire le test",
-          url: "https://audit-refonte.thatmuch.fr/",
+          url: "/audit-refonte/",
           type: "primary",
           target: "_blank",
         },

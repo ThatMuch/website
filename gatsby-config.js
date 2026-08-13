@@ -94,7 +94,17 @@ module.exports = {
     },
     `gatsby-plugin-robots-txt`,
 	  `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-offline`,
+    {
+      // L'outil d'audit est un export Next statique depose dans /audit-refonte/,
+      // inconnu du precache Gatsby. Sans cette exclusion, le service worker sert
+      // l'app shell puis un 404 du routeur pour tout visiteur deja venu sur le site.
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        workboxConfig: {
+          navigateFallbackDenylist: [/^\/audit-refonte/],
+        },
+      },
+    },
     {
       resolve: "gatsby-source-wordpress",
       options: {
