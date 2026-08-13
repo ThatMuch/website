@@ -37,5 +37,8 @@
     max-width: 600px;
     margin: $spacing-xl auto;
     display: block;
+    @include breakpoint(mobile) {
+      max-width: 100%;
+    }
   }
 }
