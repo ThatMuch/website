@@ -4,6 +4,7 @@ import PostHeader from "../../components/PostHeader/PostHeader";
 import React from "react";
 import RelatedPosts from "../../components/RelatedPosts/RelatedPosts";
 import Seo from "../../components/Seo";
+import { getReadingTime } from "../../utils/reading-time";
 import { graphql } from "gatsby";
 import { useSiteSeo } from "../../hooks/use-site-seo";
 
@@ -16,7 +17,9 @@ const withProtocol = (url?: string | null) =>
 const Post = ({ data, location = {} as { pathname?: string } }) => {
   const post = data.wpPost;
   const blocks = post.blocks || [];
+  const categories = post.categories?.nodes || [];
   const categorySlug = post.categories?.nodes?.[0]?.slug || "uncategorized";
+  const readingTime = getReadingTime(post.content);
   const { siteUrl } = useSiteSeo();
   const authorId = `${siteUrl}/#/schema/person/${post.author.node.slug}`;
   const authorLinkedIn = withProtocol(post.author.node.seo?.social?.linkedIn);
@@ -85,10 +88,11 @@ const Post = ({ data, location = {} as { pathname?: string } }) => {
           category={categorySlug}
           postDate={post.date}
           dateISO={post.dateISO}
+          readingTime={readingTime}
           dateModified={wasUpdated ? post.dateModifiedDisplay : undefined}
           dateModifiedISO={wasUpdated ? post.dateModifiedISO : undefined}
         />
-        <PostContent blocks={blocks} />
+        <PostContent blocks={blocks} categories={categories} />
         <RelatedPosts category={categorySlug} currentPostId={post.id} />
       </div>
     </Layout>

@@ -1,0 +1,29 @@
+@use "../../style/vars" as *;
+@use "../../style/mixins" as *;
+
+.PostCTA {
+  background-color: $neutral-900;
+  background-image: url("../../images/Background_Dark.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: $radius-l;
+  padding: $spacing-m;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: $spacing-xl;
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
+
+  &__links a {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -10,7 +10,7 @@
   padding: $spacing-xl;
   justify-content: space-between;
   align-items: flex-start;
-  border-radius: 2.25rem;
+  border-radius: 2rem;
   background: $neutral-900;
   background-image: url("../../images/hero.webp");
   background-repeat: no-repeat;
@@ -18,6 +18,14 @@
   background-position: right;
   color: #fff;
   margin-bottom: $spacing-xl;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
 
   @include breakpoint(mobile) {
     background-position: 90% 0;

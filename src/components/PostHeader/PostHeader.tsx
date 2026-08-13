@@ -15,6 +15,7 @@ type Props = {
   category: string;
   postDate: string;
   dateISO: string;
+  readingTime?: number;
   dateModified?: string;
   dateModifiedISO?: string;
 };
@@ -25,6 +26,7 @@ export default function PostHeader({
   category,
   postDate,
   dateISO,
+  readingTime,
   dateModified,
   dateModifiedISO,
 }: Props) {
@@ -51,6 +53,9 @@ export default function PostHeader({
             <p>{author.name} </p>
             <p>
               <time dateTime={dateISO}>{postDate}</time>
+              {!!readingTime && (
+                <> · {readingTime} min de lecture</>
+              )}
               {dateModified && dateModifiedISO && (
                 <>
                   {" "}
