@@ -51,18 +51,6 @@ exports.onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
     />,
     <link
       rel="preconnect"
-      href="https://content.hotjar.io"
-      crossOrigin="anonymous"
-      key="preconnect-hotjar"
-    />,
-    <link
-      rel="preconnect"
-      href="https://consent.cookiebot.com"
-      crossOrigin="anonymous"
-      key="preconnect-cookiebot"
-    />,
-    <link
-      rel="preconnect"
       href="https://kit.fontawesome.com"
       crossOrigin="anonymous"
       key="preconnect-fontawesome"
