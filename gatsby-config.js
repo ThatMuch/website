@@ -92,7 +92,21 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-robots-txt`,
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        // Sans "sitemap" explicite, le plugin retombe sur son propre defaut et
+        // perd la reference au sitemap-index.xml existant genere par
+        // gatsby-plugin-sitemap ci-dessus. Les deux valeurs sont donc listees
+        // ici a la main : le site principal, et l'outil d'audit sous
+        // /audit-refonte, invisible au build Gatsby (deploye a part par SCP,
+        // voir P2-1) et donc absent de allSitePage/allWpContentNode.
+        sitemap: [
+          `${process.env.SITE_URL}/sitemap-index.xml`,
+          `${process.env.SITE_URL}/audit-refonte/sitemap.xml`,
+        ],
+      },
+    },
 	  `gatsby-plugin-react-helmet`,
     // NB: pas de configuration a ajouter pour /audit-refonte/. La NavigationRoute
     // de ce plugin (sw-append.js) retombe sur fetch() des qu'un chemin n'a pas
