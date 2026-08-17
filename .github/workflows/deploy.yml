@@ -3,6 +3,14 @@ on:
   repository_dispatch: # C'est le signal de WordPress !
     types: [cms_update]
   workflow_dispatch: # Permet de redeployer a la main depuis l'onglet Actions
+    inputs:
+      branch:
+        description: "Branche a deployer EN PRODUCTION (il n'y a pas de staging)"
+        type: choice
+        default: main
+        options:
+          - main
+          - develop
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true # Annule le build précédent si un nouveau est lancé
@@ -11,7 +19,14 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      # La prod est deployee depuis main, alors que ce workflow est lu depuis la
+      # branche par defaut (develop) lors d'un repository_dispatch. Sur ce
+      # declencheur inputs est vide, d'ou le repli sur main.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch || 'main' }}
+      - name: Show deployed branch
+        run: echo "Deploiement de ${{ inputs.branch || 'main' }} vers la production"
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
