@@ -113,13 +113,13 @@ export default function Header() {
       </Link>
       <Button
         type="link"
-        label={isMobile ? "Audit" : "Evaluez votre site web"}
+        label={isMobile ? "Audit gratuit" : "Audit gratuit de votre site web"}
         url="/audit-refonte/"
         target="_blank"
         rel="noopener noreferrer"
         className="btn-primary"
       >
-        {isMobile ? "Audit" : "Evaluez votre site web"}
+        {isMobile ? "Audit gratuit" : "Audit gratuit de votre site web"}
       </Button>
     </header>
   );
