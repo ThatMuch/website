@@ -1,8 +1,8 @@
 import "./HeroSection.scss";
 
-import React from "react";
 import { FaStar } from "react-icons/fa6";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import React from "react";
 import { sanitizeHtml } from "../../utils/sanitize";
 
 interface ImageNode {
@@ -39,43 +39,47 @@ export default function HeroSection({ data }: Props) {
 
   return (
     <>
-    <section className="HeroSection">
-      <div className="HeroSection__header">
-        <h1 className="HeroSection__title">{title}</h1>
-        <div
-          className="HeroSection__desc"
-          dangerouslySetInnerHTML={{ __html: sanitizeHtml(desc) }}
+      <section className="HeroSection">
+        <div className="HeroSection__header">
+          <h1 className="HeroSection__title">{title}</h1>
+          <div
+            className="HeroSection__desc"
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(desc) }}
           />
           <div className="HeroSection__btn">
-            <a href="/audit-refonte/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-              <div className="btn__overlay"></div>
-              <div className="btn__content">
-                Evaluez votre site web
-              </div>
-            </a>
-        {boutton && (
-           <a
-            href={boutton.url}
-            target={boutton.target || "_blank"}
-            rel="noopener noreferrer"
-            className="btn btn-dev"
-            aria-label={boutton.title}
-            title={`Lien dans la hero section vers ${boutton.title}`}
+            <a
+              href="/audit-refonte/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
             >
               <div className="btn__overlay"></div>
               <div className="btn__content">
-            {boutton.title}
+                Audit gratuit de votre site web
               </div>
-          </a>
+            </a>
+            {boutton && (
+              <a
+                href={boutton.url}
+                target={boutton.target || "_blank"}
+                rel="noopener noreferrer"
+                className="btn btn-dev"
+                aria-label={boutton.title}
+                title={`Lien dans la hero section vers ${boutton.title}`}
+              >
+                <div className="btn__overlay"></div>
+                <div className="btn__content">{boutton.title}</div>
+              </a>
             )}
-            </div>
+          </div>
         </div>
         <div className="HeroSection__stats">
           <div>
-            <p className="HeroSection__stats__stars"><FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
+            <p className="HeroSection__stats__stars">
+              <FaStar />
+              <FaStar />
+              <FaStar />
+              <FaStar />
               <FaStar />
             </p>
             <p>Satisfaction client</p>
@@ -89,14 +93,21 @@ export default function HeroSection({ data }: Props) {
             <p>Réalisés</p>
           </div>
         </div>
-    </section>
-        {logos && (
+      </section>
+      {logos && (
         <div className="HeroSection__logos">
-          {logos.title && <p className="HeroSection__logos-title no-animation">{logos.title}</p>}
+          {logos.title && (
+            <p className="HeroSection__logos-title no-animation">
+              {logos.title}
+            </p>
+          )}
           <div className="HeroSection__logos__list">
             <div className="HeroSection__logos__track">
               {logos.images?.nodes.map((logo, index) => (
-                <div key={`original-${index}`} className="HeroSection__logos__list__logo">
+                <div
+                  key={`original-${index}`}
+                  className="HeroSection__logos__list__logo"
+                >
                   <LazyLoadImage
                     src={logo.mediaItemUrl}
                     alt={logo.altText || "Logo partenaire"}
@@ -107,7 +118,10 @@ export default function HeroSection({ data }: Props) {
               ))}
               {/* Duplicated list for infinite scroll */}
               {logos.images?.nodes.map((logo, index) => (
-                <div key={`duplicate-${index}`} className="HeroSection__logos__list__logo">
+                <div
+                  key={`duplicate-${index}`}
+                  className="HeroSection__logos__list__logo"
+                >
                   <LazyLoadImage
                     src={logo.mediaItemUrl}
                     alt={logo.altText || "Logo partenaire"}
@@ -118,9 +132,8 @@ export default function HeroSection({ data }: Props) {
               ))}
             </div>
           </div>
-    </div>
-  )
-  }
-  </>
+        </div>
+      )}
+    </>
   );
 }
