@@ -21,15 +21,70 @@ index 7f073e9..38f730f 100644
  const getLargestSizeFromSizesAttribute = sizesString => {
    const sizesStringsArray = sizesString.split(`,`);
 diff --git a/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js b/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js
-index 828e3c3..5139222 100644
+index 828e3c3..701ddcf 100644
 --- a/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js
 +++ b/node_modules/gatsby-source-wordpress/dist/utils/fetch-graphql.js
-@@ -29,7 +29,7 @@ const moduleHelpers = {
+@@ -29,7 +29,32 @@ const moduleHelpers = {
    }
  };
  exports.moduleHelpers = moduleHelpers;
 -const errorIs500ish = e => e.message.includes(`Request failed with status code 50`) && (e.message.includes(`502`) || e.message.includes(`503`) || e.message.includes(`500`) || e.message.includes(`504`));
 +const errorIs500ish = e => e.message.includes(`Request failed with status code 50`) && (e.message.includes(`502`) || e.message.includes(`503`) || e.message.includes(`500`) || e.message.includes(`504`)) || e.message.includes(`Request failed with status code 403`);
++// THATMUCH: Hostinger's edge network intermittently rate-limits (429) or resets
++// (ECONNRESET/TLS errors, no HTTP response at all) requests to /graphql during
++// the build's pagination burst. Neither case is a 50x/403, so the plugin's own
++// retry above would bail immediately without these additions.
++const RETRYABLE_NETWORK_ERROR_CODES = [`ECONNRESET`, `ECONNABORTED`, `ECONNREFUSED`, `ETIMEDOUT`, `ENOTFOUND`, `EAI_AGAIN`, `EPIPE`];
++const isRetryableNetworkError = e => Boolean(e.code && RETRYABLE_NETWORK_ERROR_CODES.includes(e.code)) || !e.response && Boolean(e.request);
++const isRateLimitedError = e => e.message.includes(`Request failed with status code 429`) || Boolean(e.response) && e.response.status === 429;
++const isRetryableError = e => errorIs500ish(e) || isRateLimitedError(e) || isRetryableNetworkError(e);
++const waitForRetryAfter = async e => {
++  const headers = e.response && e.response.headers || {};
++  const retryAfterHeader = headers[`retry-after`] || headers[`Retry-After`];
++  let delayMs = 5000;
++  if (retryAfterHeader) {
++    const seconds = Number(retryAfterHeader);
++    if (!Number.isNaN(seconds)) {
++      delayMs = seconds * 1000;
++    } else {
++      const retryDate = new Date(retryAfterHeader);
++      if (!Number.isNaN(retryDate.getTime())) {
++        delayMs = Math.max(0, retryDate.getTime() - Date.now());
++      }
++    }
++  }
++  await new Promise(resolve => setTimeout(resolve, Math.min(delayMs, 60000)));
++};
  const handleErrorOptions = async ({
    variables,
    query,
+@@ -523,17 +548,25 @@ const fetchGraphql = async ({
+     response = await (0, _asyncRetry.default)(bail => moduleHelpers.getHttp(limit).post(url, {
+       query,
+       variables
+-    }, requestOptions).catch(e => {
+-      if (!errorIs500ish(e)) {
+-        // for any error that is not a 50x error, we bail, meaning we stop retrying. error will be thrown one level higher
++    }, requestOptions).catch(async e => {
++      if (!isRetryableError(e)) {
++        // for any error that is not a 50x/403/429/network error, we bail, meaning we stop retrying. error will be thrown one level higher
+         bail(e);
+         return null;
+       } else {
++        // THATMUCH: honor Retry-After on 429s, and give network resets a short
++        // breather too, before letting async-retry schedule the next attempt.
++        if (isRateLimitedError(e) || isRetryableNetworkError(e)) {
++          await waitForRetryAfter(e);
++        }
+         // otherwise throwing the error will cause the retry to happen again
+         throw e;
+       }
+     }), {
+-      retries: 5
++      retries: 8,
++      factor: 2,
++      minTimeout: 2000,
++      maxTimeout: 30000
+     });
+     if (response.data === ``) {
+       throw new Error(`GraphQL request returned an empty string.`);
