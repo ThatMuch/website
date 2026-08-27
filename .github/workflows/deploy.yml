@@ -36,18 +36,27 @@ jobs:
         run: npm ci
       - name: Build Gatsby site
         run: |
-          for attempt in 1 2 3; do
+          # Delais en secondes entre tentatives (backoff croissant) : le blocage
+          # reseau intermittent cote hebergeur (protection anti-bot Hostinger)
+          # peut durer plusieurs minutes, d'ou des delais plus longs qu'un simple
+          # retry rapide.
+          delays=(120 300 600)
+          attempt=1
+          total=$((${#delays[@]} + 1))
+          while true; do
             if npm run build; then
               exit 0
             fi
 
-            if [ "$attempt" -eq 3 ]; then
+            if [ "$attempt" -eq "$total" ]; then
               echo "Build failed after ${attempt} attempts."
               exit 1
             fi
 
-            echo "Build attempt ${attempt} failed. Waiting 30 seconds before retrying..."
-            sleep 30
+            delay=${delays[$((attempt - 1))]}
+            echo "Build attempt ${attempt} failed. Waiting ${delay} seconds before retrying..."
+            sleep "$delay"
+            attempt=$((attempt + 1))
           done
         env:
           WPGRAPHQL_URL: ${{ secrets.WPGRAPHQL_URL }}
