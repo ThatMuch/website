@@ -139,7 +139,11 @@ module.exports = {
           //Prefixes all WP Types with "Wp" so "Post and allPost" become "WpPost and allWpPost".
           typePrefix: `Wp`,
           timeout: 300000, // Increased to 5 minutes
-          perPage: 20, // Reduced from 50 to 20 items per request
+          // Remis a 50 (etait descendu a 20) : moins de pages = moins de
+          // requetes totales pendant le build, ce qui reduit les risques de
+          // declencher le rate-limiting reseau de Hostinger (429 constates
+          // cote CDN les 25-27/08/2026, cf. support Hostinger).
+          perPage: 50,
           requestConcurrency: 2, // Lowered to avoid tripping Hostinger's hcdn bot protection
           previewRequestConcurrency: 2, // Limit preview requests
         },
