@@ -23,7 +23,9 @@ const Contact = ({ data, location = {} as { pathname?: string } }) => {
       <div className="contact-content">
         <ContactForm hubspotForm={page.hubspotForm} />
         {page.content && (
-          <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(page.content) }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(page.content) }}
+          />
         )}
       </div>
     </Layout>
