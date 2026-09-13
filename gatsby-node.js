@@ -327,12 +327,18 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
         nodes {
           title
           slug
+          seo {
+            metaDesc
+          }
         }
       }
       allWpPost(sort: { date: DESC }, limit: 10) {
         nodes {
           title
           uri
+          seo {
+            metaDesc
+          }
         }
       }
     }
@@ -346,27 +352,32 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
   const { site, allWpExpertise, allWpPost } = result.data;
   const { defaultDescription, siteUrl } = site.siteMetadata;
 
+  // Appends a Yoast meta description when present, so each entry answers
+  // "what's in this page" instead of relying on the title alone.
+  const withDesc = (title, url, desc) =>
+    `- [${title}](${url})${desc ? `: ${desc}` : ``}`;
+
   const lines = [
     `# THATMUCH`,
     ``,
-    `> ${defaultDescription}`,
-    ``,
-    `THATMUCH est une agence web française spécialisée en design et développement front-end sur WordPress et SaaS.`,
+    `> ${defaultDescription} Agence basée en France.`,
     ``,
     `## Pages clés`,
     ``,
-    `- [Accueil](${siteUrl}/): présentation de l'agence et de ses services`,
-    `- [Blog](${siteUrl}/blog/): articles sur le développement web, le design et le SEO`,
-    `- [iPeach, le podcast THATMUCH](${siteUrl}/ipeach/): épisodes du podcast`,
-    `- [Ressources & templates](${siteUrl}/ressources/templates/): templates téléchargeables`,
-    `- [Contact](${siteUrl}/contact/): prendre contact avec l'agence`,
+    withDesc(`Accueil`, `${siteUrl}/`, `présentation de l'agence, de ses offres et de ses réalisations`),
+    withDesc(`Ressources & templates`, `${siteUrl}/ressources/templates/`, `templates et ressources téléchargeables pour les projets web`),
+    withDesc(`Blog`, `${siteUrl}/blog/`, `articles de fond sur le développement web, le design et le SEO`),
+    withDesc(`iPeach, le podcast THATMUCH`, `${siteUrl}/ipeach/`, `épisodes du podcast sur le web, le design et l'entrepreneuriat`),
+    withDesc(`Contact`, `${siteUrl}/contact/`, `formulaire de contact pour démarrer un projet avec l'agence`),
     ``,
   ];
 
   if (allWpExpertise.nodes.length > 0) {
     lines.push(`## Expertises`, ``);
     allWpExpertise.nodes.forEach((node) => {
-      lines.push(`- [${node.title}](${siteUrl}/expertise/${node.slug}/)`);
+      lines.push(
+        withDesc(node.title, `${siteUrl}/expertise/${node.slug}/`, node.seo?.metaDesc)
+      );
     });
     lines.push(``);
   }
@@ -374,7 +385,9 @@ exports.onPostBuild = async ({ graphql, reporter }) => {
   if (allWpPost.nodes.length > 0) {
     lines.push(`## Articles récents`, ``);
     allWpPost.nodes.forEach((node) => {
-      lines.push(`- [${node.title}](${siteUrl}${node.uri})`);
+      lines.push(
+        withDesc(node.title, `${siteUrl}${node.uri}`, node.seo?.metaDesc)
+      );
     });
     lines.push(``);
   }
