@@ -27,3 +27,6 @@ public.zip
 # SSH deploy keys (never commit private keys)
 deploy_key
 deploy_key.pub
+
+# Firebase CLI debug logs
+firebase-debug.log

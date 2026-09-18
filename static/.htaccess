@@ -1,3 +1,6 @@
+# Page 404 personnalisée (sinon LiteSpeed/Apache sert sa propre page d'erreur)
+ErrorDocument 404 /404.html
+
 # Cache long terme pour les assets statiques hashés (immuables par construction)
 <IfModule mod_headers.c>
   <FilesMatch "\.(js|css|woff2?|ttf|otf|eot)$">
