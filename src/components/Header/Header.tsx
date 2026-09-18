@@ -83,6 +83,7 @@ export default function Header() {
             >
               <StaticImage
                 loading="eager"
+                placeholder="none"
                 src="../../images/LogoTHATMUCH.webp"
                 alt=""
                 className="logo"
@@ -105,6 +106,7 @@ export default function Header() {
       >
         <StaticImage
           loading="eager"
+          placeholder="none"
           src="../../images/LogoTHATMUCH.webp"
           alt="THATMUCH"
           className="logo--header"
